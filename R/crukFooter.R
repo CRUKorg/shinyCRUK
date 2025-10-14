@@ -1,3 +1,10 @@
+#' CRUK footer
+#'
+#' @returns a div containing a styled footer with links and logos
+#' @export
+#'
+#' @examples
+#' crukFooter()
 crukFooter <- function() {
   # Get paths using system.file()
   cruk_logo_path <- system.file("www", "cruk-logo.svg", package = "crukShiny")
