@@ -1,21 +1,19 @@
-Package: ShinyCRUK
 Type: Package
-Title: What the Package Does (Title Case)
+Package: shinyCRUK
+Title: Styling Shiny Apps with CRUK Branding
 Version: 0.1.0
 Authors@R: c(
-    person(
-      "Matt", "Grant",
-      email = "matt.grant@cancer.org.uk",
-      role = c("aut", "cre")
-    ),
-    person(
-      "Sam", "Finnegan",
-      email = "sam.finnegan@cancer.org.uk",
-      role = c("aut")
-    )
+    person("Matt", "Grant", , "matt.grant@cancer.org.uk", role = c("aut", "cre")),
+    person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut")
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: This package aims to make it easy to create a shiny app that matches 
+  CRUK branding, particularly the CRUK Helix Design System.
 License: MIT + file LICENSE
+Imports: 
+    htmltools (>= 0.5.8.1)
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
