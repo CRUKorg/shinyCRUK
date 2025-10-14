@@ -7,7 +7,7 @@
 hpReview(last_review_date)
 }
 \arguments{
-\item{last_review_date}{A date to displayed as the last date the page or content was reviewed}
+\item{last_review_date}{A date to display as the last date the page or content was reviewed}
 }
 \value{
 A div containing a styled health professional box and the date of last review

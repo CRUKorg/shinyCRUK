@@ -10,6 +10,8 @@ Description: This package aims to make it easy to create a shiny app that matche
   CRUK branding, particularly the CRUK Helix Design System.
 License: MIT + file LICENSE
 Imports: 
+    base64enc,
+    bslib,
     htmltools (>= 0.5.8.1)
 Encoding: UTF-8
 LazyData: true
