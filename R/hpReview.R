@@ -12,6 +12,7 @@ hpReview <- function(last_review_date) {
     htmltools::span("Health professionals",
          style = "background: #e2f4fd;
                   color: #0076b4;
+                  font-family: Poppins;
                   display: inline-flex;
                   align-items: center;
                   padding: 8px 12px 8px 12px;"),
@@ -19,6 +20,7 @@ hpReview <- function(last_review_date) {
                    align-self: stretch;"),
     htmltools::span(htmltools::HTML("Last reviewed:", last_review_date),
          style = "color: #666666;
+                  font-family: Poppins;
                   padding: 8px 12px 8px 12px;
                   text-align: right;"),
     style = "margin-bottom: 8px;
