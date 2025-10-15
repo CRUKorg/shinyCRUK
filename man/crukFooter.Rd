@@ -14,4 +14,8 @@ CRUK footer
 }
 \examples{
 crukFooter()
+
+if (interactive()) {
+  crukFooter()
+}
 }

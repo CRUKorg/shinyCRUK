@@ -1,0 +1,428 @@
+body {
+  background: #ffffff;
+}
+
+/* --- Fonts --- */
+@font-face {  
+  font-family: "Progress Medium";
+  src: url('Progress-Medium.otf');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Regular.ttf') format('truetype');
+}   
+
+@font-face {
+    font-family: 'Poppins Medium';
+    src: url('Poppins-Medium.ttf') format('truetype');
+} 
+
+/* * {font-family: Poppins;} */
+
+/* Base Typography Styles (Small/Medium: 0-900px) */
+html {
+  
+  font-family: Poppins;
+  font-size: 16px; /* Base font size */
+}
+
+h1 {
+  font-family: Progress Medium;
+  font-size: 42px;
+}
+
+h2 {
+  font-family: Progress Medium;
+  font-size: 32px;
+}
+
+h3 {
+  font-family: Progress Medium;
+  font-size: 22px;
+}
+
+h4 {
+  font-family: Poppins;
+  font-size: 20px;
+}
+
+h5 {
+  font-family: Poppins;
+  font-size: 18px;
+}
+
+h6 {
+  font-family: Poppins;
+  font-size: 16px;
+}
+
+body, p {
+  font-family: Poppins;
+  font-size: 16px;
+}
+
+.subheading {
+  font-family: Poppins;
+  font-size: 22px;
+}
+
+/* Large/XL Breakpoint (901px and above) */
+@media screen and (min-width: 901px) {
+  h1 {
+    font-size: 72px;
+  }
+  
+  h2 {
+    font-size: 42px;
+  }
+  
+  h3 {
+    font-size: 28px;
+  }
+  
+  h4 {
+    font-size: 22px;
+  }
+  
+  h5 {
+    font-size: 20px;
+  }
+  
+  h6 {
+    font-size: 18px;
+  }
+  
+  body, p {
+    font-size: 18px;
+  }
+  
+  .subheading {
+    font-size: 28px;
+  }
+}
+
+/* set link colour */        
+a:link {
+ color: #E60078;
+ font-size: 1rem;
+}
+
+a:hover {
+ color: #CC006C;
+}
+
+/* --- column layout --- */
+/* Media query for desktop screens  */
+@media (min-width: 960px) {
+  .central-column {
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .central-column {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+}
+
+/* --- navbar --- */
+/* Set the navbar to have negative space margins either side */
+.navbar{
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  margin-top: 10px;
+  max-width: 1016px; /* once padding of other bits happens, this works out to 960px */
+  flex-wrap: wrap !important;
+  background: #ffffff;
+}
+
+.nav.navbar-nav.nav-underline {
+  justify-content: flex-end !important;
+}
+
+/* black border beneath navbar */
+.bslib-page-navbar>.navbar+div,
+.bslib-page-dashboard>.navbar+div {
+  border-top:black solid 4px;
+}
+
+/* overall styling of navbar*/ 
+.navbar {
+  font-family: Poppins;
+  font-size: 18px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem; 
+}
+
+/* will force navbar links onto a new line because header takes full screen*/
+.navbar-header {
+  width: 100%;
+}
+
+/* style title */
+.title {
+  display: flex; 
+  width: 255px; 
+  font-family: Progress Medium; 
+  font-size: 1.5rem; 
+  line-height: 2rem; 
+  white-space: normal; 
+  flex-wrap: wrap; 
+  align-content: center;
+}
+
+/* change nav drop down formatting */
+.navbar-nav .dropdown-menu {
+  background: white;
+    border: 2px solid black;
+    border-radius: 0px;
+}
+
+.dropdown-item, .dropdown-menu>li>a {
+  color: #00007e !important;
+  font-family: Progress Regular;
+}
+
+a.dropdown-item.active {
+  background-color: white !important;
+  color: #e60078 !important;
+}
+
+.dropdown-item:hover, .dropdown-menu>li>a:hover {
+  background-color: white;
+}
+
+.dropdown-item.active, .dropdown-menu>li>a.active, .dropdown-item:active, .dropdown-menu>li>a:active {
+  background-color: white;
+  color: #e60078;
+}
+
+/* Reorganise elements for mobile*/
+@media (max-width: 991.98px) {
+  .navbar-header {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      margin-bottom: 5px;
+  }
+  /* remove left margin on navbar links when on small screen */
+  a.nav-link { margin-left: 0px !important}
+  /*add some margin above nav elements on small screen*/
+  .nav.navbar-nav.shiny-tab-input.shiny-bound-input{
+    margin-top: 8px;
+  }
+  
+  /*disable multi-line logo */
+  .logo {
+    display: none
+  }
+  
+  /*change title formatting */
+  .title {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    width: 215px;
+    align-content: baseline;
+  }
+  
+  .navbar-nav .dropdown-menu {
+    border: none;
+  }
+  
+}
+
+/* show small logo on mobile */
+.navbar-collapse.collapsing {
+  transition: height 0.45s ease-out !important;
+  overflow: hidden;
+  height: 0;
+}
+
+
+/* remove margin so top part of navbar isnt spilling over onto two lines */
+.navbar-brand {
+  margin-right: 0;
+}
+
+/* resize logo on small screen*/ 
+@media (max-width: 577px) {
+  .cruk-logo {
+    height: 58px;
+    margin 18px 4px 18px 4px;
+  }
+}
+
+/* set navbar links to the left hand side */
+.nav.navbar-nav.shiny-tab-input.shiny-bound-input{
+  justify-content: flex-start;
+}
+
+/* hide empty nav link elements */
+a.nav-link:empty {
+ display: none !important;
+}
+  
+/*font for nav bar links */
+a.nav-link {
+  color: #000000 !important;
+  font-size: 18px !important;
+  font-family: Poppins Medium !important;
+  margin-right: 25px; /* This will likely need adjusting based on the length of your tab titles */
+}
+
+/*font for active nav bar link */
+a.nav-link.active {
+  color: #E60078 !important;
+}
+
+/* style the menu button */ 
+.navbar-toggle {
+  display: inline-flex;
+  align-items: center;
+  color: #E60078;
+  border: 1px solid #E60078;
+  border-radius: 0px;
+  padding: 12px 24px;
+  background-color: white; 
+  width: fit-content;
+  transition: 0.2s;
+  margin-bottom: 5px;
+}
+
+.navbar-toggle:hover {
+  color: #CC006C;
+  border: 1px solid #FFF0F8;
+  background-color: #FFF0F8;
+}
+
+/* change 'menu' button colour when open */
+.navbar-toggle[aria-expanded = 'true'] {
+  color: white;
+  background-color: #E60078; 
+}
+
+/* change burger icon to down arrow and make it brand pink */  
+.navbar-toggle>.icon-bar:last-child {
+  background-image: url('menu_arrow.svg');
+  filter: invert(13%) sepia(63%) saturate(6797%) hue-rotate(317deg) brightness(92%) contrast(120%);
+  background-size: auto;
+}
+
+/* rotate/recolour the icon when the menu opens */
+.navbar-toggle[aria-expanded='true']>.icon-bar:last-child {
+  transform: rotate(180deg);
+  transition: 0.2 ease;
+  filter: invert(100%);
+}
+ 
+/* Add in menu text via pseudo-element */
+.navbar-toggle::before {
+  content: 'Menu';
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* remove dark highlight when clicking menu button */  
+.navbar-toggler:focus, .navbar-toggle:focus {
+  box-shadow: none;
+}
+
+/* --- donate button --- */
+.donate-button {
+  background: #E60078; 
+  color: #ffffff; 
+  font-size: 18px;
+  padding: 12px 24px 12px 24px;
+}
+
+.donate-button:hover {
+  background: #CC006C; 
+}
+
+/* --- value boxes --- */
+
+/* round the corner of boxes on home tab */
+.bslib-value-box {
+  box-shadow: rgb(230, 230, 230) 8px 8px 0px 0px !important;
+  border-radius: 0px;
+  border: 2px solid black !important;
+  transition: 0.2s ease;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* hover over shadow of value card */
+.bslib-value-box:hover, 
+.bslib-value-box[data-hover] {
+        box-shadow: #aeaeae 5px 5px 0px 0px !important;
+        transform: translate(3px, 3px);
+}
+
+/* value text highlight */
+.value-box-grid.html-fill-item:hover .value-box-value {
+  color: #e60078;
+}
+
+.bslib-value-box:active, 
+.bslib-value-box[data-active] {
+        box-shadow: none !important;
+        transform: translate(8px, 8px);
+}
+
+/*set font size of title in box on home tab*/
+.bslib-value-box .value-box-title {
+  font-size: 18px;
+  font-family: Poppins, Arial Bold, Arial, sans-serif;
+  margin-bottom: 5px;
+}
+
+/*set padding */
+.bslib-value-box .value-box-showcase .bi, .bslib-value-box .value-box-showcase .fa, .bslib-value-box .value-box-showcase .fab, .bslib-value-box .value-box-showcase .fas, .bslib {                
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.bslib-value-box .value-box-area {
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+/* ---- Card formatting ----- */
+.bslib-card .card-header {
+  font-family: Progress Medium;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 32px;
+  border-bottom: none;
+  padding: 0px;
+}
+
+.card-body {
+  padding: 0px;
+}
+.bslib-card {
+  padding: 0px;
+  border-radius: 0px;
+  /*border: 2px solid black;*/
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.bslib-gap-spacing {
+    gap: 0rem;
+}
+
