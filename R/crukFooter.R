@@ -60,13 +60,12 @@ crukFooter <- function() {
       htmltools::div(
         class = "terms-and-conditions",
         htmltools::div(
-          style = "terms-and-conditions-list",
           htmltools::tags$ul(
             class = "terms-and-conditions-list",
             htmltools::tags$li(
               htmltools::div(
                 htmltools::a(
-                  htmltools::span("Terms and conditions", style = "font-size: 0.875rem"),
+                  htmltools::span("Terms and conditions"),
                   href = "https://www.cancerresearchuk.org/terms-and-conditions"
                 )
               )
@@ -74,7 +73,7 @@ crukFooter <- function() {
             htmltools::tags$li(
               htmltools::div(
                 htmltools::a(
-                  htmltools::span("Privacy", style = "font-size: 0.875rem"),
+                  htmltools::span("Privacy"),
                   href = "https://www.cancerresearchuk.org/about-us/our-organisation/privacy-statement"
                 )
               )
@@ -82,7 +81,7 @@ crukFooter <- function() {
             htmltools::tags$li(
               htmltools::div(
                 htmltools::a(
-                  htmltools::span("Modern slavery statement", style = "font-size: 0.875rem"),
+                  htmltools::span("Modern slavery statement"),
                   href = "https://www.cancerresearchuk.org/about-us/our-organisation/responsible-organisation"
                 )
               )
@@ -90,7 +89,7 @@ crukFooter <- function() {
             htmltools::tags$li(
               htmltools::div(
                 htmltools::a(
-                  htmltools::span("Cookies", style = "font-size: 0.875rem"),
+                  htmltools::span("Cookies"),
                   href = "https://crukcancerintelligence.shinyapps.io/cookiespolicy"
                 )
               )
