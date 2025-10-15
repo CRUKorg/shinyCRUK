@@ -12,6 +12,7 @@ License: MIT + file LICENSE
 Imports: 
     base64enc,
     bslib,
+    fs,
     htmltools (>= 0.5.8.1),
     markdown (>= 2.0)
 Encoding: UTF-8
