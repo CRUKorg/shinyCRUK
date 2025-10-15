@@ -3,7 +3,7 @@ body {
 }
 
 /* --- Fonts --- */
-@font-face {  
+@font-face {
   font-family: "Progress Medium";
   src: url('Progress-Medium.otf');
 }
@@ -11,18 +11,21 @@ body {
 @font-face {
     font-family: 'Poppins';
     src: url('Poppins-Regular.ttf') format('truetype');
-}   
+}
 
 @font-face {
     font-family: 'Poppins Medium';
     src: url('Poppins-Medium.ttf') format('truetype');
-} 
+}
 
-/* * {font-family: Poppins;} */
+@font-face {
+    font-family: 'Poppins Semibold';
+    src: url('Poppins-SemiBold.ttf') format('truetype');
+}
+
 
 /* Base Typography Styles (Small/Medium: 0-900px) */
 html {
-  
   font-family: Poppins;
   font-size: 16px; /* Base font size */
 }
@@ -30,41 +33,50 @@ html {
 h1 {
   font-family: Progress Medium;
   font-size: 42px;
+  font-weight: 500;
 }
 
 h2 {
   font-family: Progress Medium;
   font-size: 32px;
+  font-weight: 500;
 }
 
 h3 {
   font-family: Progress Medium;
   font-size: 22px;
+  font-weight: 500;
 }
 
 h4 {
   font-family: Poppins;
   font-size: 20px;
+  font-weight: 500;
 }
 
 h5 {
   font-family: Poppins;
   font-size: 18px;
+  font-weight: 500;
 }
 
 h6 {
   font-family: Poppins;
   font-size: 16px;
+  font-weight: 500;
 }
 
 body, p {
   font-family: Poppins;
   font-size: 16px;
+  color: #000000;
+  font-weight: 500;
 }
 
 .subheading {
   font-family: Poppins;
   font-size: 22px;
+  font-weight: 500;
 }
 
 /* Large/XL Breakpoint (901px and above) */
@@ -72,44 +84,51 @@ body, p {
   h1 {
     font-size: 72px;
   }
-  
+
   h2 {
     font-size: 42px;
   }
-  
+
   h3 {
     font-size: 28px;
   }
-  
+
   h4 {
     font-size: 22px;
   }
-  
+
   h5 {
     font-size: 20px;
   }
-  
+
   h6 {
     font-size: 18px;
   }
-  
+
   body, p {
     font-size: 18px;
   }
-  
+
   .subheading {
     font-size: 28px;
   }
 }
 
-/* set link colour */        
+/* set link colour */
 a:link {
  color: #E60078;
- font-size: 1rem;
 }
 
 a:hover {
  color: #CC006C;
+}
+
+a:active {
+  color: #CC006C;
+}
+
+a:visited {
+  color: #E60078;
 }
 
 /* --- column layout --- */
@@ -131,11 +150,104 @@ a:hover {
 }
 
 /* --- navbar --- */
+
+@media (min-width: 992px) {
+  .navbar-CRUK {
+      display: grid;
+      grid-template-columns: 155px 400px 400px;
+      grid-template-rows: auto auto;
+      gap: 0;
+
+  }
+
+
+  .empty-div {
+    display: none;
+  }
+
+  .logo {
+    justify-content: flex-end;
+    display: grid;
+    grid-column: 1 / -1;
+  }
+
+  .cruk-logo-wide {
+    align: right; margin: 8px; height: 50px;
+  }
+
+  .cruk-logo-stacked {
+    display: none;
+  }
+
+  .navbar-country {
+    padding: 0px 5px;
+  }
+
+  .navbar-site {
+    padding: 0px 5px;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-CRUK {
+   display: grid;
+    grid-template-areas:
+    "Title   Logo   "
+    "Country Country"
+    "Site    Site   "
+    "Empty Empty";
+     width: 100%;
+  }
+
+  .navbar-brand {
+    width: 100%;
+  }
+
+  .title {
+    grid-area: Title;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    display: flex;
+    position: flex-end;
+    grid-area: Logo;
+  }
+
+  .cruk-logo-wide {
+    display: none;
+  }
+
+  .cruk-logo-stacked {
+    align: right; margin-top: 8px; height: 50px;
+  }
+
+  .navbar-country {
+    grid-area: Country;
+  }
+
+  .navbar-site {
+    grid-area: Site;
+  }
+
+  .empty-div {
+    height: 55px;
+    position: relative;
+
+  }
+
+  .navbar-toggle {
+    position: absolute;
+    z-index: 9999;
+  }
+
+}
+
+
 /* Set the navbar to have negative space margins either side */
 .navbar{
   margin-inline-start: auto;
   margin-inline-end: auto;
-  margin-top: 10px;
   max-width: 1016px; /* once padding of other bits happens, this works out to 960px */
   flex-wrap: wrap !important;
   background: #ffffff;
@@ -151,17 +263,18 @@ a:hover {
   border-top:black solid 4px;
 }
 
-/* overall styling of navbar*/ 
+/* overall styling of navbar*/
 .navbar {
-  font-family: Poppins;
-  font-size: 18px;
+  font-family: Poppins Medium;
+  font-size: 16px;
   width: 100%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem; 
+  padding: 0.5rem 1rem;
+  padding-top: 0px;
 }
 
 /* will force navbar links onto a new line because header takes full screen*/
@@ -171,13 +284,13 @@ a:hover {
 
 /* style title */
 .title {
-  display: flex; 
-  width: 255px; 
-  font-family: Progress Medium; 
-  font-size: 1.5rem; 
-  line-height: 2rem; 
-  white-space: normal; 
-  flex-wrap: wrap; 
+  display: flex;
+  width: 155px;
+  font-family: Progress Medium;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  white-space: normal;
+  flex-wrap: wrap;
   align-content: center;
 }
 
@@ -190,7 +303,7 @@ a:hover {
 
 .dropdown-item, .dropdown-menu>li>a {
   color: #00007e !important;
-  font-family: Progress Regular;
+  font-family: Poppins Medium;
 }
 
 a.dropdown-item.active {
@@ -222,24 +335,27 @@ a.dropdown-item.active {
   .nav.navbar-nav.shiny-tab-input.shiny-bound-input{
     margin-top: 8px;
   }
-  
+
   /*disable multi-line logo */
-  .logo {
+ /* .logo {
     display: none
-  }
-  
+  }*/
+
   /*change title formatting */
   .title {
-    font-size: 1.25rem;
-    line-height: 1.25rem;
-    width: 215px;
-    align-content: baseline;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    width: 155px;
   }
-  
+
   .navbar-nav .dropdown-menu {
     border: none;
   }
-  
+
+  .nav.navbar-nav.shiny-tab-input.shiny-bound-input {
+    margin-left: 2px;
+  }
+
 }
 
 /* show small logo on mobile */
@@ -251,11 +367,13 @@ a.dropdown-item.active {
 
 
 /* remove margin so top part of navbar isnt spilling over onto two lines */
-.navbar-brand {
+.navbar-CRUK {
+  font-size: 1rem;
   margin-right: 0;
+  white-space: normal;
 }
 
-/* resize logo on small screen*/ 
+/* resize logo on small screen*/
 @media (max-width: 577px) {
   .cruk-logo {
     height: 58px;
@@ -265,20 +383,46 @@ a.dropdown-item.active {
 
 /* set navbar links to the left hand side */
 .nav.navbar-nav.shiny-tab-input.shiny-bound-input{
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 /* hide empty nav link elements */
 a.nav-link:empty {
  display: none !important;
 }
-  
+
 /*font for nav bar links */
 a.nav-link {
   color: #000000 !important;
   font-size: 18px !important;
   font-family: Poppins Medium !important;
-  margin-right: 25px; /* This will likely need adjusting based on the length of your tab titles */
+  margin-left: 25px; /* This will likely need adjusting based on the length of your tab titles */
+}
+
+/* set navbar dropdown to align on the right, avoiding spilling off screen */
+.dropdown-menu[data-bs-popper] {
+  top:100%;
+  right:0;
+  left: auto;
+  margin-top:var(--bs-dropdown-spacer)
+}
+
+/* Replaces the bslib default with a chevron after the nav-items */
+.dropdown-toggle::after {
+  border: 0 !important;
+  background-image: url('menu_arrow.svg');
+  display: inline-block;
+  height: 24px !important;
+  width: 24px !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: middle !important;
+  margin-inline-start: 0.5rem !important;
+}
+
+a.dropdown-toggle.nav-link.show::after{
+  filter: invert(13%) sepia(63%) saturate(6797%) hue-rotate(317deg) brightness(92%) contrast(120%);
 }
 
 /*font for active nav bar link */
@@ -286,16 +430,16 @@ a.nav-link.active {
   color: #E60078 !important;
 }
 
-/* style the menu button */ 
+/* style the menu button */
 .navbar-toggle {
   display: inline-flex;
   align-items: center;
   color: #E60078;
   border: 1px solid #E60078;
   border-radius: 0px;
-  padding: 12px 24px;
-  background-color: white; 
-  width: fit-content;
+  padding: 12px 36px;
+  background-color: white;
+  width: 160px;
   transition: 0.2s;
   margin-bottom: 5px;
 }
@@ -309,12 +453,13 @@ a.nav-link.active {
 /* change 'menu' button colour when open */
 .navbar-toggle[aria-expanded = 'true'] {
   color: white;
-  background-color: #E60078; 
+  background-color: #E60078;
 }
 
-/* change burger icon to down arrow and make it brand pink */  
+/* change burger icon to down arrow and make it brand pink */
 .navbar-toggle>.icon-bar:last-child {
   background-image: url('menu_arrow.svg');
+  margin-left: 24px;
   filter: invert(13%) sepia(63%) saturate(6797%) hue-rotate(317deg) brightness(92%) contrast(120%);
   background-size: auto;
 }
@@ -325,7 +470,7 @@ a.nav-link.active {
   transition: 0.2 ease;
   filter: invert(100%);
 }
- 
+
 /* Add in menu text via pseudo-element */
 .navbar-toggle::before {
   content: 'Menu';
@@ -333,21 +478,47 @@ a.nav-link.active {
   font-weight: 500;
 }
 
-/* remove dark highlight when clicking menu button */  
+/* remove dark highlight when clicking menu button */
 .navbar-toggler:focus, .navbar-toggle:focus {
   box-shadow: none;
 }
 
-/* --- donate button --- */
-.donate-button {
-  background: #E60078; 
-  color: #ffffff; 
-  font-size: 18px;
-  padding: 12px 24px 12px 24px;
+/* --- Terms and conditions --- */
+
+.terms-and-conditions {
+  display: block;
+  margin: 0px 0px 16px 0px;
 }
 
-.donate-button:hover {
-  background: #CC006C; 
+
+.terms-and-conditions-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-family: Poppins Semibold !important;
+  list-style-type: none;
+  padding-left: 2px;
+  gap: 0.5rem;
+  margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+.terms-and-conditions-link {
+  line-height: 1.75rem !important;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media(min-width: 992px) {
+
+  .terms-and-conditions-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+
 }
 
 /* --- value boxes --- */
@@ -363,7 +534,7 @@ a.nav-link.active {
 }
 
 /* hover over shadow of value card */
-.bslib-value-box:hover, 
+.bslib-value-box:hover,
 .bslib-value-box[data-hover] {
         box-shadow: #aeaeae 5px 5px 0px 0px !important;
         transform: translate(3px, 3px);
@@ -374,7 +545,7 @@ a.nav-link.active {
   color: #e60078;
 }
 
-.bslib-value-box:active, 
+.bslib-value-box:active,
 .bslib-value-box[data-active] {
         box-shadow: none !important;
         transform: translate(8px, 8px);
@@ -388,7 +559,7 @@ a.nav-link.active {
 }
 
 /*set padding */
-.bslib-value-box .value-box-showcase .bi, .bslib-value-box .value-box-showcase .fa, .bslib-value-box .value-box-showcase .fab, .bslib-value-box .value-box-showcase .fas, .bslib {                
+.bslib-value-box .value-box-showcase .bi, .bslib-value-box .value-box-showcase .fa, .bslib-value-box .value-box-showcase .fab, .bslib-value-box .value-box-showcase .fas, .bslib {
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 5px;
@@ -417,7 +588,6 @@ a.nav-link.active {
 .bslib-card {
   padding: 0px;
   border-radius: 0px;
-  /*border: 2px solid black;*/
   background: #ffffff;
   box-shadow: none;
 }
