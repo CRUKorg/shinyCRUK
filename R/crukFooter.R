@@ -32,7 +32,7 @@ crukFooter <- function() {
         htmltools::div(
           htmltools::a(
             htmltools::img(
-              src = "shinyCRUK/images/cruk-logo.svg",
+              src = cruk_logo_path,
               class = "cruk-logo-footer",
               style = "margin: 8px; margin-bottom: 16px; height: 60px;"
             ),
@@ -100,7 +100,7 @@ crukFooter <- function() {
       ),
       htmltools::a(
         htmltools::img(
-          src = "shinyCRUK/images/logo-fundraising-regulator-reg.svg",
+          src = regulator_logo_path,
           height = "97px",
           style = "margin-right: 10px; height: 51px; margin-top: 16px; margin-bottom: 16px;"
         ),
