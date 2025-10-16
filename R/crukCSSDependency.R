@@ -11,6 +11,8 @@ crukCSSDependency <- function() {
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/styles.css",
-    all_files = FALSE
+    all_files = TRUE
   )
 }
+
+

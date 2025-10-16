@@ -10,9 +10,18 @@
 #'   crukFooter()
 #' }
 crukFooter <- function() {
+  # Register the package's www directory as a resource path
+  shiny::addResourcePath(
+    prefix = "shinyCRUK",
+    directoryPath = system.file("www", package = "shinyCRUK")
+  )
+
+  cruk_logo_path <- "shinyCRUK/images/cruk-logo.svg"
+  regulator_logo_path <- "shinyCRUK/images/logo-fundraising-regulator-reg.svg"
+
   # Get paths for logos and text for reuse of content
-  cruk_logo_path <- system.file("www/images", "cruk-logo.svg", package = "shinyCRUK", mustWork = TRUE)
-  regulator_logo_path <- system.file("www/images", "logo-fundraising-regulator-reg.svg", package = "shinyCRUK", mustWork = TRUE)
+  # cruk_logo_path <- "images/cruk-logo.svg"
+  # regulator_logo_path <- "images/logo-fundraising-regulator-reg.svg"
 
 
   citation_path <- system.file("markdown", "citation-text.html", package = "shinyCRUK", mustWork = TRUE)

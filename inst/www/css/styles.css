@@ -150,6 +150,15 @@ a:visited {
 }
 
 /* --- navbar --- */
+#app_title_link {
+  text-decoration: none;
+  font-size: inherit;
+  color: #000000;
+}
+
+#app_title_link:hover {
+  color: #cc006c;
+}
 
 @media (min-width: 992px) {
   .navbar-CRUK {
