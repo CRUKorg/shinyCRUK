@@ -17,18 +17,18 @@ crukTitle <- function(Title, Subheading = "") {
   htmltools::div(
     htmltools::h1(Title,
       style = "font-family: Progress Medium !important;
-                            font-weight: 500;
-                            margin: 0px;"
+               font-weight: 500;
+               margin: 0px;"
     ),
     htmltools::span(Subheading,
       class = "subheading",
       style = "font-family: Poppins;
-                                          margin: 28px 0px 0px 0px;"
+               margin: 28px 0px 0px 0px;"
     ),
     htmltools::hr(style = "width: 4rem;
-                                        height: 0.5rem;
-                                        color: black;
-                                        border-top: 0.5rem solid black;
-                                        opacity: 1")
+                           height: 0.5rem;
+                           color: black;
+                           border-top: 0.5rem solid black;
+                           opacity: 1;")
   )
 }

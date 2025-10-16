@@ -11,7 +11,7 @@ hpReview <- function(last_review_date) {
   htmltools::div(
     htmltools::span("Health professionals",
       style = "background: #e2f4fd;
-                  color: #0076b4;
+                  color: #52627a;
                   font-family: Poppins;
                   display: inline-flex;
                   align-items: center;

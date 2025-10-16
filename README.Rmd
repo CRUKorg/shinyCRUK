@@ -20,6 +20,10 @@ knitr::opts_chunk$set(
 
 The goal of shinyCRUK is to make it easier to create shiny apps that are on brand and use the helix design system that is coming into place with the website's move to Contentful. 
 
+## Reference
+
+References for each of the functions are available on the [GitHub pages](https://verbose-guacamole-l18vr83.pages.github.io/) of this repo.
+
 ## Installation
 
 You can install the development version of shinyCRUK from [GitHub](https://github.com/) with:
