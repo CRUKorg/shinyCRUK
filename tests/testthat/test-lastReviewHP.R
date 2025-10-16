@@ -1,5 +1,5 @@
-test_that("hpReview builds correct HTML structure", {
-  result <- hpReview("2025-10-14")
+test_that("lastReviewHP builds correct HTML structure", {
+  result <- lastReviewHP("2025-10-14")
 
   # Check it’s an htmltools tag object
   expect_s3_class(result, "shiny.tag")

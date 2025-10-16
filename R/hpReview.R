@@ -1,13 +1,12 @@
-#' Health Professional Last Review
+#' Last reviewed date with health professional tag
 #'
 #' @param last_review_date A date to display as the last date the page or content was reviewed
 #'
-#' @returns A div containing a styled health professional box and the date of last review
+#' @returns A div containing a styled internal only box and the date of last review to place at the top of pages
 #' @export
 #'
 #' @examples
-#' hpReview("08 July 2025")
-#'
+#' lastReviewHP("08 July 2025")
 lastReviewHP <- function(last_review_date) {
   htmltools::div(
     htmltools::span("Health professionals",
@@ -31,6 +30,15 @@ lastReviewHP <- function(last_review_date) {
   )
 }
 
+#' Last reviewed date with internal only flag
+#'
+#' @param last_review_date A date to display as the last date the page or content was reviewed
+#'
+#' @returns A div containing a styled internal only box and the date of last review to place at the top of pages
+#' @export
+#'
+#' @examples
+#' lastReviewInternal("08 July 2025")
 lastReviewInternal <- function(last_review_date) {
   htmltools::div(
     htmltools::span("Internal only",

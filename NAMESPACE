@@ -3,3 +3,4 @@
 export(crukFooter)
 export(crukTitle)
 export(lastReviewHP)
+export(lastReviewInternal)
