@@ -4,6 +4,6 @@ output:
 ---
 
 If you have any questions regarding the data or the interpretation of this data, or if you are having any issues with the website please contact:\
-<span style="word-wrap: anywhere;">[cancerintelligence\@cancer.org.uk](mailto:cancerintelligence@cancer.org.uk)</span> (please allow up to 10 working days for a response)
+<span style="word-wrap: anywhere;">[cancerintelligence\@cancer.org.uk](mailto:cancerintelligence@cancer.org.uk){.email}</span> (please allow up to 10 working days for a response)
 
-[See our complete statistics pages on cancerresearch.org](https://www.cancerresearchuk.org/health-professional/cancer-statistics-for-the-uk)
+[See our complete statistics pages on cancerresearch.org](https://www.cancerresearchuk.org/health-professional/cancer-statistics-for-the-uk){.stats-page}

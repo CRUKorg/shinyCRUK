@@ -492,44 +492,6 @@ a.nav-link.active {
   box-shadow: none;
 }
 
-/* --- Terms and conditions --- */
-
-.terms-and-conditions {
-  display: block;
-  margin: 0px 0px 16px 0px;
-}
-
-
-.terms-and-conditions-list {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  font-family: Poppins Semibold !important;
-  list-style-type: none;
-  padding-left: 2px;
-  gap: 0.5rem;
-  margin-bottom: 16px;
-  justify-content: space-between;
-}
-
-.terms-and-conditions-link {
-  line-height: 1.75rem !important;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-}
-
-@media(min-width: 992px) {
-
-  .terms-and-conditions-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-  }
-
-}
-
 /* --- value boxes --- */
 
 /* round the corner of boxes on home tab */

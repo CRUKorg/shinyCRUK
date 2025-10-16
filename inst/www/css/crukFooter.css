@@ -1,0 +1,116 @@
+/* horizontal line above strapline */
+.footer-hr {
+  opacity: 1;
+  margin-right: calc(50% - 49.5vw) !important;
+  border: 0;
+  border-color: #000000;
+  border-style: solid;
+  border-bottom-width: 0.25rem;
+  margin: 0px;
+  width: auto;
+}
+
+/* formatting for Together we are beating cancer strapline */
+.footer-strapline {
+  font-family: Progress Medium;
+  font-size: 28px;
+  font-weight: 500;
+  padding-top: 16px;
+  padding-bottom: 40px
+}
+
+/* regulator logo formatting */
+.regulator-logo {
+  margin-right: 10px;
+  height: 51px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+address {
+  font-family: Poppins;
+  font-size: 1rem;
+}
+
+/* --- column layout --- */
+/* Media query for desktop screens  */
+@media (min-width: 960px) {
+  .central-column {
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .central-column {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+}
+
+/* --- info box --- */
+.info-footer {
+  font-family: Poppins;
+  font-size: 1rem;
+  padding: 16px 48px 16px 48px;
+  border: 2px solid black;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
+
+.cruk-logo-footer {
+  margin: 8px;
+  margin-bottom: 16px;
+  height: 60px;
+}
+
+/* link text colour */
+.email, .stats-page, .terms-and-conditions-link {
+  color: #e60078;
+  font-family: Poppins Semibold;
+}
+
+.email, .stats-page, .terms-and-conditions-link:hover {
+  color: #CC006C;
+}
+
+.email, .stats-page, .terms-and-conditions-link:active {
+  color: #CC006C;
+}
+
+.email, .stats-page, .terms-and-conditions-link:visited {
+  color: #CC006C;
+}
+
+/* --- terms and conditions styling --- */
+.terms-and-conditions {
+  font-family: Poppins;
+  font-size: 1rem;
+  display: block;
+  margin: 0px 0px 16px 0px;
+}
+
+.terms-and-conditions-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-family: Poppins Semibold !important;
+  list-style-type: none;
+  padding-left: 2px;
+  gap: 0.5rem;
+  margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+@media(min-width: 992px) {
+
+  .terms-and-conditions-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+
+}
