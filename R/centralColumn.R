@@ -7,8 +7,7 @@
 #'
 #' @examples
 #' centralColumn(
-#'   crukTitle("Page title"),
-#'   p("Some page text")
+#'   crukTitle("Page title")
 #' )
 centralColumn <- function(...) {
   content <- list(...)

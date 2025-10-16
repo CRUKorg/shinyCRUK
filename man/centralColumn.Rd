@@ -17,7 +17,6 @@ Central column div
 }
 \examples{
 centralColumn(
-  crukTitle("Page title"),
-  p("Some page text")
+  crukTitle("Page title")
 )
 }
