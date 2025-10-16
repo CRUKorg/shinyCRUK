@@ -2,4 +2,4 @@
 
 export(crukFooter)
 export(crukTitle)
-export(hpReview)
+export(lastReviewHP)
