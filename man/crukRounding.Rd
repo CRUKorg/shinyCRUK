@@ -14,7 +14,7 @@ Character vector of formatted number descriptions with thousand
   separators and descriptive qualifiers (around, nearly, more than, less than).
 }
 \description{
-Formats numbers according to Cancer Research UK Intelligence rounding rules,
+Formats numbers according to Cancer Intelligence rounding rules,
 providing human-readable descriptions with appropriate precision levels based
 on magnitude. Returns descriptive text like "around 1,200" or "more than 5,000".
 }
