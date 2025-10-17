@@ -26,6 +26,7 @@ crukTitle <- function(Title, Subheading = "") {
                margin: 28px 0px 0px 0px;"
     ),
     htmltools::hr(style = "width: 4rem;
+                           margin: 1rem 0rem 2rem 0rem;
                            height: 0.5rem;
                            color: black;
                            border-top: 0.5rem solid black;

@@ -1,5 +1,9 @@
 /* --- column layout --- */
 /* Media query for desktop screens  */
+.central-column {
+  width: 100%;
+}
+
 @media (min-width: 960px) {
   .central-column {
     margin-inline-start: auto;

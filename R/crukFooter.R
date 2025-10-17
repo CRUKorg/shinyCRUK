@@ -43,8 +43,7 @@ crukFooter <- function() {
       stylesheet = "css/crukFooter.css",
       all_files = TRUE
     ),
-    htmltools::div(
-      class = "central-column",
+    # htmltools::div(
       htmltools::div(
         class = "info-footer",
         # CRUK logo
@@ -110,5 +109,5 @@ crukFooter <- function() {
       ),
       htmltools::tags$address("Cancer Research UK is a registered charity in England and Wales (1089464), Scotland (SC041666), the Isle of Man (1103) and Jersey (247). A company limited by guarantee. Registered company in England and Wales (4325234) and the Isle of Man (5713F). Registered address: 2 Redman Place, London, E20 1JQ.")
     )
-  )
+  # )
 }

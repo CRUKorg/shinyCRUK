@@ -18,7 +18,7 @@ lastReviewHP <- function(last_review_date) {
                   padding: 8px 12px 8px 12px;"
     ),
     htmltools::div(style = "flex: 1;
-                   align-self: stretch;"),
+                            align-self: stretch;"),
     htmltools::span(htmltools::HTML("Last reviewed:", last_review_date),
       style = "color: #666666;
                   font-family: Poppins;

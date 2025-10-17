@@ -2,6 +2,7 @@
 
 export(centralColumn)
 export(crukFooter)
+export(crukGA)
 export(crukLogo)
 export(crukLogoWide)
 export(crukTitle)
