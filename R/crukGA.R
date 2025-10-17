@@ -10,8 +10,6 @@
 #' )
 crukGA <- function () {
   if (!interactive()) {
-    crukGA()
-
   analytics_script <- system.file("www", "ga-code.html", package = "shinyCRUK", mustWork = TRUE)
   htmltools::includeHTML(analytics_script)
   }
