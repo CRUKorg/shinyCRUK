@@ -61,3 +61,27 @@ lastReviewInternal <- function(last_review_date) {
              display: flex;"
   )
 }
+
+#' Last reviewed date with no tag
+#'
+#' @param last_review_date A date to display as the last date the page or content was reviewed
+#'
+#' @returns A div containing the date of last review to place at the top of pages
+#' @export
+#'
+#' @examples
+#' lastReview("08 July 2025")
+lastReview <- function(last_review_date) {
+  htmltools::div(
+    htmltools::div(style = "flex: 1;
+                   align-self: stretch;"),
+    htmltools::span(htmltools::HTML("Last reviewed:", last_review_date),
+                    style = "color: #666666;
+                  font-family: Poppins;
+                  padding: 8px 12px 8px 12px;
+                  text-align: right;"
+    ),
+    style = "margin-bottom: 8px;
+             display: flex;"
+  )
+}

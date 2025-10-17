@@ -2,6 +2,9 @@
 
 export(centralColumn)
 export(crukFooter)
+export(crukLogo)
+export(crukLogoWide)
 export(crukTitle)
+export(lastReview)
 export(lastReviewHP)
 export(lastReviewInternal)
