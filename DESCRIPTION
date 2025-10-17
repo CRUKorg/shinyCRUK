@@ -11,6 +11,8 @@ Description: This package aims to make it easy to create a shiny app that matche
 License: MIT + file LICENSE
 Imports: 
     bslib,
+    dplyr,
+    glue,
     htmltools (>= 0.5.8.1),
     knitr,
     shiny (>= 1.11.1)
