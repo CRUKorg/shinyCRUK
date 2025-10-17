@@ -131,24 +131,6 @@ a:visited {
   color: #E60078;
 }
 
-/* --- column layout --- */
-/* Media query for desktop screens  */
-@media (min-width: 960px) {
-  .central-column {
-    margin-inline-start: auto;
-    margin-inline-end: auto;
-    max-width: 960px;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .central-column {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 0 15px;
-  }
-}
-
 /* --- navbar --- */
 #app_title_link {
   text-decoration: none;

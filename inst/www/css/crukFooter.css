@@ -72,15 +72,15 @@ address {
   font-family: Poppins Semibold;
 }
 
-.email, .stats-page, .terms-and-conditions-link:hover {
+.email:hover, .stats-page:hover, .terms-and-conditions-link:hover {
   color: #CC006C;
 }
 
-.email, .stats-page, .terms-and-conditions-link:active {
+.email:active, .stats-page:active, .terms-and-conditions-link:active {
   color: #CC006C;
 }
 
-.email, .stats-page, .terms-and-conditions-link:visited {
+.email:visited, .stats-page:visited, .terms-and-conditions-link:visited {
   color: #CC006C;
 }
 

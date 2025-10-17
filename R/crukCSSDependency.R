@@ -14,5 +14,3 @@ crukCSSDependency <- function() {
     all_files = TRUE
   )
 }
-
-

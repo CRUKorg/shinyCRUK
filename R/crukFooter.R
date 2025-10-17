@@ -11,10 +11,25 @@
 #' }
 crukFooter <- function() {
   # Register the package's www directory as a resource path
-  shiny::addResourcePath(
-    prefix = "shinyCRUK",
-    directoryPath = system.file("www", package = "shinyCRUK")
-  )
+  isStatic <- is.null(shiny::getDefaultReactiveDomain())
+  if (isStatic) {
+    # For static HTML (Quarto), use base64 encoding
+    cruk_logo_path <- knitr::image_uri(
+      system.file("www/images/cruk-logo.svg", package = "shinyCRUK")
+    )
+    regulator_logo_path <- knitr::image_uri(
+      system.file("www/images/logo-fundraising-regulator-reg.svg", package = "shinyCRUK")
+    )
+  } else {
+    # For Shiny apps, use resource paths
+    shiny::addResourcePath(
+      prefix = "shinyCRUK",
+      directoryPath = system.file("www", package = "shinyCRUK")
+    )
+    cruk_logo_path <- "shinyCRUK/images/cruk-logo.svg"
+    regulator_logo_path <- "shinyCRUK/images/logo-fundraising-regulator-reg.svg"
+  }
+
 
   # Get paths for logos and text for reuse of content
   cruk_logo_path <- "shinyCRUK/images/cruk-logo.svg"
