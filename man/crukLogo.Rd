@@ -4,13 +4,18 @@
 \alias{crukLogo}
 \title{CRUK logo}
 \usage{
-crukLogo()
+crukLogo(height = "50px", width = "auto")
+}
+\arguments{
+\item{height}{The height of the logo, default is 50px. Must be a valid css unit.}
+
+\item{width}{The width of the logo, may not work unless a height is specified too. Must be a valid css unit.}
 }
 \value{
 The CRUK stacked logo as a .svg
 }
 \description{
-CRUK logo
+Returns the standard CRUK logo as a svg, with the css class "cruk-logo". By default the height is set to 50px, but you can specify a width or height.
 }
 \examples{
 crukLogo()

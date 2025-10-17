@@ -4,13 +4,21 @@
 \alias{crukLogoWide}
 \title{CRUK logo wide}
 \usage{
-crukLogoWide()
+crukLogoWide(height = "50px", width = "auto")
+}
+\arguments{
+\item{height}{The height of the logo, default is 50px. Must be a valid css unit.}
+
+\item{width}{The width of the logo, may not work unless a height is specified too. Must be a valid css unit.}
 }
 \value{
-A wide version of the CRUK as a .svg. Use sparingly and only when stacked logo doesn't work
+A wide version of the CRUK as a .png.
 }
 \description{
-CRUK logo wide
+This function returns the wide version of the CRUK logo with the css class "cruk-logo-wide". Use sparingly and only when stacked logo doesn't work.
+}
+\details{
+By default the height is set to 50px, but you can specify a width or height.
 }
 \examples{
 crukLogoWide()
