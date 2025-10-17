@@ -2,8 +2,7 @@
 % Please edit documentation in R/crukGA.R
 \name{crukGA}
 \alias{crukGA}
-\title{CRUK Google analytics and cookie banner
-Adds the necessary html and javascript to enable google analytics in a shiny app, along with the necessary cookie banner. The app should also include the crukFooter() that includes a link to our cookies policy page. The function should be called within the head html element of a shiny app.}
+\title{CRUK Google analytics and cookie banner}
 \usage{
 crukGA()
 }
@@ -11,7 +10,6 @@ crukGA()
 Adds google analytics to a shiny dashboard along with the necessary cookie banner
 }
 \description{
-CRUK Google analytics and cookie banner
 Adds the necessary html and javascript to enable google analytics in a shiny app, along with the necessary cookie banner. The app should also include the crukFooter() that includes a link to our cookies policy page. The function should be called within the head html element of a shiny app.
 }
 \examples{
