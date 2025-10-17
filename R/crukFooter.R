@@ -30,11 +30,6 @@ crukFooter <- function() {
     regulator_logo_path <- "shinyCRUK/images/logo-fundraising-regulator-reg.svg"
   }
 
-
-  # Get paths for logos and text for reuse of content
-  cruk_logo_path <- "shinyCRUK/images/cruk-logo.svg"
-  regulator_logo_path <- "shinyCRUK/images/logo-fundraising-regulator-reg.svg"
-
   citation_path <- system.file("markdown", "citation-text.html", package = "shinyCRUK", mustWork = TRUE)
   email_site_path <- system.file("markdown", "email-site-text.html", package = "shinyCRUK", mustWork = TRUE)
 
