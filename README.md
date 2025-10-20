@@ -26,3 +26,10 @@ pak::pak("CRUKorg/shinyCRUK")
 # or 
 remotes::install_github("CRUKorg/shinyCRUK")
 ```
+
+## Use
+
+This package is built to work well with
+[bslib](https://rstudio.github.io/bslib/) and their
+[page_navbar()](https://rstudio.github.io/bslib/reference/page_navbar.html)
+function.
