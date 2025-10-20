@@ -1,0 +1,43 @@
+/* Container */
+.last-review-container {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+/* Spacer to push date to the right */
+.last-review-spacer {
+  flex: 1;
+  align-self: stretch;
+}
+
+/* Base tag styles */
+.last-review-tag {
+  font-family: Poppins, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Health professional tag */
+.tag-health-professional {
+  background: #e2f4fd;
+  color: #52627a;
+}
+
+/* Internal only tag */
+.tag-internal {
+  background: #fff0f8;
+  color: #cc006c;
+}
+
+/* Review date */
+.last-review-date {
+  color: #666666;
+  font-family: Poppins, sans-serif;
+  padding: 8px 12px;
+  text-align: right;
+  white-space: nowrap;
+}

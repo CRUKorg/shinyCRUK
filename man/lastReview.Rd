@@ -20,7 +20,7 @@ converted to this format. Required.}
 
 \item{tag}{Character string or NULL. The audience tag to display. Options are:
 \itemize{
-  \item \code{"health_professional"} or \code{"hp"} - Blue tag for health
+  \item \code{"health professional"} or \code{"hp"} - Blue tag for health
     professional content
   \item \code{"internal"} - Pink tag for internal-only content
   \item \code{NULL} (default) - No tag, shows only the review date
@@ -105,7 +105,7 @@ lastReview(as.Date("2025-07-08"))
 lastReview(Sys.Date(), tag = "hp")
 
 # Using ISO date strings (automatically formatted)
-lastReview("2025-07-08", tag = "health_professional")
+lastReview("2025-07-08", tag = "health professional")
 
 # All of these produce: "Last reviewed: 08 July 2025"
 lastReview("08 July 2025")

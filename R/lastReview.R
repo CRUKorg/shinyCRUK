@@ -14,7 +14,7 @@
 #'   converted to this format. Required.
 #' @param tag Character string or NULL. The audience tag to display. Options are:
 #'   \itemize{
-#'     \item \code{"health_professional"} or \code{"hp"} - Blue tag for health
+#'     \item \code{"health professional"} or \code{"hp"} - Blue tag for health
 #'       professional content
 #'     \item \code{"internal"} - Pink tag for internal-only content
 #'     \item \code{NULL} (default) - No tag, shows only the review date
@@ -86,7 +86,7 @@
 #' lastReview(Sys.Date(), tag = "hp")
 #'
 #' # Using ISO date strings (automatically formatted)
-#' lastReview("2025-07-08", tag = "health_professional")
+#' lastReview("2025-07-08", tag = "health professional")
 #'
 #' # All of these produce: "Last reviewed: 08 July 2025"
 #' lastReview("08 July 2025")
@@ -110,9 +110,9 @@ lastReview <- function(last_review_date, tag = NULL) {
   formatted_date <- format_review_date(last_review_date)
 
   # Validate tag parameter
-  valid_tags <- c("health_professional", "hp", "internal")
+  valid_tags <- c("health professional", "hp", "internal")
   if (!is.null(tag) && !tag %in% valid_tags) {
-    stop("Parameter 'tag' must be one of: 'health_professional', 'hp', 'internal', or NULL")
+    stop("Parameter 'tag' must be one of: 'health professional', 'hp', 'internal', or NULL")
   }
 
   # Load CSS dependency
@@ -128,13 +128,13 @@ lastReview <- function(last_review_date, tag = NULL) {
   # Determine tag content and class
   tag_element <- if (!is.null(tag)) {
     tag_class <- switch(tag,
-      "health_professional" = "tag-health-professional",
+      "health professional" = "tag-health-professional",
       "hp" = "tag-health-professional",
       "internal" = "tag-internal"
     )
 
     tag_text <- switch(tag,
-      "health_professional" = "Health professionals",
+      "health professional" = "Health professionals",
       "hp" = "Health professionals",
       "internal" = "Internal only"
     )
@@ -250,7 +250,7 @@ format_review_date <- function(date) {
 #' @rdname lastReview
 #' @export
 lastReviewHP <- function(last_review_date) {
-  lastReview(last_review_date, tag = "health_professional")
+  lastReview(last_review_date, tag = "health professional")
 }
 
 #' @rdname lastReview
