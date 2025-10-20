@@ -1,0 +1,28 @@
+/* Main title heading */
+.cruk-title-heading {
+  font-family: Progress Medium, sans-serif;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Subheading */
+.cruk-title-subheading {
+  font-family: Poppins, sans-serif;
+  margin: 28px 0 0 0;
+  display: block;
+}
+
+/* Decorative horizontal rule */
+.cruk-title-rule {
+  width: 4rem;
+  margin: 1rem 0 2rem 0;
+  height: 0.5rem;
+  background-color: black;
+  border: none;
+  opacity: 1;
+}
+
+/* Container */
+.cruk-title-container {
+  margin-bottom: 1rem;
+}

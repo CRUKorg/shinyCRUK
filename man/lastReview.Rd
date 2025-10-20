@@ -2,19 +2,124 @@
 % Please edit documentation in R/lastReview.R
 \name{lastReview}
 \alias{lastReview}
-\title{Last reviewed date with no tag}
+\alias{lastReviewHP}
+\alias{lastReviewInternal}
+\title{Last Reviewed Date with Optional Audience Tag}
 \usage{
-lastReview(last_review_date)
+lastReview(last_review_date, tag = NULL)
+
+lastReviewHP(last_review_date)
+
+lastReviewInternal(last_review_date)
 }
 \arguments{
-\item{last_review_date}{A date to display as the last date the page or content was reviewed}
+\item{last_review_date}{Character string or Date object. The date when the
+page or content was last reviewed. Must be in the format "DD Month YYYY"
+(e.g., "08 July 2025") or a Date object which will be automatically
+converted to this format. Required.}
+
+\item{tag}{Character string or NULL. The audience tag to display. Options are:
+\itemize{
+  \item \code{"health_professional"} or \code{"hp"} - Blue tag for health
+    professional content
+  \item \code{"internal"} - Pink tag for internal-only content
+  \item \code{NULL} (default) - No tag, shows only the review date
+}}
 }
 \value{
-A div containing the date of last review to place at the top of pages
+An \code{htmltools::div} element containing:
+  \itemize{
+    \item Optional audience tag (if specified) with appropriate styling
+    \item Last reviewed date right-aligned in format "DD Month YYYY"
+    \item CSS dependency for styling
+  }
 }
 \description{
-Last reviewed date with no tag
+Displays the last review date for page content with an optional audience tag
+(Health Professionals or Internal Only). This component helps users understand
+the currency of the information and its intended audience.
 }
+\details{
+The review date appears right-aligned in a flex container, with the optional
+tag appearing on the left. The component is typically placed at the top of
+page content to provide context about data freshness and access restrictions.
+}
+\section{Date Format}{
+
+The function enforces a consistent date format: "DD Month YYYY" (e.g.,
+"08 July 2025", "01 January 2024"). You can provide:
+\itemize{
+  \item A character string already in "DD Month YYYY" format
+  \item A UK date string in "DD/MM/YYYY" format (e.g., "08/07/2025")
+  \item A Date object (e.g., \code{as.Date("2025-07-08")}) which will be
+    automatically formatted
+  \item An ISO date string (e.g., "2025-07-08") which will be parsed and
+    formatted
+}
+Invalid formats will produce an error with guidance on the expected format.
+
+This function will take UK date format (DD/MM/YYYY), I.e. "08/07/2025" as
+8th July 2025, not 7th August 2025 (US format). You may want to double check
+the format of your data frame.
+}
+
+\section{Tag Styles}{
+
+\describe{
+  \item{Health Professional}{
+    \itemize{
+      \item Background: Light blue (#e2f4fd)
+      \item Text: Blue-grey (#52627a)
+      \item Label: "Health professionals"
+    }
+  }
+  \item{Internal Only}{
+    \itemize{
+      \item Background: Light pink (#fff0f8)
+      \item Text: Pink (#cc006c)
+      \item Label: "Internal only"
+    }
+  }
+}
+}
+
+\section{Placement}{
+
+Place this component at the top of page content, typically immediately after
+\code{\link{crukTitle}} or as the first element within \code{\link{centralColumn}}.
+}
+
 \examples{
+# Correct format - character string
+\dontrun{
 lastReview("08 July 2025")
+lastReview("01 January 2024", tag = "internal")
+
+# UK date format (DD/MM/YYYY)
+lastReview("08/07/2025") # 8th July 2025
+lastReview("15/03/2024", tag = "hp") # 15th March 2024
+lastReview("1/1/2025", tag = "internal") # 1st January 2025
+
+# Using Date objects (automatically formatted)
+lastReview(as.Date("2025-07-08"))
+lastReview(Sys.Date(), tag = "hp")
+
+# Using ISO date strings (automatically formatted)
+lastReview("2025-07-08", tag = "health_professional")
+
+# All of these produce: "Last reviewed: 08 July 2025"
+lastReview("08 July 2025")
+lastReview("08/07/2025")
+lastReview(as.Date("2025-07-08"))
+lastReview("2025-07-08")
+
+# These will produce errors:
+lastReview("July 8, 2025") # Wrong format (US style)
+lastReview("32/01/2025") # Invalid date (no 32nd day)
+}
+
+}
+\seealso{
+\code{\link{crukTitle}} for page titles
+\code{\link{centralColumn}} for the main content container
 }

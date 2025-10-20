@@ -2,20 +2,155 @@
 % Please edit documentation in R/crukFooter.R
 \name{crukFooter}
 \alias{crukFooter}
-\title{CRUK footer}
+\title{CRUK Footer with Legal Information and Branding}
 \usage{
-crukFooter()
+crukFooter(includeContact = TRUE)
+}
+\arguments{
+\item{includeContact}{Logical. If \code{TRUE} (default), includes the
+\code{info-footer} section containing the CRUK logo, data citation
+guidelines, and contact information. Set to \code{FALSE} to omit this
+section and show only the tagline, legal links, and regulatory information.
+This is useful for apps where contact/citation information is not relevant.}
 }
 \value{
-a div containing a styled footer with links and logos
+An \code{htmltools::tagList} containing:
+  \itemize{
+    \item CSS dependency for footer styling (\code{crukFooter.css})
+    \item (Optional) Info section with CRUK logo, citation guidelines, and
+      contact details
+    \item CRUK tagline: "Together we are beating cancer"
+    \item Legal links: Terms and conditions, Privacy, Modern slavery statement,
+      Cookies
+    \item Fundraising Regulator logo
+    \item Registered charity and company information
+  }
 }
 \description{
-CRUK footer
+Creates a comprehensive footer section for CRUK applications containing the
+CRUK tagline, legal links, regulatory logos, and optionally citation and
+contact information. The footer provides users with terms and conditions,
+privacy policy, and regulatory information in a styled, brand-compliant format.
 }
+\details{
+This function automatically detects whether it's being used in a Shiny app or
+static HTML context (e.g., Quarto) and handles logo resources appropriately.
+}
+\section{Footer Components}{
+
+Optional Info Section (includeContact = TRUE): CRUK Logo (linked to main website),
+Citation Guidelines (instructions for reusing content), Contact Information
+(cancerintelligence@cancer.org.uk, 10 working days response time).
+
+Always Included: Tagline ("Together we are beating cancer"), Legal Links
+(Terms and conditions, Privacy statement, Modern slavery statement, Cookies policy),
+Regulatory Information (Fundraising Regulator logo, charity registration numbers,
+company details, registered address: 2 Redman Place, London, E20 1JQ).
+}
+
+\section{Responsive Design}{
+
+The footer is styled responsively via \code{crukFooter.css}:
+Citation and contact information displayed in a two-column layout
+on desktop, stacking on mobile (when \code{includeContact = TRUE}).
+Legal links presented as a horizontal list on desktop, wrapping on mobile.
+All logos and text scale appropriately for different screen sizes.
+}
+
+\section{Static vs. Shiny Context}{
+
+The function automatically detects the rendering context:
+\describe{
+  \item{Shiny Apps}{Uses \code{shiny::addResourcePath()} to serve logo images}
+  \item{Static HTML (Quarto/RMarkdown)}{Uses \code{knitr::image_uri()} to
+    embed logos as base64-encoded data URIs}
+}
+This ensures the footer works correctly in both interactive and static documents.
+}
+
+\section{Dependencies}{
+
+\itemize{
+  \item External HTML files (when \code{includeContact = TRUE}):
+    \code{inst/markdown/citation-text.html} and
+    \code{inst/markdown/email-site-text.html}
+  \item CSS: \code{inst/www/css/crukFooter.css}
+  \item Logos: \code{inst/www/images/cruk-logo.svg} and
+    \code{inst/www/images/logo-fundraising-regulator-reg.svg}
+  \item Required packages: \code{bslib} (for \code{layout_column_wrap})
+}
+}
+
+\section{Placement}{
+
+The footer should be placed at the end of your UI definition, typically as
+the last element within \code{\link{centralColumn}} or at the bottom of
+the page outside the central column.
+}
+
 \examples{
+# Full footer with contact information (default)
 crukFooter()
 
+# Footer without contact information
+crukFooter(includeContact = FALSE)
+
+# In an interactive Shiny session
 if (interactive()) {
   crukFooter()
 }
+
+\dontrun{
+# Complete Shiny app with full footer
+library(shiny)
+library(shinyCRUK)
+
+ui <- fluidPage(
+  tags$head(crukTheme()),
+  crukNavTitle(Title = "Cancer Statistics Dashboard"),
+  centralColumn(
+    crukTitle("Welcome"),
+    p("This dashboard presents cancer incidence and survival statistics."),
+    plotOutput("mainPlot"),
+
+    # Full footer with contact info
+    crukFooter()
+  )
+)
+
+server <- function(input, output, session) {
+  output$mainPlot <- renderPlot({
+    plot(1:10)
+  })
+}
+
+shinyApp(ui, server)
+
+# App without contact information (e.g., internal tool)
+ui <- fluidPage(
+  tags$head(crukTheme()),
+  crukNavTitle(Title = "Internal Data Tool"),
+  centralColumn(
+    crukTitle("Analysis"),
+    p("Internal use only - no public contact needed")
+  ),
+
+  # Footer without contact section
+  crukFooter(includeContact = FALSE)
+)
+
+# In a Quarto document (full footer)
+crukFooter()
+
+# In a Quarto document (minimal footer)
+crukFooter(includeContact = FALSE)
+}
+
+}
+\seealso{
+\code{\link{crukNavTitle}} for the header/navigation component
+
+\code{\link{centralColumn}} for the main content container
+
+\code{\link{crukTheme}} for overall CRUK styling
 }

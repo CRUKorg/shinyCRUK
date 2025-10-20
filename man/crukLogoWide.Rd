@@ -2,26 +2,70 @@
 % Please edit documentation in R/logos.R
 \name{crukLogoWide}
 \alias{crukLogoWide}
-\title{CRUK logo wide}
+\title{CRUK Wide Logo}
 \usage{
 crukLogoWide(height = "50px", width = "auto", class = "")
 }
 \arguments{
-\item{height}{The height of the logo, default is 50px. Must be a valid css unit.}
+\item{height}{Character string specifying the logo height. Must be a valid CSS
+unit (e.g., "50px", "3rem", "10\%"). Default is "50px".}
 
-\item{width}{The width of the logo, may not work unless a height is specified too. Must be a valid css unit.}
+\item{width}{Character string specifying the logo width. Must be a valid CSS
+unit. Default is "auto" to maintain aspect ratio. Note: Specifying both
+height and width may distort the logo if the aspect ratio doesn't match
+the original.}
 
-\item{class}{Add extra CSS classes, if adding multiple then use c() format}
+\item{class}{Character string or character vector of additional CSS class names
+to apply to the logo element. If providing multiple classes, use a character
+vector: `c("class1", "class2")`. These are added alongside the default
+`"cruk-logo-wide"` class. Default is an empty string.}
 }
 \value{
-A wide version of the CRUK as a .png.
+An `htmltools::tags$img` element containing the CRUK wide logo
+  PNG with the specified dimensions and CSS classes.
 }
 \description{
-This function returns the wide version of the CRUK logo with the css class "cruk-logo-wide". Use sparingly and only when stacked logo doesn't work.
+Returns the wide (horizontal) version of the Cancer Research UK logo as a PNG
+image element. The logo is assigned the CSS class `"cruk-logo-wide"` for
+styling purposes.
 }
-\details{
-By default the height is set to 50px, but you can specify a width or height.
+\section{Logo Details}{
+
+  Format: PNG (Portable Network Graphics)
+  Orientation: Wide (logo beside text)
+  Default class: `"cruk-logo-wide"`
+  File location: `inst/www/images/cruk-logo-wide.png`
 }
+
+\section{Usage Guidelines}{
+
+  Use this wide logo format **sparingly** and only when:
+
+  Horizontal space is constrained but vertical space is available
+  The stacked logo ([crukLogo()]) doesn't fit the layout
+  Designing for wide/landscape orientations (e.g., desktop navigation bars)
+
+  The stacked logo ([crukLogo()]) is the preferred format for most
+  use cases per CRUK brand guidelines.
+}
+
 \examples{
-crukLogoWide()
+  # Basic usage with default size (50px height)
+  crukLogoWide()
+
+  # Custom height for navigation bar
+  crukLogoWide(height = "35px")
+
+  # Custom height and width
+  crukLogoWide(height = "40px", width = "200px")
+
+  # Add custom CSS classes
+  crukLogoWide(class = "navbar-logo")
+
+  # Multiple custom classes
+  crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
+
+}
+\seealso{
+[crukLogo()] for the standard stacked version of the CRUK logo (preferred)
 }
