@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 ## Features
 
-### CRUK Brandomg
+### CRUK Branding
 - Pre-styled components following CRUK brand guidelines
 - Consistent typography using Progress Medium and Poppins fonts
 - CRUK color palette and visual identity
@@ -34,6 +34,17 @@ knitr::opts_chunk$set(
 - **Value Boxes**: Styled value boxes
 - **Footers**: Complete footer with legal information and contact details
 - **Utilities**: Rounding functions per CI guidelines
+
+## Documentation
+
+Comprehensive function documentation is available on the [package website](https://verbose-guacamole-l18vr83.pages.github.io/).
+
+Each function includes:
+
+- Detailed parameter descriptions
+- Usage examples
+- Accessibility guidelines
+
 
 ## Installation
 
@@ -207,18 +218,6 @@ crukRounding(156789)
 ## Design System Integration
 
 This package aligns with CRUK's Helix Design System which is used throughout the new Contentful pages. It is built to rely on [bslib](https://rstudio.github.io/bslib/) components, particularly `bslib::page_navbar()` for navigation layouts.
-
-
-## Documentation
-
-Comprehensive function documentation is available on the [package website](https://verbose-guacamole-l18vr83.pages.github.io/).
-
-Each function includes:
-- Detailed parameter descriptions
-- Usage examples
-- Accessibility guidelines
-
-## CRUK Brand Colors
 
 ## Requirements
 

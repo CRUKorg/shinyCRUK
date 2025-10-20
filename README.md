@@ -12,7 +12,7 @@ and brand guidelines.
 
 ## Features
 
-### CRUK Brandomg
+### CRUK Branding
 
 - Pre-styled components following CRUK brand guidelines
 - Consistent typography using Progress Medium and Poppins fonts
@@ -28,6 +28,17 @@ and brand guidelines.
 - **Footers**: Complete footer with legal information and contact
   details
 - **Utilities**: Rounding functions per CI guidelines
+
+## Documentation
+
+Comprehensive function documentation is available on the [package
+website](https://verbose-guacamole-l18vr83.pages.github.io/).
+
+Each function includes:
+
+- Detailed parameter descriptions
+- Usage examples
+- Accessibility guidelines
 
 ## Installation
 
@@ -217,16 +228,6 @@ This package aligns with CRUK’s Helix Design System which is used
 throughout the new Contentful pages. It is built to rely on
 [bslib](https://rstudio.github.io/bslib/) components, particularly
 `bslib::page_navbar()` for navigation layouts.
-
-## Documentation
-
-Comprehensive function documentation is available on the [package
-website](https://verbose-guacamole-l18vr83.pages.github.io/).
-
-Each function includes: - Detailed parameter descriptions - Usage
-examples - Accessibility guidelines
-
-## CRUK Brand Colors
 
 ## Requirements
 
