@@ -142,54 +142,9 @@ a:visited {
   color: #cc006c;
 }
 
-@media (min-width: 992px) {
-  .navbar-CRUK {
-      display: grid;
-      grid-template-columns: 155px 400px 400px;
-      grid-template-rows: auto auto;
-      gap: 0;
 
-  }
-
-
-  .empty-div {
-    display: none;
-  }
-
-  .logo {
-    justify-content: flex-end;
-    display: grid;
-    grid-column: 1 / -1;
-  }
-
-  .cruk-logo-wide {
-    align: right; margin: 8px; height: 50px;
-  }
-
-  .cruk-logo-stacked {
-    display: none;
-  }
-
-  .navbar-country {
-    padding: 0px 5px;
-  }
-
-  .navbar-site {
-    padding: 0px 5px;
-  }
-}
-
+*/
 @media (max-width: 991px) {
-  .navbar-CRUK {
-   display: grid;
-    grid-template-areas:
-    "Title   Logo   "
-    "Country Country"
-    "Site    Site   "
-    "Empty Empty";
-     width: 100%;
-  }
-
   .navbar-brand {
     width: 100%;
   }
@@ -202,7 +157,6 @@ a:visited {
   .logo {
     display: flex;
     position: flex-end;
-    grid-area: Logo;
   }
 
   .cruk-logo-wide {
@@ -213,13 +167,7 @@ a:visited {
     align: right; margin-top: 8px; height: 50px;
   }
 
-  .navbar-country {
-    grid-area: Country;
-  }
 
-  .navbar-site {
-    grid-area: Site;
-  }
 
   .empty-div {
     height: 55px;
@@ -228,7 +176,6 @@ a:visited {
   }
 
   .navbar-toggle {
-    position: absolute;
     z-index: 9999;
   }
 
@@ -316,8 +263,8 @@ a.dropdown-item.active {
   .navbar-header {
       width: 100%;
       display: flex;
-      flex-direction: row;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: baseline;
       margin-bottom: 5px;
   }
   /* remove left margin on navbar links when on small screen */
@@ -326,11 +273,6 @@ a.dropdown-item.active {
   .nav.navbar-nav.shiny-tab-input.shiny-bound-input{
     margin-top: 8px;
   }
-
-  /*disable multi-line logo */
- /* .logo {
-    display: none
-  }*/
 
   /*change title formatting */
   .title {
@@ -358,18 +300,10 @@ a.dropdown-item.active {
 
 
 /* remove margin so top part of navbar isnt spilling over onto two lines */
-.navbar-CRUK {
+.navbar-cruk {
   font-size: 1rem;
   margin-right: 0;
   white-space: normal;
-}
-
-/* resize logo on small screen*/
-@media (max-width: 577px) {
-  .cruk-logo {
-    height: 58px;
-    margin 18px 4px 18px 4px;
-  }
 }
 
 /* set navbar links to the left hand side */
@@ -401,7 +335,7 @@ a.nav-link {
 /* Replaces the bslib default with a chevron after the nav-items */
 .dropdown-toggle::after {
   border: 0 !important;
-  background-image: url('menu_arrow.svg');
+  background-image: url('/shinyCRUK/images/chevron-down.svg');
   display: inline-block;
   height: 24px !important;
   width: 24px !important;
@@ -449,7 +383,7 @@ a.nav-link.active {
 
 /* change burger icon to down arrow and make it brand pink */
 .navbar-toggle>.icon-bar:last-child {
-  background-image: url('menu_arrow.svg');
+  background-image: url('/shinyCRUK/images/chevron-down.svg');
   margin-left: 24px;
   filter: invert(13%) sepia(63%) saturate(6797%) hue-rotate(317deg) brightness(92%) contrast(120%);
   background-size: auto;
@@ -498,3 +432,61 @@ a.nav-link.active {
     gap: 0rem;
 }
 
+
+/* button colouring - base colour*/
+.btn-info, .btn-outline-primary {
+    --bs-btn-color: #e60078;
+    --bs-btn-border-color: #e60078;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #e60078;
+    --bs-btn-hover-border-color: #e60078;
+    --bs-btn-focus-shadow-rgb: 64,64,64;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #e60078;
+    --bs-btn-active-border-color: #e60078;
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: #e60078;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #e60078;
+    --bs-btn-bg: transparent;
+    --bs-gradient: none;
+}
+
+/* Default download button styling */
+.btn-outline-default, .btn-default:not(.btn-primary,.btn-secondary,.btn-info,.btn-success,.btn-danger,.btn-warning,.btn-light,.btn-dark,.btn-link,[class*="btn-outline-"]) {
+    --bs-btn-color: #e60078;
+    --bs-btn-border-color: #e60078;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #e60078;
+    --bs-btn-hover-border-color: #e60078;
+    --bs-btn-focus-shadow-rgb: 64,64,64;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #e60078;
+    --bs-btn-active-border-color: #e60078;
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: #e60078;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #e60078;
+    --bs-btn-bg: transparent;
+    --bs-gradient: none;
+}
+
+
+/* selected and hover over colouring */
+.btn-info.active, .btn-info.focus, .btn-info:active, .open>.dropdown-toggle.btn-info, .btn-info:hover, .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus, .open>.dropdown-toggle.btn-info:hover    {
+  color: #fff !important;
+    background-color: #e60078 !important;
+    border-color: #e60078 !important;
+}
+
+/* remove shadow from radio buttons */
+.btn.active, .btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn.radiobtn {
+  border-radius: 0;
+}
