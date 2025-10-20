@@ -49,26 +49,247 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The goal of shinyCRUK is to make it easier to create shiny apps that are on brand and use the helix design system that is coming into place with the website’s move to Contentful.</p>
+<p><strong>shinyCRUK</strong> provides Cancer Research UK-branded components for building Shiny applications that align with CRUK’s Helix Design System and brand guidelines.</p>
 <div class="section level2">
-<h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
+<h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
 </h2>
-<p>References for each of the functions are available on the <a href="https://verbose-guacamole-l18vr83.pages.github.io/">GitHub pages</a> of this repo.</p>
+<div class="section level3">
+<h3 id="cruk-brandomg">CRUK Brandomg<a class="anchor" aria-label="anchor" href="#cruk-brandomg"></a>
+</h3>
+<ul>
+<li>Pre-styled components following CRUK brand guidelines</li>
+<li>Consistent typography using Progress Medium and Poppins fonts</li>
+<li>CRUK color palette and visual identity</li>
+<li>Responsive layouts for mobile and desktop</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="key-components">Key Components<a class="anchor" aria-label="anchor" href="#key-components"></a>
+</h3>
+<ul>
+<li>
+<strong>Navigation</strong>: Branded nav bar with responsive logos and selectors</li>
+<li>
+<strong>Layout</strong>: Central column containers for optimal content width</li>
+<li>
+<strong>Fonts</strong>: Page titles and headings with CRUK styling</li>
+<li>
+<strong>Value Boxes</strong>: Styled value boxes</li>
+<li>
+<strong>Footers</strong>: Complete footer with legal information and contact details</li>
+<li>
+<strong>Utilities</strong>: Rounding functions per CI guidelines</li>
+</ul>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of shinyCRUK from <a href="https://github.com/CRUKorg/shinyCRUK" class="external-link">GitHub</a> with:</p>
+<p>Install the development version from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<code class="sourceCode R"><span><span class="co"># Using pak</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"CRUKorg/shinyCRUK"</span><span class="op">)</span></span>
-<span><span class="co"># or </span></span>
+<span></span>
+<span><span class="co"># Or using remotes</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CRUKorg/shinyCRUK"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="use">Use<a class="anchor" aria-label="anchor" href="#use"></a>
+<h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<p>This package is built to work well with <a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a> and their <a href="https://rstudio.github.io/bslib/reference/page_navbar.html" class="external-link">page_navbar()</a> function.</p>
+<p>Here’s a minimal example of a CRUK-branded Shiny app:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://verbose-guacamole-l18vr83.pages.github.io/">shinyCRUK</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="va">tags</span><span class="op">$</span><span class="fu">head</span><span class="op">(</span><span class="fu"><a href="reference/crukTheme.html">crukTheme</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  </span>
+<span>  <span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span>Title <span class="op">=</span> <span class="st">"Cancer Statistics Dashboard"</span><span class="op">)</span>,</span>
+<span>  </span>
+<span>  <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20 October 2025"</span><span class="op">)</span>,</span>
+<span>    </span>
+<span>    <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
+<span>      <span class="st">"UK Cancer Incidence"</span>,</span>
+<span>      <span class="st">"Latest statistics for common cancer types"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    </span>
+<span>    <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
+<span>      width <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,</span>
+<span>      </span>
+<span>      <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
+<span>        id <span class="op">=</span> <span class="st">"incidence"</span>,</span>
+<span>        title <span class="op">=</span> <span class="st">"New Cases"</span>,</span>
+<span>        value <span class="op">=</span> <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">367850</span><span class="op">)</span>,</span>
+<span>        icon <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"user-plus"</span><span class="op">)</span>,</span>
+<span>        detail <span class="op">=</span> <span class="st">"Annual incidence in UK"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      </span>
+<span>      <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
+<span>        id <span class="op">=</span> <span class="st">"survival"</span>,</span>
+<span>        title <span class="op">=</span> <span class="st">"Survival Rate"</span>,</span>
+<span>        value <span class="op">=</span> <span class="st">"50%"</span>,</span>
+<span>        icon <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"heart"</span><span class="op">)</span>,</span>
+<span>        detail <span class="op">=</span> <span class="st">"10-year survival"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      </span>
+<span>      <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
+<span>        id <span class="op">=</span> <span class="st">"mortality"</span>,</span>
+<span>        title <span class="op">=</span> <span class="st">"Deaths"</span>,</span>
+<span>        value <span class="op">=</span> <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">167512</span><span class="op">)</span>,</span>
+<span>        icon <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"chart-line-down"</span><span class="op">)</span>,</span>
+<span>        detail <span class="op">=</span> <span class="st">"Annual mortality in UK"</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">plotOutput</a></span><span class="op">(</span><span class="st">"examplePlot"</span><span class="op">)</span>,</span>
+<span>    </span>
+<span>    <span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">examplePlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPlot.html" class="external-link">renderPlot</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="co"># Your plot here</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="core-components">Core Components<a class="anchor" aria-label="anchor" href="#core-components"></a>
+</h2>
+<div class="section level3">
+<h3 id="theme-and-layout">Theme and Layout<a class="anchor" aria-label="anchor" href="#theme-and-layout"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Apply CRUK theme</span></span>
+<span><span class="va">tags</span><span class="op">$</span><span class="fu">head</span><span class="op">(</span><span class="fu"><a href="reference/crukTheme.html">crukTheme</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create central content column (900px max width)</span></span>
+<span><span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Your content here</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="navigation">Navigation<a class="anchor" aria-label="anchor" href="#navigation"></a>
+</h3>
+<p>Navbar styling handles desktop and mobile, with up to two selectors in the navbar.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Simple navigation</span></span>
+<span><span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span>Title <span class="op">=</span> <span class="st">"Early Diagnosis Data Hub"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># With selectors</span></span>
+<span><span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span></span>
+<span>  Title <span class="op">=</span> <span class="st">"Data Dashboard"</span>,</span>
+<span>  selectors <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  selector1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html" class="external-link">selectInput</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"Year:"</span>, <span class="fl">2020</span><span class="op">:</span><span class="fl">2024</span><span class="op">)</span>,</span>
+<span>  selector2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html" class="external-link">selectInput</a></span><span class="op">(</span><span class="st">"region"</span>, <span class="st">"Region:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UK"</span>, <span class="st">"England"</span>, <span class="st">"Scotland"</span>, <span class="st">"Wales"</span>, <span class="st">"Northern Ireland"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="typography">Typography<a class="anchor" aria-label="anchor" href="#typography"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Page title with optional subheading</span></span>
+<span><span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Cancer Incidence Trends"</span>,</span>
+<span>  <span class="st">"Age-standardised rates per 100,000 population"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="logos">Logos<a class="anchor" aria-label="anchor" href="#logos"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Stacked logo (preferred)</span></span>
+<span><span class="fu"><a href="reference/crukLogo.html">crukLogo</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"50px"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wide logo (use sparingly)</span></span>
+<span><span class="fu"><a href="reference/crukLogoWide.html">crukLogoWide</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"35px"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="value-boxes">Value Boxes<a class="anchor" aria-label="anchor" href="#value-boxes"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="st">"metric1"</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Total Cases"</span>,</span>
+<span>  value <span class="op">=</span> <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>,</span>
+<span>  icon <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"chart-bar"</span><span class="op">)</span>,</span>
+<span>  icon_colour <span class="op">=</span> <span class="st">"#00007e"</span>,  <span class="co"># CRUK blue</span></span>
+<span>  detail <span class="op">=</span> <span class="st">"Year ending 2024"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="styled-last-review">Styled last review<a class="anchor" aria-label="anchor" href="#styled-last-review"></a>
+</h3>
+<p>Use these for the top of pages so users know how up to date material is.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Public content</span></span>
+<span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20 October 2025"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Health professional content</span></span>
+<span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20 October 2025"</span>, tag <span class="op">=</span> <span class="st">"health_professional"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Internal content</span></span>
+<span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20 October 2025"</span>, tag <span class="op">=</span> <span class="st">"internal"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Accepts multiple date formats</span></span>
+<span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20/10/2025"</span><span class="op">)</span>              <span class="co"># UK format</span></span>
+<span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2025-10-20"</span><span class="op">)</span><span class="op">)</span>     <span class="co"># Date object</span></span>
+<span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>                <span class="co"># Current date</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="footer">Footer<a class="anchor" aria-label="anchor" href="#footer"></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Full footer with contact information</span></span>
+<span><span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Footer without contact section </span></span>
+<span><span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span>includeContact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="number-formatting">Number Formatting<a class="anchor" aria-label="anchor" href="#number-formatting"></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Format numbers per CRUK Intelligence guidelines</span></span>
+<span><span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1200</span><span class="op">)</span></span>
+<span><span class="co"># Returns: "around 1,200"</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">156789</span><span class="op">)</span></span>
+<span><span class="co"># Returns: "around 157,000"</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="design-system-integration">Design System Integration<a class="anchor" aria-label="anchor" href="#design-system-integration"></a>
+</h2>
+<p>This package aligns with CRUK’s Helix Design System which is used throughout the new Contentful pages. It is built to rely on <a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a> components, particularly <code><a href="https://rstudio.github.io/bslib/reference/page_navbar.html" class="external-link">bslib::page_navbar()</a></code> for navigation layouts.</p>
+</div>
+<div class="section level2">
+<h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h2>
+<p>Comprehensive function documentation is available on the <a href="https://verbose-guacamole-l18vr83.pages.github.io/">package website</a>.</p>
+<p>Each function includes: - Detailed parameter descriptions - Usage examples - Accessibility guidelines</p>
+</div>
+<div class="section level2">
+<h2 id="cruk-brand-colors">CRUK Brand Colors<a class="anchor" aria-label="anchor" href="#cruk-brand-colors"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a>
+</h2>
+<ul>
+<li>shiny</li>
+<li>htmltools</li>
+<li>bslib</li>
+<li>dplyr</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>This package is maintained by the CRUK Cancer Intelligence team. For questions, issues, or contributions, open an issue on GitHub or message Matt or Sam.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
