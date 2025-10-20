@@ -59,61 +59,76 @@ Here’s a minimal example of a CRUK-branded Shiny app:
 ``` r
 library(shiny)
 library(shinyCRUK)
+library(bslib)
+library(shinyWidgets)
 
-ui <- fluidPage(
-  tags$head(crukTheme()),
-  
-  crukNavTitle(Title = "Cancer Statistics Dashboard"),
-  
-  centralColumn(
-    lastReview("20 October 2025"),
-    
-    crukTitle(
-      "UK Cancer Incidence",
-      "Latest statistics for common cancer types"
-    ),
-    
-    bslib::layout_column_wrap(
-      width = 1/3,
-      
-      crukValueBox(
-        id = "incidence",
-        title = "New Cases",
-        value = crukRounding(367850),
-        icon = shiny::icon("user-plus"),
-        detail = "Annual incidence in UK"
-      ),
-      
-      crukValueBox(
-        id = "survival",
-        title = "Survival Rate",
-        value = "50%",
-        icon = shiny::icon("heart"),
-        detail = "10-year survival"
-      ),
-      
-      crukValueBox(
-        id = "mortality",
-        title = "Deaths",
-        value = crukRounding(167512),
-        icon = shiny::icon("chart-line-down"),
-        detail = "Annual mortality in UK"
-      )
-    ),
-    
-    plotOutput("examplePlot"),
-    
-    crukFooter()
-  )
+options(shiny.autoreload = TRUE)
+
+
+# Define UI for application that draws a histogram
+ui <- bslib::page_navbar(
+  tags$head(crukGA(), crukTheme()),
+  # Navbar title
+  fillable = FALSE,
+  title = crukNavTitle("{shinyCRUK}", selectors = 1,
+                       selector1 = radioGroupButtons(inputId = "word-select",
+                                                     label = "Selector label",
+                                                     choices = c("A", "B", "C"),
+                                                     width = "100%",
+                                                     justified = TRUE)),
+  # header = "",
+  footer = centralColumn(crukFooter()),
+
+  nav_panel(title = "Overview",
+            centralColumn(
+              lastReview(format(as.Date(Sys.Date()), "%d %B %Y"), tag = "hp"),
+              crukTitle("Welcome to the {shinyCRUK} test app",
+                        "This app will dsiplay some of the functions that are built into the app"),
+              p("This package is mostly intended to make it easier to make pretty shiny apps. But it also comes with our rounding rules.",
+                "So for example, you can use crukRounding() so numbers like 12236 become ", crukRounding(12236),
+                " or you can use it for percentages so 0.652 becomes ", crukRoundingPercentage(0.652, "lower"), "."),
+              layout_column_wrap(
+                width = 1/2,
+                crukValueBox(id = "valuBox1",
+                             title = "Title of the first value box",
+                             value = crukRounding("785849615"),
+                             icon = icon("weight-scale"),
+                             detail = "detail text",
+                ),
+                crukValueBox(id = "valuBox2",
+                             title = "Title of the second value box",
+                             value = crukRoundingPercentage(0.456186),
+                             icon = icon("weight-scale"),
+                             detail = "detail text",
+                )
+              )
+
+            )
+  ),
+
+  nav_panel(title = "Logos",
+            centralColumn(
+              lastReviewInternal(format(as.Date(Sys.Date()), "%d %B %Y")),
+              crukTitle("The CRUK logo",
+                        "This app will dsiplay some of the functions that are built into the app"),
+              p("I've built up a couple of functions to make it easier to get the CRUK logo."),
+              p("You can call crukLogo() which will give you the logo at a standard 50 pixels tall.", br(),
+                crukLogo()),
+              p("But if you want you can change the size, so for example crukLogo('125px')", br(),
+                crukLogo("125px")),
+              br(),
+              p("You might notice this app uses the wide logo, which can be called with crukLogoWide(), but we are only meant to use this when absolutely necessary...", br(),
+                crukLogoWide(75))
+            ))
 )
 
-server <- function(input, output, session) {
-  output$examplePlot <- renderPlot({
-    # Your plot here
-  })
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+
 }
 
-shinyApp(ui, server)
+# Run the application
+shinyApp(ui = ui, server = server)
 ```
 
 ## Core Components
