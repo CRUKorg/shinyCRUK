@@ -42,7 +42,7 @@ lastReviewHP <- function(last_review_date) {
 lastReviewInternal <- function(last_review_date) {
   htmltools::div(
     htmltools::span("Internal only",
-                    style = "background: #fff0f8;
+      style = "background: #fff0f8;
                   color: #cc006c;
                   font-family: Poppins;
                   display: inline-flex;
@@ -52,7 +52,7 @@ lastReviewInternal <- function(last_review_date) {
     htmltools::div(style = "flex: 1;
                    align-self: stretch;"),
     htmltools::span(htmltools::HTML("Last reviewed:", last_review_date),
-                    style = "color: #666666;
+      style = "color: #666666;
                   font-family: Poppins;
                   padding: 8px 12px 8px 12px;
                   text-align: right;"
@@ -76,7 +76,7 @@ lastReview <- function(last_review_date) {
     htmltools::div(style = "flex: 1;
                    align-self: stretch;"),
     htmltools::span(htmltools::HTML("Last reviewed:", last_review_date),
-                    style = "color: #666666;
+      style = "color: #666666;
                   font-family: Poppins;
                   padding: 8px 12px 8px 12px;
                   text-align: right;"

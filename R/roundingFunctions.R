@@ -39,7 +39,6 @@
 #'
 #' @export
 crukRounding <- function(number) {
-
   # Input validation
   if (!is.numeric(number) && !all(is.na(number))) {
     # Try to coerce to numeric
@@ -61,13 +60,13 @@ crukRounding <- function(number) {
   # Apply rounding tweaks to avoid ties at 0.5 boundaries
   number <- dplyr::case_when(
     number >= 100000000 & number %% 1000000 == 500 ~ number + 1,
-    number >= 10000000  & number %% 100000 == 500 ~ number + 1,
-    number >= 1000000   & number %% 10000 == 500 ~ number + 1,
-    number >= 100000    & number %% 1000 == 500 ~ number + 1,
-    number >= 10000     & number %% 100 == 50 ~ number + 1,
-    number >= 1000      & number %% 100 == 50 ~ number + 1,
-    number >= 100       & number %% 10 == 5 ~ number + 0.01,
-    number >= 10        & number %% 1 == 0.5 ~ number + 0.0001,
+    number >= 10000000 & number %% 100000 == 500 ~ number + 1,
+    number >= 1000000 & number %% 10000 == 500 ~ number + 1,
+    number >= 100000 & number %% 1000 == 500 ~ number + 1,
+    number >= 10000 & number %% 100 == 50 ~ number + 1,
+    number >= 1000 & number %% 100 == 50 ~ number + 1,
+    number >= 100 & number %% 10 == 5 ~ number + 0.01,
+    number >= 10 & number %% 1 == 0.5 ~ number + 0.0001,
     TRUE ~ number
   )
 
@@ -175,7 +174,6 @@ crukRounding <- function(number) {
 #'
 #' @export
 crukRoundingPercentage <- function(number, case = "upper", digits = 3) {
-
   # Input validation
   if (!is.numeric(number)) {
     stop("`number` must be numeric")

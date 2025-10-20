@@ -4,14 +4,15 @@
 #'
 #' @param height The height of the logo, default is 50px. Must be a valid css unit.
 #' @param width The width of the logo, may not work unless a height is specified too. Must be a valid css unit.
+#' @param class Add extra CSS classes, if adding multiple then use c() format
 #'
 #' @returns The CRUK stacked logo as a .svg
 #' @export
 #'
 #' @examples
 #' crukLogo()
-crukLogo <- function(height = "50px", width = "auto") {
-  #Add filepath for logo
+crukLogo <- function(height = "50px", width = "auto", class = "") {
+  # Add filepath for logo
   shiny::addResourcePath(
     prefix = "shinyCRUK",
     directoryPath = system.file("www", package = "shinyCRUK")
@@ -24,7 +25,7 @@ crukLogo <- function(height = "50px", width = "auto") {
   cruk_logo_path <- "shinyCRUK/images/cruk-logo.svg"
   htmltools::img(
     src = cruk_logo_path,
-    class = "cruk-logo",
+    class = paste("cruk-logo", class),
     style = glue::glue("height: {height}; width: {width};")
   )
 }
@@ -37,14 +38,15 @@ crukLogo <- function(height = "50px", width = "auto") {
 #'
 #' @param height The height of the logo, default is 50px. Must be a valid css unit.
 #' @param width The width of the logo, may not work unless a height is specified too. Must be a valid css unit.
+#' @param class Add extra CSS classes, if adding multiple then use c() format
 #'
 #' @returns A wide version of the CRUK as a .png.
 #' @export
 #'
 #' @examples
 #' crukLogoWide()
-crukLogoWide <- function(height = "50px", width = "auto") {
-  #Add filepath for logo
+crukLogoWide <- function(height = "50px", width = "auto", class = "") {
+  # Add filepath for logo
   shiny::addResourcePath(
     prefix = "shinyCRUK",
     directoryPath = system.file("www", package = "shinyCRUK")
@@ -57,7 +59,7 @@ crukLogoWide <- function(height = "50px", width = "auto") {
   cruk_logo_path <- "shinyCRUK/images/cruk-logo-wide.png"
   htmltools::img(
     src = cruk_logo_path,
-    class = "cruk-logo-wide",
+    class = paste("cruk-logo-wide", class),
     style = glue::glue("height: {height}; width: {width};")
   )
 }

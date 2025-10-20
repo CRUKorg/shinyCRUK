@@ -12,13 +12,14 @@
 #' @export
 #'
 #' @examples
-#' crukValueBox(id = "valuBox1",
-#'              title = "Title of the first value box",
-#'              value = "250",
-#'              icon = shiny::icon("weight-scale"),
-#'              detail = "detail text"
+#' crukValueBox(
+#'   id = "valuBox1",
+#'   title = "Title of the first value box",
+#'   value = "250",
+#'   icon = shiny::icon("weight-scale"),
+#'   detail = "detail text"
 #' )
-crukValueBox <- function(id, title= "", value = "", icon = "",
+crukValueBox <- function(id, title = "", value = "", icon = "",
                          icon_colour = "#00007e", detail = "") {
   # Create and store the dependency
   css <- htmltools::htmlDependency(
@@ -40,19 +41,26 @@ crukValueBox <- function(id, title= "", value = "", icon = "",
   # Create the value box
   valueBox <- bslib::value_box(
     id = id,
-    title = htmltools::p(title,
-                         htmltools::hr(class = "value-box-hr")),  # Remove the dot
-    value = htmltools::div(class = "value-box-value",
-                           htmltools::span(value,
-                                           style = "font-family: Progress Medium;"),
-                           htmltools::tags$i('arrow_forward',
-                                             class = c("material-symbols-outlined", "value-box-value-arrow"))
+    title = htmltools::p(
+      title,
+      htmltools::hr(class = "value-box-hr")
+    ), # Remove the dot
+    value = htmltools::div(
+      class = "value-box-value",
+      htmltools::span(value,
+        style = "font-family: Progress Medium;"
+      ),
+      htmltools::tags$i("arrow_forward",
+        class = c("material-symbols-outlined", "value-box-value-arrow")
+      )
     ),
     showcase_layout = bslib::showcase_left_center(width = 0.25),
     showcase = htmltools::span(icon,
-                               style = paste0("color: ", icon_colour, ";")),
+      style = paste0("color: ", icon_colour, ";")
+    ),
     theme = bslib::value_box_theme(bg = "#ffffff", fg = "#000000"),
-    detail)
+    detail
+  )
 
   # Attach the dependency and return
   htmltools::attachDependencies(valueBox, list(css, googleSymbols))

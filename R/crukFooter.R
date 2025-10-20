@@ -44,70 +44,75 @@ crukFooter <- function() {
       all_files = TRUE
     ),
     # htmltools::div(
+    htmltools::div(
+      class = "info-footer",
+      # CRUK logo
       htmltools::div(
-        class = "info-footer",
-        # CRUK logo
-        htmltools::div(
-          htmltools::a(
-            htmltools::img(
-              src = cruk_logo_path,
-              class = "cruk-logo-footer",
-            ),
-            href = "https://www.cancerresearchuk.org/"
-          )
-        ),
-        bslib::layout_column_wrap(
-          width = 1 / 2,
-          htmltools::includeHTML(citation_path),
-          htmltools::includeHTML(email_site_path)
-        ),
+        htmltools::a(
+          htmltools::img(
+            src = cruk_logo_path,
+            class = "cruk-logo-footer",
+          ),
+          href = "https://www.cancerresearchuk.org/"
+        )
       ),
-      htmltools::hr(class = "footer-hr"),
-      htmltools::h3(class = "footer-strapline",
-                    "Together we are", htmltools::br(),
-                    " beating cancer"
-                    ),
+      bslib::layout_column_wrap(
+        width = 1 / 2,
+        htmltools::includeHTML(citation_path),
+        htmltools::includeHTML(email_site_path)
+      ),
+    ),
+    htmltools::hr(class = "footer-hr"),
+    htmltools::h3(
+      class = "footer-strapline",
+      "Together we are", htmltools::br(),
+      " beating cancer"
+    ),
+    htmltools::div(
+      class = "terms-and-conditions",
       htmltools::div(
-        class = "terms-and-conditions",
-        htmltools::div(
-          htmltools::tags$ul(
-            class = "terms-and-conditions-list",
-            htmltools::tags$li(
-              htmltools::a(class = "terms-and-conditions-link",
-                "Terms and conditions",
-                href = "https://www.cancerresearchuk.org/terms-and-conditions"
-              )
-            ),
-            htmltools::tags$li(
-              htmltools::a(class = "terms-and-conditions-link",
-                "Privacy",
-                href = "https://www.cancerresearchuk.org/about-us/our-organisation/privacy-statement"
-              )
-            ),
-            htmltools::tags$li(
-              htmltools::a(class = "terms-and-conditions-link",
-                "Modern slavery statement",
-                href = "https://www.cancerresearchuk.org/about-us/our-organisation/responsible-organisation"
-              )
-            ),
-            htmltools::tags$li(
-              htmltools::a(class = "terms-and-conditions-link",
+        htmltools::tags$ul(
+          class = "terms-and-conditions-list",
+          htmltools::tags$li(
+            htmltools::a(
+              class = "terms-and-conditions-link",
+              "Terms and conditions",
+              href = "https://www.cancerresearchuk.org/terms-and-conditions"
+            )
+          ),
+          htmltools::tags$li(
+            htmltools::a(
+              class = "terms-and-conditions-link",
+              "Privacy",
+              href = "https://www.cancerresearchuk.org/about-us/our-organisation/privacy-statement"
+            )
+          ),
+          htmltools::tags$li(
+            htmltools::a(
+              class = "terms-and-conditions-link",
+              "Modern slavery statement",
+              href = "https://www.cancerresearchuk.org/about-us/our-organisation/responsible-organisation"
+            )
+          ),
+          htmltools::tags$li(
+            htmltools::a(
+              class = "terms-and-conditions-link",
               "Cookies",
-                href = "https://crukcancerintelligence.shinyapps.io/cookiespolicy"
-              )
+              href = "https://crukcancerintelligence.shinyapps.io/cookiespolicy"
             )
           )
-        ),
+        )
       ),
-      htmltools::a(
-        htmltools::img(
-          class = "regulator-logo",
-          src = regulator_logo_path,
-          height = "97px",
-        ),
-        href = "https://www.fundraisingregulator.org.uk/"
+    ),
+    htmltools::a(
+      htmltools::img(
+        class = "regulator-logo",
+        src = regulator_logo_path,
+        height = "97px",
       ),
-      htmltools::tags$address("Cancer Research UK is a registered charity in England and Wales (1089464), Scotland (SC041666), the Isle of Man (1103) and Jersey (247). A company limited by guarantee. Registered company in England and Wales (4325234) and the Isle of Man (5713F). Registered address: 2 Redman Place, London, E20 1JQ.")
-    )
+      href = "https://www.fundraisingregulator.org.uk/"
+    ),
+    htmltools::tags$address("Cancer Research UK is a registered charity in England and Wales (1089464), Scotland (SC041666), the Isle of Man (1103) and Jersey (247). A company limited by guarantee. Registered company in England and Wales (4325234) and the Isle of Man (5713F). Registered address: 2 Redman Place, London, E20 1JQ.")
+  )
   # )
 }

@@ -4,12 +4,14 @@
 \alias{crukLogoWide}
 \title{CRUK logo wide}
 \usage{
-crukLogoWide(height = "50px", width = "auto")
+crukLogoWide(height = "50px", width = "auto", class = "")
 }
 \arguments{
 \item{height}{The height of the logo, default is 50px. Must be a valid css unit.}
 
 \item{width}{The width of the logo, may not work unless a height is specified too. Must be a valid css unit.}
+
+\item{class}{Add extra CSS classes, if adding multiple then use c() format}
 }
 \value{
 A wide version of the CRUK as a .png.

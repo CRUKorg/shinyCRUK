@@ -9,9 +9,9 @@
 #' htmltools::tags$head(
 #'   crukGA()
 #' )
-crukGA <- function () {
+crukGA <- function() {
   if (!interactive()) {
-  analytics_script <- system.file("www", "ga-code.html", package = "shinyCRUK", mustWork = TRUE)
-  htmltools::includeHTML(analytics_script)
+    analytics_script <- system.file("www", "ga-code.html", package = "shinyCRUK", mustWork = TRUE)
+    htmltools::includeHTML(analytics_script)
   }
 }
