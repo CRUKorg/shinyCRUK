@@ -37,6 +37,6 @@ crukValueBox(id = "valuBox1",
              title = "Title of the first value box",
              value = "250",
              icon = shiny::icon("weight-scale"),
-             detail = "detail text",
+             detail = "detail text"
 )
 }

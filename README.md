@@ -18,7 +18,7 @@ pages](https://verbose-guacamole-l18vr83.pages.github.io/) of this repo.
 ## Installation
 
 You can install the development version of shinyCRUK from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/CRUKorg/shinyCRUK) with:
 
 ``` r
 # install.packages("pak")
