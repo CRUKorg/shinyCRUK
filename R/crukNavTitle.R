@@ -156,7 +156,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
             height: 35px;
           }
 
-          .cruk-logo {
+          .cruk-logo-nav {
             display: none;
           }
 

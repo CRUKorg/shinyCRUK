@@ -434,20 +434,29 @@ a.nav-link.active {
 
 
 /* button colouring - base colour*/
+.btn{
+  color: #ffffff;
+    background-color: #e60078;
+    border-radius: 0px;
+}
+
 .btn-info, .btn-outline-primary {
+  color: #e60078;
+    background-color: #ffffff;
+    border-radius: 0px;
     --bs-btn-color: #e60078;
     --bs-btn-border-color: #e60078;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #e60078;
-    --bs-btn-hover-border-color: #e60078;
+    --bs-btn-hover-bg: #cc006c;
+    --bs-btn-hover-border-color: #cc006c;
     --bs-btn-focus-shadow-rgb: 64,64,64;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #e60078;
     --bs-btn-active-border-color: #e60078;
     --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #e60078;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #e60078;
+    --bs-btn-disabled-color: #666666;
+    --bs-btn-disabled-bg: #e6e6e6;
+    --bs-btn-disabled-border-color: #e6e6e6;
     --bs-btn-bg: transparent;
     --bs-gradient: none;
 }
@@ -457,16 +466,16 @@ a.nav-link.active {
     --bs-btn-color: #e60078;
     --bs-btn-border-color: #e60078;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #e60078;
-    --bs-btn-hover-border-color: #e60078;
+    --bs-btn-hover-bg: #cc006c;
+    --bs-btn-hover-border-color: #cc006c;
     --bs-btn-focus-shadow-rgb: 64,64,64;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #e60078;
-    --bs-btn-active-border-color: #e60078;
+    --bs-btn-active-bg: #cc006c;
+    --bs-btn-active-border-color: #cc006c;
     --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #e60078;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #e60078;
+    --bs-btn-disabled-color: #666666;
+    --bs-btn-disabled-bg: #e6e6e6;
+    --bs-btn-disabled-border-color: #666666;
     --bs-btn-bg: transparent;
     --bs-gradient: none;
 }
@@ -475,8 +484,8 @@ a.nav-link.active {
 /* selected and hover over colouring */
 .btn-info.active, .btn-info.focus, .btn-info:active, .open>.dropdown-toggle.btn-info, .btn-info:hover, .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus, .open>.dropdown-toggle.btn-info:hover    {
   color: #fff !important;
-    background-color: #e60078 !important;
-    border-color: #e60078 !important;
+    background-color: #cc006c !important;
+    border-color: #cc006c !important;
 }
 
 /* remove shadow from radio buttons */
