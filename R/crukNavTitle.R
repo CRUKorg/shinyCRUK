@@ -125,7 +125,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
           .navbar-cruk {
             flex-direction: column;
           }
-          .cruk-logo-wide {
+          .cruk-logo-wide-nav {
             display: none;
           }
           .cruk-logo-nav {
@@ -152,7 +152,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
             justify-content: flex-end;
           }
 
-          .cruk-logo-wide {
+          .cruk-logo-wide-nav {
             height: 35px;
           }
 
@@ -195,7 +195,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
       htmltools::div(
         class = "logo-wide",
         htmltools::a(
-          shinyCRUK::crukLogoWide(),
+          shinyCRUK::crukLogoWide(class = "cruk-logo-wide-nav"),
           href = "https://www.cancerresearchuk.org/"
         )
       ),
