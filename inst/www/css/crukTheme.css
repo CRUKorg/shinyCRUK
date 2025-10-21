@@ -5,22 +5,22 @@ body {
 /* --- Fonts --- */
 @font-face {
   font-family: "Progress Medium";
-  src: url('Progress-Medium.otf');
+  src: url('shinyCRUK/css/Progress-Medium.otf');
 }
 
 @font-face {
     font-family: 'Poppins';
-    src: url('Poppins-Regular.ttf') format('truetype');
+    src: url('shinyCRUK/css/Poppins-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Medium';
-    src: url('Poppins-Medium.ttf') format('truetype');
+    src: url('shinyCRUK/css/Poppins-Medium.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Semibold';
-    src: url('Poppins-SemiBold.ttf') format('truetype');
+    src: url('shinyCRUK/css/Poppins-SemiBold.ttf') format('truetype');
 }
 
 
