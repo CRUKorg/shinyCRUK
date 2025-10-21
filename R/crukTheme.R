@@ -50,6 +50,8 @@ crukTheme <- function() {
       package = "shinyCRUK",
       stylesheet = "css/crukTheme.css",
       all_files = TRUE
-    )
+    ),
+    htmltools::tags$link(rel = "shortcut icon", href = "shinyCRUK/images/favicon.ico"),
+
   )
 }
