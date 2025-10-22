@@ -2,12 +2,15 @@
 % Please edit documentation in R/roundingFunctions.R
 \name{crukRounding}
 \alias{crukRounding}
-\title{Round Numbers Following CRUK Intelligence Guidelines}
+\title{Round Numbers Following Cancer Intelligence Guidelines}
 \usage{
-crukRounding(number)
+crukRounding(number, case = "lower")
 }
 \arguments{
 \item{number}{Numeric vector of values to format. Can be integers or decimals.}
+
+\item{case}{Character string specifying text case. Either "lower" (default)
+for lowercase or "upper" for sentence case output.}
 }
 \value{
 Character vector of formatted number descriptions with thousand
@@ -34,6 +37,9 @@ increments before rounding.
 \examples{
 crukRounding(1200)
 # Returns: "around 1,200"
+
+crukRounding(1200, case = "upper")
+# Returns: "Around 1,200"
 
 crukRounding(156789)
 # Returns: "around 157,000"
