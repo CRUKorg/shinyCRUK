@@ -189,7 +189,8 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, justified = T
       label = label,
       choices = choices,
       width = width,
-      justified = TRUE
+      justified = TRUE,
+      ...
     )
   )
 
