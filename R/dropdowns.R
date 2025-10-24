@@ -8,8 +8,8 @@ crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = 
     all_files = TRUE
   )
 
-  dropdown <- div(class = c("crukSelectInput", class),
-                  selectInput(
+  dropdown <- htmltools::div(class = c("crukSelectInput", class),
+                  shiny::selectInput(
                     inputId = "select",
                     label = "label",
                     choices = c("Hobnob", "Digestive", "Bourbon", "Custard cream", "Rich tea"),
@@ -39,12 +39,12 @@ crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TR
   )
 
   # Merge user-provided options with defaults
-  merged_options <- modifyList(default_options, options)
+  merged_options <- utils::modifyList(default_options, options)
 
   # Pass ... to pickerInput, and merged options to the options argument
-  dropdown <- div(
+  dropdown <- htmltools::div(
     class = "crukPickerInput",
-    pickerInput(
+    shinyWidgets::pickerInput(
       inputId = inputId,
       label = label,
       choices = choices,
