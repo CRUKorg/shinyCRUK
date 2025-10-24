@@ -171,7 +171,7 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
 #'
 #'   shinyApp(ui, server)
 #' }
-crukRadioButton <- function(inputId, label, choices, width = NULL, justified = TRUE, class, ...) {
+crukRadioButton <- function(inputId, label, choices, width = NULL, justified = TRUE, class = "", ...) {
   # Dependencies
   css <- htmltools::htmlDependency(
     name = "crukRadioButton",
@@ -182,14 +182,16 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, justified = T
     all_files = TRUE
   )
 
-  radioButton <- htmltools::div(class = c("cruk-radio-btn", class),
-                shinyWidgets::radioGroupButtons(inputId = inputId,
-                                                label = label,
-                                                choices = choices,
-                                                width = width,
-                                                justified = TRUE)
+  radioButton <- htmltools::div(
+    class = c("cruk-radio-btn", class),
+    shinyWidgets::radioGroupButtons(
+      inputId = inputId,
+      label = label,
+      choices = choices,
+      width = width,
+      justified = TRUE
+    )
   )
 
   htmltools::attachDependencies(radioButton, css)
-
 }
