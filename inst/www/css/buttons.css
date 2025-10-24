@@ -1,0 +1,91 @@
+/* action button styling */
+.cruk-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border-radius: 0px;
+    width: fit-content;
+    gap: 12px;
+    padding: 12px 24px;
+    min-width: 160px;
+    max-width: 250px;
+}
+
+/* primary button styling */
+.cruk-btn-primary {
+  border: 1px solid #e60078;
+  background: #e60078;
+  color: #ffffff;
+}
+
+.cruk-btn-icon-primary {
+  font-size: 1.25rem !important;
+  color: #ffffff;
+}
+
+.cruk-btn-primary:active, .cruk-btn-primary:hover, .cruk-btn-primary.btn:first-child:active {
+  border: 1px solid #cc006c;
+  background: #cc006c;
+  color: #ffffff;
+}
+
+/* secondary button styling */
+.cruk-btn-secondary {
+  border: 1px solid #e60078;
+  background: #ffffff;
+  color: #e60078;
+}
+
+.cruk-btn-icon-secondary {
+  font-size: 1.25rem !important;
+  color: #E60078;
+}
+
+.cruk-btn-secondary:hover .cruk-btn-icon-secondary  {
+  font-size: 1.25rem !important;
+  color: #cc006c;
+}
+
+.cruk-btn-secondary:active .cruk-btn-icon-secondary  {
+  font-size: 1.25rem !important;
+  color: #ffffff;
+}
+
+.cruk-btn-secondary:hover {
+  border: 1px solid #fff0f8;
+  background: #fff0f8;
+  color: #cc006c;
+}
+
+.cruk-btn-secondary:active, .cruk-btn-secondary.btn:first-child:active {
+  border: 1px solid #e60078;
+  background: #e60078;
+  color: #ffffff;
+}
+
+/* Radio button styling */
+.cruk-radio-btn .btn {
+  color: #e60078;
+  background: white;
+  border: 1px solid #e60078;
+  border-radius: 0px;
+}
+
+.cruk-radio-btn .btn-check:checked+.btn {
+  color: #ffffff;
+  background: #e60078;
+  border: 1px solid #e60078;
+}
+
+.cruk-radio-btn .btn:hover {
+  color: #cc006c;
+  background: #fff0f8;
+  border: 1px solid #e60078;
+}
+
+.cruk-radio-btn .control-label {
+  font-family: 'Poppins Medium';
+  font-weight: 400;
+  font-size: 1rem;
+}
