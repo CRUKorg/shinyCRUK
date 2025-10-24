@@ -143,7 +143,6 @@ a:visited {
 }
 
 
-*/
 @media (max-width: 991px) {
   .navbar-brand {
     width: 100%;
@@ -433,7 +432,7 @@ a.nav-link.active {
 }
 
 
-/* button colouring - base colour*/
+/* button colouring - base colour
 .btn{
   color: #ffffff;
     background-color: #e60078;
@@ -461,41 +460,41 @@ a.nav-link.active {
     --bs-gradient: none;
 }
 
-/* Default download button styling */
-.btn-outline-default, .btn-default:not(.btn-primary,.btn-secondary,.btn-info,.btn-success,.btn-danger,.btn-warning,.btn-light,.btn-dark,.btn-link,[class*="btn-outline-"]) {
-    --bs-btn-color: #e60078;
-    --bs-btn-border-color: #e60078;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #cc006c;
-    --bs-btn-hover-border-color: #cc006c;
-    --bs-btn-focus-shadow-rgb: 64,64,64;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #cc006c;
-    --bs-btn-active-border-color: #cc006c;
-    --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #666666;
-    --bs-btn-disabled-bg: #e6e6e6;
-    --bs-btn-disabled-border-color: #666666;
-    --bs-btn-bg: transparent;
-    --bs-gradient: none;
-}
+/*Default download button styling
+/*.btn-outline-default, .btn-default:not(.btn-primary,.btn-secondary,.btn-info,.btn-success,.btn-danger,.btn-warning,.btn-light,.btn-dark,.btn-link,[class*="btn-outline-"]) {
+/*    --bs-btn-color: #e60078;
+/*    --bs-btn-border-color: #e60078;
+/*    --bs-btn-hover-color: #fff;
+/*    --bs-btn-hover-bg: #cc006c;
+/*    --bs-btn-hover-border-color: #cc006c;
+/*    --bs-btn-focus-shadow-rgb: 64,64,64;
+/*    --bs-btn-active-color: #fff;
+/*    --bs-btn-active-bg: #cc006c;
+/*    --bs-btn-active-border-color: #cc006c;
+/*    --bs-btn-active-shadow: none;
+/*    --bs-btn-disabled-color: #666666;
+/*    --bs-btn-disabled-bg: #e6e6e6;
+/*    --bs-btn-disabled-border-color: #666666;
+/*    --bs-btn-bg: transparent;
+/*    --bs-gradient: none;
+/*}
 
 
-/* selected and hover over colouring */
+/* selected and hover over colouring
 .btn-info.active, .btn-info.focus, .btn-info:active, .open>.dropdown-toggle.btn-info, .btn-info:hover, .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus, .open>.dropdown-toggle.btn-info:hover    {
   color: #fff !important;
     background-color: #cc006c !important;
     border-color: #cc006c !important;
 }
-
+*/
 /* remove shadow from radio buttons */
-.btn.active, .btn:active {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.btn.radiobtn {
-  border-radius: 0;
-}
+/*.btn.active, .btn:active {
+/*  background-image: none;
+/*  outline: 0;
+/*  -webkit-box-shadow: none;
+/*  box-shadow: none;
+/*}
+/*
+/*.btn.radiobtn {
+/*  border-radius: 0;
+/*}

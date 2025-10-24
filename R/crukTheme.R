@@ -41,6 +41,7 @@ crukTheme <- function() {
     prefix = "shinyCRUK",
     directoryPath = system.file("www", package = "shinyCRUK")
   )
+
   htmltools::tagList(
     # Add css theme to whole app
     htmltools::htmlDependency(
@@ -52,6 +53,5 @@ crukTheme <- function() {
       all_files = TRUE
     ),
     htmltools::tags$link(rel = "shortcut icon", href = "shinyCRUK/images/favicon.ico"),
-
   )
 }

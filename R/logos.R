@@ -2,7 +2,7 @@
 #'
 #' Returns the standard Cancer Research UK stacked logo as an SVG image element.
 #' This is the primary CRUK logo format, featuring the logo mark above the text.
-#' The logo is assigned the CSS class `"cruk-logo"` for styling purposes.
+#' The logo is assigned the CSS class `cruk-logo` for styling purposes.
 #'
 #' @param height Character string specifying the logo height. Must be a valid CSS
 #' @param width Character string specifying the logo width. Must be a valid CSS
@@ -33,24 +33,24 @@
 #'   [crukLogoWide] for the wide version of the CRUK logo
 #'
 #' @examples
-#'   # Basic usage with default size (50px height)
-#'   crukLogo()
+#' # Basic usage with default size (50px height)
+#' crukLogo()
 #'
-#'   # Custom height
-#'   crukLogo(height = "75px")
+#' # Custom height
+#' crukLogo(height = "75px")
 #'
-#'   # Custom height and width (use carefully to avoid distortion)
-#'   crukLogo(height = "60px", width = "60px")
+#' # Custom height and width (use carefully to avoid distortion)
+#' crukLogo(height = "60px", width = "60px")
 #'
-#'   # Add custom CSS classes
-#'   crukLogo(class = "my-custom-class")
+#' # Add custom CSS classes
+#' crukLogo(class = "my-custom-class")
 #'
-#'   # Multiple custom classes
-#'   crukLogo(height = "100px", class = c("logo-header", "fade-in"))
+#' # Multiple custom classes
+#' crukLogo(height = "100px", class = c("logo-header", "fade-in"))
 #'
-#'   # Using CSS units other than pixels
-#'   crukLogo(height = "5rem")
-#'   crukLogo(height = "10vh")
+#' # Using CSS units other than pixels
+#' crukLogo(height = "5rem")
+#' crukLogo(height = "10vh")
 #'
 #' @export
 crukLogo <- function(height = "50px", width = "auto", class = "") {
@@ -113,20 +113,20 @@ crukLogo <- function(height = "50px", width = "auto", class = "") {
 #'   [crukLogo()] for the standard stacked version of the CRUK logo (preferred)
 #'
 #' @examples
-#'   # Basic usage with default size (50px height)
-#'   crukLogoWide()
+#' # Basic usage with default size (50px height)
+#' crukLogoWide()
 #'
-#'   # Custom height for navigation bar
-#'   crukLogoWide(height = "35px")
+#' # Custom height for navigation bar
+#' crukLogoWide(height = "35px")
 #'
-#'   # Custom height and width
-#'   crukLogoWide(height = "40px", width = "200px")
+#' # Custom height and width
+#' crukLogoWide(height = "40px", width = "200px")
 #'
-#'   # Add custom CSS classes
-#'   crukLogoWide(class = "navbar-logo")
+#' # Add custom CSS classes
+#' crukLogoWide(class = "navbar-logo")
 #'
-#'   # Multiple custom classes
-#'   crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
+#' # Multiple custom classes
+#' crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
 #'
 #' @export
 crukLogoWide <- function(height = "50px", width = "auto", class = "") {

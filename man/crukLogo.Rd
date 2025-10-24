@@ -26,7 +26,7 @@ An `htmltools::tags$img` element containing the CRUK stacked logo
 \description{
 Returns the standard Cancer Research UK stacked logo as an SVG image element.
 This is the primary CRUK logo format, featuring the logo mark above the text.
-The logo is assigned the CSS class `"cruk-logo"` for styling purposes.
+The logo is assigned the CSS class `cruk-logo` for styling purposes.
 }
 \section{Logo Details}{
 
@@ -44,24 +44,24 @@ The logo is assigned the CSS class `"cruk-logo"` for styling purposes.
 }
 
 \examples{
-  # Basic usage with default size (50px height)
-  crukLogo()
+# Basic usage with default size (50px height)
+crukLogo()
 
-  # Custom height
-  crukLogo(height = "75px")
+# Custom height
+crukLogo(height = "75px")
 
-  # Custom height and width (use carefully to avoid distortion)
-  crukLogo(height = "60px", width = "60px")
+# Custom height and width (use carefully to avoid distortion)
+crukLogo(height = "60px", width = "60px")
 
-  # Add custom CSS classes
-  crukLogo(class = "my-custom-class")
+# Add custom CSS classes
+crukLogo(class = "my-custom-class")
 
-  # Multiple custom classes
-  crukLogo(height = "100px", class = c("logo-header", "fade-in"))
+# Multiple custom classes
+crukLogo(height = "100px", class = c("logo-header", "fade-in"))
 
-  # Using CSS units other than pixels
-  crukLogo(height = "5rem")
-  crukLogo(height = "10vh")
+# Using CSS units other than pixels
+crukLogo(height = "5rem")
+crukLogo(height = "10vh")
 
 }
 \seealso{

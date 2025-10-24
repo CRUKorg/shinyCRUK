@@ -208,8 +208,8 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
   googleSymbols <- htmltools::htmlDependency(
     name = "google-material-symbols",
     version = "1.0.0",
-    src = c(href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"),
-    stylesheet = ""
+    src = c(href = "https://fonts.googleapis.com"),
+    stylesheet = "css2?family=Material+Symbols+Sharp"
   )
 
   # Create the value box
@@ -225,7 +225,7 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
         style = "font-family: Progress Medium;"
       ),
       htmltools::tags$i("arrow_forward",
-        class = c("material-symbols-outlined", "value-box-value-arrow")
+        class = c("material-symbols-sharp", "value-box-value-arrow")
       )
     ),
     showcase_layout = bslib::showcase_left_center(width = 0.25),

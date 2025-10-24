@@ -10,7 +10,7 @@
 #'   crukGA()
 #' )
 crukGA <- function() {
-  #Check if being run locally, if not activate analytics
+  # Check if being run locally, if not activate analytics
   if (!interactive()) {
     analytics_script <- system.file("www", "ga-code.html", package = "shinyCRUK", mustWork = TRUE)
     htmltools::includeHTML(analytics_script)

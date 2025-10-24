@@ -50,20 +50,20 @@ styling purposes.
 }
 
 \examples{
-  # Basic usage with default size (50px height)
-  crukLogoWide()
+# Basic usage with default size (50px height)
+crukLogoWide()
 
-  # Custom height for navigation bar
-  crukLogoWide(height = "35px")
+# Custom height for navigation bar
+crukLogoWide(height = "35px")
 
-  # Custom height and width
-  crukLogoWide(height = "40px", width = "200px")
+# Custom height and width
+crukLogoWide(height = "40px", width = "200px")
 
-  # Add custom CSS classes
-  crukLogoWide(class = "navbar-logo")
+# Add custom CSS classes
+crukLogoWide(class = "navbar-logo")
 
-  # Multiple custom classes
-  crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
+# Multiple custom classes
+crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
 
 }
 \seealso{
