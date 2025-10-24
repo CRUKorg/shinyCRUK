@@ -26,6 +26,11 @@
 #' )
 #' }
 crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = "", ...) {
+  shiny::addResourcePath(
+    prefix = "shinyCRUK",
+    directoryPath = system.file("www", package = "shinyCRUK")
+  )
+
   css <- htmltools::htmlDependency(
     name = "dropdowns",
     version = utils::packageVersion("shinyCRUK"),
@@ -34,14 +39,15 @@ crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = 
     stylesheet = "css/dropdowns.css",
     all_files = TRUE
   )
-  dropdown <- htmltools::div(class = c("crukSelectInput", class),
-                             shiny::selectInput(
-                               inputId = inputId,
-                               label = label,
-                               choices = choices,
-                               selectize = selectize,
-                               ...
-                             )
+  dropdown <- htmltools::div(
+    class = c("crukSelectInput", class),
+    shiny::selectInput(
+      inputId = inputId,
+      label = label,
+      choices = choices,
+      selectize = selectize,
+      ...
+    )
   )
   htmltools::attachDependencies(dropdown, css)
 }
@@ -90,6 +96,11 @@ crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = 
 #' )
 #' }
 crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TRUE, placeholder = NULL, ..., options = list()) {
+  shiny::addResourcePath(
+    prefix = "shinyCRUK",
+    directoryPath = system.file("www", package = "shinyCRUK")
+  )
+
   css <- htmltools::htmlDependency(
     name = "dropdowns",
     version = utils::packageVersion("shinyCRUK"),
@@ -98,7 +109,7 @@ crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TR
     stylesheet = "css/dropdowns.css",
     all_files = TRUE
   )
-  #define default options
+  # define default options
   default_options <- list(
     `live-search` = livesearch,
     selectOnTab = TRUE,

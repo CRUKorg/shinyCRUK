@@ -334,7 +334,7 @@ a.nav-link {
 /* Replaces the bslib default with a chevron after the nav-items */
 .dropdown-toggle::after {
   border: 0 !important;
-  background-image: url('/shinyCRUK/images/chevron-down.svg');
+  background-image: url('.../images/chevron-down.svg');
   display: inline-block;
   height: 24px !important;
   width: 24px !important;
@@ -382,7 +382,7 @@ a.nav-link.active {
 
 /* change burger icon to down arrow and make it brand pink */
 .navbar-toggle>.icon-bar:last-child {
-  background-image: url('/shinyCRUK/images/chevron-down.svg');
+  background-image: url('.../images/chevron-down.svg');
   margin-left: 24px;
   filter: invert(13%) sepia(63%) saturate(6797%) hue-rotate(317deg) brightness(92%) contrast(120%);
   background-size: auto;

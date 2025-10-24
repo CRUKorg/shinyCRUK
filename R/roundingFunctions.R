@@ -152,15 +152,14 @@ crukRounding <- function(number, case = "lower") {
   )
 
   numbertext <- ifelse(case == "upper",
-                       paste0(
-                         substr(toupper(numbertext), 1, 1),
-                         substr(numbertext, 2, nchar(numbertext))
-                         ),
-                       numbertext)
+    paste0(
+      substr(toupper(numbertext), 1, 1),
+      substr(numbertext, 2, nchar(numbertext))
+    ),
+    numbertext
+  )
 
   return(numbertext)
-
-
 }
 
 
