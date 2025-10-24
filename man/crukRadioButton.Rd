@@ -10,7 +10,7 @@ crukRadioButton(
   choices,
   width = NULL,
   justified = TRUE,
-  class,
+  class = "",
   ...
 )
 }
