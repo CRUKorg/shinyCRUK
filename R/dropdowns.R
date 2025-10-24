@@ -1,3 +1,16 @@
+#' CRUK selectInput
+#'
+#' @param inputId
+#' @param label
+#' @param choices
+#' @param selectize
+#' @param class
+#' @param ...
+#'
+#' @returns
+#' @export
+#'
+#' @examples
 crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = "", ...) {
   css <- htmltools::htmlDependency(
     name = "dropdowns",
@@ -11,7 +24,7 @@ crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = 
   dropdown <- htmltools::div(class = c("crukSelectInput", class),
                   shiny::selectInput(
                     inputId = "select",
-                    label = "label",
+                    label = label,
                     choices = c("Hobnob", "Digestive", "Bourbon", "Custard cream", "Rich tea"),
                     selectize = FALSE,
                     ...
@@ -21,6 +34,21 @@ crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = 
   htmltools::attachDependencies(dropdown, css)
 
 }
+#' CRUK pickerInput
+#'
+#' @param inputId
+#' @param label
+#' @param choices
+#' @param class
+#' @param livesearch
+#' @param placeholder
+#' @param ...
+#' @param options
+#'
+#' @returns
+#' @export
+#'
+#' @examples
 crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TRUE, placeholder = NULL, ..., options = list()) {
   css <- htmltools::htmlDependency(
     name = "dropdowns",
