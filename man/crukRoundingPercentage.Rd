@@ -4,13 +4,13 @@
 \alias{crukRoundingPercentage}
 \title{Round and Format Percentages with Descriptive Text}
 \usage{
-crukRoundingPercentage(number, case = "upper", digits = 3)
+crukRoundingPercentage(number, case = "lower", digits = 3)
 }
 \arguments{
 \item{number}{Numeric vector of proportions between 0 and 1.}
 
-\item{case}{Character string specifying text case. Either "upper" (default)
-for sentence case or "lower" for lowercase output.}
+\item{case}{Character string specifying text case. Either "lower" (default)
+for lowercase or "upper" for sentence case output.}
 
 \item{digits}{Integer specifying number of decimal places for percentage
 display. Default is 3.}
@@ -31,7 +31,10 @@ crukRoundingPercentage(0.25)
 crukRoundingPercentage(0.33, digits = 2)
 # Returns: "1 in 3 (33\%)"
 
-crukRoundingPercentage(0.25, case = "lower")
-# Returns: "1 in 4 (25\%)" in lowercase
+crukRoundingPercentage(0.4567, case = "lower")
+# Returns: "almost 1 in 2 (45.7\%)"
+
+crukRoundingPercentage(0.4567, case = "upper")
+# Returns: "Almost 1 in 2 (45.7\%)"
 
 }

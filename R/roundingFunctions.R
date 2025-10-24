@@ -1,10 +1,12 @@
-#' Round Numbers Following CRUK Intelligence Guidelines
+#' Round Numbers Following Cancer Intelligence Guidelines
 #'
 #' Formats numbers according to Cancer Intelligence rounding rules,
 #' providing human-readable descriptions with appropriate precision levels based
 #' on magnitude. Returns descriptive text like "around 1,200" or "more than 5,000".
 #'
 #' @param number Numeric vector of values to format. Can be integers or decimals.
+#' @param case Character string specifying text case. Either "lower" (default)
+#'   for lowercase or "upper" for sentence case output.
 #'
 #' @return Character vector of formatted number descriptions with thousand
 #'   separators and descriptive qualifiers (around, nearly, more than, less than).
@@ -28,6 +30,9 @@
 #' crukRounding(1200)
 #' # Returns: "around 1,200"
 #'
+#' crukRounding(1200, case = "upper")
+#' # Returns: "Around 1,200"
+#'
 #' crukRounding(156789)
 #' # Returns: "around 157,000"
 #'
@@ -38,7 +43,7 @@
 #' # Returns: "around 1,000,000"
 #'
 #' @export
-crukRounding <- function(number) {
+crukRounding <- function(number, case = "lower") {
   # Input validation
   if (!is.numeric(number) && !all(is.na(number))) {
     # Try to coerce to numeric
@@ -55,6 +60,11 @@ crukRounding <- function(number) {
   # Warn about negative values
   if (any(number < 0, na.rm = TRUE)) {
     warning("Negative values detected. Results may not follow CRUK guidelines for negative numbers.")
+  }
+
+  # Error if case argument is mis-specified
+  if (!case %in% c("lower", "upper")) {
+    stop("`case` must be 'lower' or 'upper'")
   }
 
   # Apply rounding tweaks to avoid ties at 0.5 boundaries
@@ -141,7 +151,16 @@ crukRounding <- function(number) {
     TRUE ~ "less than 5"
   )
 
+  numbertext <- ifelse(case == "upper",
+                       paste0(
+                         substr(toupper(numbertext), 1, 1),
+                         substr(numbertext, 2, nchar(numbertext))
+                         ),
+                       numbertext)
+
   return(numbertext)
+
+
 }
 
 
@@ -153,8 +172,8 @@ crukRounding <- function(number) {
 #' divide by 100 first.
 #'
 #' @param number Numeric vector of proportions between 0 and 1.
-#' @param case Character string specifying text case. Either "upper" (default)
-#'   for sentence case or "lower" for lowercase output.
+#' @param case Character string specifying text case. Either "lower" (default)
+#'   for lowercase or "upper" for sentence case output.
 #' @param digits Integer specifying number of decimal places for percentage
 #'   display. Default is 3.
 #'
@@ -169,18 +188,21 @@ crukRounding <- function(number) {
 #' crukRoundingPercentage(0.33, digits = 2)
 #' # Returns: "1 in 3 (33%)"
 #'
-#' crukRoundingPercentage(0.25, case = "lower")
-#' # Returns: "1 in 4 (25%)" in lowercase
+#' crukRoundingPercentage(0.4567, case = "lower")
+#' # Returns: "almost 1 in 2 (45.7%)"
+#'
+#' crukRoundingPercentage(0.4567, case = "upper")
+#' # Returns: "Almost 1 in 2 (45.7%)"
 #'
 #' @export
-crukRoundingPercentage <- function(number, case = "upper", digits = 3) {
+crukRoundingPercentage <- function(number, case = "lower", digits = 3) {
   # Input validation
   if (!is.numeric(number)) {
     stop("`number` must be numeric")
   }
 
-  if (!case %in% c("upper", "lower")) {
-    stop("`case` must be either 'upper' or 'lower'")
+  if (!case %in% c("lower", "upper")) {
+    stop("`case` must be either 'lower' or 'upper'")
   }
 
   if (!is.numeric(digits) || digits < 0) {
