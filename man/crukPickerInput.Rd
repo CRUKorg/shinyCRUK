@@ -16,8 +16,53 @@ crukPickerInput(
 )
 }
 \arguments{
-\item{options}{}
+\item{inputId}{The input slot that will be used to access the value.}
+
+\item{label}{Display label for the control, or NULL for no label.}
+
+\item{choices}{List of values to select from. If elements of the list are named,
+then that name rather than the value is displayed to the user.}
+
+\item{class}{Additional CSS classes to apply to the wrapper div.}
+
+\item{livesearch}{Enable live search functionality. Default is TRUE.}
+
+\item{placeholder}{Placeholder text displayed when no selection is made.}
+
+\item{...}{Additional arguments passed to \code{shinyWidgets::pickerInput}.}
+
+\item{options}{A list of options for bootstrap-select. User-provided options
+are merged with defaults (\code{live-search}, \code{selectOnTab}, \code{title}).}
+}
+\value{
+An HTML div element containing a styled picker input with attached
+  CSS dependencies.
 }
 \description{
-CRUK pickerInput
+Creates a styled picker input control with CRUK branding using the
+\code{shinyWidgets::pickerInput} function. This provides enhanced dropdown
+functionality including live search, multiple selection, and custom styling.
+}
+\examples{
+\dontrun{
+# Basic usage
+crukPickerInput(
+  inputId = "treatment_choice",
+  label = "Select treatment:",
+  choices = c("Chemotherapy", "Radiotherapy", "Surgery")
+)
+
+# With custom options
+crukPickerInput(
+  inputId = "multi_choice",
+  label = "Select multiple:",
+  choices = letters[1:10],
+  placeholder = "Choose one or more...",
+  options = list(
+    `actions-box` = TRUE,
+    `selected-text-format` = "count > 3"
+  ),
+  multiple = TRUE
+)
+}
 }
