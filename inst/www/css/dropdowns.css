@@ -15,7 +15,7 @@
   color: #666666;
   border-radius: 0px;
   border: 1px black solid;
-  background-image: url(''.../images/chevron-down.svg');
+  background-image: url('images/chevron-down.svg');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 1.25rem;
@@ -33,51 +33,75 @@
 
 /* Style selected option */
 .crukSelectInput select option:checked {
-  background-color: #e60078;
-  color: #fff;
+  background-color: #ffffff;
+  color: #e60078;
 }
 
 
 /* ---- pickerInput ---- */
-.crukPickerInput control-label {
+.crukPickerInput .dropdown-toggle::after {
+  color: transparent;
+  background-image: url('images/chevron-down.svg');
+  background-repeat: no-repeat;
+  background-size: 1.25rem;
+  padding: 12px 12px 12px 12px;
+}
+
+
+.crukPickerInput .control-label {
   font-family: Poppins Medium;
   font-size: 1rem;
 }
-.crukPickerInput .btn.dropdown-toggle {
-  border-radius: 0px;
-  background: #ffffff;
-  padding: 12px 12px 12px 16px;
-}
-.crukPickerInput .dropdown-menu {
-  border: 1px solid black;
-  border-radius: 0px;
+
+/* shadow for dropdown box */
+.crukPickerInput .form-control:hover, .crukPickerInput .form-control:focus {
+  	box-shadow: 0 0 0  .25rem #ffffffff;
 }
 
-.crukPickerInput a.dropdown-item {
-  color: #000 !important;
-}
-
-.crukPickerInput a.dropdown-item.active{
-  color: #e60078 !important;
-}
-.crukPickerInput a.dropdown-item:hover{
-  background: #fff0f8 !important;
-}
-
-.crukPickerInput a.dropdown-item.active:hover{
-  color: #cc006c !important;
-  background: #fff0f8 !important;
-}
-
+/* border styling for input box and search box */
 .crukPickerInput .form-control {
   border: 1px solid black;
   border-radius: 0px;
 }
 
-.crukPickerInput .form-control:hover, .crukPickerInput .form-control:focus {
-  	box-shadow: 0 0 0  .25rem #ffffffff;
+/* styling for input box */
+.crukPickerInput .btn.dropdown-toggle {
+  border-radius: 0px;
+  background: #ffffff;
+  padding: 12px 12px 12px 16px;
 }
 
-.filter-option-inner-inner {
+/* styling for input box text */
+.crukPickerInput .filter-option-inner-inner {
+  font-family: Poppins;
   color: #666666;
+}
+
+/* styling for dropdown box */
+.crukPickerInput .dropdown-menu {
+  border: 1px solid black;
+  border-radius: 0px;
+}
+
+/* styling for dropdown text */
+.crukPickerInput a.dropdown-item {
+  font-family: Poppins;
+  color: #000 !important;
+}
+
+/* styling for active dropdown text */
+.crukPickerInput a.dropdown-item.active{
+  color: #e60078 !important;
+  background: #ffffff;
+}
+
+/* styling for dropdown hover over */
+.crukPickerInput a.dropdown-item:hover{
+  background: #fff0f8 !important;
+}
+
+/* styling for active dropdown hover text */
+.crukPickerInput a.dropdown-item.active:hover{
+  color: #cc006c !important;
+  background: #fff0f8 !important;
 }

@@ -106,8 +106,7 @@ crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TR
     version = utils::packageVersion("shinyCRUK"),
     src = "www",
     package = "shinyCRUK",
-    stylesheet = "css/dropdowns.css",
-    all_files = TRUE
+    stylesheet = "css/dropdowns.css"
   )
   # define default options
   default_options <- list(
@@ -119,7 +118,9 @@ crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TR
   merged_options <- utils::modifyList(default_options, options)
   # Pass ... to pickerInput, and merged options to the options argument
   dropdown <- htmltools::div(
-    class = "crukPickerInput",
+    class = c("crukPickerInput", class),
+
+    # class = "crukPickerInput",
     shinyWidgets::pickerInput(
       inputId = inputId,
       label = label,
@@ -128,5 +129,5 @@ crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TR
       ...
     )
   )
-  htmltools::attachDependencies(dropdown, css)
+  htmltools::attachDependencies(dropdown, list(css))
 }
