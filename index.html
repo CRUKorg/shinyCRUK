@@ -108,7 +108,7 @@
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<p>Here’s a minimal example of a CRUK-branded Shiny app:</p>
+<p>Here’s an example of a CRUK-branded Shiny app:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://verbose-guacamole-l18vr83.pages.github.io/">shinyCRUK</a></span><span class="op">)</span></span>
@@ -124,14 +124,14 @@
 <span>  <span class="co"># Navbar title</span></span>
 <span>  fillable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  title <span class="op">=</span> <span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span><span class="st">"{shinyCRUK}"</span>, selectors <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                       selector1 <span class="op">=</span> <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/radioGroupButtons.html" class="external-link">radioGroupButtons</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"word-select"</span>,</span>
+<span>                       selector1 <span class="op">=</span> <span class="fu"><a href="reference/crukRadioButton.html">crukRadioButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"word-select"</span>,</span>
 <span>                                                     label <span class="op">=</span> <span class="st">"Selector label"</span>,</span>
 <span>                                                     choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>                                                     width <span class="op">=</span> <span class="st">"100%"</span>,</span>
 <span>                                                     justified <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="co"># header = "",</span></span>
 <span>  footer <span class="op">=</span> <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span><span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span></span>
+<span>  </span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Overview"</span>,</span>
 <span>            <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
 <span>              <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"%d %B %Y"</span><span class="op">)</span>, tag <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span>,</span>
@@ -155,10 +155,10 @@
 <span>                             detail <span class="op">=</span> <span class="st">"detail text"</span>,</span>
 <span>                <span class="op">)</span></span>
 <span>              <span class="op">)</span></span>
-<span></span>
+<span>              </span>
 <span>            <span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
-<span></span>
+<span>  </span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Logos"</span>,</span>
 <span>            <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
 <span>              <span class="fu"><a href="reference/lastReview.html">lastReviewInternal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"%d %B %Y"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -177,7 +177,7 @@
 <span></span>
 <span><span class="co"># Define server logic required to draw a histogram</span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
-<span></span>
+<span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Run the application</span></span>
