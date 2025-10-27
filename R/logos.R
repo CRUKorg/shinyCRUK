@@ -145,6 +145,6 @@ crukLogoWide <- function(height = "50px", width = "auto", class = "") {
     src = cruk_logo_path,
     class = paste("cruk-logo-wide", class),
     style = glue::glue("height: {height}; width: {width};"),
-    alt = "Cancer Research UK logo" # Add for accessibility
+    alt = "Cancer Research UK logo"
   )
 }

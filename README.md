@@ -54,7 +54,7 @@ remotes::install_github("CRUKorg/shinyCRUK")
 
 ## Quick Start
 
-Here’s a minimal example of a CRUK-branded Shiny app:
+Here’s an example of a CRUK-branded Shiny app:
 
 ``` r
 library(shiny)
@@ -71,14 +71,14 @@ ui <- bslib::page_navbar(
   # Navbar title
   fillable = FALSE,
   title = crukNavTitle("{shinyCRUK}", selectors = 1,
-                       selector1 = radioGroupButtons(inputId = "word-select",
+                       selector1 = crukRadioButton(inputId = "word-select",
                                                      label = "Selector label",
                                                      choices = c("A", "B", "C"),
                                                      width = "100%",
                                                      justified = TRUE)),
   # header = "",
   footer = centralColumn(crukFooter()),
-
+  
   nav_panel(title = "Overview",
             centralColumn(
               lastReview(format(as.Date(Sys.Date()), "%d %B %Y"), tag = "hp"),
@@ -102,10 +102,10 @@ ui <- bslib::page_navbar(
                              detail = "detail text",
                 )
               )
-
+              
             )
   ),
-
+  
   nav_panel(title = "Logos",
             centralColumn(
               lastReviewInternal(format(as.Date(Sys.Date()), "%d %B %Y")),
@@ -124,7 +124,7 @@ ui <- bslib::page_navbar(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
+  
 }
 
 # Run the application
