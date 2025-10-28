@@ -1,0 +1,37 @@
+.ci-box {
+   padding: 16px 48px 16px 48px;
+  margin-bottom: 32px;
+  margin-top: 32px;
+  align-items: center;
+  max-width: 100%;
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.ci-child {
+  padding-top: 10px;
+}
+
+.ci-text {
+  font-size: 14px;
+  font-family: Poppins;
+    min-width: 0; /* Allows text to wrap properly */
+}
+
+.ci-logo {
+  flex-shrink: 0; /* Prevents logo from shrinking */
+}
+
+
+/* Switch to column layout on smaller screens */
+@media (max-width: 768px) {
+  .ci-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ci-child {
+    padding-top: 10px;
+  }
+}
