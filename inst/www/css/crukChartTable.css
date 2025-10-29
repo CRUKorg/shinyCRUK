@@ -1,0 +1,47 @@
+/* Remove card border */
+.no-border-card .card {
+  border: none !important;
+  --bslib-box-shadow-color-rgb: none;
+  overflow: hidden !important;
+}
+
+/* Remove card header padding/margin if needed */
+.no-border-card .card-header {
+  padding-left: 0;
+  padding-right: 0;
+  border-bottom: none !important;
+}
+
+.no-border-card .card-header-tabs {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.no-border-card .nav-link {
+  font-family: Poppins !important;
+  color: #666666 !important;
+  font-weight: normal;
+  margin-left: 0;
+}
+
+/* Add pink underline to active tab */
+.no-border-card .nav-link.active {
+  font-family: Poppins Semibold !important;
+  color: #000000 !important;
+  border-bottom: 4px solid #e60078 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Remove default active tab styling */
+.no-border-card .nav-link {
+  border: none !important;
+}
+
+/* Remove usual styling from link */
+.no-border-card-source {
+  color: #666666 !important;
+  align-self: flex-end;
+  padding-right: 8px;
+}
