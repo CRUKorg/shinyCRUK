@@ -104,9 +104,20 @@ bottom of the table. Text is appended with "Data source: " in front.</p></dd>
           or <code><a href="crukSelectInput.html">shinyCRUK::crukSelectInput</a></code>.</p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id=""></h2>
-    <p>NA</p>
-    </div>
+    <h2 id="usage-tips">Usage Tips<a class="anchor" aria-label="anchor" href="#usage-tips"></a></h2>
+
+
+<ul><li><p>Use descriptive but concise alt text</p></li>
+<li><p>By default, <code>plotly::plotlyOutput</code>s should scale to fill the div,
+  so avoid manually setting chart sizes</p></li>
+<li><p>If you want a title or selectors to apply to the chart and table, pass
+  these as additional arguments. They will be displayed about the chart table card</p></li>
+<li><p>Ideally give full data source. If this is not possible
+  (for example because you are using UK data from several sources), then you can
+  direct the user to a data sources/references box at the bottom of the page
+  and supply the function the full URL of the app with the div id of the
+  data sources/reference box</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
