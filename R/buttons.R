@@ -62,11 +62,9 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
     all_files = TRUE
   )
 
-  googleSymbols <- htmltools::htmlDependency(
-    name = "google-material-symbols",
-    version = "1.0.0",
-    src = c(href = "https://fonts.googleapis.com"),
-    stylesheet = "css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  googleSymbols <- htmltools::tags$link(
+    rel = "stylesheet",
+    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   )
 
   # Create button first
@@ -79,7 +77,7 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
   }
 
   # Attach the Google Symbols dependency and return
-  htmltools::attachDependencies(button, list(googleSymbols, css))
+  htmltools::attachDependencies(button, css)
 }
 
 

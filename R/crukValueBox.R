@@ -205,11 +205,9 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
     all_files = TRUE
   )
 
-  googleSymbols <- htmltools::htmlDependency(
-    name = "google-material-symbols",
-    version = "1.0.0",
-    src = c(href = "https://fonts.googleapis.com"),
-    stylesheet = "css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  googleSymbols <- htmltools::tags$link(
+    rel = "stylesheet",
+    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   )
 
   # Create the value box
@@ -237,5 +235,5 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
   )
 
   # Attach the dependency and return
-  htmltools::attachDependencies(valueBox, list(css, googleSymbols))
+  htmltools::attachDependencies(valueBox, css)
 }
