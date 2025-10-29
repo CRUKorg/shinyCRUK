@@ -306,7 +306,7 @@ a.dropdown-item.active {
 }
 
 /* set navbar links to the left hand side */
-.nav.navbar-nav.shiny-tab-input.shiny-bound-input{
+.nav.navbar-nav, .nav.navbar-nav.shiny-tab-input.shiny-bound-input{
   justify-content: flex-end;
 }
 

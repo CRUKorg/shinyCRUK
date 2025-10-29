@@ -25,12 +25,14 @@
 .tag-health-professional {
   background: #e2f4fd;
   color: #52627a;
+  border-radius: 0px;
 }
 
 /* Internal only tag */
 .tag-internal {
   background: #fff0f8;
   color: #cc006c;
+  border-radius: 0px;
 }
 
 /* Review date */
