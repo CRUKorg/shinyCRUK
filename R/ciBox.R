@@ -100,7 +100,7 @@ ciBox <- function(boxBorder = TRUE) {
 
   css <- htmltools::htmlDependency(
     name = "ciBox",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/ciBox.css",

@@ -157,7 +157,7 @@ centralColumn <- function(...) {
     # Call the css that contains the media queries
     htmltools::htmlDependency(
       name = "centralColumn",
-      version = utils::packageVersion("shinyCRUK"),
+      version = get_pkg_version(),
       src = "www",
       package = "shinyCRUK",
       stylesheet = "css/centralColumn.css",

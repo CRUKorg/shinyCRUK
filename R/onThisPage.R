@@ -60,7 +60,7 @@
 onThisPage <- function(..., include_top_button = TRUE) {
   css <- htmltools::htmlDependency(
     name = "onThisPage",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/onThisPage.css",
@@ -71,7 +71,7 @@ onThisPage <- function(..., include_top_button = TRUE) {
     name = "google-material-symbols",
     version = "1.0.0",
     src = c(href = "https://fonts.googleapis.com"),
-    stylesheet = "css2?family=Material+Symbols+Sharp"
+    stylesheet = "css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   )
 
   # Process arguments

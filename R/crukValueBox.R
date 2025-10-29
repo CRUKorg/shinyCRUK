@@ -198,7 +198,7 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
   # Create and store the dependency
   css <- htmltools::htmlDependency(
     name = "crukValueBox",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/crukValueBox.css",
@@ -208,8 +208,8 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
   googleSymbols <- htmltools::htmlDependency(
     name = "google-material-symbols",
     version = "1.0.0",
-    src = c(href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp"),
-    stylesheet = ""
+    src = c(href = "https://fonts.googleapis.com"),
+    stylesheet = "css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   )
 
   # Create the value box

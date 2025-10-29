@@ -93,7 +93,7 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
   # Create and store the dependency
   css <- htmltools::htmlDependency(
     name = "crukChartTable",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/crukChartTable.css",

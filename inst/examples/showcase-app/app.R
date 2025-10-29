@@ -226,11 +226,14 @@ ui <- bslib::page_navbar(
         tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.847)</strong> = ", crukRoundingPercentage(0.847))))
       ),
       h3("Data sources box"),
-      p("A data sources box allows you to build out your sources list through integration with Zotero,
-        and there are some supporting functions to help set Zotero up for use with apps."),
+      p("A data sources box allows you to build out your sources list and we are working on an integration with Zotero
+        so you can pull sources from there."),
       crukSources(
         notes = "This demo app showcases the shinyCRUK package components.",
-        zotero_path = "General & Cross Pathway/Shiny Example",
+        custom_sources = tagList(
+          tags$li(HTML("<a href='https://github.com/CRUKorg/shinyCRUK'>shinyCRUK GitHub Repository</a>")),
+          tags$li("Cancer Research UK Design System")
+        ),
         boxBorder = TRUE
       )
     )

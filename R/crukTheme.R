@@ -46,7 +46,7 @@ crukTheme <- function() {
     # Add css theme to whole app
     htmltools::htmlDependency(
       name = "crukTheme",
-      version = utils::packageVersion("shinyCRUK"),
+      version = get_pkg_version(),
       src = "www",
       package = "shinyCRUK",
       stylesheet = "css/crukTheme.css",

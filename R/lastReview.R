@@ -118,7 +118,7 @@ lastReview <- function(last_review_date, tag = NULL) {
   # Load CSS dependency
   css <- htmltools::htmlDependency(
     name = "lastReview",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/lastReview.css",

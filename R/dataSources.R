@@ -171,7 +171,7 @@ crukSources <- function(notes = "", zotero_path = NULL, custom_sources = NULL, b
 
   css <- htmltools::htmlDependency(
     name = "crukSources",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/crukSources.css",

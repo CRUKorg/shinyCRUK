@@ -166,7 +166,7 @@ crukFooter <- function(includeContact = TRUE) {
   htmltools::tagList(
     htmltools::htmlDependency(
       name = "shinyCRUK-footer",
-      version = utils::packageVersion("shinyCRUK"),
+      version = get_pkg_version(),
       src = "www",
       package = "shinyCRUK",
       stylesheet = "css/crukFooter.css",

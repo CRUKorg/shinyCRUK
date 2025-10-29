@@ -33,7 +33,7 @@ crukSelectInput <- function(inputId, label, choices, selectize = FALSE, class = 
 
   css <- htmltools::htmlDependency(
     name = "dropdowns",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/dropdowns.css",
@@ -103,7 +103,7 @@ crukPickerInput <- function(inputId, label, choices, class = "", livesearch = TR
 
   css <- htmltools::htmlDependency(
     name = "dropdowns",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/dropdowns.css"

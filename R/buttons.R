@@ -55,17 +55,18 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
   # Dependencies
   css <- htmltools::htmlDependency(
     name = "crukButton",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/buttons.css",
     all_files = TRUE
   )
+
   googleSymbols <- htmltools::htmlDependency(
     name = "google-material-symbols",
     version = "1.0.0",
     src = c(href = "https://fonts.googleapis.com"),
-    stylesheet = "css2?family=Material+Symbols+Sharp"
+    stylesheet = "css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   )
 
   # Create button first
@@ -175,7 +176,7 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, justified = T
   # Dependencies
   css <- htmltools::htmlDependency(
     name = "crukRadioButton",
-    version = utils::packageVersion("shinyCRUK"),
+    version = get_pkg_version(),
     src = "www",
     package = "shinyCRUK",
     stylesheet = "css/buttons.css",

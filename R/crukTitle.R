@@ -91,7 +91,7 @@ crukTitle <- function(Title, Subheading = "") {
   htmltools::tagList(
     htmltools::htmlDependency(
       name = "crukTitle",
-      version = utils::packageVersion("shinyCRUK"),
+      version = get_pkg_version(),
       src = "www",
       package = "shinyCRUK",
       stylesheet = "css/crukTitle.css",
