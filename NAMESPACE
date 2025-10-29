@@ -3,6 +3,7 @@
 export(centralColumn)
 export(ciBox)
 export(crukButton)
+export(crukChartTable)
 export(crukFooter)
 export(crukGA)
 export(crukLogo)
