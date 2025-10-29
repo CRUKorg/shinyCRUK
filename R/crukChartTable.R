@@ -69,7 +69,7 @@
 #'                  value = FALSE)
 #' )
 #' }
-
+#' @export
 crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..., height = 600) {
 
   # Input validation
