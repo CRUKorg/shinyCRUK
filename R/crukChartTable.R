@@ -41,7 +41,7 @@
 #'   direct the user to a data sources/references box at the bottom of the page
 #'   and supply the function the full URL of the app with the div id of the
 #'   data sources/reference box
-#'
+#'}
 #'
 #' @examples
 #' \dontrun{

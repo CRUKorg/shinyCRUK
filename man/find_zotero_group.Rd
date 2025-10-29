@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataSources.R
 \name{find_zotero_group}
 \alias{find_zotero_group}
-\title{#' Find Your Zotero Group ID}
+\title{Find Your Zotero Group ID}
 \usage{
 find_zotero_group(
   group_name = NULL,

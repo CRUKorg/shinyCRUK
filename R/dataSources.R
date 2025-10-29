@@ -579,7 +579,7 @@ setup_zotero_credentials <- function(api_key, user_id) {
 }
 
 
-#' #' Find Your Zotero Group ID
+#' Find Your Zotero Group ID
 #'
 #' Retrieves a list of your Zotero group libraries and their IDs. Use this
 #' function to find the correct \code{group_id} parameter for

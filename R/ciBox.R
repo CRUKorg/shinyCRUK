@@ -110,7 +110,7 @@ ciBox <- function(boxBorder = TRUE) {
   ciBox <- htmltools::div(
     class = "ci-box",
     style = if (boxBorder) {
-      "border: 1px solid black;"
+      "border: 2px solid black;"
     },
     htmltools::div(
       class = "ci-logo",

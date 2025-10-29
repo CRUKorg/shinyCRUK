@@ -53,8 +53,20 @@ Creates a border-less bslib card with two panels: one for a chart and the other
 for a table. This function has a requirement for alt text to ensure accessibility
 best practice.
 }
-\section{}{
-NA
+\section{Usage Tips}{
+
+\itemize{
+  \item Use descriptive but concise alt text
+  \item By default, \code{plotly::plotlyOutput}s should scale to fill the div,
+  so avoid manually setting chart sizes
+  \item If you want a title or selectors to apply to the chart and table, pass
+  these as additional arguments. They will be displayed about the chart table card
+  \item Ideally give full data source. If this is not possible
+  (for example because you are using UK data from several sources), then you can
+  direct the user to a data sources/references box at the bottom of the page
+  and supply the function the full URL of the app with the div id of the
+  data sources/reference box
+}
 }
 
 \examples{
