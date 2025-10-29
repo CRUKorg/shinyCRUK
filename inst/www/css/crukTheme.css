@@ -158,10 +158,6 @@ a:visited {
     position: flex-end;
   }
 
-  .cruk-logo-wide {
-    display: none;
-  }
-
   .cruk-logo-stacked {
     align: right; margin-top: 8px; height: 50px;
   }

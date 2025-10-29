@@ -3,7 +3,6 @@ library(shinyCRUK)
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
-library(ggplot2)
 library(plotly)
 library(gt)
 
@@ -134,56 +133,7 @@ ui <- bslib::page_navbar(
   ),
 
   # Data Visualization Panel
-  nav_panel(
-    title = "Data Visualization",
-    centralColumn(
-      lastReviewHP(as.Date("2025-10-15")),
-
-      crukTitle(
-        "Data Visualization Components",
-        "Chart and table display with accessibility features"
-      ),
-
-      crukChartTable(
-        chart = plotlyOutput("demo_plot", height = "100%"),
-        table = gt::gt_output("demo_table"),
-        alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
-        dataSourceText = "mtcars dataset from R",
-        dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
-        height = 600,
-        h3("A nice little chart based on mtcars"),
-        crukPickerInput(
-          inputId = "car_filter",
-          label = "Filter by number of cylinders:",
-          choices = c("All", "4", "6", "8"),
-          selected = "All",
-          placeholder = "Select cylinders..."
-        )
-      ),
-
-      br(),
-
-      h3("Rounding Functions"),
-      p("The package includes CRUK Intelligence rounding functions:"),
-
-      tags$ul(
-        tags$li(HTML(paste0("<strong>crukRounding(1234)</strong> = ", crukRounding(1234)))),
-        tags$li(HTML(paste0("<strong>crukRounding(156789)</strong> = ", crukRounding(156789)))),
-        tags$li(HTML(paste0("<strong>crukRounding(1234567)</strong> = ", crukRounding(1234567)))),
-        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.25)</strong> = ", crukRoundingPercentage(0.25)))),
-        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.847)</strong> = ", crukRoundingPercentage(0.847))))
-      ),
-      h3("Data sources box"),
-      p("A data sources box allows you to build out your sources list through integration with Zotero,
-        and there are some supporting functions to help set Zotero up for use with apps."),
-      crukSources(
-        notes = "This demo app showcases the shinyCRUK package components.",
-        zotero_path = "General & Cross Pathway/Shiny Example",
-        boxBorder = TRUE
-      )
-    )
-  ),
-
+  nav_menu("Showcases",
   # Typography Panel
   nav_panel(
     title = "Typography",
@@ -236,6 +186,56 @@ ui <- bslib::page_navbar(
           crukLogoWide(height = "50px")
       )
     )
+  ),
+  nav_panel(
+    title = "Data Visualization",
+    centralColumn(
+      lastReviewHP(as.Date("2025-10-15")),
+
+      crukTitle(
+        "Data Visualization Components",
+        "Chart and table display with accessibility features"
+      ),
+      crukPickerInput(
+        inputId = "car_filter",
+        label = "Filter by number of cylinders:",
+        choices = c("All", "4", "6", "8"),
+        selected = "All",
+        placeholder = "Select cylinders..."
+      ),
+      crukChartTable(
+        chart = plotlyOutput("demo_plot", height = "100%"),
+        table = gt::gt_output("demo_table"),
+        alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
+        dataSourceText = "mtcars dataset from R",
+        dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
+        height = 600,
+        h3("A nice little chart based on mtcars")
+      ),
+
+      br(),
+
+      h3("Rounding Functions"),
+      p("The package includes CRUK Intelligence rounding functions:"),
+
+      tags$ul(
+        tags$li(HTML(paste0("<strong>crukRounding(1234)</strong> = ", crukRounding(1234)))),
+        tags$li(HTML(paste0("<strong>crukRounding(156789)</strong> = ", crukRounding(156789)))),
+        tags$li(HTML(paste0("<strong>crukRounding(1234567)</strong> = ", crukRounding(1234567)))),
+        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.25)</strong> = ", crukRoundingPercentage(0.25)))),
+        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.847)</strong> = ", crukRoundingPercentage(0.847))))
+      ),
+      h3("Data sources box"),
+      p("A data sources box allows you to build out your sources list through integration with Zotero,
+        and there are some supporting functions to help set Zotero up for use with apps."),
+      crukSources(
+        notes = "This demo app showcases the shinyCRUK package components.",
+        zotero_path = "General & Cross Pathway/Shiny Example",
+        boxBorder = TRUE
+      )
+    )
+  )
+
   ),
 
   # Components Panel
