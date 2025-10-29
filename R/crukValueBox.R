@@ -235,5 +235,9 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
   )
 
   # Attach the dependency and return
-  htmltools::attachDependencies(valueBox, css)
+  htmltools::tagList(
+    googleSymbols,
+    htmltools::attachDependencies(valueBox, css)
+  )
+
 }

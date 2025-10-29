@@ -163,6 +163,7 @@ onThisPage <- function(..., include_top_button = TRUE) {
     return(
       htmltools::tagList(
         css,
+        googleSymbols,
         main_container
       )
     )

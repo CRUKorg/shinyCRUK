@@ -77,7 +77,10 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
   }
 
   # Attach the Google Symbols dependency and return
-  htmltools::attachDependencies(button, css)
+  htmltools::tagList(
+    googleSymbols,
+    htmltools::attachDependencies(button, css)
+  )
 }
 
 
