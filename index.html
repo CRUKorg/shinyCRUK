@@ -99,89 +99,496 @@
 </h2>
 <p>Install the development version from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Using pak</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"CRUKorg/shinyCRUK"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Or using remotes</span></span>
+<code class="sourceCode R"><span><span class="co"># Using remotes</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CRUKorg/shinyCRUK"</span><span class="op">)</span></span></code></pre></div>
+<p>For some people this might fail, so try this instead:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># First create a github token</span></span>
+<span><span class="co"># It opens a browser window where you'll create a token on the github website</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html" class="external-link">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Then run this function and paste the token when prompted</span></span>
+<span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html" class="external-link">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># Once your token is set, run this to download the package</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CRUKorg/shinyCRUK"</span>, auth_token <span class="op">=</span> <span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html" class="external-link">gitcreds_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">password</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<p>Here’s an example of a CRUK-branded Shiny app:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+We’ve buily a working Shiny app to showcase most of the features in the package, with the folllowing code:
+<details><summary>
+Show code
+</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://verbose-guacamole-l18vr83.pages.github.io/">shinyCRUK</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets" class="external-link">shinyWidgets</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com" class="external-link">plotly</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>shiny.autoreload <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span></span>
-<span><span class="co"># Define UI for application that draws a histogram</span></span>
+<span><span class="co"># Define UI</span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_navbar.html" class="external-link">page_navbar</a></span><span class="op">(</span></span>
-<span>  <span class="va">tags</span><span class="op">$</span><span class="fu">head</span><span class="op">(</span><span class="fu"><a href="reference/crukGA.html">crukGA</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="reference/crukTheme.html">crukTheme</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="co"># Navbar title</span></span>
 <span>  fillable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  title <span class="op">=</span> <span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span><span class="st">"{shinyCRUK}"</span>, selectors <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                       selector1 <span class="op">=</span> <span class="fu"><a href="reference/crukRadioButton.html">crukRadioButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"word-select"</span>,</span>
-<span>                                                     label <span class="op">=</span> <span class="st">"Selector label"</span>,</span>
-<span>                                                     choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
-<span>                                                     width <span class="op">=</span> <span class="st">"100%"</span>,</span>
-<span>                                                     justified <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="co"># header = "",</span></span>
-<span>  footer <span class="op">=</span> <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span><span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Overview"</span>,</span>
-<span>            <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
-<span>              <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"%d %B %Y"</span><span class="op">)</span>, tag <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span><span class="st">"Welcome to the {shinyCRUK} test app"</span>,</span>
-<span>                        <span class="st">"This app will dsiplay some of the functions that are built into the app"</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"This package is mostly intended to make it easier to make pretty shiny apps. But it also comes with our rounding rules."</span>,</span>
-<span>                <span class="st">"So for example, you can use crukRounding() so numbers like 12236 become "</span>, <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">12236</span><span class="op">)</span>,</span>
-<span>                <span class="st">" or you can use it for percentages so 0.652 becomes "</span>, <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.652</span>, <span class="st">"lower"</span><span class="op">)</span>, <span class="st">"."</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
-<span>                width <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
-<span>                <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"valuBox1"</span>,</span>
-<span>                             title <span class="op">=</span> <span class="st">"Title of the first value box"</span>,</span>
-<span>                             value <span class="op">=</span> <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="st">"785849615"</span><span class="op">)</span>,</span>
-<span>                             icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"weight-scale"</span><span class="op">)</span>,</span>
-<span>                             detail <span class="op">=</span> <span class="st">"detail text"</span>,</span>
-<span>                <span class="op">)</span>,</span>
-<span>                <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"valuBox2"</span>,</span>
-<span>                             title <span class="op">=</span> <span class="st">"Title of the second value box"</span>,</span>
-<span>                             value <span class="op">=</span> <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.456186</span><span class="op">)</span>,</span>
-<span>                             icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"weight-scale"</span><span class="op">)</span>,</span>
-<span>                             detail <span class="op">=</span> <span class="st">"detail text"</span>,</span>
-<span>                <span class="op">)</span></span>
-<span>              <span class="op">)</span></span>
-<span>              </span>
-<span>            <span class="op">)</span></span>
+<span>  navbar_options <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/navbar_options.html" class="external-link">navbar_options</a></span><span class="op">(</span>underline <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  <span class="co"># Apply CRUK theme and Google Analytics</span></span>
+<span>  <span class="va">tags</span><span class="op">$</span><span class="fu">head</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="reference/crukTheme.html">crukTheme</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="reference/crukGA.html">crukGA</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Logos"</span>,</span>
-<span>            <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
-<span>              <span class="fu"><a href="reference/lastReview.html">lastReviewInternal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="st">"%d %B %Y"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span><span class="st">"The CRUK logo"</span>,</span>
-<span>                        <span class="st">"This app will dsiplay some of the functions that are built into the app"</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"I've built up a couple of functions to make it easier to get the CRUK logo."</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"You can call crukLogo() which will give you the logo at a standard 50 pixels tall."</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                <span class="fu"><a href="reference/crukLogo.html">crukLogo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"But if you want you can change the size, so for example crukLogo('125px')"</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                <span class="fu"><a href="reference/crukLogo.html">crukLogo</a></span><span class="op">(</span><span class="st">"125px"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>              <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"You might notice this app uses the wide logo, which can be called with crukLogoWide(), but we are only meant to use this when absolutely necessary..."</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                <span class="fu"><a href="reference/crukLogoWide.html">crukLogoWide</a></span><span class="op">(</span><span class="fl">75</span><span class="op">)</span><span class="op">)</span></span>
-<span>            <span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Navigation bar with two selectors</span></span>
+<span>  title <span class="op">=</span> <span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span></span>
+<span>    Title <span class="op">=</span> <span class="st">"shinyCRUK"</span></span>
+<span>    <span class="co"># selectors = 2,</span></span>
+<span>    <span class="co"># selector1 = crukPickerInput(</span></span>
+<span>    <span class="co">#   inputId = "demo_section",</span></span>
+<span>    <span class="co">#   label = "Choose a section:",</span></span>
+<span>    <span class="co">#   choices = c("Overview", "Data Viz", "Typography", "Components"),</span></span>
+<span>    <span class="co">#   livesearch = FALSE</span></span>
+<span>    <span class="co"># ),</span></span>
+<span>    <span class="co"># selector2 = crukSelectInput(</span></span>
+<span>    <span class="co">#   inputId = "theme_option",</span></span>
+<span>    <span class="co">#   label = "Theme:",</span></span>
+<span>    <span class="co">#   choices = c("Light", "Dark"),</span></span>
+<span>    <span class="co">#   selectize = FALSE</span></span>
+<span>    <span class="co"># )</span></span>
+<span>  <span class="op">)</span>,</span>
+<span></span>
+<span>  <span class="co"># Window size tracking (hidden UI component)</span></span>
+<span>  <span class="fu"><a href="reference/window_size.html">window_size_ui</a></span><span class="op">(</span><span class="st">"window_tracker"</span><span class="op">)</span>,</span>
+<span></span>
+<span>  <span class="co"># Footer at bottom</span></span>
+<span>  footer <span class="op">=</span> <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span>includeContact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span></span>
+<span>  <span class="co"># Overview Panel</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Overview"</span>,</span>
+<span>    <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, tag <span class="op">=</span> <span class="st">"internal"</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Welcome to the shinyCRUK Package Demo"</span>,</span>
+<span>        <span class="st">"A quick showcase of all the things it can help with"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"This application demonstrates most of the functions available in the shinyCRUK package,</span></span>
+<span><span class="st">        which provides themed and on-brand components for Shiny applications (and occasionally quarto)."</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"If this is your first time here, you'll have just seen the cookie banner which comes with google analytics.</span></span>
+<span><span class="st">        Alongside that is the crukTheme() which sorts out the navbar and a number of other bits."</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"For full installation instructions have a look at the "</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">a</a></span><span class="op">(</span><span class="st">"package documentation site"</span>, </span>
+<span>                                                                    href <span class="op">=</span> <span class="st">"https://verbose-guacamole-l18vr83.pages.github.io/index.html"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Value Boxes"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"The package includes styled value boxes for displaying key metrics:"</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
+<span>        width <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>        <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
+<span>          id <span class="op">=</span> <span class="st">"vbox1"</span>,</span>
+<span>          title <span class="op">=</span> <span class="st">"Total Users"</span>,</span>
+<span>          value <span class="op">=</span> <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">15678</span><span class="op">)</span>,</span>
+<span>          icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"users"</span><span class="op">)</span>,</span>
+<span>          icon_colour <span class="op">=</span> <span class="st">"#00007e"</span>,</span>
+<span>          detail <span class="op">=</span> <span class="st">"Last 30 days"</span></span>
+<span>        <span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
+<span>          id <span class="op">=</span> <span class="st">"vbox2"</span>,</span>
+<span>          title <span class="op">=</span> <span class="st">"Success Rate"</span>,</span>
+<span>          value <span class="op">=</span> <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.847</span><span class="op">)</span>,</span>
+<span>          icon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"chart-line"</span><span class="op">)</span>,</span>
+<span>          icon_colour <span class="op">=</span> <span class="st">"#e60078"</span>,</span>
+<span>          detail <span class="op">=</span> <span class="st">"Quarterly average"</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Buttons and Inputs"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Buttons"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Buttons are available in two styles, 'primary' or 'secondary', with on-brand icons."</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
+<span>          width <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,</span>
+<span>          <span class="fu"><a href="reference/crukButton.html">crukButton</a></span><span class="op">(</span><span class="st">"btn_primary"</span>, <span class="st">"Primary Button"</span>, type <span class="op">=</span> <span class="st">"primary"</span>, icon <span class="op">=</span> <span class="st">"check_circle"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/crukButton.html">crukButton</a></span><span class="op">(</span><span class="st">"btn_secondary"</span>, <span class="st">"Secondary Button"</span>, type <span class="op">=</span> <span class="st">"secondary"</span>, icon <span class="op">=</span> <span class="st">"download"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/crukButton.html">crukButton</a></span><span class="op">(</span><span class="st">"btn_upload"</span>, <span class="st">"Upload File"</span>, type <span class="op">=</span> <span class="st">"primary"</span>, icon <span class="op">=</span> <span class="st">"upload_file"</span><span class="op">)</span></span>
+<span>        <span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Radio buttons and dropdowns"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"crukRadioButton() creates radio buttons that rely on the shinyWidgets::RadioGroupButton() function, and anything you could use there can be used here too."</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRadioButton.html">crukRadioButton</a></span><span class="op">(</span></span>
+<span>          inputId <span class="op">=</span> <span class="st">"radio_example_A"</span>,</span>
+<span>          label <span class="op">=</span> <span class="st">"Select an option:"</span>,</span>
+<span>          choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Option A"</span>, <span class="st">"Option B"</span>, <span class="st">"Option C"</span><span class="op">)</span>,</span>
+<span>          width <span class="op">=</span> <span class="st">"100%"</span>,</span>
+<span>          justified <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>        <span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRadioButton.html">crukRadioButton</a></span><span class="op">(</span></span>
+<span>          inputId <span class="op">=</span> <span class="st">"radio_example_B"</span>,</span>
+<span>          label <span class="op">=</span> <span class="st">"Select an option:"</span>,</span>
+<span>          choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Option A"</span>, <span class="st">"Option B"</span>, <span class="st">"Option C"</span><span class="op">)</span>,</span>
+<span>          justified <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>          direction <span class="op">=</span> <span class="st">'vertical'</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Two dropdown selectors are available, crukSelectInput() and crukPickerInput().</span></span>
+<span><span class="st">          crukSelectInput is well suited to short dropdowns, and on mobile will use the native selector. Whereas crukPickerInput() has better support for long lists, allowing searching and multiple selections."</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
+<span>          widht <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>          <span class="fu"><a href="reference/crukSelectInput.html">crukSelectInput</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"select-input"</span>,</span>
+<span>                        label <span class="op">=</span> <span class="st">"crukSelectInput()"</span>,</span>
+<span>                        choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hobnob"</span>, <span class="st">"Digestive"</span>, <span class="st">"Bourbon"</span>, <span class="st">"Custard cream"</span>, <span class="st">"Rich tea"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukPickerInput.html">crukPickerInput</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"pick-input"</span>,</span>
+<span>                        label <span class="op">=</span> <span class="st">"crukPickerInput()"</span>,</span>
+<span>                        choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Axolotl"</span>, <span class="st">"Naked mole rat"</span>, <span class="st">"Sloth"</span>, <span class="st">"Blobfish"</span>, <span class="st">"Pangolin"</span>,</span>
+<span>                                    <span class="st">"Aye-aye"</span>, <span class="st">"Quokka"</span>, <span class="st">"Giraffe"</span>, <span class="st">"Cobra"</span>, <span class="st">"Goliath squid"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Content for the bottom of your pages"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"If you're making something for internal use, I've added in a little CI team box you can drop in the footer or at the bottom of a page."</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="reference/ciBox.html">ciBox</a></span><span class="op">(</span>boxBorder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"And there is a standardised footer that available, which comes with all the links to our legal/privacy bits, and an optional contact box for use on external shiny apps."</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span></span>
+<span>  <span class="co"># Data Visualization Panel</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_menu</a></span><span class="op">(</span><span class="st">"Showcases"</span>,</span>
+<span>  <span class="co"># Typography Panel</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Typography"</span>,</span>
+<span>    <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20/10/2025"</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Typography Components"</span>,</span>
+<span>        <span class="st">"Titles, headings, and text styling"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="reference/onThisPage.html">onThisPage</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"page-titles"</span>, <span class="st">"Page Titles"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"last-review"</span>, <span class="st">"Last Review Dates"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"logos"</span>, <span class="st">"Logos"</span><span class="op">)</span>,</span>
+<span>        include_top_button <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Page Titles"</span>, id <span class="op">=</span> <span class="st">"page-titles"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"The crukTitle() function creates styled page headings:"</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"border: 1px solid #ccc; padding: 20px; margin: 20px 0;"</span>,</span>
+<span>          <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span><span class="st">"Example Page Title"</span>, <span class="st">"With an optional subheading"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Last Review Dates"</span>, id <span class="op">=</span> <span class="st">"last-review"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Different styles for different audiences through lastReview()."</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"border: 1px solid #ccc; padding: 20px; margin: 20px 0;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Public Content"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Health Professional Content"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, tag <span class="op">=</span> <span class="st">"health professional"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Internal Content"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, tag <span class="op">=</span> <span class="st">"internal"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"CRUK Logos"</span>, id <span class="op">=</span> <span class="st">"logos"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Two logo formats are available:"</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"border: 1px solid #ccc; padding: 20px; margin: 20px 0;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Stacked Logo (Preferred)"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/crukLogo.html">crukLogo</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"75px"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Wide Logo (Use Sparingly)"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="reference/crukLogoWide.html">crukLogoWide</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"50px"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Data Visualization"</span>,</span>
+<span>    <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="reference/lastReview.html">lastReviewHP</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2025-10-15"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Data Visualization Components"</span>,</span>
+<span>        <span class="st">"Chart and table display with accessibility features"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Rounding Functions"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Cancer Intelligence rounding rules are now wrapped up in handy functions with two versions available, one for numbers and another for frequencies and percentages:"</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
+<span>        <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;strong&gt;crukRounding(1234)&lt;/strong&gt; = "</span>, <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;strong&gt;crukRounding(156789)&lt;/strong&gt; = "</span>, <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">156789</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;strong&gt;crukRounding(1234567)&lt;/strong&gt; = "</span>, <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1234567</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;strong&gt;crukRoundingPercentage(0.25)&lt;/strong&gt; = "</span>, <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;strong&gt;crukRoundingPercentage(0.847)&lt;/strong&gt; = "</span>, <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.847</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"We've built a styled card to hold your graphs and encourage a data table to support the graph for better accessibility standards."</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="reference/crukPickerInput.html">crukPickerInput</a></span><span class="op">(</span></span>
+<span>        inputId <span class="op">=</span> <span class="st">"car_filter"</span>,</span>
+<span>        label <span class="op">=</span> <span class="st">"Filter by number of cylinders:"</span>,</span>
+<span>        choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"All"</span>, <span class="st">"4"</span>, <span class="st">"6"</span>, <span class="st">"8"</span><span class="op">)</span>,</span>
+<span>        selected <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>        placeholder <span class="op">=</span> <span class="st">"Select cylinders..."</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="reference/crukChartTable.html">crukChartTable</a></span><span class="op">(</span></span>
+<span>        chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span><span class="st">"demo_plot"</span>, height <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span>,</span>
+<span>        table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span><span class="st">"demo_table"</span><span class="op">)</span>,</span>
+<span>        alt <span class="op">=</span> <span class="st">"A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset"</span>,</span>
+<span>        dataSourceText <span class="op">=</span> <span class="st">"mtcars dataset from R"</span>,</span>
+<span>        dataSourceLink <span class="op">=</span> <span class="st">"https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars"</span>,</span>
+<span>        height <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"A nice little chart based on mtcars"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Data sources box"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"A data sources box allows you to build out your sources list and we are working on an integration with Zotero</span></span>
+<span><span class="st">        so you can pull sources from there."</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="reference/crukSources.html">crukSources</a></span><span class="op">(</span></span>
+<span>        notes <span class="op">=</span> <span class="st">"This demo app showcases the shinyCRUK package components."</span>,</span>
+<span>        custom_sources <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="st">"&lt;a href='https://github.com/CRUKorg/shinyCRUK'&gt;shinyCRUK GitHub Repository&lt;/a&gt;"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="st">"Cancer Research UK Design System"</span><span class="op">)</span></span>
+<span>        <span class="op">)</span>,</span>
+<span>        boxBorder <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="op">)</span>,</span>
+<span></span>
+<span>  <span class="co"># Components Panel</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">nav_panel</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"All Components"</span>,</span>
+<span>    <span class="fu"><a href="reference/centralColumn.html">centralColumn</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Complete Component List"</span>,</span>
+<span>        <span class="st">"Every function in the shinyCRUK package"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"A full reference list is available on "</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">a</a></span><span class="op">(</span><span class="st">"the package website"</span>, href <span class="op">=</span> <span class="st">"https://verbose-guacamole-l18vr83.pages.github.io/reference/index.html"</span><span class="op">)</span>,</span>
+<span>        <span class="st">"along with documentation on each of the arguments and examples how to use them. "</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="reference/onThisPage.html">onThisPage</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"layout"</span>, <span class="st">"Layout Components"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"navigation"</span>, <span class="st">"Navigation"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inputs"</span>, <span class="st">"Input Controls"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"display"</span>, <span class="st">"Display Components"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"utilities"</span>, <span class="st">"Utility Functions"</span><span class="op">)</span>,</span>
+<span>        include_top_button <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"layout"</span>, style <span class="op">=</span> <span class="st">"margin-top: 30px;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Layout Components"</span><span class="op">)</span>,</span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"centralColumn()"</span><span class="op">)</span>, <span class="st">" - Main content container (900px max width)"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukTheme()"</span><span class="op">)</span>, <span class="st">" - Apply CRUK CSS theme to the app"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"window_size_ui() / window_size_server()"</span><span class="op">)</span>, <span class="st">" - Track browser window dimensions"</span><span class="op">)</span></span>
+<span>          <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"navigation"</span>, style <span class="op">=</span> <span class="st">"margin-top: 30px;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Navigation"</span><span class="op">)</span>,</span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukNavTitle()"</span><span class="op">)</span>, <span class="st">" - Branded navigation bar with logo and selectors"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"onThisPage()"</span><span class="op">)</span>, <span class="st">" - Contents navigation box with scroll-to-top button"</span><span class="op">)</span></span>
+<span>          <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"inputs"</span>, style <span class="op">=</span> <span class="st">"margin-top: 30px;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Input Controls"</span><span class="op">)</span>,</span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukButton()"</span><span class="op">)</span>, <span class="st">" - Styled action buttons (primary/secondary)"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukRadioButton()"</span><span class="op">)</span>, <span class="st">" - Styled radio button groups"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukPickerInput()"</span><span class="op">)</span>, <span class="st">" - Enhanced dropdown with search"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukSelectInput()"</span><span class="op">)</span>, <span class="st">" - Basic styled dropdown"</span><span class="op">)</span></span>
+<span>          <span class="op">)</span>,</span>
+<span></span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Examples:"</span><span class="op">)</span>,</span>
+<span>          <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
+<span>            width <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>            <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<span>              <span class="fu"><a href="reference/crukSelectInput.html">crukSelectInput</a></span><span class="op">(</span></span>
+<span>                <span class="st">"select_demo"</span>,</span>
+<span>                <span class="st">"Choose a fruit:"</span>,</span>
+<span>                choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Apple"</span>, <span class="st">"Banana"</span>, <span class="st">"Orange"</span><span class="op">)</span></span>
+<span>              <span class="op">)</span></span>
+<span>            <span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<span>              <span class="fu"><a href="reference/crukPickerInput.html">crukPickerInput</a></span><span class="op">(</span></span>
+<span>                <span class="st">"picker_demo"</span>,</span>
+<span>                <span class="st">"Choose multiple:"</span>,</span>
+<span>                choices <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>,</span>
+<span>                options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>`actions-box` <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                multiple <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>              <span class="op">)</span></span>
+<span>            <span class="op">)</span></span>
+<span>          <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"display"</span>, style <span class="op">=</span> <span class="st">"margin-top: 30px;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Display Components"</span><span class="op">)</span>,</span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukTitle()"</span><span class="op">)</span>, <span class="st">" - Page titles with optional subheadings"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukValueBox()"</span><span class="op">)</span>, <span class="st">" - Metric display boxes"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukChartTable()"</span><span class="op">)</span>, <span class="st">" - Combined chart/table with alt text"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"lastReview()"</span><span class="op">)</span>, <span class="st">" - Last reviewed date with audience tags"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukLogo() / crukLogoWide()"</span><span class="op">)</span>, <span class="st">" - CRUK logos"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukFooter()"</span><span class="op">)</span>, <span class="st">" - Complete footer with legal info"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukSources()"</span><span class="op">)</span>, <span class="st">" - Data sources box"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"ciBox()"</span><span class="op">)</span>, <span class="st">" - Cancer Intelligence team footer"</span><span class="op">)</span></span>
+<span>          <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"utilities"</span>, style <span class="op">=</span> <span class="st">"margin-top: 30px;"</span>,</span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Utility Functions"</span><span class="op">)</span>,</span>
+<span>          <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukRounding()"</span><span class="op">)</span>, <span class="st">" - Format numbers per CI guidelines"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukRoundingPercentage()"</span><span class="op">)</span>, <span class="st">" - Format percentages with descriptive text"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"crukGA()"</span><span class="op">)</span>, <span class="st">" - Add Google Analytics tracking"</span><span class="op">)</span>,</span>
+<span>            <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">strong</span><span class="op">(</span><span class="st">"get_zotero_sources()"</span><span class="op">)</span>, <span class="st">" - Retrieve Zotero bibliography"</span><span class="op">)</span></span>
+<span>          <span class="op">)</span>,</span>
+<span></span>
+<span>          <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4</a></span><span class="op">(</span><span class="st">"Rounding Examples:"</span><span class="op">)</span>,</span>
+<span>          <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderTable.html" class="external-link">tableOutput</a></span><span class="op">(</span><span class="st">"rounding_table"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span></span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">br</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"The window_size_server() and window_size_ui() allow the app to read in what size the window is,</span></span>
+<span><span class="st">        which is handy for resizing graphs better. (Resize this window and the numbers below should change.)"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">verbatimTextOutput</a></span><span class="op">(</span><span class="st">"window_size_display"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Define server logic required to draw a histogram</span></span>
-<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
+<span><span class="co"># Define server</span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># Track window size</span></span>
+<span>  <span class="va">win_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/window_size.html">window_size_server</a></span><span class="op">(</span><span class="st">"window_tracker"</span>, debounce_ms <span class="op">=</span> <span class="fl">300</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Display window size</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">window_size_display</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">ws</span> <span class="op">&lt;-</span> <span class="fu">win_size</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/req.html" class="external-link">req</a></span><span class="op">(</span><span class="va">ws</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Current Window Size: "</span>, <span class="va">ws</span><span class="op">$</span><span class="va">width</span>, <span class="st">" x "</span>, <span class="va">ws</span><span class="op">$</span><span class="va">height</span>, <span class="st">" pixels"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Filter mtcars data based on cylinder selection</span></span>
+<span>  <span class="va">filtered_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/reactive.html" class="external-link">reactive</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">car_filter</span> <span class="op">!=</span> <span class="st">"All"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">car_filter</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="va">data</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Create plotly chart</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">demo_plot</span> <span class="op">&lt;-</span> <span class="fu">renderPlotly</span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu">plot_ly</span><span class="op">(</span><span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>            x <span class="op">=</span> <span class="op">~</span><span class="va">wt</span>,</span>
+<span>            y <span class="op">=</span> <span class="op">~</span><span class="va">mpg</span>,</span>
+<span>            type <span class="op">=</span> <span class="st">'scatter'</span>,</span>
+<span>            mode <span class="op">=</span> <span class="st">'markers'</span>,</span>
+<span>            marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">'#e60078'</span><span class="op">)</span>,</span>
+<span>            text <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Car:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                          <span class="st">"&lt;br&gt;Weight:"</span>, <span class="va">wt</span>,</span>
+<span>                          <span class="st">"&lt;br&gt;MPG:"</span>, <span class="va">mpg</span><span class="op">)</span>,</span>
+<span>            hoverinfo <span class="op">=</span> <span class="st">'text'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu">config</span><span class="op">(</span>displayModeBar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/layout.html" class="external-link">layout</a></span><span class="op">(</span></span>
+<span>        showlegend <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co">#change to true if not using annotations</span></span>
+<span>        yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          title <span class="op">=</span> <span class="st">"Miles per gallon"</span>,</span>
+<span>          zeroline <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          zerolinewidth <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>          showgrid <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          titlefont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"Poppins"</span>, color <span class="op">=</span> <span class="st">"#000000"</span>, size <span class="op">=</span> <span class="fl">18</span><span class="op">)</span>,</span>
+<span>          tickfont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"Poppins"</span>, color<span class="op">=</span> <span class="st">"#000000"</span>, size<span class="op">=</span> <span class="fl">14</span><span class="op">)</span>,</span>
+<span>          range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span> <span class="op">+</span> <span class="fl">5</span><span class="op">)</span></span>
+<span>        <span class="op">)</span>,</span>
+<span>        xaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          title <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span>,</span>
+<span>          zeroline <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>          showgrid <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>          tickfont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"Poppins"</span>, color<span class="op">=</span> <span class="st">"#000000"</span>, size<span class="op">=</span> <span class="fl">14</span><span class="op">)</span>,</span>
+<span>          titlefont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="st">"Poppins"</span>, color <span class="op">=</span> <span class="st">"#000000"</span>, size <span class="op">=</span> <span class="fl">18</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>l <span class="op">=</span> <span class="fl">50</span>, r <span class="op">=</span> <span class="fl">20</span>, t <span class="op">=</span> <span class="fl">20</span>, b <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Create gt table</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">demo_table</span> <span class="op">&lt;-</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">render_gt</span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">wt</span>, <span class="va">hp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>car <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">car</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu">gt</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu">cols_label</span><span class="op">(</span></span>
+<span>        car <span class="op">=</span> <span class="st">"Car Model"</span>,</span>
+<span>        mpg <span class="op">=</span> <span class="st">"MPG"</span>,</span>
+<span>        cyl <span class="op">=</span> <span class="st">"Cylinders"</span>,</span>
+<span>        wt <span class="op">=</span> <span class="st">"Weight"</span>,</span>
+<span>        hp <span class="op">=</span> <span class="st">"Horsepower"</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu">fmt_number</span><span class="op">(</span></span>
+<span>        columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span><span class="op">)</span>,</span>
+<span>        decimals <span class="op">=</span> <span class="fl">1</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu">tab_header</span><span class="op">(</span></span>
+<span>        title <span class="op">=</span> <span class="st">"Motor Trend Car Data"</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Create rounding examples table</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">rounding_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderTable.html" class="external-link">renderTable</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>      Input <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1234"</span>, <span class="st">"156789"</span>, <span class="st">"1234567"</span>, <span class="st">"0.25"</span>, <span class="st">"0.847"</span>, <span class="st">"0.33"</span><span class="op">)</span>,</span>
+<span>      Function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"crukRounding()"</span>, <span class="st">"crukRounding()"</span>, <span class="st">"crukRounding()"</span>,</span>
+<span>                   <span class="st">"crukRoundingPercentage()"</span>, <span class="st">"crukRoundingPercentage()"</span>,</span>
+<span>                   <span class="st">"crukRoundingPercentage()"</span><span class="op">)</span>,</span>
+<span>      Output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">156789</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1234567</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.847</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="reference/crukRoundingPercentage.html">crukRoundingPercentage</a></span><span class="op">(</span><span class="fl">0.33</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span>, striped <span class="op">=</span> <span class="cn">TRUE</span>, hover <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Button observers</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn_primary</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/showNotification.html" class="external-link">showNotification</a></span><span class="op">(</span><span class="st">"Primary button clicked!"</span>, type <span class="op">=</span> <span class="st">"message"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn_secondary</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/showNotification.html" class="external-link">showNotification</a></span><span class="op">(</span><span class="st">"Secondary button clicked!"</span>, type <span class="op">=</span> <span class="st">"message"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">btn_upload</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/showNotification.html" class="external-link">showNotification</a></span><span class="op">(</span><span class="st">"Upload button clicked!"</span>, type <span class="op">=</span> <span class="st">"message"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Observe app title link click</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">app_title_link</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/showNotification.html" class="external-link">showNotification</a></span><span class="op">(</span><span class="st">"Title clicked! This can be used for navigation."</span>, type <span class="op">=</span> <span class="st">"message"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Run the application</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span>ui <span class="op">=</span> <span class="va">ui</span>, server <span class="op">=</span> <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+</details>
 </div>
 <div class="section level2">
 <h2 id="core-components">Core Components<a class="anchor" aria-label="anchor" href="#core-components"></a>
@@ -189,7 +596,7 @@
 <div class="section level3">
 <h3 id="theme-and-layout">Theme and Layout<a class="anchor" aria-label="anchor" href="#theme-and-layout"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Apply CRUK theme</span></span>
 <span><span class="va">tags</span><span class="op">$</span><span class="fu">head</span><span class="op">(</span><span class="fu"><a href="reference/crukTheme.html">crukTheme</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -202,7 +609,7 @@
 <h3 id="navigation">Navigation<a class="anchor" aria-label="anchor" href="#navigation"></a>
 </h3>
 <p>Navbar styling handles desktop and mobile, with up to two selectors in the navbar.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simple navigation</span></span>
 <span><span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span>Title <span class="op">=</span> <span class="st">"Early Diagnosis Data Hub"</span><span class="op">)</span></span>
 <span></span>
@@ -217,7 +624,7 @@
 <div class="section level3">
 <h3 id="typography">Typography<a class="anchor" aria-label="anchor" href="#typography"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Page title with optional subheading</span></span>
 <span><span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Cancer Incidence Trends"</span>,</span>
@@ -227,7 +634,7 @@
 <div class="section level3">
 <h3 id="logos">Logos<a class="anchor" aria-label="anchor" href="#logos"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stacked logo (preferred)</span></span>
 <span><span class="fu"><a href="reference/crukLogo.html">crukLogo</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"50px"</span><span class="op">)</span></span>
 <span></span>
@@ -237,7 +644,7 @@
 <div class="section level3">
 <h3 id="value-boxes">Value Boxes<a class="anchor" aria-label="anchor" href="#value-boxes"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="st">"metric1"</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Total Cases"</span>,</span>
@@ -251,7 +658,7 @@
 <h3 id="styled-last-review">Styled last review<a class="anchor" aria-label="anchor" href="#styled-last-review"></a>
 </h3>
 <p>Use these for the top of pages so users know how up to date material is.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Public content</span></span>
 <span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20 October 2025"</span><span class="op">)</span></span>
 <span></span>
@@ -269,7 +676,7 @@
 <div class="section level3">
 <h3 id="footer">Footer<a class="anchor" aria-label="anchor" href="#footer"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Full footer with contact information</span></span>
 <span><span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -279,7 +686,7 @@
 <div class="section level3">
 <h3 id="number-formatting">Number Formatting<a class="anchor" aria-label="anchor" href="#number-formatting"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format numbers per CRUK Intelligence guidelines</span></span>
 <span><span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1200</span><span class="op">)</span></span>
 <span><span class="co"># Returns: "around 1,200"</span></span>
