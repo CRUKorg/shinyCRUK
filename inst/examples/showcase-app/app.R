@@ -59,6 +59,9 @@ ui <- bslib::page_navbar(
         which provides themed and on-brand components for Shiny applications (and occasionally quarto)."),
       p("If this is your first time here, you'll have just seen the cookie banner which comes with google analytics.
         Alongside that is the crukTheme() which sorts out the navbar and a number of other bits."),
+      p("For full installation instructions have a look at the ", a("package documentation site",
+                                                                    href = "https://verbose-guacamole-l18vr83.pages.github.io/index.html"),
+        " which also includes the code for this app if you want to run it yourself."),
 
       h3("Value Boxes"),
       p("The package includes styled value boxes for displaying key metrics:"),
@@ -163,13 +166,13 @@ ui <- bslib::page_navbar(
       p("Different styles for different audiences through lastReview()."),
 
       div(style = "border: 1px solid #ccc; padding: 20px; margin: 20px 0;",
-          h4("Public Content"),
+          p("Public Content"),
           lastReview(Sys.Date()),
           br(),
-          h4("Health Professional Content"),
+          p("Health Professional Content"),
           lastReview(Sys.Date(), tag = "health professional"),
           br(),
-          h4("Internal Content"),
+          p("Internal Content"),
           lastReview(Sys.Date(), tag = "internal")
       ),
 
@@ -179,10 +182,10 @@ ui <- bslib::page_navbar(
       p("Two logo formats are available:"),
 
       div(style = "border: 1px solid #ccc; padding: 20px; margin: 20px 0;",
-          h4("Stacked Logo (Preferred)"),
+          p("Stacked Logo (Preferred)"),
           crukLogo(height = "75px"),
           br(), br(),
-          h4("Wide Logo (Use Sparingly)"),
+          p("Wide Logo (Use Sparingly)"),
           crukLogoWide(height = "50px")
       )
     )
@@ -196,6 +199,18 @@ ui <- bslib::page_navbar(
         "Data Visualization Components",
         "Chart and table display with accessibility features"
       ),
+      h3("Rounding Functions"),
+      p("Cancer Intelligence rounding rules are now wrapped up in handy functions with two versions available, one for numbers and another for frequencies and percentages:"),
+
+      tags$ul(
+        tags$li(HTML(paste0("<strong>crukRounding(1234)</strong> = ", crukRounding(1234)))),
+        tags$li(HTML(paste0("<strong>crukRounding(156789)</strong> = ", crukRounding(156789)))),
+        tags$li(HTML(paste0("<strong>crukRounding(1234567)</strong> = ", crukRounding(1234567)))),
+        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.25)</strong> = ", crukRoundingPercentage(0.25)))),
+        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.847)</strong> = ", crukRoundingPercentage(0.847))))
+      ),
+      br(),
+      p("We've built a styled card to hold your graphs and encourage a data table to support the graph for better accessibility standards."),
       crukPickerInput(
         inputId = "car_filter",
         label = "Filter by number of cylinders:",
@@ -215,16 +230,6 @@ ui <- bslib::page_navbar(
 
       br(),
 
-      h3("Rounding Functions"),
-      p("The package includes CRUK Intelligence rounding functions:"),
-
-      tags$ul(
-        tags$li(HTML(paste0("<strong>crukRounding(1234)</strong> = ", crukRounding(1234)))),
-        tags$li(HTML(paste0("<strong>crukRounding(156789)</strong> = ", crukRounding(156789)))),
-        tags$li(HTML(paste0("<strong>crukRounding(1234567)</strong> = ", crukRounding(1234567)))),
-        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.25)</strong> = ", crukRoundingPercentage(0.25)))),
-        tags$li(HTML(paste0("<strong>crukRoundingPercentage(0.847)</strong> = ", crukRoundingPercentage(0.847))))
-      ),
       h3("Data sources box"),
       p("A data sources box allows you to build out your sources list and we are working on an integration with Zotero
         so you can pull sources from there."),
@@ -249,7 +254,9 @@ ui <- bslib::page_navbar(
         "Complete Component List",
         "Every function in the shinyCRUK package"
       ),
-
+      p("A full reference list is available on ",
+        a("the package website", href = "https://verbose-guacamole-l18vr83.pages.github.io/reference/index.html"),
+        "along with documentation on each of the arguments and examples how to use them. "),
       onThisPage(
         c("layout", "Layout Components"),
         c("navigation", "Navigation"),
@@ -335,7 +342,8 @@ ui <- bslib::page_navbar(
       ),
 
       br(), br(),
-
+      p("The window_size_server() and window_size_ui() allow the app to read in what size the window is,
+        which is handy for resizing graphs better. (Resize this window and the numbers below should change.)"),
       verbatimTextOutput("window_size_display")
     )
   )
@@ -380,7 +388,8 @@ server <- function(input, output, session) {
         showlegend = FALSE, #change to true if not using annotations
         yaxis = list(
           title = "Miles per gallon",
-          zeroline = F,
+          zeroline = T,
+          zerolinewidth = 2,
           showgrid = T,
           titlefont = list(family = "Poppins", color = "#000000", size = 18),
           tickfont = list(family = "Poppins", color= "#000000", size= 14),
