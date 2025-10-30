@@ -1,5 +1,5 @@
 library(shiny)
-library(shinyCRUK)
+# library(shinyCRUK)
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
@@ -10,6 +10,7 @@ options(shiny.autoreload = TRUE)
 
 # Define UI
 ui <- bslib::page_navbar(
+  window_title = "shinyCRUK",
   fillable = FALSE,
   navbar_options = navbar_options(underline = FALSE),
   # Apply CRUK theme and Google Analytics
