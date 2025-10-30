@@ -121,7 +121,7 @@ We’ve buily a working Shiny app to showcase most of the features in the packag
 Show code
 </summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://verbose-guacamole-l18vr83.pages.github.io/">shinyCRUK</a></span><span class="op">)</span></span>
+<span><span class="co"># library(shinyCRUK)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets" class="external-link">shinyWidgets</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -132,6 +132,7 @@ Show code
 <span></span>
 <span><span class="co"># Define UI</span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu">bslib</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/bslib/reference/page_navbar.html" class="external-link">page_navbar</a></span><span class="op">(</span></span>
+<span>  window_title <span class="op">=</span> <span class="st">"shinyCRUK"</span>,</span>
 <span>  fillable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  navbar_options <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/bslib/reference/navbar_options.html" class="external-link">navbar_options</a></span><span class="op">(</span>underline <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  <span class="co"># Apply CRUK theme and Google Analytics</span></span>
@@ -181,8 +182,9 @@ Show code
 <span><span class="st">        which provides themed and on-brand components for Shiny applications (and occasionally quarto)."</span><span class="op">)</span>,</span>
 <span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"If this is your first time here, you'll have just seen the cookie banner which comes with google analytics.</span></span>
 <span><span class="st">        Alongside that is the crukTheme() which sorts out the navbar and a number of other bits."</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"For full installation instructions have a look at the "</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">a</a></span><span class="op">(</span><span class="st">"package documentation site"</span>, </span>
-<span>                                                                    href <span class="op">=</span> <span class="st">"https://verbose-guacamole-l18vr83.pages.github.io/index.html"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"For full installation instructions have a look at the "</span>, <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">a</a></span><span class="op">(</span><span class="st">"package documentation site"</span>,</span>
+<span>                                                                    href <span class="op">=</span> <span class="st">"https://verbose-guacamole-l18vr83.pages.github.io/index.html"</span><span class="op">)</span>,</span>
+<span>        <span class="st">" which also includes the code for this app if you want to run it yourself."</span><span class="op">)</span>,</span>
 <span></span>
 <span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Value Boxes"</span><span class="op">)</span>,</span>
 <span>      <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"The package includes styled value boxes for displaying key metrics:"</span><span class="op">)</span>,</span>
