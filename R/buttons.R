@@ -63,10 +63,9 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
   )
 
   googleSymbols <- htmltools::tags$link(
-    rel = "stylesheet",
-    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+    rel = "stylesheet"
   )
-
   # Create button first
   button <- shiny::actionButton(inputId = inputId, label = text, class = c(paste0("cruk-btn-", type), "cruk-btn"), ...)
 

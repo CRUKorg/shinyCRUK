@@ -68,8 +68,8 @@ onThisPage <- function(..., include_top_button = TRUE) {
   )
 
   googleSymbols <- htmltools::tags$link(
-    rel = "stylesheet",
-    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+    rel = "stylesheet"
   )
 
   # Process arguments
@@ -104,7 +104,7 @@ onThisPage <- function(..., include_top_button = TRUE) {
   # Build the main container with all links
   main_container <- htmltools::div(
     class = "otp-link-container",
-    htmltools::tags$link(href = "https://fonts.googleapis.com/icon?family=Material+Icons", rel = "stylesheet"),
+    # htmltools::tags$link(href = "https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp", rel = "stylesheet"),
     htmltools::div(
       class = "otp-header",
       "On this page"

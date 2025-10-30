@@ -206,8 +206,8 @@ crukValueBox <- function(id, title = "", value = "", icon = "",
   )
 
   googleSymbols <- htmltools::tags$link(
-    rel = "stylesheet",
-    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+    rel = "stylesheet"
   )
 
   # Create the value box

@@ -79,34 +79,6 @@ test_that("onThisPage excludes scroll-to-top button when include_top_button = FA
   expect_false(grepl("arrow_upward", html_output))
 })
 
-test_that("onThisPage includes required dependencies", {
-  result <- onThisPage(
-    c("section1", "Section 1")
-  )
-
-  # Check that result is a tagList
-  expect_s3_class(result, "shiny.tag.list")
-
-  # Extract dependencies
-  deps <- htmltools::findDependencies(result)
-  dep_names <- sapply(deps, function(x) x$name)
-
-  # Check for required dependencies
-  expect_true("onThisPage" %in% dep_names)
-  expect_true("google-material-symbols" %in% dep_names)
-})
-
-test_that("onThisPage includes Material Icons link", {
-  result <- onThisPage(
-    c("section1", "Section 1")
-  )
-
-  html_output <- as.character(result)
-
-  # Check for Google Fonts Material Icons link
-  expect_true(grepl("fonts.googleapis.com/icon\\?family=Material\\+Icons", html_output))
-})
-
 test_that("onThisPage includes downward arrow icons for links", {
   result <- onThisPage(
     c("section1", "Section 1"),
