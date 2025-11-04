@@ -1,7 +1,7 @@
 Type: Package
 Package: shinyCRUK
 Title: Styling Shiny Apps with CRUK Branding
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Matt", "Grant", , "matt.grant@cancer.org.uk", role = c("aut", "cre")),
     person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut")
