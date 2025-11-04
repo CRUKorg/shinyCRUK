@@ -65,7 +65,7 @@ remotes::install_github("CRUKorg/shinyCRUK", auth_token = gitcreds::gitcreds_get
 
 ## Quick Start
 
-We’ve buily a working Shiny app to showcase most of the features in the
+We’ve built a working Shiny app to showcase most of the features in the
 package, with the folllowing code:
 <details>
 <summary>
@@ -74,7 +74,7 @@ Show code
 
 ``` r
 library(shiny)
-# library(shinyCRUK)
+library(shinyCRUK)
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
@@ -193,7 +193,7 @@ ui <- bslib::page_navbar(
         p("Two dropdown selectors are available, crukSelectInput() and crukPickerInput().
           crukSelectInput is well suited to short dropdowns, and on mobile will use the native selector. Whereas crukPickerInput() has better support for long lists, allowing searching and multiple selections."),
         layout_column_wrap(
-          widht = 1/2,
+          width = 1/2,
           crukSelectInput(inputId = "select-input",
                         label = "crukSelectInput()",
                         choices = c("Hobnob", "Digestive", "Bourbon", "Custard cream", "Rich tea")),

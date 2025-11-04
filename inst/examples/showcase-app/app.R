@@ -1,5 +1,5 @@
 library(shiny)
-# library(shinyCRUK)
+library(shinyCRUK)
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
@@ -118,7 +118,7 @@ ui <- bslib::page_navbar(
         p("Two dropdown selectors are available, crukSelectInput() and crukPickerInput().
           crukSelectInput is well suited to short dropdowns, and on mobile will use the native selector. Whereas crukPickerInput() has better support for long lists, allowing searching and multiple selections."),
         layout_column_wrap(
-          widht = 1/2,
+          width = 1/2,
           crukSelectInput(inputId = "select-input",
                         label = "crukSelectInput()",
                         choices = c("Hobnob", "Digestive", "Bourbon", "Custard cream", "Rich tea")),

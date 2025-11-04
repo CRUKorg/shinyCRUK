@@ -151,15 +151,16 @@ crukRounding <- function(number, case = "lower") {
     TRUE ~ "less than 5"
   )
 
-  numbertext <- ifelse(case == "upper",
+  numbertext <- if(case == "upper") {
     paste0(
       substr(toupper(numbertext), 1, 1),
       substr(numbertext, 2, nchar(numbertext))
-    ),
+    )
+  } else {
     numbertext
-  )
+  }
 
-  return(numbertext)
+return(numbertext)
 }
 
 
@@ -178,8 +179,6 @@ crukRounding <- function(number, case = "lower") {
 #'
 #' @return Character vector of formatted percentage descriptions.
 #'
-#' @importFrom dplyr case_when if_else
-#'
 #' @examples
 #' crukRoundingPercentage(0.25)
 #' # Returns: "1 in 4 (25%)"
@@ -196,8 +195,14 @@ crukRounding <- function(number, case = "lower") {
 #' @export
 crukRoundingPercentage <- function(number, case = "lower", digits = 3) {
   # Input validation
-  if (!is.numeric(number)) {
-    stop("`number` must be numeric")
+  if (!is.numeric(number) && !all(is.na(number))) {
+    # Try to coerce to numeric
+    number_converted <- suppressWarnings(as.numeric(number))
+
+    if (all(is.na(number_converted) & !is.na(number))) {
+      stop("`number` must be numeric or coercible to numeric")
+    }
+    number <- number_converted
   }
 
   if (!case %in% c("lower", "upper")) {
@@ -297,7 +302,10 @@ crukRoundingPercentage <- function(number, case = "lower", digits = 3) {
   )
 
   # Apply case transformation
-  CaseText <- dplyr::if_else(case == "lower", tolower(Text), Text)
+  if (case == "lower") {
+    return(tolower(Text))
+  } else {
+    return(Text)
+  }
 
-  return(CaseText)
 }

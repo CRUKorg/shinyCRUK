@@ -68,7 +68,7 @@ remotes::install_github("CRUKorg/shinyCRUK", auth_token = gitcreds::gitcreds_get
 
 ## Quick Start
 
-We've buily a working Shiny app to showcase most of the features in the package, with the folllowing code:
+We've built a working Shiny app to showcase most of the features in the package, with the folllowing code:
 <details><summary>Show code</summary>
 ```{r, eval=FALSE, code=readLines("~/shinyCRUK/inst/examples/showcase-app/app.R")}
 
