@@ -8,7 +8,14 @@ template:
     fg: "#000000"
     primary: "#e60078"
     secondary: "#00007e"
-
     base_font: Poppins
     heading_font: Progress Medium
 
+navbar:
+  structure:
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/CRUKorg/shinyCRUK
+      aria-label: GitHub
