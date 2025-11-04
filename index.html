@@ -116,12 +116,12 @@
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-We’ve buily a working Shiny app to showcase most of the features in the package, with the folllowing code:
+We’ve built a working Shiny app to showcase most of the features in the package, with the folllowing code:
 <details><summary>
 Show code
 </summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span><span class="co"># library(shinyCRUK)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://verbose-guacamole-l18vr83.pages.github.io/">shinyCRUK</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets" class="external-link">shinyWidgets</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -240,7 +240,7 @@ Show code
 <span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"Two dropdown selectors are available, crukSelectInput() and crukPickerInput().</span></span>
 <span><span class="st">          crukSelectInput is well suited to short dropdowns, and on mobile will use the native selector. Whereas crukPickerInput() has better support for long lists, allowing searching and multiple selections."</span><span class="op">)</span>,</span>
 <span>        <span class="fu"><a href="https://rstudio.github.io/bslib/reference/layout_column_wrap.html" class="external-link">layout_column_wrap</a></span><span class="op">(</span></span>
-<span>          widht <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>          width <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>,</span>
 <span>          <span class="fu"><a href="reference/crukSelectInput.html">crukSelectInput</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"select-input"</span>,</span>
 <span>                        label <span class="op">=</span> <span class="st">"crukSelectInput()"</span>,</span>
 <span>                        choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hobnob"</span>, <span class="st">"Digestive"</span>, <span class="st">"Bourbon"</span>, <span class="st">"Custard cream"</span>, <span class="st">"Rich tea"</span><span class="op">)</span><span class="op">)</span>,</span>
