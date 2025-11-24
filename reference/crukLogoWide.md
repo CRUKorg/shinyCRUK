@@ -1,0 +1,83 @@
+# CRUK Wide Logo
+
+Returns the wide (horizontal) version of the Cancer Research UK logo as
+a PNG image element. The logo is assigned the CSS class
+\`"cruk-logo-wide"\` for styling purposes.
+
+## Usage
+
+``` r
+crukLogoWide(height = "50px", width = "auto", class = "")
+```
+
+## Arguments
+
+- height:
+
+  Character string specifying the logo height. Must be a valid CSS unit
+  (e.g., "50px", "3rem", "10%"). Default is "50px".
+
+- width:
+
+  Character string specifying the logo width. Must be a valid CSS unit.
+  Default is "auto" to maintain aspect ratio. Note: Specifying both
+  height and width may distort the logo if the aspect ratio doesn't
+  match the original.
+
+- class:
+
+  Character string or character vector of additional CSS class names to
+  apply to the logo element. If providing multiple classes, use a
+  character vector: \`c("class1", "class2")\`. These are added alongside
+  the default \`"cruk-logo-wide"\` class. Default is an empty string.
+
+## Value
+
+An \`htmltools::tags\$img\` element containing the CRUK wide logo PNG
+with the specified dimensions and CSS classes.
+
+## Logo Details
+
+Format: PNG (Portable Network Graphics) Orientation: Wide (logo beside
+text) Default class: \`"cruk-logo-wide"\` File location:
+\`inst/www/images/cruk-logo-wide.png\`
+
+## Usage Guidelines
+
+Use this wide logo format \*\*sparingly\*\* and only when:
+
+Horizontal space is constrained but vertical space is available The
+stacked logo (\[crukLogo()\]) doesn't fit the layout Designing for
+wide/landscape orientations (e.g., desktop navigation bars)
+
+The stacked logo (\[crukLogo()\]) is the preferred format for most use
+cases per CRUK brand guidelines.
+
+## See also
+
+\[crukLogo()\] for the standard stacked version of the CRUK logo
+(preferred)
+
+## Examples
+
+``` r
+# Basic usage with default size (50px height)
+crukLogoWide()
+#> <img src="shinyCRUK/images/cruk-logo-wide.png" class="cruk-logo-wide " style="height: 50px; width: auto;" alt="Cancer Research UK logo"/>
+
+# Custom height for navigation bar
+crukLogoWide(height = "35px")
+#> <img src="shinyCRUK/images/cruk-logo-wide.png" class="cruk-logo-wide " style="height: 35px; width: auto;" alt="Cancer Research UK logo"/>
+
+# Custom height and width
+crukLogoWide(height = "40px", width = "200px")
+#> <img src="shinyCRUK/images/cruk-logo-wide.png" class="cruk-logo-wide " style="height: 40px; width: 200px;" alt="Cancer Research UK logo"/>
+
+# Add custom CSS classes
+crukLogoWide(class = "navbar-logo")
+#> <img src="shinyCRUK/images/cruk-logo-wide.png" class="cruk-logo-wide navbar-logo" style="height: 50px; width: auto;" alt="Cancer Research UK logo"/>
+
+# Multiple custom classes
+crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
+#> <img src="shinyCRUK/images/cruk-logo-wide.png" class="cruk-logo-wide logo-desktop cruk-logo-wide float-right" style="height: 45px; width: auto;" alt="Cancer Research UK logo"/>
+```
