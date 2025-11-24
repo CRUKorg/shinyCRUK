@@ -19,10 +19,6 @@
     min-width: 0; /* Allows text to wrap properly */
 }
 
-.ci-logo {
-  flex-shrink: 0; /* Prevents logo from shrinking */
-}
-
 
 /* Switch to column layout on smaller screens */
 @media (max-width: 768px) {
@@ -33,5 +29,14 @@
 
   .ci-child {
     padding-top: 10px;
+  }
+
+  .ci-logo img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .ci-email {
+    word-wrap: anywhere;
   }
 }

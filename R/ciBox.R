@@ -121,7 +121,7 @@ ciBox <- function(boxBorder = TRUE) {
       htmltools::p(
         class = "ci-text",
         "This app was made by the Cancer Intelligence team. If you have feedback or have found a bug, then please email",
-        htmltools::a("cancerintelligence@cancer.org.uk", href = "mailto:cancerintelligence@cancer.org.uk")
+        htmltools::a("cancerintelligence@cancer.org.uk", href = "mailto:cancerintelligence@cancer.org.uk", class = "ci-email")
       )
     )
   )
