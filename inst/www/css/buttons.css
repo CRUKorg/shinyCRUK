@@ -24,7 +24,15 @@
   color: #ffffff;
 }
 
-.cruk-btn-primary:active, .cruk-btn-primary:hover, .cruk-btn-primary.btn:first-child:active {
+.btn-check:checked+.cruk-btn-primary,
+.cruk-btn-primary:active,
+:not(.btn-check)+.cruk-btn-primary:active,
+.cruk-btn-primary:first-child:active,
+.cruk-btn-primary.active,
+.cruk-btn-primary.show,
+.cruk-btn-primary.in,
+.cruk-btn-primary:hover,
+.cruk-btn-primary.btn:first-child:active {
   border: 1px solid #cc006c;
   background: #cc006c;
   color: #ffffff;
@@ -47,6 +55,7 @@
   color: #cc006c;
 }
 
+
 .cruk-btn-secondary:active .cruk-btn-icon-secondary  {
   font-size: 1.25rem !important;
   color: #ffffff;
@@ -58,6 +67,16 @@
   color: #cc006c;
 }
 
+
+.btn-check:checked+.cruk-btn-secondary,
+.cruk-btn-secondary:active,
+:not(.btn-check)+.cruk-btn-secondary:active,
+.cruk-btn-secondary:first-child:active,
+.cruk-btn-secondary.active,
+.cruk-btn-secondary.show,
+.cruk-btn-secondary.in,
+.cruk-btn-secondary:hover,
+.cruk-btn-secondary.btn:first-child:active
 .cruk-btn-secondary:active, .cruk-btn-secondary.btn:first-child:active {
   border: 1px solid #e60078;
   background: #e60078;
@@ -88,4 +107,10 @@
   font-family: 'Poppins Medium';
   font-weight: 400;
   font-size: 1rem;
+}
+
+@media (max-width: 576px) {
+  .cruk-radio-btn .d-flex {
+    flex-direction: column;
+  }
 }
