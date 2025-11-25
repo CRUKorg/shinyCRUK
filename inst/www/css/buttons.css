@@ -91,7 +91,9 @@
   border-radius: 0px;
 }
 
-.cruk-radio-btn .btn-check:checked+.btn {
+.cruk-radio-btn .btn-check:checked+.btn,
+.cruk-radio-btn .btn-default.active,
+.cruk-radio-btn .btn-default.active:hover {
   color: #ffffff;
   background: #e60078;
   border: 1px solid #e60078;
