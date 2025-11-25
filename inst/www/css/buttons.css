@@ -93,7 +93,8 @@
 
 .cruk-radio-btn .btn-check:checked+.btn,
 .cruk-radio-btn .btn-default.active,
-.cruk-radio-btn .btn-default.active:hover {
+.cruk-radio-btn .btn-default.active:hover,
+.cruk-radio-btn .btn-default.active:focus {
   color: #ffffff;
   background: #e60078;
   border: 1px solid #e60078;
