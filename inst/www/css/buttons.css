@@ -89,6 +89,8 @@
   background: white;
   border: 1px solid #e60078;
   border-radius: 0px;
+  font-size: 16px;
+  height: 48px;
 }
 
 .cruk-radio-btn .btn-check:checked+.btn,
