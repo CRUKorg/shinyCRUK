@@ -8,15 +8,7 @@ with CRUK-specific styling to match the helix design system.
 ## Usage
 
 ``` r
-crukRadioButton(
-  inputId,
-  label,
-  choices,
-  width = NULL,
-  justified = TRUE,
-  class = "",
-  ...
-)
+crukRadioButton(inputId, label, choices, width = NULL, class = "", ...)
 ```
 
 ## Arguments
@@ -40,12 +32,6 @@ crukRadioButton(
   The width of the input group. Can be specified in pixels (e.g.,
   `"400px"`), percentage (e.g., `"100%"`), or `NULL` (default) for
   automatic width.
-
-- justified:
-
-  Logical. If `TRUE` (default), buttons are stretched to fill the width
-  of the container evenly. If `FALSE`, buttons are sized to their
-  content.
 
 - class:
 
