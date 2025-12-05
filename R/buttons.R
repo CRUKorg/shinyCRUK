@@ -97,9 +97,6 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
 #' @param width The width of the input group. Can be specified in pixels
 #'   (e.g., \code{"400px"}), percentage (e.g., \code{"100\%"}), or \code{NULL}
 #'   (default) for automatic width.
-#' @param justified Logical. If \code{TRUE} (default), buttons are stretched
-#'   to fill the width of the container evenly. If \code{FALSE}, buttons are
-#'   sized to their content.
 #' @param class Additional CSS classes to apply to the radio button container.
 #'   Optional parameter for custom styling.
 #' @param ... Additional arguments passed to

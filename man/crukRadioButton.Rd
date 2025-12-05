@@ -4,15 +4,7 @@
 \alias{crukRadioButton}
 \title{Create a CRUK-branded radio button group}
 \usage{
-crukRadioButton(
-  inputId,
-  label,
-  choices,
-  width = NULL,
-  justified = TRUE,
-  class = "",
-  ...
-)
+crukRadioButton(inputId, label, choices, width = NULL, class = "", ...)
 }
 \arguments{
 \item{inputId}{The unique identifier for the radio button.}
@@ -26,10 +18,6 @@ Can be a vector or a named list.}
 \item{width}{The width of the input group. Can be specified in pixels
 (e.g., \code{"400px"}), percentage (e.g., \code{"100\%"}), or \code{NULL}
 (default) for automatic width.}
-
-\item{justified}{Logical. If \code{TRUE} (default), buttons are stretched
-to fill the width of the container evenly. If \code{FALSE}, buttons are
-sized to their content.}
 
 \item{class}{Additional CSS classes to apply to the radio button container.
 Optional parameter for custom styling.}
