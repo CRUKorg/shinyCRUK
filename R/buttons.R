@@ -172,7 +172,7 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
 #'
 #'   shinyApp(ui, server)
 #' }
-crukRadioButton <- function(inputId, label, choices, width = NULL, justified = TRUE, class = "", ...) {
+crukRadioButton <- function(inputId, label, choices, width = NULL, class = "", ...) {
   # Dependencies
   css <- htmltools::htmlDependency(
     name = "crukRadioButton",
@@ -190,7 +190,7 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, justified = T
       label = label,
       choices = choices,
       width = width,
-      justified = TRUE,
+      # justified = TRUE,
       ...
     )
   )

@@ -107,7 +107,7 @@ ui <- bslib::page_navbar(
           label = "Select an option:",
           choices = c("Option A", "Option B", "Option C"),
           width = "100%",
-          justified = TRUE
+          justified = FALSE
         ),
         crukRadioButton(
           inputId = "radio_example_B",

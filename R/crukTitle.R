@@ -101,7 +101,7 @@ crukTitle <- function(Title, Subheading = "") {
       class = "cruk-title-container",
       htmltools::h1(Title, class = "cruk-title-heading"),
       if (nchar(Subheading) > 0) {
-        htmltools::p(Subheading, class = "cruk-title-subheading")
+        htmltools::p(htmltools::span(Subheading, class = "cruk-title-subheading"))
       },
       htmltools::hr(class = "cruk-title-rule")
     )
