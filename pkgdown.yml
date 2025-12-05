@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-11-26T11:47Z
+last_built: 2025-12-05T15:47Z
 urls:
   reference: https://verbose-guacamole-l18vr83.pages.github.io/reference
   article: https://verbose-guacamole-l18vr83.pages.github.io/articles

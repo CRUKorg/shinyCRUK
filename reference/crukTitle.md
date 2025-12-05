@@ -98,7 +98,9 @@ crukTitle(
 )
 #> <div class="cruk-title-container">
 #>   <h1 class="cruk-title-heading">Incidence for Common Cancers</h1>
-#>   <p class="cruk-title-subheading">Latest cancer incidence statistics for the years 2017-2019</p>
+#>   <p>
+#>     <span class="cruk-title-subheading">Latest cancer incidence statistics for the years 2017-2019</span>
+#>   </p>
 #>   <hr class="cruk-title-rule"/>
 #> </div>
 
@@ -109,7 +111,9 @@ crukTitle(
 )
 #> <div class="cruk-title-container">
 #>   <h1 class="cruk-title-heading">Five-Year Survival Rates by Cancer Type</h1>
-#>   <p class="cruk-title-subheading">Age-standardised net survival for adults diagnosed 2013-2017, followed up to 2018</p>
+#>   <p>
+#>     <span class="cruk-title-subheading">Age-standardised net survival for adults diagnosed 2013-2017, followed up to 2018</span>
+#>   </p>
 #>   <hr class="cruk-title-rule"/>
 #> </div>
 
