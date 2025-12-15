@@ -4,11 +4,19 @@
 \alias{crukNavTitle}
 \title{CRUK-branded Navigation Title}
 \usage{
-crukNavTitle(Title = "", selectors = 0, selector1 = NULL, selector2 = NULL)
+crukNavTitle(
+  Title = "",
+  title_width = 155,
+  selectors = 0,
+  selector1 = NULL,
+  selector2 = NULL
+)
 }
 \arguments{
 \item{Title}{Character string. The title text to display in the navigation bar.
 Can include HTML markup. Default is an empty string.}
+
+\item{title_width}{Numeric. Width in pixels of title. Defaults to 155.}
 
 \item{selectors}{Integer (0, 1, or 2). The number of selector elements to include
 in the navigation bar. This determines the responsive layout behavior:

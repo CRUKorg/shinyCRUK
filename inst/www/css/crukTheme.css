@@ -262,6 +262,12 @@ a.dropdown-item.active {
       align-items: baseline;
       margin-bottom: 5px;
   }
+
+  /* Stop long titles from taking up all horizontal space on small screen */
+  #app_title_link {
+  max-width: 60%;
+}
+
   /* remove left margin on navbar links when on small screen */
   a.nav-link { margin-left: 0px !important}
   /*add some margin above nav elements on small screen*/
@@ -316,7 +322,9 @@ a.nav-link {
   color: #000000 !important;
   font-size: 18px !important;
   font-family: Poppins Medium !important;
-  margin-left: 25px; /* This will likely need adjusting based on the length of your tab titles */
+  margin-left: 20px; /* This will likely need adjusting based on the length of your tab titles */
+  padding-left: 2px !important;
+  padding-right: 2px !important;
 }
 
 /* set navbar dropdown to align on the right, avoiding spilling off screen */
