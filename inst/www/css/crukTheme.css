@@ -218,7 +218,6 @@ a:visited {
 /* style title */
 .title {
   display: flex;
-  width: 155px;
   font-family: Progress Medium;
   font-size: 1.5rem;
   line-height: 2rem;
