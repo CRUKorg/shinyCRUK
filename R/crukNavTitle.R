@@ -106,7 +106,6 @@ crukNavTitle <- function(Title = "", title_width = 155, selectors = 0, selector1
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 10px
       }
 
       @media (max-width: 991px) {
@@ -131,6 +130,7 @@ crukNavTitle <- function(Title = "", title_width = 155, selectors = 0, selector1
       ".navbar-cruk {
           display: flex;
           justify-content: space-between;
+          gap: 10px
         }
 
         @media (max-width: 991px) {
