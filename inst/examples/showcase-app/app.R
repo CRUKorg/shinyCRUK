@@ -1,5 +1,6 @@
 library(shiny)
 library(shinyCRUK)
+#devtools::load_all() # Comment out above line and comment this in to test package edits made locally
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
@@ -126,7 +127,14 @@ ui <- bslib::page_navbar(
                         label = "crukPickerInput()",
                         choices = c("Axolotl", "Naked mole rat", "Sloth", "Blobfish", "Pangolin",
                                     "Aye-aye", "Quokka", "Giraffe", "Cobra", "Goliath squid")),
-      )
+      ),
+      p("We also have a date selector"),
+      crukDatePicker(inputId = "date-input",
+                     start = "2019-01-01",
+                     end = "2025-12-31",
+                     label = "Pick a date, yo:",
+                     view = "months",
+                     minView = "months")
       ),
       h3("Content for the bottom of your pages"),
       p("If you're making something for internal use, I've added in a little CI team box you can drop in the footer or at the bottom of a page."),

@@ -1,0 +1,84 @@
+/* ---- crukDatePicker ---- */
+
+.air-datepicker {
+  border: 1px solid #000000;
+  border-radius: 0px;
+  font-family: Poppins;
+  font-size: 18px;
+  color: #000000;
+}
+
+.air-datepicker-nav {
+  color: #000000;
+  border-bottom: 1px solid #000000;
+}
+
+.air-datepicker-nav--action:hover {
+	background: #fff0f8;
+}
+
+.air-datepicker-nav--title:hover {
+	background: #fff0f8;
+}
+
+.air-datepicker-nav--action path {
+	fill: none;
+	stroke: #000000;
+	stroke-width: 2px;
+}
+
+.air-datepicker-cell.-current- {
+  color: #e60078;
+  border: none;
+  border-radius: 0px;
+}
+
+.air-datepicker--content {
+	color: #e60078;
+}
+
+.air-datepicker-cell:hover{
+  background: #fff0f8;
+}
+
+.air-datepicker-cell.-selected-.-focus- {
+	background: #e60078;
+	color: #ffffff;
+	border: none;
+	border-radius: 0px;
+}
+
+.air-datepicker-cell.-selected- {
+	color: #fff;
+	border: none;
+	background: #e60078;
+	border-radius: 0px;
+}
+
+.air-datepicker--pointer::after {
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+}
+
+#date-input {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-right: 0px;
+  border-radius: 0px;
+}
+
+#date-input_button {
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-left: 0px;
+  border-radius: 0px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+#date-input_button:hover {
+  background: #ffffff;
+  color: #000000;
+}
