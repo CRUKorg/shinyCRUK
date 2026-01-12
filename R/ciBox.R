@@ -114,7 +114,7 @@ ciBox <- function(boxBorder = TRUE) {
     },
     htmltools::div(
       class = "ci-logo",
-      htmltools::tags$img(src = ci_logo_path)
+      htmltools::tags$img(src = ci_logo_path, alt = "Cancer Research UK Cancer Intelligence Team logo")
     ),
     htmltools::div(
       class = "ci-child",
