@@ -61,18 +61,28 @@ crukButton <- function(inputId, text, type = "primary", icon = NULL, ...) {
     stylesheet = "css/buttons.css",
     all_files = TRUE
   )
-
   googleSymbols <- htmltools::tags$link(
     href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
     rel = "stylesheet"
   )
-  # Create button first
-  button <- shiny::actionButton(inputId = inputId, label = text, class = c(paste0("cruk-btn-", type), "cruk-btn"), ...)
 
-  # If icon specified, add it to the button
+  # Create button with empty label or just the text
+  button <- shiny::actionButton(
+    inputId = inputId,
+    label = NULL,  # If you set the label here then it ends up being duplicated
+    class = c(paste0("cruk-btn-", type), "cruk-btn"),
+    ...
+  )
+
+  # Build the button content
   if (!is.null(icon)) {
-    icon_html <- htmltools::tags$span(class = c("material-symbols-sharp", paste0("cruk-btn-icon-", type)), icon)
-    button$children[[1]] <- htmltools::tagList(text, " ", icon_html)
+    icon_html <- htmltools::tags$span(
+      class = c("material-symbols-sharp", paste0("cruk-btn-icon-", type)),
+      icon
+    )
+    button$children[[2]] <- htmltools::tagList(text, " ", icon_html)
+  } else {
+    button$children[[2]] <- text
   }
 
   # Attach the Google Symbols dependency and return

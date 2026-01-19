@@ -6,8 +6,8 @@
 #'
 #' @param ... Pairs of values where the first element is the div ID to link to
 #'   and the second element is the display text for the link. Each pair should
-#'   be provided as a vector `c(id, text)`. The div ID can be provided with or
-#'   without a leading `#`.
+#'   be provided as a vector `c(id, text)`. The div ID should be the heading of
+#'   the content to link to can be provided with or without a leading `#`.
 #' @param include_top_button Logical. Whether to include the scroll-to-top
 #'   button that appears after scrolling down 200px. Default is `TRUE`.
 #'

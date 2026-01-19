@@ -15,10 +15,12 @@
 
 .air-datepicker-nav--action:hover {
 	background: #fff0f8;
+	border-radius: 0px;
 }
 
 .air-datepicker-nav--title:hover {
 	background: #fff0f8;
+	border-radius: 0px;
 }
 
 .air-datepicker-nav--action path {
@@ -39,6 +41,7 @@
 
 .air-datepicker-cell:hover{
   background: #fff0f8;
+  border-radius: 0px;
 }
 
 .air-datepicker-cell.-selected-.-focus- {
@@ -53,6 +56,11 @@
 	border: none;
 	background: #e60078;
 	border-radius: 0px;
+}
+
+.air-datepicker-cell.-selected-.-current- {
+	color: #fff;
+	background: #e60078;
 }
 
 .air-datepicker--pointer::after {

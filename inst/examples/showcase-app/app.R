@@ -1,6 +1,6 @@
 library(shiny)
-library(shinyCRUK)
-#devtools::load_all() # Comment out above line and comment this in to test package edits made locally
+#library(shinyCRUK)
+devtools::load_all() # Comment out above line and comment this in to test package edits made locally
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
