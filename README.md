@@ -56,11 +56,21 @@ For some people this might fail, so try this instead:
 # It opens a browser window where you'll create a token on the github website
 usethis::create_github_token()
 
+# You will need to make sure you have configured CRUK SSO on this token
+
 # Then run this function and paste the token when prompted
 gitcreds::gitcreds_set() 
 
-# Once your token is set, run this to download the package
+# Then run this to download the package
 remotes::install_github("CRUKorg/shinyCRUK", auth_token = gitcreds::gitcreds_get()$password) 
+```
+
+You may then want to add your token to the GITHUB_PAT environment
+variable. This should allow you to run `remotes::install_github` without
+having to set the `auth_token` each time:
+
+``` r
+Sys.setenv(GITHUB_PAT = gitcreds::gitcreds_get()$password)
 ```
 
 ## Quick Start

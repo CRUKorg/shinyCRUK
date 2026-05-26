@@ -218,7 +218,6 @@ a:visited {
 /* style title */
 .title {
   display: flex;
-  width: 155px;
   font-family: Progress Medium;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -262,6 +261,12 @@ a.dropdown-item.active {
       align-items: baseline;
       margin-bottom: 5px;
   }
+
+  /* Stop long titles from taking up all horizontal space on small screen */
+  #app_title_link {
+  max-width: 60%;
+}
+
   /* remove left margin on navbar links when on small screen */
   a.nav-link { margin-left: 0px !important}
   /*add some margin above nav elements on small screen*/
@@ -282,6 +287,7 @@ a.dropdown-item.active {
 
   .nav.navbar-nav.shiny-tab-input.shiny-bound-input {
     margin-left: 2px;
+    gap: 0 !important
   }
 
 }
@@ -304,6 +310,7 @@ a.dropdown-item.active {
 /* set navbar links to the left hand side */
 .nav.navbar-nav, .nav.navbar-nav.shiny-tab-input.shiny-bound-input{
   justify-content: flex-end;
+  gap: 1.5rem;
 }
 
 /* hide empty nav link elements */
@@ -316,7 +323,8 @@ a.nav-link {
   color: #000000 !important;
   font-size: 18px !important;
   font-family: Poppins Medium !important;
-  margin-left: 25px; /* This will likely need adjusting based on the length of your tab titles */
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 /* set navbar dropdown to align on the right, avoiding spilling off screen */
@@ -332,8 +340,8 @@ a.nav-link {
   border: 0 !important;
   background-image: url('images/chevron-down.svg');
   display: inline-block;
-  height: 24px !important;
-  width: 24px !important;
+  height: 20px !important;
+  width: 20px !important;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

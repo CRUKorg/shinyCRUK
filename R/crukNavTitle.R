@@ -5,6 +5,7 @@
 #'
 #' @param Title Character string. The title text to display in the navigation bar.
 #'   Can include HTML markup. Default is an empty string.
+#' @param title_width Numeric. Width in pixels of title. Defaults to 155.
 #' @param selectors Integer (0, 1, or 2). The number of selector elements to include
 #'   in the navigation bar. This determines the responsive layout behavior:
 #'   \itemize{
@@ -69,13 +70,12 @@
 #' }
 #'
 #' @export
-crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 = NULL) {
+crukNavTitle <- function(Title = "", title_width = 155, selectors = 0, selector1 = NULL, selector2 = NULL) {
   shiny::addResourcePath(
     prefix = "shinyCRUK",
     directoryPath = system.file("www", package = "shinyCRUK")
   )
 
-  # Add at the start of the function:
   if (!selectors %in% 0:2) {
     stop("selectors must be 0, 1, or 2")
   }
@@ -85,6 +85,20 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
   if (selectors == 2 && is.null(selector2)) {
     warning("selector2 is NULL but selectors == 2")
   }
+
+
+  # Handle title width (numeric only)
+  if (!is.numeric(title_width) || length(title_width) != 1) {
+    stop("`title_width` must be a single numeric value (e.g., 155).")
+  }
+  if (title_width > 250) {
+    warning("title_width > 250px. This may look naff.")
+  }
+  title_style <- paste0("width:", title_width, "px;")
+
+
+
+
   # Define media queries based on selector count
   media_query <- if (selectors == 0) {
     htmltools::tags$style(
@@ -116,6 +130,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
       ".navbar-cruk {
           display: flex;
           justify-content: space-between;
+          gap: 10px
         }
 
         @media (max-width: 991px) {
@@ -177,6 +192,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
         class = "title",
         shiny::actionLink(
           inputId = "app_title_link",
+          style = title_style,
           class = "app-title",
           htmltools::HTML(Title)
         )
@@ -206,6 +222,7 @@ crukNavTitle <- function(Title = "", selectors = 0, selector1 = NULL, selector2 
           shiny::actionLink(
             inputId = "app_title_link",
             class = "app-title",
+            style = title_style,
             htmltools::HTML(Title)
           ),
           htmltools::a(
