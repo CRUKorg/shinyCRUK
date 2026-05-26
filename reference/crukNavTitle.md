@@ -6,7 +6,13 @@ and up to two selectors
 ## Usage
 
 ``` r
-crukNavTitle(Title = "", selectors = 0, selector1 = NULL, selector2 = NULL)
+crukNavTitle(
+  Title = "",
+  title_width = 155,
+  selectors = 0,
+  selector1 = NULL,
+  selector2 = NULL
+)
 ```
 
 ## Arguments
@@ -15,6 +21,10 @@ crukNavTitle(Title = "", selectors = 0, selector1 = NULL, selector2 = NULL)
 
   Character string. The title text to display in the navigation bar. Can
   include HTML markup. Default is an empty string.
+
+- title_width:
+
+  Numeric. Width in pixels of title. Defaults to 155.
 
 - selectors:
 

@@ -65,6 +65,7 @@ The exact responsive breakpoints and styling are defined in
 
 Typical page structure using this function:
 
+
     ui <- fluidPage(
       tags$head(crukTheme()),
       crukNavTitle(Title = "My App"),  # Outside centralColumn

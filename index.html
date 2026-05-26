@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Styling Shiny Apps with CRUK Branding • shinyCRUK</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Styling Shiny Apps with CRUK Branding">
@@ -108,11 +108,16 @@
 <span><span class="co"># It opens a browser window where you'll create a token on the github website</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html" class="external-link">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># You will need to make sure you have configured CRUK SSO on this token</span></span>
+<span></span>
 <span><span class="co"># Then run this function and paste the token when prompted</span></span>
 <span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html" class="external-link">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
-<span><span class="co"># Once your token is set, run this to download the package</span></span>
+<span><span class="co"># Then run this to download the package</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CRUKorg/shinyCRUK"</span>, auth_token <span class="op">=</span> <span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html" class="external-link">gitcreds_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">password</span><span class="op">)</span> </span></code></pre></div>
+<p>You may then want to add your token to the GITHUB_PAT environment variable. This should allow you to run <code>remotes::install_github</code> without having to set the <code>auth_token</code> each time:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>GITHUB_PAT <span class="op">=</span> <span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html" class="external-link">gitcreds_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">password</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
@@ -120,7 +125,7 @@
 We’ve built a working Shiny app to showcase most of the features in the package, with the folllowing code:
 <details><summary>
 Show code
-</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://verbose-guacamole-l18vr83.pages.github.io/">shinyCRUK</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/bslib/" class="external-link">bslib</a></span><span class="op">)</span></span>
@@ -599,7 +604,7 @@ Show code
 <div class="section level3">
 <h3 id="theme-and-layout">Theme and Layout<a class="anchor" aria-label="anchor" href="#theme-and-layout"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Apply CRUK theme</span></span>
 <span><span class="va">tags</span><span class="op">$</span><span class="fu">head</span><span class="op">(</span><span class="fu"><a href="reference/crukTheme.html">crukTheme</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -612,7 +617,7 @@ Show code
 <h3 id="navigation">Navigation<a class="anchor" aria-label="anchor" href="#navigation"></a>
 </h3>
 <p>Navbar styling handles desktop and mobile, with up to two selectors in the navbar.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simple navigation</span></span>
 <span><span class="fu"><a href="reference/crukNavTitle.html">crukNavTitle</a></span><span class="op">(</span>Title <span class="op">=</span> <span class="st">"Early Diagnosis Data Hub"</span><span class="op">)</span></span>
 <span></span>
@@ -627,7 +632,7 @@ Show code
 <div class="section level3">
 <h3 id="typography">Typography<a class="anchor" aria-label="anchor" href="#typography"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Page title with optional subheading</span></span>
 <span><span class="fu"><a href="reference/crukTitle.html">crukTitle</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Cancer Incidence Trends"</span>,</span>
@@ -637,7 +642,7 @@ Show code
 <div class="section level3">
 <h3 id="logos">Logos<a class="anchor" aria-label="anchor" href="#logos"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stacked logo (preferred)</span></span>
 <span><span class="fu"><a href="reference/crukLogo.html">crukLogo</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"50px"</span><span class="op">)</span></span>
 <span></span>
@@ -647,7 +652,7 @@ Show code
 <div class="section level3">
 <h3 id="value-boxes">Value Boxes<a class="anchor" aria-label="anchor" href="#value-boxes"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/crukValueBox.html">crukValueBox</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="st">"metric1"</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Total Cases"</span>,</span>
@@ -661,7 +666,7 @@ Show code
 <h3 id="styled-last-review">Styled last review<a class="anchor" aria-label="anchor" href="#styled-last-review"></a>
 </h3>
 <p>Use these for the top of pages so users know how up to date material is.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Public content</span></span>
 <span><span class="fu"><a href="reference/lastReview.html">lastReview</a></span><span class="op">(</span><span class="st">"20 October 2025"</span><span class="op">)</span></span>
 <span></span>
@@ -679,7 +684,7 @@ Show code
 <div class="section level3">
 <h3 id="footer">Footer<a class="anchor" aria-label="anchor" href="#footer"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Full footer with contact information</span></span>
 <span><span class="fu"><a href="reference/crukFooter.html">crukFooter</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -689,7 +694,7 @@ Show code
 <div class="section level3">
 <h3 id="number-formatting">Number Formatting<a class="anchor" aria-label="anchor" href="#number-formatting"></a>
 </h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format numbers per CRUK Intelligence guidelines</span></span>
 <span><span class="fu"><a href="reference/crukRounding.html">crukRounding</a></span><span class="op">(</span><span class="fl">1200</span><span class="op">)</span></span>
 <span><span class="co"># Returns: "around 1,200"</span></span>

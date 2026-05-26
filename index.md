@@ -39,6 +39,7 @@ Each function includes:
 Install the development version from GitHub:
 
 ``` r
+
 # Using remotes
 remotes::install_github("CRUKorg/shinyCRUK")
 ```
@@ -46,15 +47,27 @@ remotes::install_github("CRUKorg/shinyCRUK")
 For some people this might fail, so try this instead:
 
 ``` r
+
 # First create a github token
 # It opens a browser window where you'll create a token on the github website
 usethis::create_github_token()
 
+# You will need to make sure you have configured CRUK SSO on this token
+
 # Then run this function and paste the token when prompted
 gitcreds::gitcreds_set() 
 
-# Once your token is set, run this to download the package
+# Then run this to download the package
 remotes::install_github("CRUKorg/shinyCRUK", auth_token = gitcreds::gitcreds_get()$password) 
+```
+
+You may then want to add your token to the GITHUB_PAT environment
+variable. This should allow you to run `remotes::install_github` without
+having to set the `auth_token` each time:
+
+``` r
+
+Sys.setenv(GITHUB_PAT = gitcreds::gitcreds_get()$password)
 ```
 
 ## Quick Start
@@ -65,6 +78,7 @@ package, with the folllowing code:
 Show code
 
 ``` r
+
 library(shiny)
 library(shinyCRUK)
 library(bslib)
@@ -542,6 +556,7 @@ shinyApp(ui = ui, server = server)
 ### Theme and Layout
 
 ``` r
+
 # Apply CRUK theme
 tags$head(crukTheme())
 
@@ -557,6 +572,7 @@ Navbar styling handles desktop and mobile, with up to two selectors in
 the navbar.
 
 ``` r
+
 # Simple navigation
 crukNavTitle(Title = "Early Diagnosis Data Hub")
 
@@ -572,6 +588,7 @@ crukNavTitle(
 ### Typography
 
 ``` r
+
 # Page title with optional subheading
 crukTitle(
   "Cancer Incidence Trends",
@@ -582,6 +599,7 @@ crukTitle(
 ### Logos
 
 ``` r
+
 # Stacked logo (preferred)
 crukLogo(height = "50px")
 
@@ -592,6 +610,7 @@ crukLogoWide(height = "35px")
 ### Value Boxes
 
 ``` r
+
 crukValueBox(
   id = "metric1",
   title = "Total Cases",
@@ -607,6 +626,7 @@ crukValueBox(
 Use these for the top of pages so users know how up to date material is.
 
 ``` r
+
 # Public content
 lastReview("20 October 2025")
 
@@ -625,6 +645,7 @@ lastReview(Sys.Date())                # Current date
 ### Footer
 
 ``` r
+
 # Full footer with contact information
 crukFooter()
 
@@ -635,6 +656,7 @@ crukFooter(includeContact = FALSE)
 ### Number Formatting
 
 ``` r
+
 # Format numbers per CRUK Intelligence guidelines
 crukRounding(1200)
 # Returns: "around 1,200"

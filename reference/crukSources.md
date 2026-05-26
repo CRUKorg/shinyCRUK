@@ -92,6 +92,7 @@ to help configure these.
 
 When providing `custom_sources`, create a list of `<li>` elements:
 
+
     custom_sources <- htmltools::tagList(
       htmltools::tags$li("First source citation"),
       htmltools::tags$li("Second source citation"),

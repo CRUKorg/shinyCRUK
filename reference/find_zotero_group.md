@@ -65,6 +65,7 @@ Set these up using
 Once you've found your group ID, use it in
 [`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md):
 
+
     # Find your group
     groups <- find_zotero_group()
     # Note the group_id for your desired group
