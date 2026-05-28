@@ -12,7 +12,6 @@
 #'  characters. Please ensure alt text is sufficiently descriptive. Supplied
 #'  character string will be appended with the text " Please see table for the data
 #'  in an accessible format."
-#' @param height Height of the card. Default is 600 pixels.
 #' @param dataSourceText Character. Data source text that is displayed at the
 #'  bottom of the table. Text is appended with "Data source: " in front.
 #' @param dataSourceLink Character. URL for the data source hyperlink.
@@ -70,7 +69,7 @@
 #' )
 #' }
 #' @export
-crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..., height = 600) {
+crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ...) {
 
   # Input validation
   if (missing(chart)) {
@@ -130,7 +129,6 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
     class = "no-border-card",
     ...,
     bslib::navset_card_tab(
-      height = height,
       bslib::nav_panel(
         "Chart",
         role = "img",
