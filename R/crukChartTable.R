@@ -70,7 +70,7 @@
 #' )
 #' }
 #' @export
-crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..., height = 600) {
+crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ...) {
 
   # Input validation
   if (missing(chart)) {
@@ -130,7 +130,6 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
     class = "no-border-card",
     ...,
     bslib::navset_card_tab(
-      height = height,
       bslib::nav_panel(
         "Chart",
         role = "img",
