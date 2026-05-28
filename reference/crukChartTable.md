@@ -7,15 +7,7 @@ ensure accessibility best practice.
 ## Usage
 
 ``` r
-crukChartTable(
-  chart,
-  table,
-  alt,
-  dataSourceText,
-  dataSourceLink,
-  ...,
-  height = 600
-)
+crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
 ```
 
 ## Arguments
@@ -52,10 +44,6 @@ crukChartTable(
 - ...:
 
   Optional additional arguments
-
-- height:
-
-  Height of the card. Default is 600 pixels.
 
 ## Value
 
