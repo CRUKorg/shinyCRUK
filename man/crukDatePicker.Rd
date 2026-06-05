@@ -10,6 +10,7 @@ crukDatePicker(
   start,
   end,
   view = "days",
+  value,
   minView = "days",
   class = "",
   ...
@@ -25,6 +26,8 @@ crukDatePicker(
 \item{end}{The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.}
 
 \item{view}{Starting view, one of 'days' (default), 'months' or 'years'.}
+
+\item{value}{Sets the default selected date. Either a Date object or a string in the form \code{yyyy-mm-dd}.}
 
 \item{minView}{Minimal view, one of 'days' (default), 'months' or 'years'.}
 

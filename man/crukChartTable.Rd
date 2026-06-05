@@ -4,15 +4,7 @@
 \alias{crukChartTable}
 \title{Border-less Card for Chart and Table Combined Output}
 \usage{
-crukChartTable(
-  chart,
-  table,
-  alt,
-  dataSourceText,
-  dataSourceLink,
-  ...,
-  height = 600
-)
+crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
 }
 \arguments{
 \item{chart}{A chart output in the form of a \code{shiny::plotOutput},
@@ -32,8 +24,6 @@ bottom of the table. Text is appended with "Data source: " in front.}
 \item{dataSourceLink}{Character. URL for the data source hyperlink.}
 
 \item{...}{Optional additional arguments}
-
-\item{height}{Height of the card. Default is 600 pixels.}
 }
 \value{
 A \code{bslib::navset_card_tab} object with attached CSS dependencies

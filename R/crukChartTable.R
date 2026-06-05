@@ -12,7 +12,6 @@
 #'  characters. Please ensure alt text is sufficiently descriptive. Supplied
 #'  character string will be appended with the text " Please see table for the data
 #'  in an accessible format."
-#' @param height Height of the card. Default is 600 pixels.
 #' @param dataSourceText Character. Data source text that is displayed at the
 #'  bottom of the table. Text is appended with "Data source: " in front.
 #' @param dataSourceLink Character. URL for the data source hyperlink.
