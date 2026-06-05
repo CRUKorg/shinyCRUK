@@ -132,7 +132,7 @@ ui <- bslib::page_navbar(
       crukDatePicker(inputId = "date-input",
                      start = "2019-01",
                      end = "2025-12",
-                     label = "crukDatePicker():",
+                     label = "crukDatePicker()",
                      view = "months",
                      minView = "months",
                      startView = "2025-06",
