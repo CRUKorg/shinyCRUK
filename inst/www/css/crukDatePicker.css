@@ -95,3 +95,15 @@
   background: #ffffff;
   color: #000000;
 }
+
+.crukDatePicker .control-label {
+  font-family: 'Poppins Medium';
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* Make sure the calendar icon doesn't disappear on hover */
+.crukDatePicker .btn:hover {
+  color: #000000;
+  cursor: text;
+}

@@ -130,11 +130,13 @@ ui <- bslib::page_navbar(
       ),
       p("We also have a date selector"),
       crukDatePicker(inputId = "date-input",
-                     start = "2019-01-01",
-                     end = "2025-12-31",
-                     label = "Pick a date, yo:",
+                     start = "2019-01",
+                     end = "2025-12",
+                     label = "crukDatePicker():",
                      view = "months",
-                     minView = "months")
+                     minView = "months",
+                     startView = "2025-06",
+                     value = "2025-06")
       ),
       h3("Content for the bottom of your pages"),
       p("If you're making something for internal use, I've added in a little CI team box you can drop in the footer or at the bottom of a page."),
