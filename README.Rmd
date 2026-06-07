@@ -37,7 +37,7 @@ knitr::opts_chunk$set(
 
 ## Documentation
 
-Comprehensive function documentation is available on the [package website](https://verbose-guacamole-l18vr83.pages.github.io/).
+Comprehensive function documentation is available on the [package website](https://crukorg.github.io/shinyCRUK/).
 
 Each function includes:
 
