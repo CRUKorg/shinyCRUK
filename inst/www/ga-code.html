@@ -2,7 +2,7 @@
 <script>
 // Define dataLayer and the gtag function.
 window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+function gtag(){window.dataLayer.push(arguments);}
 // Set default consent command
 gtag('consent', 'default', {
 'ad_storage': 'denied',
