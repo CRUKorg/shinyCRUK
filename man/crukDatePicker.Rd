@@ -20,7 +20,7 @@ crukDatePicker(
 \arguments{
 \item{inputId}{The inputId to access the selected value}
 
-\item{label}{Character. Text to display above the label. Use NULL for no label.}
+\item{label}{Character. Text to display above the label. Use \code{NULL} for no label.}
 
 \item{start}{The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.}
 
@@ -30,7 +30,9 @@ crukDatePicker(
 
 \item{value}{Sets the default selected date. Either a Date object or a string in the form \code{yyyy-mm-dd}. Defaults to \code{Sys.Date()}.}
 
-\item{minView}{Minimal view, one of 'days', 'months' or 'years'. Defaults to equal to view.}
+\item{minView}{Minimal view, one of 'days', 'months' or 'years'. Defaults to equal to \code{view}.}
+
+\item{startView}{View to display when opening the calendar. Defaults to \code{value}}
 
 \item{class}{Additional CSS classes to apply to wrapper div.}
 

@@ -4,11 +4,12 @@
 #' with additional CRUK-specific styling applied via CSS dependencies.
 #'
 #' @param inputId The inputId to access the selected value
-#' @param label Character. Text to display above the label. Use NULL for no label.
+#' @param label Character. Text to display above the label. Use \code{NULL} for no label.
 #' @param start The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.
 #' @param end The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.
 #' @param view Starting view, one of 'days', 'months' (default) or 'years'.
-#' @param minView Minimal view, one of 'days', 'months' or 'years'. Defaults to equal to view.
+#' @param minView Minimal view, one of 'days', 'months' or 'years'. Defaults to equal to \code{view}.
+#' @param startView View to display when opening the calendar. Defaults to \code{value}
 #' @param value Sets the default selected date. Either a Date object or a string in the form \code{yyyy-mm-dd}. Defaults to \code{Sys.Date()}.
 #' @param class Additional CSS classes to apply to wrapper div.
 #' @param ... Additional arguments passed to \code{shinyWidgets::airDatePickerInput}
