@@ -9,9 +9,10 @@ crukDatePicker(
   label,
   start,
   end,
-  view = "days",
-  value,
-  minView = "days",
+  view = "months",
+  value = Sys.Date(),
+  minView = NULL,
+  startView = NULL,
   class = "",
   ...
 )
@@ -25,15 +26,15 @@ crukDatePicker(
 
 \item{end}{The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.}
 
-\item{view}{Starting view, one of 'days' (default), 'months' or 'years'.}
+\item{view}{Starting view, one of 'days', 'months' (default) or 'years'.}
 
-\item{value}{Sets the default selected date. Either a Date object or a string in the form \code{yyyy-mm-dd}.}
+\item{value}{Sets the default selected date. Either a Date object or a string in the form \code{yyyy-mm-dd}. Defaults to \code{Sys.Date()}.}
 
-\item{minView}{Minimal view, one of 'days' (default), 'months' or 'years'.}
+\item{minView}{Minimal view, one of 'days', 'months' or 'years'. Defaults to equal to view.}
 
 \item{class}{Additional CSS classes to apply to wrapper div.}
 
-\item{...}{Additional arguments passed to \code{shinyWidgets::airDatePIckerInput}}
+\item{...}{Additional arguments passed to \code{shinyWidgets::airDatePickerInput}}
 }
 \value{
 An HTML div element containing a  styled airDatePickerInput with attached CSS dependencies.
