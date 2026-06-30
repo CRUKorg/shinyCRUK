@@ -8,7 +8,7 @@
 #' @param start The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.
 #' @param end The minimum date to display. Either a Date object or a string in the form \code{yyyy-mm-dd}.
 #' @param view Starting view, one of 'days', 'months' (default) or 'years'.
-#' @param minView Minimal view, one of 'days', 'months' or 'years'.
+#' @param minView Minimal view, one of 'days', 'months' or 'years'. Defaults to equal to view.
 #' @param value Sets the default selected date. Either a Date object or a string in the form \code{yyyy-mm-dd}.
 #' @param class Additional CSS classes to apply to wrapper div.
 #' @param ... Additional arguments passed to \code{shinyWidgets::airDatePIckerInput}
@@ -28,7 +28,7 @@
 #' )
 #'
 #' }
-crukDatePicker <- function(inputId, label, start, end, view = "months", value=Sys.Date(), minView, class = "", ...) {
+crukDatePicker <- function(inputId, label, start, end, view = "months", value=Sys.Date(), minView = NULL, class = "", ...) {
   shiny::addResourcePath(
     prefix = "shinyCRUK",
     directoryPath = system.file("www", package = "shinyCRUK")
@@ -42,6 +42,11 @@ crukDatePicker <- function(inputId, label, start, end, view = "months", value=Sy
     stylesheet = "css/crukDatePicker.css",
     all_files = TRUE
   )
+
+  # Make minView match view by default
+  if (is.null(minView)) {
+    minView <- view
+  }
 
   datePicker <- htmltools::div(
     class = c("crukDatePicker", class),
