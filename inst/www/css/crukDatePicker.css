@@ -1,5 +1,25 @@
 /* ---- crukDatePicker ---- */
 
+@font-face {
+  font-family: "Progress Medium";
+  src: url('fonts/Progress-Medium.otf');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins Medium';
+    src: url('fonts/Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins Semibold';
+    src: url('fonts/Poppins-SemiBold.ttf') format('truetype');
+}
+
 .air-datepicker {
   border: 1px solid #000000;
   border-radius: 0px;
@@ -144,5 +164,5 @@
     background-color: #ffffff;
     border-color: #000000;
     box-shadow: none;
-    webkit-box-shadow: none;
+    -webkit-box-shadow: none;
 }
