@@ -62,7 +62,7 @@ ui <- bslib::page_navbar(
       p("If this is your first time here, you'll have just seen the cookie banner which comes with google analytics.
         Alongside that is the crukTheme() which sorts out the navbar and a number of other bits."),
       p("For full installation instructions have a look at the ", a("package documentation site",
-                                                                    href = "https://verbose-guacamole-l18vr83.pages.github.io/index.html"),
+                                                                    href = "https://crukorg.github.io/shinyCRUK/index.html"),
         " which also includes the code for this app if you want to run it yourself."),
 
       h3("Value Boxes"),
