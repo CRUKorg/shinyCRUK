@@ -7,14 +7,13 @@
 
 /* Remove card header padding/margin if needed */
 .no-border-card .card-header {
-  padding-left: 0;
-  padding-right: 0;
   border-bottom: none !important;
 }
 
 .no-border-card .card-header-tabs {
   margin-left: 0;
   margin-right: 0;
+  margin-bottom: 5px;
 }
 
 .no-border-card .nav-link {
@@ -34,9 +33,10 @@
   border-right: none !important;
 }
 
-/* Remove default active tab styling */
 .no-border-card .nav-link {
   border: none !important;
+  padding: 0.5rem 1rem 0 1rem !important;
+  margin-bottom: 0px;
 }
 
 /* Remove usual styling from link */
