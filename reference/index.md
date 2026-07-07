@@ -10,6 +10,8 @@
   : Create a CRUK-branded action button
 - [`crukChartTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukChartTable.md)
   : Border-less Card for Chart and Table Combined Output
+- [`crukDatePicker()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukDatePicker.md)
+  : CRUK Date Picker
 - [`crukFooter()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukFooter.md)
   : CRUK Footer with Legal Information and Branding
 - [`crukGA()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukGA.md)

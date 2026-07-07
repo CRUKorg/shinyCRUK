@@ -92,7 +92,7 @@ for the main content container
 ciBox()
 #> <div class="ci-box" style="border: 2px solid black;">
 #>   <div class="ci-logo">
-#>     <img src="shinyCRUK/images/CI-logo.svg"/>
+#>     <img src="shinyCRUK/images/CI-logo.svg" alt="Cancer Research UK Cancer Intelligence Team logo"/>
 #>   </div>
 #>   <div class="ci-child">
 #>     <p class="ci-text">
@@ -106,7 +106,7 @@ ciBox()
 ciBox(boxBorder = FALSE)
 #> <div class="ci-box">
 #>   <div class="ci-logo">
-#>     <img src="shinyCRUK/images/CI-logo.svg"/>
+#>     <img src="shinyCRUK/images/CI-logo.svg" alt="Cancer Research UK Cancer Intelligence Team logo"/>
 #>   </div>
 #>   <div class="ci-child">
 #>     <p class="ci-text">
