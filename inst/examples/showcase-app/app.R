@@ -107,15 +107,16 @@ ui <- bslib::page_navbar(
           inputId = "radio_example_A",
           label = "Select an option:",
           choices = c("Option A", "Option B", "Option C"),
-          width = "100%",
-          justified = FALSE
+          justified = FALSE,
+          width = 600
         ),
         crukRadioButton(
           inputId = "radio_example_B",
           label = "Select an option:",
           choices = c("Option A", "Option B", "Option C"),
           justified = TRUE,
-          direction = 'vertical'),
+          direction = 'vertical',
+          width = 200),
         p("Two dropdown selectors are available, crukSelectInput() and crukPickerInput().
           crukSelectInput is well suited to short dropdowns, and on mobile will use the native selector. Whereas crukPickerInput() has better support for long lists, allowing searching and multiple selections."),
         layout_column_wrap(
