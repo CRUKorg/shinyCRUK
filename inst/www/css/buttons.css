@@ -114,8 +114,12 @@
   font-size: 1rem;
 }
 
+.btn-group-container-sw {
+  display: flex;
+}
+
 @media (max-width: 576px) {
-  .cruk-radio-btn .d-flex {
+  .btn-group-container-sw {
     flex-direction: column;
   }
 }
