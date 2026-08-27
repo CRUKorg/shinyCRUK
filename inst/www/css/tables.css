@@ -1,0 +1,48 @@
+.cruk-table .rt-tbody .rt-tr:hover {
+  background-color: #F8C9DF !important;
+}
+
+.cruk-table .rt-thead .rt-th:hover {
+  background-color: #FF0087 !important;
+  color: #FFFFFF !important;
+}
+
+.cruk-table .rt-thead .rt-th:hover .rt-th-inner {
+  color: #FFFFFF !important;
+}
+
+.cruk-table .rt-tr.rt-tr-selected {
+  background-color: #F8C9DF !important;
+}
+
+.cruk-table .rt-tr.rt-tr-selected:hover {
+  background-color: #F8C9DF !important;
+}
+
+.cruk-table .rt-th[aria-sort="ascending"],
+.cruk-table .rt-th[aria-sort="descending"] {
+  background-color: #FF0087 !important;
+  color: #FFFFFF !important;
+}
+
+.cruk-table .rt-th[aria-sort="ascending"] .rt-th-inner,
+.cruk-table .rt-th[aria-sort="descending"] .rt-th-inner {
+  color: #FFFFFF !important;
+}
+
+.cruk-table .rt-th-select,
+.cruk-table .rt-td-select {
+  display: none !important;
+}
+
+.cruk-table .rt-tr.rt-tr-filters > .rt-td:first-child {
+  display: none !important;
+}
+
+.cruk-table .rt-tbody {
+  padding-left: 5px !important;
+}
+
+.cruk-table .rt-filter {
+  border-radius: 0 !important;
+}
