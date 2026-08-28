@@ -241,7 +241,7 @@ ui <- bslib::page_navbar(
         chart = plotlyOutput("demo_plot", height = "500px"),
         table = gt::gt_output("demo_table"),
         alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
-        dataSourceText = textOutput("dataSourceReactive"),
+        dataSourceText = "mtcars dataset from R",
         dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
         h3("A nice little chart based on mtcars")
       ),
@@ -467,15 +467,6 @@ server <- function(input, output, session) {
       write.csv(filtered_data(),file, row.names = FALSE)
     }
   )
-
-  # reactive data source test
-  output$dataSourceReactive <- renderText({
-    if (input$car_filter == "All") {
-      "mtcars dataset from R, all"
-    } else {
-      "mtcars dataset from R, selected"
-    }
-  })
 
   # Create rounding examples table
   output$rounding_table <- renderTable({
