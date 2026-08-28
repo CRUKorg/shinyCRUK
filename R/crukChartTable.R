@@ -12,62 +12,12 @@
 #'  characters. Please ensure alt text is sufficiently descriptive. Supplied
 #'  character string will be appended with the text " Please see table for the data
 #'  in an accessible format."
-#' @param dataSourceText Character. Data source text that is displayed at the
+#' @param dataSourceText Character or Shiny UI object. Data source text that is displayed at the
 #'  bottom of the table. Text is appended with "Data source: " in front.
 #' @param dataSourceLink Character. URL for the data source hyperlink.
 #' @param ... Optional additional arguments
 #'
 #' @returns A \code{bslib::navset_card_tab} object with attached CSS dependencies
-#'  for CRUK styling. The card includes:
-#'  \itemize{
-#'    \item A border-less, shadow-less card with two \code{bslib::nav_panel}s
-#'    \item A tab with the heading "Chart".
-#'    \item Attached alt text to the chart output, directing users to the table
-#'    \item A tab with the heading "Title" and a data source
-#'    \item Optional additional arguments placed above the card, e.g. a title
-#'           using \code{htmltools::h1} or selectors using \code{shinyCRUK::crukPickerInput}
-#'           or \code{shinyCRUK::crukSelectInput}.
-#'  }
-#' @section Usage Tips:
-#' \itemize{
-#'   \item Use descriptive but concise alt text
-#'   \item By default, \code{plotly::plotlyOutput}s should scale to fill the div,
-#'   so avoid manually setting chart sizes
-#'   \item If you want a title or selectors to apply to the chart and table, pass
-#'   these as additional arguments. They will be displayed about the chart table card
-#'   \item Ideally give full data source. If this is not possible
-#'   (for example because you are using UK data from several sources), then you can
-#'   direct the user to a data sources/references box at the bottom of the page
-#'   and supply the function the full URL of the app with the div id of the
-#'   data sources/reference box
-#'}
-#'
-#' @examples
-#' \dontrun{
-#' #' # Basic card with just chart and table
-#' crukChartTable(
-#'   chart = plotlyOutput(outputId = "mtcarsPlot"),
-#'   table = gt::gt_output(outputId = "mtTable"),
-#'   alt = "A chart showing how horsepower varies according to mpg in the mtcars dataset.",
-#'   dataSourceText = "mtcars: Motor Trend Car Road Tests",
-#'   dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars"
-#' )
-#'
-#' # Chart and table card with additional arguments passed
-#' crukChartTable(
-#'   chart = plotlyOutput(outputId = "mtcarsPlot"),
-#'   table = gt::gt_output(outputId = "mtTable"),
-#'   alt = "Some alt text to go with the chart.",
-#'   dataSourceText = "mtcars: Motor Trend Car Road Tests",
-#'   dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
-#'   htmltools::h1("mtcars: higher horsepower decreases mpg"),
-#'   htmltools::br(),
-#'   prettyCheckbox(inputId = "showCIs",
-#'                  label = strong("Show confidence intervals"),
-#'                  shape = "square",
-#'                  value = FALSE)
-#' )
-#' }
 #' @export
 crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ...) {
 
@@ -88,7 +38,6 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
     stop("Alt text is over 125 characters, which may cause issues with some screen readers. Please use shorter alt text.")
   }
 
-
   # Create and store the dependency
   css <- htmltools::htmlDependency(
     name = "crukChartTable",
@@ -99,29 +48,70 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
     all_files = TRUE
   )
 
-
   # Adjust alt text by adding additional info. Also add period if necessary
   if (!grepl("\\.$", alt)) {
-    alt_processed <- glue::glue(alt, ". Please see the table for the data in an accessible format.")
+    alt_processed <- glue::glue(
+      alt,
+      ". Please see the table for the data in an accessible format."
+    )
   } else {
-    alt_processed <- glue::glue(alt, " Please see the table for the data in an accessible format.")
+    alt_processed <- glue::glue(
+      alt,
+      " Please see the table for the data in an accessible format."
+    )
+  }
+
+  # Treat dataSourceText as either plain text or a Shiny/htmltools object
+  if (
+    inherits(dataSourceText, "shiny.tag") &&
+    identical(dataSourceText$name, "div") &&
+    "shiny-text-output" %in% dataSourceText$attribs$class
+  ) {
+
+    # Convert textOutput() to inline textOutput()
+    dataSourceContent <- shiny::textOutput(
+      outputId = dataSourceText$attribs$id,
+      inline = TRUE
+    )
+
+  } else if (
+    inherits(dataSourceText, "shiny.tag") ||
+    inherits(dataSourceText, "shiny.tag.list")
+  ) {
+
+    dataSourceContent <- dataSourceText
+
+  } else {
+
+    dataSourceContent <- htmltools::span(dataSourceText)
 
   }
 
+  # Adjust link, depending on if it's a div.
+  if (
+    startsWith(dataSourceLink, "https://crukcancerintelligence.shinyapps.io/") &&
+    grepl("#$", dataSourceLink)
+  ) {
 
-  # Adjust link, depending on it if it's a div.
-  if (startsWith(dataSourceLink, "https://crukcancerintelligence.shinyapps.io/") && grepl("#$", dataSourceLink)) {
     dataSource <- htmltools::div(
       class = "no-border-card-source",
       htmltools::span("Data source: "),
-      htmltools::a(href = dataSourceLink, dataSourceText)
+      dataSourceContent
     )
+
   } else {
+
     dataSource <- htmltools::div(
       class = "no-border-card-source",
-      htmltools::span(paste0("Data source: ", dataSourceText, ". ")),
-      htmltools::a(href = dataSourceLink, dataSourceLink)
+      htmltools::span("Data source: "),
+      dataSourceContent,
+      htmltools::span(". "),
+      htmltools::a(
+        href = dataSourceLink,
+        dataSourceLink
+      )
     )
+
   }
 
   # Create the card
@@ -134,8 +124,8 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
         role = "img",
         `aria-label` = alt_processed,
         htmltools::div(
-         style = "padding-top: 10px;",
-         chart
+          style = "padding-top: 10px;",
+          chart
         )
       ),
       bslib::nav_panel(
