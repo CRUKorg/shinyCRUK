@@ -92,14 +92,21 @@ ui <- bslib::page_navbar(
 
       h3("Buttons and Inputs"),
       div(
-        h4("Buttons"),
-        p("Buttons are available in two styles, 'primary' or 'secondary', with on-brand icons."),
+        h4("Action buttons"),
+        p("crukButton() is available in two styles, 'primary' or 'secondary', with on-brand icons."),
         layout_column_wrap(
           width = 1/3,
           crukButton("btn_primary", "Primary Button", type = "primary", icon = "check_circle"),
-          crukButton("btn_secondary", "Secondary Button", type = "secondary", icon = "download"),
+          crukButton("btn_secondary", "Secondary Button", type = "secondary", icon = "check_circle"),
           crukButton("btn_upload", "Upload File", type = "primary", icon = "upload_file")
-        )),
+        ),
+        h4("Download button"),
+        p("crukDownloadButton() uses a slightly different function so that it can talk to the download handler nicely."),
+        layout_column_wrap(
+          width = 1/2,
+          crukDownloadButton("btn_download", "Download data", type = "secondary", icon = "download")
+        )
+        ),
       div(
         h4("Radio buttons and dropdowns"),
         p("crukRadioButton() creates radio buttons that rely on the shinyWidgets::RadioGroupButton() function, and anything you could use there can be used here too."),
@@ -238,6 +245,7 @@ ui <- bslib::page_navbar(
         dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
         h3("A nice little chart based on mtcars")
       ),
+      crukDownloadButton("downloadDemoData", "Download data", type = "secondary", icon = "download"),
 
       br(),
 
@@ -298,6 +306,7 @@ ui <- bslib::page_navbar(
           h3("Input Controls"),
           tags$ul(
             tags$li(tags$strong("crukButton()"), " - Styled action buttons (primary/secondary)"),
+            tags$li(tags$strong("crukDownloadButton()"), " - Styled download buttons"),
             tags$li(tags$strong("crukRadioButton()"), " - Styled radio button groups"),
             tags$li(tags$strong("crukPickerInput()"), " - Enhanced dropdown with search"),
             tags$li(tags$strong("crukSelectInput()"), " - Basic styled dropdown")
@@ -438,6 +447,26 @@ server <- function(input, output, session) {
         title = "Motor Trend Car Data"
       )
   })
+
+  # Download handler for the download data button(s)
+  output$btn_download <- downloadHandler(
+    filename = function() {
+      paste0("mtcars", "_", Sys.Date(),".csv")
+    },
+    content = function(file) {
+      write.csv(mtcars, file, row.names = FALSE)
+    }
+  )
+
+  # On data viz page
+  output$downloadDemoData <- downloadHandler(
+    filename = function() {
+      paste0("mtcars", "_", Sys.Date(),".csv")
+    },
+    content = function(file) {
+      write.csv(filtered_data(),file, row.names = FALSE)
+    }
+  )
 
   # Create rounding examples table
   output$rounding_table <- renderTable({
