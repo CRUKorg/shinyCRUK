@@ -143,20 +143,19 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
       htmltools::span("Data source: "),
       htmltools::a(href = dataSourceLink, dataSourceText)
     )
-  } else if (is_tag_ish(dataSourceText)) {
+  } else if (is_tag_ish(dataSourceText) || dataSourceText$attribs$class == "shiny-text-output") {
     # dataSourceText is a shiny output / htmltools tag (e.g. textOutput) --
     # insert directly as a child so it renders rather than being coerced to a string
     dataSource <- htmltools::div(
       class = "no-border-card-source",
       htmltools::span("Data source: "),
       dataSourceText,
-      htmltools::span(". "),
       htmltools::a(href = dataSourceLink, dataSourceLink)
     )
   } else {
     dataSource <- htmltools::div(
       class = "no-border-card-source",
-      htmltools::span(paste0("Data source: ", dataSourceText, ". ")),
+      htmltools::span(paste0("Data source: ", dataSourceText)),
       htmltools::a(href = dataSourceLink, dataSourceLink)
     )
   }

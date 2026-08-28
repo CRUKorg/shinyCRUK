@@ -241,7 +241,7 @@ ui <- bslib::page_navbar(
         chart = plotlyOutput("demo_plot", height = "500px"),
         table = gt::gt_output("demo_table"),
         alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
-        dataSourceText = "mtcars dataset from R",
+        dataSourceText = textOutput("dataSourceReactive"),
         dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
         h3("A nice little chart based on mtcars")
       ),
@@ -446,6 +446,15 @@ server <- function(input, output, session) {
       gt::tab_header(
         title = "Motor Trend Car Data"
       )
+  })
+
+  # Dynamic source text
+  output$dataSourceReactive <- renderText({
+    if (input$car_filter == "All") {
+      "mtcars dataset from R, all"
+    } else {
+      "mtcars dataset from R, selected"
+    }
   })
 
   # Download handler for the download data button(s)
