@@ -133,7 +133,9 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
   # as.character() on the tag serializes its structure into literal HTML,
   # which then gets escaped and shown as raw markup instead of being rendered.
   is_tag_ish <- function(x) {
-    inherits(x, "shiny.tag") || inherits(x, "shiny.tag.list") || inherits(x, "html")
+    inherits(x, "shiny.tag") ||
+      inherits(x, "shiny.tag.list") ||
+      inherits(x, "html")
   }
 
   # Adjust link, depending on if it's a div.
@@ -143,7 +145,7 @@ crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ..
       htmltools::span("Data source: "),
       htmltools::a(href = dataSourceLink, dataSourceText)
     )
-  } else if (is_tag_ish(dataSourceText) || dataSourceText$attribs$class == "shiny-text-output") {
+  } else if (is_tag_ish(dataSourceText)) {
     # dataSourceText is a shiny output / htmltools tag (e.g. textOutput) --
     # insert directly as a child so it renders rather than being coerced to a string
     dataSource <- htmltools::div(
