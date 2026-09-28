@@ -91,8 +91,6 @@
 #' @export
 crukChartTable <- function(chart, table, alt, dataSourceText, dataSourceLink, ...) {
 
-  browser()
-
   # Input validation
   if (missing(chart)) {
     stop("Parameter 'chart' is required and cannot be empty")
