@@ -13,12 +13,12 @@ version that blends more seamlessly with surrounding content.}
 }
 \value{
 An \code{htmltools::div} element with attached CSS dependencies containing:
-  \itemize{
-    \item Cancer Intelligence logo (SVG format)
-    \item Attribution text explaining the team's role
-    \item Contact email link (cancerintelligence@cancer.org.uk) for feedback
-      and bug reports
-  }
+\itemize{
+\item Cancer Intelligence logo (SVG format)
+\item Attribution text explaining the team's role
+\item Contact email link (cancerintelligence@cancer.org.uk) for feedback
+and bug reports
+}
 }
 \description{
 Only for use in internal apps.
@@ -35,18 +35,18 @@ The box is typically placed at the bottom of the page, within
 
 The component uses custom CSS (\code{ciBox.css}) that provides:
 \itemize{
-  \item Flexible layout with logo and text positioned side-by-side on desktop
-  \item Responsive stacking of logo and text on mobile devices
-  \item Optional border styling controlled by the \code{boxBorder} parameter
-  \item CRUK brand-compliant typography and spacing
+\item Flexible layout with logo and text positioned side-by-side on desktop
+\item Responsive stacking of logo and text on mobile devices
+\item Optional border styling controlled by the \code{boxBorder} parameter
+\item CRUK brand-compliant typography and spacing
 }
 }
 
 \section{Dependencies}{
 
 \itemize{
-  \item CSS: \code{inst/www/css/ciBox.css}
-  \item Logo: \code{inst/www/images/CI-logo.svg}
+\item CSS: \code{inst/www/css/ciBox.css}
+\item Logo: \code{inst/www/images/CI-logo.svg}
 }
 }
 
@@ -60,9 +60,9 @@ team to showcase work and provide attribution. Only us it for internal apps.
 
 The attribution box should be placed at the end of your UI definition, typically:
 \itemize{
-  \item As the last element within \code{\link{centralColumn}}
-  \item Before or after \code{\link{crukFooter}} depending on your layout needs
-  \item At the bottom of the page to maintain clear visual hierarchy
+\item As the last element within \code{\link{centralColumn}}
+\item Before or after \code{\link{crukFooter}} depending on your layout needs
+\item At the bottom of the page to maintain clear visual hierarchy
 }
 }
 

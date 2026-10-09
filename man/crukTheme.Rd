@@ -8,8 +8,8 @@ crukTheme()
 }
 \value{
 An \code{htmltools::tagList} containing an \code{htmlDependency} object
-  that loads the CRUK theme CSS file (\code{crukTheme.css}) from the package's
-  \code{www/css/} directory.
+that loads the CRUK theme CSS file (\code{crukTheme.css}) from the package's
+\code{www/css/} directory.
 }
 \description{
 Adds Cancer Research UK branding and styling to a Shiny application by loading

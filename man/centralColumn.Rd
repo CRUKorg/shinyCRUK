@@ -14,11 +14,11 @@ container.}
 }
 \value{
 An \code{htmltools::tagList} containing:
-  \itemize{
-    \item An \code{htmlDependency} that loads \code{centralColumn.css}
-    \item A \code{div} element with class \code{"central-column"} wrapping
-      the provided content
-  }
+\itemize{
+\item An \code{htmlDependency} that loads \code{centralColumn.css}
+\item A \code{div} element with class \code{"central-column"} wrapping
+the provided content
+}
 }
 \description{
 Creates a responsive central column container for main page content. This div
@@ -35,9 +35,9 @@ maintaining appropriate margins.
 
 The central column adapts to different screen sizes:
 \describe{
-  \item{Desktop}{Fixed width of 900px, centered with automatic side margins}
-  \item{Tablet/Mobile}{Full width with responsive padding to maintain
-    readability on smaller screens}
+\item{Desktop}{Fixed width of 900px, centered with automatic side margins}
+\item{Tablet/Mobile}{Full width with responsive padding to maintain
+readability on smaller screens}
 }
 The exact responsive breakpoints and styling are defined in
 \code{inst/www/css/centralColumn.css}.
@@ -46,9 +46,9 @@ The exact responsive breakpoints and styling are defined in
 \section{CSS Details}{
 
 \itemize{
-  \item CSS class: \code{"central-column"}
-  \item Stylesheet: \code{centralColumn.css}
-  \item Maximum content width: 900px (desktop)
+\item CSS class: \code{"central-column"}
+\item Stylesheet: \code{centralColumn.css}
+\item Maximum content width: 900px (desktop)
 }
 }
 

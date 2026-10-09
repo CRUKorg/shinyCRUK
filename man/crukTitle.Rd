@@ -18,13 +18,13 @@ string (no subheading).}
 }
 \value{
 An \code{htmltools::tagList} containing:
-  \itemize{
-    \item CSS dependency for title styling (\code{crukTitle.css})
-    \item A \code{div} container with class \code{"cruk-title-container"}
-    \item An \code{h1} element with the main title (Progress Medium font)
-    \item A \code{p} element with the subheading (Poppins font), if provided
-    \item A thick horizontal rule (\code{hr}) as a visual separator
-  }
+\itemize{
+\item CSS dependency for title styling (\code{crukTitle.css})
+\item A \code{div} container with class \code{"cruk-title-container"}
+\item An \code{h1} element with the main title (Progress Medium font)
+\item A \code{p} element with the subheading (Poppins font), if provided
+\item A thick horizontal rule (\code{hr}) as a visual separator
+}
 }
 \description{
 Creates a styled page title element with an optional subheading and decorative
@@ -41,9 +41,9 @@ separator.
 
 The title uses CRUK brand typography:
 \describe{
-  \item{Title (h1)}{Font: Progress Medium, Weight: 500, Margin: 0px}
-  \item{Subheading (p)}{Font: Poppins, Margin: 28px top, 0px other sides, Class: "cruk-title-subheading"}
-  \item{Horizontal Rule}{Width: 4rem (~64px), Height: 0.5rem (~8px), Color: Black, Margin: 1rem top, 2rem bottom}
+\item{Title (h1)}{Font: Progress Medium, Weight: 500, Margin: 0px}
+\item{Subheading (p)}{Font: Poppins, Margin: 28px top, 0px other sides, Class: "cruk-title-subheading"}
+\item{Horizontal Rule}{Width: 4rem (~64px), Height: 0.5rem (~8px), Color: Black, Margin: 1rem top, 2rem bottom}
 }
 }
 

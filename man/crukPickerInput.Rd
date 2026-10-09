@@ -36,7 +36,7 @@ are merged with defaults (\code{live-search}, \code{selectOnTab}, \code{title}).
 }
 \value{
 An HTML div element containing a styled picker input with attached
-  CSS dependencies.
+CSS dependencies.
 }
 \description{
 Creates a styled picker input control with CRUK branding using the

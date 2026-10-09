@@ -33,12 +33,12 @@ the sources box. Set to \code{FALSE} for a borderless design.}
 }
 \value{
 An \code{htmltools::div} element with class \code{"sources"} containing:
-  \itemize{
-    \item CSS dependency for sources box styling (\code{crukSources.css})
-    \item Optional notes section with "Notes:" header
-    \item "Data sources:" header
-    \item Unordered list of sources (from Zotero or custom HTML)
-  }
+\itemize{
+\item CSS dependency for sources box styling (\code{crukSources.css})
+\item Optional notes section with "Notes:" header
+\item "Data sources:" header
+\item Unordered list of sources (from Zotero or custom HTML)
+}
 }
 \description{
 Creates a styled box displaying data sources and optional notes for CRUK
@@ -51,10 +51,10 @@ citation requirements.
 
 When using \code{zotero_path}, the function:
 \enumerate{
-  \item Connects to the Zotero API using credentials from environment variables
-  \item Navigates to the specified collection path
-  \item Formats each reference as: "Author(s). Title, Year. Last accessed Month, Year."
-  \item Returns the formatted citations as an HTML list
+\item Connects to the Zotero API using credentials from environment variables
+\item Navigates to the specified collection path
+\item Formats each reference as: "Author(s). Title, Year. Last accessed Month, Year."
+\item Returns the formatted citations as an HTML list
 }
 }
 
@@ -62,8 +62,8 @@ When using \code{zotero_path}, the function:
 
 To use Zotero integration, set these in your \code{.Renviron} file:
 \itemize{
-  \item \code{ZOTERO_API_KEY} - Your Zotero API key (from https://www.zotero.org/settings/keys)
-  \item \code{ZOTERO_USER_ID} - Your Zotero user ID (from https://www.zotero.org/settings/security)
+\item \code{ZOTERO_API_KEY} - Your Zotero API key (from https://www.zotero.org/settings/keys)
+\item \code{ZOTERO_USER_ID} - Your Zotero user ID (from https://www.zotero.org/settings/security)
 }
 Use \code{\link{setup_zotero_credentials}} to help configure these.
 }
@@ -92,11 +92,11 @@ all data visualizations and tables but before \code{\link{crukFooter}}.
 
 The sources box uses custom CSS (\code{crukSources.css}) that provides:
 \itemize{
-  \item Distinct "Notes:" and "Data sources:" headers in bold
-  \item Consistent spacing and typography
-  \item Optional border (1px solid black when \code{boxBorder = TRUE})
-  \item Responsive padding and margins
-  \item Zotero list styling with class \code{"zotero-list"}
+\item Distinct "Notes:" and "Data sources:" headers in bold
+\item Consistent spacing and typography
+\item Optional border (1px solid black when \code{boxBorder = TRUE})
+\item Responsive padding and margins
+\item Zotero list styling with class \code{"zotero-list"}
 }
 }
 

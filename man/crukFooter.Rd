@@ -15,16 +15,16 @@ This is useful for apps where contact/citation information is not relevant.}
 }
 \value{
 An \code{htmltools::tagList} containing:
-  \itemize{
-    \item CSS dependency for footer styling (\code{crukFooter.css})
-    \item (Optional) Info section with CRUK logo, citation guidelines, and
-      contact details
-    \item CRUK tagline: "Together we are beating cancer"
-    \item Legal links: Terms and conditions, Privacy, Modern slavery statement,
-      Cookies
-    \item Fundraising Regulator logo
-    \item Registered charity and company information
-  }
+\itemize{
+\item CSS dependency for footer styling (\code{crukFooter.css})
+\item (Optional) Info section with CRUK logo, citation guidelines, and
+contact details
+\item CRUK tagline: "Together we are beating cancer"
+\item Legal links: Terms and conditions, Privacy, Modern slavery statement,
+Cookies
+\item Fundraising Regulator logo
+\item Registered charity and company information
+}
 }
 \description{
 Creates a comprehensive footer section for CRUK applications containing the
@@ -61,9 +61,9 @@ All logos and text scale appropriately for different screen sizes.
 
 The function automatically detects the rendering context:
 \describe{
-  \item{Shiny Apps}{Uses \code{shiny::addResourcePath()} to serve logo images}
-  \item{Static HTML (Quarto/RMarkdown)}{Uses \code{knitr::image_uri()} to
-    embed logos as base64-encoded data URIs}
+\item{Shiny Apps}{Uses \code{shiny::addResourcePath()} to serve logo images}
+\item{Static HTML (Quarto/RMarkdown)}{Uses \code{knitr::image_uri()} to
+embed logos as base64-encoded data URIs}
 }
 This ensures the footer works correctly in both interactive and static documents.
 }
@@ -71,13 +71,13 @@ This ensures the footer works correctly in both interactive and static documents
 \section{Dependencies}{
 
 \itemize{
-  \item External HTML files (when \code{includeContact = TRUE}):
-    \code{inst/markdown/citation-text.html} and
-    \code{inst/markdown/email-site-text.html}
-  \item CSS: \code{inst/www/css/crukFooter.css}
-  \item Logos: \code{inst/www/images/cruk-logo.svg} and
-    \code{inst/www/images/logo-fundraising-regulator-reg.svg}
-  \item Required packages: \code{bslib} (for \code{layout_column_wrap})
+\item External HTML files (when \code{includeContact = TRUE}):
+\code{inst/markdown/citation-text.html} and
+\code{inst/markdown/email-site-text.html}
+\item CSS: \code{inst/www/css/crukFooter.css}
+\item Logos: \code{inst/www/images/cruk-logo.svg} and
+\code{inst/www/images/logo-fundraising-regulator-reg.svg}
+\item Required packages: \code{bslib} (for \code{layout_column_wrap})
 }
 }
 

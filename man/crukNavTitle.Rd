@@ -21,9 +21,9 @@ Can include HTML markup. Default is an empty string.}
 \item{selectors}{Integer (0, 1, or 2). The number of selector elements to include
 in the navigation bar. This determines the responsive layout behavior:
 \itemize{
-  \item 0: Simple layout with title and stacked logo
-  \item 1: Layout with title, one selector, and responsive logo switching
-  \item 2: Layout with title, two selectors, and responsive logo switching
+\item 0: Simple layout with title and stacked logo
+\item 1: Layout with title, one selector, and responsive logo switching
+\item 2: Layout with title, two selectors, and responsive logo switching
 }
 Default is 0.}
 
@@ -39,7 +39,7 @@ Default is NULL.}
 }
 \value{
 An \code{htmltools::tagList} containing the styled navigation bar with
-  embedded CSS for responsive behavior.
+embedded CSS for responsive behavior.
 }
 \description{
 Themes the navigation bar with the CRUK logo. Accomodates mobile layout and up
@@ -49,10 +49,10 @@ to two selectors
 
 The function creates different layouts based on screen width:
 \describe{
-  \item{Mobile (< 992px)}{Vertical layout with stacked logo (50px height),
-    full-width selectors stacked below the title}
-  \item{Desktop (>= 992px)}{Horizontal layout with wide logo (35px or 70px height),
-    selectors positioned alongside title (400px width each)}
+\item{Mobile (< 992px)}{Vertical layout with stacked logo (50px height),
+full-width selectors stacked below the title}
+\item{Desktop (>= 992px)}{Horizontal layout with wide logo (35px or 70px height),
+selectors positioned alongside title (400px width each)}
 }
 }
 
@@ -66,8 +66,8 @@ allowing you to observe clicks with \code{observeEvent(input$app_title_link, ...
 
 Requires the shinyCRUK package with logo assets in \code{inst/www/images/}:
 \itemize{
-  \item \code{cruk-logo.svg} - Stacked logo for mobile view
-  \item \code{cruk-logo-wide.png} - Wide logo for desktop view
+\item \code{cruk-logo.svg} - Stacked logo for mobile view
+\item \code{cruk-logo-wide.png} - Wide logo for desktop view
 }
 }
 

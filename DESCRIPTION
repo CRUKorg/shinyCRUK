@@ -18,7 +18,6 @@ Imports:
     knitr,
     purrr,
     reactable,
-    reactablefmtr,
     rlang,
     shiny (>= 1.11.1),
     shinyWidgets,
@@ -33,4 +32,5 @@ Suggests:
 Config/testthat/edition: 3
 URL: https://verbose-guacamole-l18vr83.pages.github.io/
 BugReports: https://github.com/CRUKorg/shinyCRUK/issues
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
+Roxygen: list(markdown = TRUE)

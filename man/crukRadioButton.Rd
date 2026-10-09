@@ -27,7 +27,7 @@ Optional parameter for custom styling.}
 }
 \value{
 A Shiny radio button group tag with CRUK branding and attached CSS
-  dependencies.
+dependencies.
 }
 \description{
 This function creates a Cancer Research UK branded radio button selector.

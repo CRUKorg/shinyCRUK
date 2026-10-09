@@ -25,11 +25,11 @@ https://www.zotero.org/settings/keys}
 }
 \value{
 A data frame (tibble) with columns:
-  \describe{
-    \item{group_id}{Character. The group library ID to use in API calls}
-    \item{name}{Character. The human-readable group name}
-  }
-  The data frame is also printed to the console for easy viewing.
+\describe{
+\item{group_id}{Character. The group library ID to use in API calls}
+\item{name}{Character. The human-readable group name}
+}
+The data frame is also printed to the console for easy viewing.
 }
 \description{
 Retrieves a list of your Zotero group libraries and their IDs. Use this
@@ -40,8 +40,8 @@ function to find the correct \code{group_id} parameter for
 
 This function requires:
 \itemize{
-  \item A valid Zotero API key with group library access
-  \item Your Zotero user ID
+\item A valid Zotero API key with group library access
+\item Your Zotero user ID
 }
 Set these up using \code{\link{setup_zotero_credentials}}.
 }

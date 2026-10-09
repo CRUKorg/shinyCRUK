@@ -22,7 +22,7 @@ value box, describing what the value represents. A horizontal rule appears
 below the title. Default is an empty string.}
 
 \item{value}{Character string or numeric. The main value to display prominently
-in the value box (e.g., "250", "45.2%", "1,234"). Appears in large text
+in the value box (e.g., "250", "45.2\%", "1,234"). Appears in large text
 with the Progress Medium font. Default is an empty string.}
 
 \item{icon}{A Shiny icon object or Material Symbols icon. The icon to display
@@ -41,14 +41,14 @@ Default is an empty string.}
 }
 \value{
 A \code{bslib::value_box} object with attached CSS dependencies for
-  CRUK styling and Google Material Symbols font. The value box includes:
-  \itemize{
-    \item Title with horizontal rule separator
-    \item Large, prominent value display with forward arrow icon
-    \item Left-aligned showcase area for custom icon
-    \item Detail text below the value
-    \item White background with black text (CRUK theme)
-  }
+CRUK styling and Google Material Symbols font. The value box includes:
+\itemize{
+\item Title with horizontal rule separator
+\item Large, prominent value display with forward arrow icon
+\item Left-aligned showcase area for custom icon
+\item Detail text below the value
+\item White background with black text (CRUK theme)
+}
 }
 \description{
 Creates a branded value box component for displaying key metrics or statistics
@@ -65,11 +65,11 @@ the value.
 
 The value box uses custom CSS (\code{crukValueBox.css}) that applies:
 \itemize{
-  \item Progress Medium font for the value display
-  \item CRUK-styled horizontal rule under the title
-  \item Material Symbols "arrow_forward" icon next to the value
-  \item Showcase layout with icon on the left (25\% width)
-  \item White background with black text
+\item Progress Medium font for the value display
+\item CRUK-styled horizontal rule under the title
+\item Material Symbols "arrow_forward" icon next to the value
+\item Showcase layout with icon on the left (25\\% width)
+\item White background with black text
 }
 }
 
@@ -77,20 +77,20 @@ The value box uses custom CSS (\code{crukValueBox.css}) that applies:
 
 This function loads:
 \itemize{
-  \item \code{crukValueBox.css} - Custom CRUK value box styling
-  \item Google Material Symbols Outlined font - For the arrow icon
-  \item \code{bslib} package - For the base value box component
+\item \code{crukValueBox.css} - Custom CRUK value box styling
+\item Google Material Symbols Outlined font - For the arrow icon
+\item \code{bslib} package - For the base value box component
 }
 }
 
 \section{Usage Tips}{
 
 \itemize{
-  \item Use concise titles that clearly describe the metric
-  \item Format values appropriately (e.g., add commas for thousands, \% signs)
-  \item Choose icons that visually represent the metric
-  \item Use the default CRUK blue for icons unless brand guidelines specify otherwise
-  \item Keep detail text brief - one or two lines maximum
+\item Use concise titles that clearly describe the metric
+\item Format values appropriately (e.g., add commas for thousands, \\% signs)
+\item Choose icons that visually represent the metric
+\item Use the default CRUK blue for icons unless brand guidelines specify otherwise
+\item Keep detail text brief - one or two lines maximum
 }
 }
 

@@ -10,17 +10,18 @@ crukTable(
   sortable = TRUE,
   filterable = TRUE,
   selection = "multiple",
-  onClick = "select",
+  onClick = if (!is.null(selection)) "select" else NULL,
   highlight = TRUE,
   pagination = FALSE,
   defaultPageSize = NULL,
+  class = NULL,
   ...
 )
 }
 \arguments{
 \item{data}{A data frame or matrix to display.}
 
-\item{columns}{Optional named list of column definitions created using
+\item{columns}{Optional named list of column definitions created with
 \code{reactable::colDef()}.}
 
 \item{sortable}{Logical. Whether columns can be sorted by clicking the
@@ -29,51 +30,39 @@ column headers. Default is \code{TRUE}.}
 \item{filterable}{Logical. Whether filter inputs are displayed for columns.
 Default is \code{TRUE}.}
 
-\item{selection}{Character string specifying the row selection mode.
-Either \code{"multiple"}, \code{"single"}, or \code{NULL}.
-Default is \code{"multiple"}.}
+\item{selection}{Row selection mode: \code{"multiple"}, \code{"single"}, or
+\code{NULL} for no selection. Default is \code{"multiple"}.}
 
-\item{onClick}{Action to perform when a row is clicked.
-Default is \code{"select"}.}
+\item{onClick}{Action to perform when a row is clicked. Defaults to
+\code{"select"} when \code{selection} is set, otherwise \code{NULL}.}
 
-\item{highlight}{Logical. Whether rows should be highlighted on hover.
+\item{highlight}{Logical. Whether rows are highlighted on hover.
 Default is \code{TRUE}.}
 
-\item{pagination}{Logical. Whether pagination should be enabled.
+\item{pagination}{Logical. Whether pagination is enabled.
 Default is \code{FALSE}.}
 
-\item{defaultPageSize}{Number of rows to display per page. If \code{NULL}
-and pagination is disabled, all rows are displayed.}
+\item{defaultPageSize}{Number of rows per page. If \code{NULL}, all rows are
+shown when pagination is off and 10 when it is on.}
+
+\item{class}{Optional extra CSS class(es) for the table.}
 
 \item{...}{Additional arguments passed to \code{reactable::reactable()}.}
 }
 \value{
-A Shiny reactable table with CRUK branding and attached CSS
-  dependencies.
+A \code{reactable} htmlwidget with the CRUK table stylesheet
+attached.
 }
 \description{
-This function creates a Cancer Research UK branded table for Shiny
-applications. It wraps \code{reactable::reactable()} with CRUK-specific
-styling and uses the FiveThirtyEight reactable theme.
+Builds a \code{reactable::reactable()} widget with CRUK styling. All styling
+comes from \code{inst/www/css/tables.css}, which is attached as an HTML
+dependency. In a Shiny app you will usually use \code{crukTableOutput()} in
+the UI and \code{renderCrukTable()} in the server instead of calling this
+directly. Call it directly in R Markdown, Quarto, or for static tables.
 }
 \examples{
-if (interactive()) {
-  library(shiny)
-
-  ui <- fluidPage(
-    reactable::reactableOutput("table")
-  )
-
-  server <- function(input, output, session) {
-    output$table <- reactable::renderReactable({
-      crukTable(
-        mtcars,
-        sortable = TRUE,
-        filterable = TRUE
-      )
-    })
-  }
-
-  shinyApp(ui, server)
+crukTable(head(mtcars), filterable = FALSE, selection = NULL)
 }
+\seealso{
+\code{\link[=crukTableOutput]{crukTableOutput()}}, \code{\link[=renderCrukTable]{renderCrukTable()}}
 }
