@@ -27,16 +27,16 @@ bottom of the table. Text is appended with "Data source: " in front.}
 }
 \value{
 A \code{bslib::navset_card_tab} object with attached CSS dependencies
- for CRUK styling. The card includes:
- \itemize{
-   \item A border-less, shadow-less card with two \code{bslib::nav_panel}s
-   \item A tab with the heading "Chart".
-   \item Attached alt text to the chart output, directing users to the table
-   \item A tab with the heading "Title" and a data source
-   \item Optional additional arguments placed above the card, e.g. a title
-          using \code{htmltools::h1} or selectors using \code{shinyCRUK::crukPickerInput}
-          or \code{shinyCRUK::crukSelectInput}.
- }
+for CRUK styling. The card includes:
+\itemize{
+\item A border-less, shadow-less card with two \code{bslib::nav_panel}s
+\item A tab with the heading "Chart".
+\item Attached alt text to the chart output, directing users to the table
+\item A tab with the heading "Title" and a data source
+\item Optional additional arguments placed above the card, e.g. a title
+using \code{htmltools::h1} or selectors using \code{shinyCRUK::crukPickerInput}
+or \code{shinyCRUK::crukSelectInput}.
+}
 }
 \description{
 Creates a border-less bslib card with two panels: one for a chart and the other
@@ -46,16 +46,16 @@ best practice.
 \section{Usage Tips}{
 
 \itemize{
-  \item Use descriptive but concise alt text
-  \item By default, \code{plotly::plotlyOutput}s should scale to fill the div,
-  so avoid manually setting chart sizes
-  \item If you want a title or selectors to apply to the chart and table, pass
-  these as additional arguments. They will be displayed about the chart table card
-  \item Ideally give full data source. If this is not possible
-  (for example because you are using UK data from several sources), then you can
-  direct the user to a data sources/references box at the bottom of the page
-  and supply the function the full URL of the app with the div id of the
-  data sources/reference box
+\item Use descriptive but concise alt text
+\item By default, \code{plotly::plotlyOutput}s should scale to fill the div,
+so avoid manually setting chart sizes
+\item If you want a title or selectors to apply to the chart and table, pass
+these as additional arguments. They will be displayed about the chart table card
+\item Ideally give full data source. If this is not possible
+(for example because you are using UK data from several sources), then you can
+direct the user to a data sources/references box at the bottom of the page
+and supply the function the full URL of the app with the div id of the
+data sources/reference box
 }
 }
 

@@ -4,7 +4,8 @@ Title: Styling Shiny Apps with CRUK Branding
 Version: 0.3.0
 Authors@R: c(
     person("Matt", "Grant", , "matt.grant@cancer.org.uk", role = c("aut", "cre")),
-    person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut")
+    person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut"),
+    person("Mishell", "Mahabubul", , "mishell.mahabubul@cancer.org.uk", role = "aut")
   )
 Description: This package aims to make it easy to create a shiny app that matches 
   CRUK branding, particularly the CRUK Helix Design System.
@@ -17,6 +18,7 @@ Imports:
     httr2,
     knitr,
     purrr,
+    reactable,
     rlang,
     shiny (>= 1.11.1),
     shinyWidgets,
@@ -26,9 +28,10 @@ Imports:
     zoo
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.3
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://verbose-guacamole-l18vr83.pages.github.io/
 BugReports: https://github.com/CRUKorg/shinyCRUK/issues
+Config/roxygen2/version: 8.1.1
+Roxygen: list(markdown = TRUE)

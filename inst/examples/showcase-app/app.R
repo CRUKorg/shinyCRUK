@@ -1,6 +1,6 @@
 library(shiny)
-library(shinyCRUK)
-#devtools::load_all() # Comment out above line and comment this in to test package edits made locally
+#library(shinyCRUK)
+devtools::load_all() # Comment out above line and comment this in to test package edits made locally
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
@@ -107,8 +107,7 @@ ui <- bslib::page_navbar(
           inputId = "radio_example_A",
           label = "Select an option:",
           choices = c("Option A", "Option B", "Option C"),
-          justified = FALSE,
-          width = 600
+          justified = FALSE
         ),
         crukRadioButton(
           inputId = "radio_example_B",
@@ -232,7 +231,8 @@ ui <- bslib::page_navbar(
       ),
       crukChartTable(
         chart = plotlyOutput("demo_plot", height = "500px"),
-        table = gt::gt_output("demo_table"),
+        #table = gt::gt_output("demo_table"),
+        table = crukTableOutput("demo_table"),
         alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
         dataSourceText = "mtcars dataset from R",
         dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
@@ -416,27 +416,12 @@ server <- function(input, output, session) {
       )
   })
 
-  # Create gt table
-  output$demo_table <- gt::render_gt({
-    filtered_data() %>%
-      select(mpg, cyl, wt, hp) %>%
-      mutate(car = rownames(filtered_data())) %>%
-      select(car, everything()) %>%
-      gt() %>%
-      gt::cols_label(
-        car = "Car Model",
-        mpg = "MPG",
-        cyl = "Cylinders",
-        wt = "Weight",
-        hp = "Horsepower"
-      ) %>%
-      gt::fmt_number(
-        columns = c(mpg, wt),
-        decimals = 1
-      ) %>%
-      gt::tab_header(
-        title = "Motor Trend Car Data"
-      )
+  # Create crukTable()
+  output$demo_table <- renderCrukTable({
+    filtered_data() |>
+      tibble::rownames_to_column("car") |>
+      select(car, mpg, cyl, wt, hp) |>
+      crukTable(filterable = FALSE)
   })
 
   # Create rounding examples table

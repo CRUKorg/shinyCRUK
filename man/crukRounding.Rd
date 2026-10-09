@@ -14,7 +14,7 @@ for lowercase or "upper" for sentence case output.}
 }
 \value{
 Character vector of formatted number descriptions with thousand
-  separators and descriptive qualifiers (around, nearly, more than, less than).
+separators and descriptive qualifiers (around, nearly, more than, less than).
 }
 \description{
 Formats numbers according to Cancer Intelligence rounding rules,
@@ -24,11 +24,11 @@ on magnitude. Returns descriptive text like "around 1,200" or "more than 5,000".
 \details{
 The function applies different rounding rules based on number magnitude:
 \itemize{
-  \item Numbers >= 100,000: Rounded to 3 significant figures with qualifiers
-  \item Numbers >= 1,000: Rounded to nearest 100 with "around" prefix
-  \item Numbers >= 100: Rounded to nearest 10 with "around" prefix
-  \item Numbers >= 10: Rounded to nearest 5 with "around" prefix
-  \item Numbers < 10: Simplified to "around 10", "around 5", or "less than 5"
+\item Numbers >= 100,000: Rounded to 3 significant figures with qualifiers
+\item Numbers >= 1,000: Rounded to nearest 100 with "around" prefix
+\item Numbers >= 100: Rounded to nearest 10 with "around" prefix
+\item Numbers >= 10: Rounded to nearest 5 with "around" prefix
+\item Numbers < 10: Simplified to "around 10", "around 5", or "less than 5"
 }
 
 Special handling is applied to avoid ties at 0.5 boundaries by adding small

@@ -22,7 +22,7 @@ then that name rather than the value is displayed to the user.}
 }
 \value{
 An HTML div element containing a styled select input with attached
-  CSS dependencies.
+CSS dependencies.
 }
 \description{
 Creates a styled select input control with CRUK branding and custom CSS styling.

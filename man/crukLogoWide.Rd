@@ -17,36 +17,36 @@ the original.}
 
 \item{class}{Character string or character vector of additional CSS class names
 to apply to the logo element. If providing multiple classes, use a character
-vector: `c("class1", "class2")`. These are added alongside the default
-`"cruk-logo-wide"` class. Default is an empty string.}
+vector: \code{c("class1", "class2")}. These are added alongside the default
+\code{"cruk-logo-wide"} class. Default is an empty string.}
 }
 \value{
-An `htmltools::tags$img` element containing the CRUK wide logo
-  PNG with the specified dimensions and CSS classes.
+An \code{htmltools::tags$img} element containing the CRUK wide logo
+PNG with the specified dimensions and CSS classes.
 }
 \description{
 Returns the wide (horizontal) version of the Cancer Research UK logo as a PNG
-image element. The logo is assigned the CSS class `"cruk-logo-wide"` for
+image element. The logo is assigned the CSS class \code{"cruk-logo-wide"} for
 styling purposes.
 }
 \section{Logo Details}{
 
-  Format: PNG (Portable Network Graphics)
-  Orientation: Wide (logo beside text)
-  Default class: `"cruk-logo-wide"`
-  File location: `inst/www/images/cruk-logo-wide.png`
+Format: PNG (Portable Network Graphics)
+Orientation: Wide (logo beside text)
+Default class: \code{"cruk-logo-wide"}
+File location: \code{inst/www/images/cruk-logo-wide.png}
 }
 
 \section{Usage Guidelines}{
 
-  Use this wide logo format **sparingly** and only when:
+Use this wide logo format \strong{sparingly} and only when:
 
-  Horizontal space is constrained but vertical space is available
-  The stacked logo ([crukLogo()]) doesn't fit the layout
-  Designing for wide/landscape orientations (e.g., desktop navigation bars)
+Horizontal space is constrained but vertical space is available
+The stacked logo (\code{\link[=crukLogo]{crukLogo()}}) doesn't fit the layout
+Designing for wide/landscape orientations (e.g., desktop navigation bars)
 
-  The stacked logo ([crukLogo()]) is the preferred format for most
-  use cases per CRUK brand guidelines.
+The stacked logo (\code{\link[=crukLogo]{crukLogo()}}) is the preferred format for most
+use cases per CRUK brand guidelines.
 }
 
 \examples{
@@ -67,5 +67,5 @@ crukLogoWide(height = "45px", class = c("logo-desktop", "float-right"))
 
 }
 \seealso{
-[crukLogo()] for the standard stacked version of the CRUK logo (preferred)
+\code{\link[=crukLogo]{crukLogo()}} for the standard stacked version of the CRUK logo (preferred)
 }
