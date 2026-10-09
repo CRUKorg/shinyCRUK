@@ -64,25 +64,24 @@ This prevents excessive reactive updates during rapid window resizing.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical. If `TRUE`, prints window size changes to the R console
-with timestamps (default: `FALSE`). Useful for debugging.</p></dd>
+<dd><p>Logical. If <code>TRUE</code>, prints window size changes to the R console
+with timestamps (default: <code>FALSE</code>). Useful for debugging.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>**window_size_ui**: A `shiny.tag` object containing JavaScript code.</p>
-<p>**window_size_server**: A debounced reactive expression returning a list with:
-  * `width` - Numeric. Window inner width in pixels
-  * `height` - Numeric. Window inner height in pixels</p>
-    </div>
+    <p><strong>window_size_ui</strong>: A <code>shiny.tag</code> object containing JavaScript code.</p>
+<p><strong>window_size_server</strong>: A debounced reactive expression returning a list with:</p><ul><li><p><code>width</code> - Numeric. Window inner width in pixels</p></li>
+<li><p><code>height</code> - Numeric. Window inner height in pixels</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The JavaScript code sends initial window dimensions when the Shiny connection
 is established and listens for window resize events. A random nonce is included
 on resize to ensure Shiny detects changes even when resizing back to previous
 dimensions.</p>
-<p>The returned reactive will be `NULL` or contain `NA` values until the first
-window size update is received. Always use [shiny::req()] or similar validation
+<p>The returned reactive will be <code>NULL</code> or contain <code>NA</code> values until the first
+window size update is received. Always use <code><a href="https://rdrr.io/pkg/shiny/man/req.html" class="external-link">shiny::req()</a></code> or similar validation
 before accessing the values.</p>
 <p>The debouncing helps performance by limiting how frequently your app responds
 to window resize events. A 200ms delay is generally imperceptible to users
@@ -92,7 +91,7 @@ while significantly reducing server load.</p>
     <h2 id="ui-function">UI Function<a class="anchor" aria-label="anchor" href="#ui-function"></a></h2>
 
 
-<p>`window_size_ui(id)` creates JavaScript handlers to track browser window
+<p><code>window_size_ui(id)</code> creates JavaScript handlers to track browser window
 dimensions. Adds client-side code that sends window size information to the
 server on initial load and whenever the window is resized.</p>
     </div>
@@ -100,14 +99,16 @@ server on initial load and whenever the window is resized.</p>
     <h2 id="server-function">Server Function<a class="anchor" aria-label="anchor" href="#server-function"></a></h2>
 
 
-<p>`window_size_server(id, debounce_ms = 200, verbose = FALSE)` is the server-side
+<p><code>window_size_server(id, debounce_ms = 200, verbose = FALSE)</code> is the server-side
 component that returns a debounced reactive expression containing the current
 window width and height.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>* [shiny::debounce()] for information about debouncing
-* [shiny::req()] for handling NULL/NA values</p></div>
+    <div class="dont-index">
+<ul><li><p><code><a href="https://rdrr.io/pkg/shiny/man/debounce.html" class="external-link">shiny::debounce()</a></code> for information about debouncing</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/shiny/man/req.html" class="external-link">shiny::req()</a></code> for handling NULL/NA values</p></li>
+</ul></div>
     </div>
 
     <div class="section level2">
@@ -160,7 +161,7 @@ window width and height.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Matt Grant, Sam Finnegan.</p>
+  <p>Developed by Matt Grant, Sam Finnegan, Mishell Mahabubul.</p>
 </div>
 
 <div class="pkgdown-footer-right">

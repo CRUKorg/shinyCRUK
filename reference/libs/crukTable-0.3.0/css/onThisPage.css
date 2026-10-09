@@ -1,0 +1,67 @@
+/* scroll to top arrow */
+.scroll-to-top-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 51%;
+    margin-left: 480px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background-color: #00007e;
+    cursor: pointer;
+    padding: 7px 5px 3px 5px;
+    border-radius: 9999px;
+    width: 56px !important;
+    height: 56px !important;
+}
+
+.scroll-to-top-arrow {
+  font-size: 2.5rem !important;
+}
+
+@media (max-width: 1030px) {
+  .scroll-to-top-button {
+    left: auto !important;
+    margin-left: auto !important;
+    right: 5%;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .scroll-to-top-arrow {
+    font-size: 1.5rem !important;
+  }
+}
+
+
+.otp-link-div {
+  padding: 0.5rem;
+}
+
+.otp-link-icon {
+  vertical-align: middle; color: #00007e;
+}
+
+.otp-link {
+  color: #00007e !important;
+  text-decoration: underline !important;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.otp-link-container {
+  background: #f0f0ff;
+  padding:1.5rem;
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.otp-header {
+  font-size: 1.5rem;
+  padding-bottom: 0.8rem;
+  margin: 0px;
+  font-family: 'Progress Medium';
+}

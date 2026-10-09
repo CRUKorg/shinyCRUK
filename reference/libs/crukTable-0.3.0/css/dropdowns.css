@@ -1,0 +1,107 @@
+/* ---- selectInput ---- */
+
+.crukSelectInput .control-label {
+  font-family: Poppins Medium;
+}
+
+.crukSelectInput .form-control:focus {
+	color: #000;
+	background-color: #ffffff;
+	border-color: #000000;
+	box-shadow: 0 0 0  .25rem #FFF0F8;
+}
+
+.crukSelectInput .shiny-input-select {
+  color: #666666;
+  border-radius: 0px;
+  border: 1px black solid;
+  background-image: url('images/chevron-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1.25rem;
+  padding: 12px 12px 12px 16px;
+  padding-right: 2.5rem;
+}
+
+
+.crukSelectInput select option {
+  padding: 10px;
+  background-color: white;
+  color: #000;
+  border-radius: 0px;
+}
+
+/* Style selected option */
+.crukSelectInput select option:checked {
+  background-color: #ffffff;
+  color: #e60078;
+}
+
+
+/* ---- pickerInput ---- */
+.crukPickerInput .dropdown-toggle::after {
+  color: transparent;
+  background-image: url('images/chevron-down.svg');
+  background-repeat: no-repeat;
+  background-size: 1.25rem;
+  padding: 12px 12px 12px 12px;
+}
+
+
+.crukPickerInput .control-label {
+  font-family: Poppins Medium;
+  font-size: 1rem;
+}
+
+/* shadow for dropdown box */
+.crukPickerInput .form-control:hover, .crukPickerInput .form-control:focus {
+  	box-shadow: 0 0 0  .25rem #ffffffff;
+}
+
+/* border styling for input box and search box */
+.crukPickerInput .form-control {
+  border: 1px solid black !important;
+  border-radius: 0px;
+}
+
+/* styling for input box */
+.crukPickerInput .btn.dropdown-toggle {
+  border-radius: 0px;
+  background: #ffffff;
+  padding: 12px 12px 12px 16px;
+}
+
+/* styling for input box text */
+.crukPickerInput .filter-option-inner-inner {
+  font-family: Poppins;
+  color: #666666;
+}
+
+/* styling for dropdown box */
+.crukPickerInput .dropdown-menu {
+  border: 1px solid black;
+  border-radius: 0px;
+}
+
+/* styling for dropdown text */
+.crukPickerInput a.dropdown-item {
+  font-family: Poppins;
+  color: #000 !important;
+}
+
+/* styling for active dropdown text */
+.crukPickerInput a.dropdown-item.active{
+  color: #e60078 !important;
+  background: #ffffff;
+}
+
+/* styling for dropdown hover over */
+.crukPickerInput a.dropdown-item:hover{
+  background: #fff0f8 !important;
+}
+
+/* styling for active dropdown hover text */
+.crukPickerInput a.dropdown-item.active:hover{
+  color: #cc006c !important;
+  background: #fff0f8 !important;
+}

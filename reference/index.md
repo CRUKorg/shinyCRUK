@@ -34,6 +34,10 @@
   : CRUK selectInput
 - [`crukSources()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukSources.md)
   : CRUK Data Sources Box with Zotero Integration
+- [`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md)
+  : Create a CRUK-branded table
+- [`crukTableOutput()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTableOutput.md)
+  : CRUK table output for Shiny
 - [`crukTheme()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTheme.md)
   : Apply CRUK Brand Theme to Shiny Application
 - [`crukTitle()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTitle.md)
@@ -50,6 +54,8 @@
   : Last Reviewed Date with Optional Audience Tag
 - [`onThisPage()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/onThisPage.md)
   : Create "On This Page" Contents Box with Scroll-to-Top Button
+- [`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md)
+  : Render a CRUK table in Shiny
 - [`setup_zotero_credentials()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md)
   : Setup Zotero API Credentials
 - [`window_size_ui()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/window_size.md)

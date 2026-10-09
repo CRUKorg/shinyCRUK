@@ -2,8 +2,8 @@
 
 Converts numeric proportions (0-1) into human-readable text descriptions
 following CRUK style guidelines. Provides intuitive phrases like "1 in
-4" alongside percentage values. If you're value is an integer divide by
-100 first.
+4" alongside percentage values. If you're value is an integer%, make
+sure to divide by 100 first.
 
 ## Usage
 

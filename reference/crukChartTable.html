@@ -58,7 +58,7 @@ best practice.</p>
 
 <dt id="arg-table">table<a class="anchor" aria-label="anchor" href="#arg-table"></a></dt>
 <dd><p>A table output in the form of a <code><a href="https://rdrr.io/pkg/shiny/man/renderTable.html" class="external-link">shiny::tableOutput</a></code>,
-<code>DT::dataTableOutput</code>, <code>gt::gt_output</code>, or <code>reactable::reactableOutput</code>.</p></dd>
+<code>DT::dataTableOutput</code>, <code>gt::gt_output</code>, or <code><a href="https://glin.github.io/reactable/reference/reactable-shiny.html" class="external-link">reactable::reactableOutput</a></code>.</p></dd>
 
 
 <dt id="arg-alt">alt<a class="anchor" aria-label="anchor" href="#arg-alt"></a></dt>
@@ -84,13 +84,13 @@ bottom of the table. Text is appended with "Data source: " in front.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://rstudio.github.io/bslib/reference/navset.html" class="external-link">bslib::navset_card_tab</a></code> object with attached CSS dependencies
- for CRUK styling. The card includes:</p><ul><li><p>A border-less, shadow-less card with two <code><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">bslib::nav_panel</a></code>s</p></li>
+for CRUK styling. The card includes:</p><ul><li><p>A border-less, shadow-less card with two <code><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">bslib::nav_panel</a></code>s</p></li>
 <li><p>A tab with the heading "Chart".</p></li>
 <li><p>Attached alt text to the chart output, directing users to the table</p></li>
 <li><p>A tab with the heading "Title" and a data source</p></li>
 <li><p>Optional additional arguments placed above the card, e.g. a title
-          using <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">htmltools::h1</a></code> or selectors using <code><a href="crukPickerInput.html">shinyCRUK::crukPickerInput</a></code>
-          or <code><a href="crukSelectInput.html">shinyCRUK::crukSelectInput</a></code>.</p></li>
+using <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">htmltools::h1</a></code> or selectors using <code><a href="crukPickerInput.html">shinyCRUK::crukPickerInput</a></code>
+or <code><a href="crukSelectInput.html">shinyCRUK::crukSelectInput</a></code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="usage-tips">Usage Tips<a class="anchor" aria-label="anchor" href="#usage-tips"></a></h2>
@@ -98,14 +98,14 @@ bottom of the table. Text is appended with "Data source: " in front.</p></dd>
 
 <ul><li><p>Use descriptive but concise alt text</p></li>
 <li><p>By default, <code>plotly::plotlyOutput</code>s should scale to fill the div,
-  so avoid manually setting chart sizes</p></li>
+so avoid manually setting chart sizes</p></li>
 <li><p>If you want a title or selectors to apply to the chart and table, pass
-  these as additional arguments. They will be displayed about the chart table card</p></li>
+these as additional arguments. They will be displayed about the chart table card</p></li>
 <li><p>Ideally give full data source. If this is not possible
-  (for example because you are using UK data from several sources), then you can
-  direct the user to a data sources/references box at the bottom of the page
-  and supply the function the full URL of the app with the div id of the
-  data sources/reference box</p></li>
+(for example because you are using UK data from several sources), then you can
+direct the user to a data sources/references box at the bottom of the page
+and supply the function the full URL of the app with the div id of the
+data sources/reference box</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -142,7 +142,7 @@ bottom of the table. Text is appended with "Data source: " in front.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Matt Grant, Sam Finnegan.</p>
+  <p>Developed by Matt Grant, Sam Finnegan, Mishell Mahabubul.</p>
 </div>
 
 <div class="pkgdown-footer-right">

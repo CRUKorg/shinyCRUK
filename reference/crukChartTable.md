@@ -23,7 +23,7 @@ crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
   A table output in the form of a
   [`shiny::tableOutput`](https://rdrr.io/pkg/shiny/man/renderTable.html),
   `DT::dataTableOutput`, `gt::gt_output`, or
-  `reactable::reactableOutput`.
+  [`reactable::reactableOutput`](https://glin.github.io/reactable/reference/reactable-shiny.html).
 
 - alt:
 

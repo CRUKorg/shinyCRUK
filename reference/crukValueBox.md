@@ -34,8 +34,8 @@ crukValueBox(
 - value:
 
   Character string or numeric. The main value to display prominently in
-  the value box (e.g., "250", "45.2 with the Progress Medium font.
-  Default is an empty string.
+  the value box (e.g., "250", "45.2%", "1,234"). Appears in large text
+  with the Progress Medium font. Default is an empty string.
 
 - icon:
 
@@ -92,7 +92,7 @@ The value box uses custom CSS (`crukValueBox.css`) that applies:
 
 - Material Symbols "arrow_forward" icon next to the value
 
-- Showcase layout with icon on the left (25% width)
+- Showcase layout with icon on the left (25\\
 
 - White background with black text
 
@@ -110,7 +110,7 @@ This function loads:
 
 - Use concise titles that clearly describe the metric
 
-- Format values appropriately (e.g., add commas for thousands, % signs)
+- Format values appropriately (e.g., add commas for thousands, \\
 
 - Choose icons that visually represent the metric
 

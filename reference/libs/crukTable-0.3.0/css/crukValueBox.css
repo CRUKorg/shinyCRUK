@@ -1,0 +1,89 @@
+.value-box-hr {
+  width:100%;
+  text-align:left;
+  margin-left:0;
+  border-top: 5px solid #000;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  opacity: 1;
+}
+
+.value-box-value {
+  display: flex;
+  justify-content: space-between;
+}
+
+.value-box-value-arrow {
+  font-size: 1.8rem;
+  align-content: center;
+}
+
+/* round the corner of boxes on home tab */
+.bslib-value-box {
+  box-shadow: rgb(230, 230, 230) 8px 8px 0px 0px;
+  border-radius: 0px;
+  border: 2px solid black !important;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.bslib-value-box .value-box-area {
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+/* value text highlight */
+.value-box-grid.html-fill-item:hover .value-box-value {
+  color: #00007e;
+}
+
+/* hover over shadow of value card */
+.bslib-value-box:hover,
+.bslib-value-box[data-hover] {
+  box-shadow: #aeaeae 5px 5px 0px 0px;
+  transform: translate(3px, 3px);
+}
+
+.bslib-value-box:active,
+.bslib-value-box[data-active] {
+  box-shadow: none;
+  transform: translate(8px, 8px);
+}
+
+/*set font size of title in box on home tab*/
+.bslib-value-box .value-box-title {
+  font-size: 18px;
+  font-family: Poppins, Arial Bold, Arial, sans-serif;
+  margin-bottom: 5px;
+}
+
+.bslib-value-box .value-box-value div > p {
+  font-size: 1.8rem;
+  font-family: Progress Medium, Arial Bold, Arial, sans-serif;
+  margin-bottom: 5px;
+}
+
+.bslib-value-box .value-box-value {
+  margin-bottom: 5px;
+}
+
+.bslib-value-box .value-box-area {
+  font-size: 1rem;
+  font-family: Poppins, Arial Bold, Arial, sans-serif;
+  margin-bottom: 5px;
+}
+
+/*set value box icon size*/
+.bslib-value-box .value-box-showcase .far, .bslib-value-box .value-box-showcase .fas{
+  font-size: 3rem !important;
+}
+
+/*set padding */
+.bslib-value-box .value-box-showcase .bi, .bslib-value-box .value-box-showcase .fa, .bslib-value-box .value-box-showcase .fab, .bslib-value-box .value-box-showcase .fas, .bslib {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+

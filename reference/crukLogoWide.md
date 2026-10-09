@@ -2,7 +2,7 @@
 
 Returns the wide (horizontal) version of the Cancer Research UK logo as
 a PNG image element. The logo is assigned the CSS class
-\`"cruk-logo-wide"\` for styling purposes.
+`"cruk-logo-wide"` for styling purposes.
 
 ## Usage
 
@@ -28,35 +28,38 @@ crukLogoWide(height = "50px", width = "auto", class = "")
 
   Character string or character vector of additional CSS class names to
   apply to the logo element. If providing multiple classes, use a
-  character vector: \`c("class1", "class2")\`. These are added alongside
-  the default \`"cruk-logo-wide"\` class. Default is an empty string.
+  character vector: `c("class1", "class2")`. These are added alongside
+  the default `"cruk-logo-wide"` class. Default is an empty string.
 
 ## Value
 
-An \`htmltools::tags\$img\` element containing the CRUK wide logo PNG
-with the specified dimensions and CSS classes.
+An `htmltools::tags$img` element containing the CRUK wide logo PNG with
+the specified dimensions and CSS classes.
 
 ## Logo Details
 
 Format: PNG (Portable Network Graphics) Orientation: Wide (logo beside
-text) Default class: \`"cruk-logo-wide"\` File location:
-\`inst/www/images/cruk-logo-wide.png\`
+text) Default class: `"cruk-logo-wide"` File location:
+`inst/www/images/cruk-logo-wide.png`
 
 ## Usage Guidelines
 
-Use this wide logo format \*\*sparingly\*\* and only when:
+Use this wide logo format **sparingly** and only when:
 
 Horizontal space is constrained but vertical space is available The
-stacked logo (\[crukLogo()\]) doesn't fit the layout Designing for
-wide/landscape orientations (e.g., desktop navigation bars)
+stacked logo
+([`crukLogo()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogo.md))
+doesn't fit the layout Designing for wide/landscape orientations (e.g.,
+desktop navigation bars)
 
-The stacked logo (\[crukLogo()\]) is the preferred format for most use
-cases per CRUK brand guidelines.
+The stacked logo
+([`crukLogo()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogo.md))
+is the preferred format for most use cases per CRUK brand guidelines.
 
 ## See also
 
-\[crukLogo()\] for the standard stacked version of the CRUK logo
-(preferred)
+[`crukLogo()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogo.md)
+for the standard stacked version of the CRUK logo (preferred)
 
 ## Examples
 

@@ -64,7 +64,7 @@ converted to this format. Required.</p></dd>
 
 <dt id="arg-tag">tag<a class="anchor" aria-label="anchor" href="#arg-tag"></a></dt>
 <dd><p>Character string or NULL. The audience tag to display. Options are:</p><ul><li><p><code>"health professional"</code> or <code>"hp"</code> - Blue tag for health
-    professional content</p></li>
+professional content</p></li>
 <li><p><code>"internal"</code> - Pink tag for internal-only content</p></li>
 <li><p><code>NULL</code> (default) - No tag, shows only the review date</p></li>
 </ul></dd>
@@ -90,9 +90,9 @@ page content to provide context about data freshness and access restrictions.</p
 "08 July 2025", "01 January 2024"). You can provide:</p><ul><li><p>A character string already in "DD Month YYYY" format</p></li>
 <li><p>A UK date string in "DD/MM/YYYY" format (e.g., "08/07/2025")</p></li>
 <li><p>A Date object (e.g., <code>as.Date("2025-07-08")</code>) which will be
-    automatically formatted</p></li>
+automatically formatted</p></li>
 <li><p>An ISO date string (e.g., "2025-07-08") which will be parsed and
-    formatted</p></li>
+formatted</p></li>
 </ul><p>Invalid formats will produce an error with guidance on the expected format.</p>
 <p>This function will take UK date format (DD/MM/YYYY), I.e. "08/07/2025" as
 8th July 2025, not 7th August 2025 (US format). You may want to double check
@@ -103,16 +103,18 @@ the format of your data frame.</p>
 
 
 <dl><dt>Health Professional</dt>
-<dd><p></p><ul><li><p>Background: Light blue (#e2f4fd)</p></li>
+<dd>
+<ul><li><p>Background: Light blue (#e2f4fd)</p></li>
 <li><p>Text: Blue-grey (#52627a)</p></li>
 <li><p>Label: "Health professionals"</p></li>
-</ul><p></p></dd>
+</ul></dd>
 
-  <dt>Internal Only</dt>
-<dd><p></p><ul><li><p>Background: Light pink (#fff0f8)</p></li>
+<dt>Internal Only</dt>
+<dd>
+<ul><li><p>Background: Light pink (#fff0f8)</p></li>
 <li><p>Text: Pink (#cc006c)</p></li>
 <li><p>Label: "Internal only"</p></li>
-</ul><p></p></dd>
+</ul></dd>
 
 
 </dl></div>
@@ -166,7 +168,7 @@ the format of your data frame.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Matt Grant, Sam Finnegan.</p>
+  <p>Developed by Matt Grant, Sam Finnegan, Mishell Mahabubul.</p>
 </div>
 
 <div class="pkgdown-footer-right">

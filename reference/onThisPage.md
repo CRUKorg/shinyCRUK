@@ -16,18 +16,18 @@ onThisPage(..., include_top_button = TRUE)
 
   Pairs of values where the first element is the div ID to link to and
   the second element is the display text for the link. Each pair should
-  be provided as a vector \`c(id, text)\`. The div ID should be the
+  be provided as a vector `c(id, text)`. The div ID should be the
   heading of the content to link to can be provided with or without a
-  leading \`#\`.
+  leading `#`.
 
 - include_top_button:
 
   Logical. Whether to include the scroll-to-top button that appears
-  after scrolling down 200px. Default is \`TRUE\`.
+  after scrolling down 200px. Default is `TRUE`.
 
 ## Value
 
-A \`tagList\` containing the styled navigation box, Material Symbols
+A `tagList` containing the styled navigation box, Material Symbols
 dependencies, and optionally the scroll-to-top button with its
 JavaScript functionality.
 
@@ -42,7 +42,7 @@ The function creates two main components:
 
 The function automatically includes:
 
-- CSS styling from \`css/onThisPage.css\`
+- CSS styling from `css/onThisPage.css`
 
 - Google Material Symbols Sharp font for icons
 

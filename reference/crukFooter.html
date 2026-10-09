@@ -66,10 +66,10 @@ This is useful for apps where contact/citation information is not relevant.</p><
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An <code><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">htmltools::tagList</a></code> containing:</p><ul><li><p>CSS dependency for footer styling (<code>crukFooter.css</code>)</p></li>
 <li><p>(Optional) Info section with CRUK logo, citation guidelines, and
-      contact details</p></li>
+contact details</p></li>
 <li><p>CRUK tagline: "Together we are beating cancer"</p></li>
 <li><p>Legal links: Terms and conditions, Privacy, Modern slavery statement,
-      Cookies</p></li>
+Cookies</p></li>
 <li><p>Fundraising Regulator logo</p></li>
 <li><p>Registered charity and company information</p></li>
 </ul></div>
@@ -107,9 +107,9 @@ All logos and text scale appropriately for different screen sizes.</p>
 <p>The function automatically detects the rendering context:</p><dl><dt>Shiny Apps</dt>
 <dd><p>Uses <code><a href="https://rdrr.io/pkg/shiny/man/resourcePaths.html" class="external-link">shiny::addResourcePath()</a></code> to serve logo images</p></dd>
 
-  <dt>Static HTML (Quarto/RMarkdown)</dt>
+<dt>Static HTML (Quarto/RMarkdown)</dt>
 <dd><p>Uses <code><a href="https://rdrr.io/pkg/knitr/man/image_uri.html" class="external-link">knitr::image_uri()</a></code> to
-    embed logos as base64-encoded data URIs</p></dd>
+embed logos as base64-encoded data URIs</p></dd>
 
 
 </dl><p>This ensures the footer works correctly in both interactive and static documents.</p>
@@ -119,11 +119,11 @@ All logos and text scale appropriately for different screen sizes.</p>
 
 
 <ul><li><p>External HTML files (when <code>includeContact = TRUE</code>):
-    <code>inst/markdown/citation-text.html</code> and
-    <code>inst/markdown/email-site-text.html</code></p></li>
+<code>inst/markdown/citation-text.html</code> and
+<code>inst/markdown/email-site-text.html</code></p></li>
 <li><p>CSS: <code>inst/www/css/crukFooter.css</code></p></li>
 <li><p>Logos: <code>inst/www/images/cruk-logo.svg</code> and
-    <code>inst/www/images/logo-fundraising-regulator-reg.svg</code></p></li>
+<code>inst/www/images/logo-fundraising-regulator-reg.svg</code></p></li>
 <li><p>Required packages: <code>bslib</code> (for <code>layout_column_wrap</code>)</p></li>
 </ul></div>
     <div class="section level2">
@@ -290,7 +290,7 @@ the page outside the central column.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Matt Grant, Sam Finnegan.</p>
+  <p>Developed by Matt Grant, Sam Finnegan, Mishell Mahabubul.</p>
 </div>
 
 <div class="pkgdown-footer-right">
