@@ -16,31 +16,31 @@ the original.}
 
 \item{class}{Character string or character vector of additional CSS class names
 to apply to the logo element. If providing multiple classes, use a character
-vector: `c("class1", "class2")`. These are added alongside the default
-`"cruk-logo"` class. Default is an empty string.}
+vector: \code{c("class1", "class2")}. These are added alongside the default
+\code{"cruk-logo"} class. Default is an empty string.}
 }
 \value{
-An `htmltools::tags$img` element containing the CRUK stacked logo
-  SVG with the specified dimensions and CSS classes.
+An \code{htmltools::tags$img} element containing the CRUK stacked logo
+SVG with the specified dimensions and CSS classes.
 }
 \description{
 Returns the standard Cancer Research UK stacked logo as an SVG image element.
 This is the primary CRUK logo format, featuring the logo mark above the text.
-The logo is assigned the CSS class `cruk-logo` for styling purposes.
+The logo is assigned the CSS class \code{cruk-logo} for styling purposes.
 }
 \section{Logo Details}{
 
-  Format: SVG (Scalable Vector Graphics)
-  Orientation: Cancer Research UK over 3 lines
-  Default class: `"cruk-logo"`
-  File location: `inst/www/images/cruk-logo.svg`
+Format: SVG (Scalable Vector Graphics)
+Orientation: Cancer Research UK over 3 lines
+Default class: \code{"cruk-logo"}
+File location: \code{inst/www/images/cruk-logo.svg}
 }
 
 \section{Usage Guidelines}{
 
-  This is the preferred CRUK logo format for most use cases. Use
-  [crukLogoWide()] only when vertical space is limited or when
-  the stacked format doesn't fit the layout requirements.
+This is the preferred CRUK logo format for most use cases. Use
+\code{\link[=crukLogoWide]{crukLogoWide()}} only when vertical space is limited or when
+the stacked format doesn't fit the layout requirements.
 }
 
 \examples{
@@ -65,5 +65,5 @@ crukLogo(height = "10vh")
 
 }
 \seealso{
-[crukLogoWide] for the wide version of the CRUK logo
+\link{crukLogoWide} for the wide version of the CRUK logo
 }

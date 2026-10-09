@@ -80,7 +80,7 @@ crukLogo <- function(height = "50px", width = "auto", class = "") {
 #' styling purposes.
 #'
 #' @param height Character string specifying the logo height. Must be a valid CSS
-#'   unit (e.g., "50px", "3rem", "10\%"). Default is "50px".
+#'   unit (e.g., "50px", "3rem", "10%"). Default is "50px".
 #' @param width Character string specifying the logo width. Must be a valid CSS
 #'   unit. Default is "auto" to maintain aspect ratio. Note: Specifying both
 #'   height and width may distort the logo if the aspect ratio doesn't match

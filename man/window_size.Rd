@@ -17,15 +17,17 @@ instance of the module. Must be the same in both UI and server functions.}
 \item{debounce_ms}{Numeric. Debounce delay in milliseconds (default: 200).
 This prevents excessive reactive updates during rapid window resizing.}
 
-\item{verbose}{Logical. If `TRUE`, prints window size changes to the R console
-with timestamps (default: `FALSE`). Useful for debugging.}
+\item{verbose}{Logical. If \code{TRUE}, prints window size changes to the R console
+with timestamps (default: \code{FALSE}). Useful for debugging.}
 }
 \value{
-**window_size_ui**: A `shiny.tag` object containing JavaScript code.
+\strong{window_size_ui}: A \code{shiny.tag} object containing JavaScript code.
 
-**window_size_server**: A debounced reactive expression returning a list with:
-  * `width` - Numeric. Window inner width in pixels
-  * `height` - Numeric. Window inner height in pixels
+\strong{window_size_server}: A debounced reactive expression returning a list with:
+\itemize{
+\item \code{width} - Numeric. Window inner width in pixels
+\item \code{height} - Numeric. Window inner height in pixels
+}
 }
 \description{
 Track browser window dimensions in a Shiny app using a Shiny module.
@@ -38,8 +40,8 @@ is established and listens for window resize events. A random nonce is included
 on resize to ensure Shiny detects changes even when resizing back to previous
 dimensions.
 
-The returned reactive will be `NULL` or contain `NA` values until the first
-window size update is received. Always use [shiny::req()] or similar validation
+The returned reactive will be \code{NULL} or contain \code{NA} values until the first
+window size update is received. Always use \code{\link[shiny:req]{shiny::req()}} or similar validation
 before accessing the values.
 
 The debouncing helps performance by limiting how frequently your app responds
@@ -48,14 +50,14 @@ while significantly reducing server load.
 }
 \section{UI Function}{
 
-`window_size_ui(id)` creates JavaScript handlers to track browser window
+\code{window_size_ui(id)} creates JavaScript handlers to track browser window
 dimensions. Adds client-side code that sends window size information to the
 server on initial load and whenever the window is resized.
 }
 
 \section{Server Function}{
 
-`window_size_server(id, debounce_ms = 200, verbose = FALSE)` is the server-side
+\code{window_size_server(id, debounce_ms = 200, verbose = FALSE)} is the server-side
 component that returns a debounced reactive expression containing the current
 window width and height.
 }
@@ -104,6 +106,8 @@ shinyApp(ui, server)
 
 }
 \seealso{
-* [shiny::debounce()] for information about debouncing
-* [shiny::req()] for handling NULL/NA values
+\itemize{
+\item \code{\link[shiny:debounce]{shiny::debounce()}} for information about debouncing
+\item \code{\link[shiny:req]{shiny::req()}} for handling NULL/NA values
+}
 }

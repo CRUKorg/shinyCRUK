@@ -24,7 +24,7 @@ to display. Must be one of: \code{"upload_file"}, \code{"download"},
 }
 \value{
 A Shiny action button tag with CRUK branding and attached CSS/icon
-  dependencies.
+dependencies.
 }
 \description{
 This function creates a Cancer Research UK branded action button for Shiny

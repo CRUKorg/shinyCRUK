@@ -33,13 +33,13 @@ uses the access date from each Zotero item's metadata.}
 }
 \value{
 A character vector of HTML-formatted citation strings, one per
-  reference in the collection. Each string includes:
-  \itemize{
-    \item Author name(s) (or "Unknown Author" if missing)
-    \item Title (hyperlinked if URL available, or "Untitled" if missing)
-    \item Year (if available)
-    \item Access date (from Zotero metadata or \code{last_accessed} parameter)
-  }
+reference in the collection. Each string includes:
+\itemize{
+\item Author name(s) (or "Unknown Author" if missing)
+\item Title (hyperlinked if URL available, or "Untitled" if missing)
+\item Year (if available)
+\item Access date (from Zotero metadata or \code{last_accessed} parameter)
+}
 }
 \description{
 Retrieves bibliographic references from a Zotero collection and formats them
@@ -55,9 +55,9 @@ with clickable links to the source URLs when available.
 
 This function requires valid Zotero API credentials. Set up your credentials by:
 \enumerate{
-  \item Getting an API key from https://www.zotero.org/settings/keys
-  \item Adding \code{ZOTERO_API_KEY=your_key_here} to your \code{.Renviron} file
-  \item Restarting R
+\item Getting an API key from https://www.zotero.org/settings/keys
+\item Adding \code{ZOTERO_API_KEY=your_key_here} to your \code{.Renviron} file
+\item Restarting R
 }
 Or use \code{\link{setup_zotero_credentials}} to help with this setup.
 }
@@ -66,9 +66,9 @@ Or use \code{\link{setup_zotero_credentials}} to help with this setup.
 
 Collection paths use forward slashes (\code{/}) to navigate nested collections:
 \itemize{
-  \item Top-level collection: \code{"My Collection"}
-  \item Nested collection: \code{"Parent/Child"}
-  \item Deeply nested: \code{"Grandparent/Parent/Child"}
+\item Top-level collection: \code{"My Collection"}
+\item Nested collection: \code{"Parent/Child"}
+\item Deeply nested: \code{"Grandparent/Parent/Child"}
 }
 Collection names are case-sensitive and must match exactly.
 }
@@ -77,10 +77,10 @@ Collection names are case-sensitive and must match exactly.
 
 The function will stop with an informative error if:
 \itemize{
-  \item The API key is not found or invalid
-  \item The specified collection path doesn't exist
-  \item The collection exists but contains no references
-  \item The API request fails
+\item The API key is not found or invalid
+\item The specified collection path doesn't exist
+\item The collection exists but contains no references
+\item The API request fails
 }
 }
 
@@ -88,10 +88,10 @@ The function will stop with an informative error if:
 
 References are formatted according to CRUK guidelines:
 \itemize{
-  \item Multiple authors are concatenated with spaces
-  \item Titles are hyperlinked when URLs are available
-  \item Years are extracted from full dates when necessary
-  \item Access dates are formatted as "Last accessed Month, Year"
+\item Multiple authors are concatenated with spaces
+\item Titles are hyperlinked when URLs are available
+\item Years are extracted from full dates when necessary
+\item Access dates are formatted as "Last accessed Month, Year"
 }
 }
 

@@ -20,19 +20,19 @@ converted to this format. Required.}
 
 \item{tag}{Character string or NULL. The audience tag to display. Options are:
 \itemize{
-  \item \code{"health professional"} or \code{"hp"} - Blue tag for health
-    professional content
-  \item \code{"internal"} - Pink tag for internal-only content
-  \item \code{NULL} (default) - No tag, shows only the review date
+\item \code{"health professional"} or \code{"hp"} - Blue tag for health
+professional content
+\item \code{"internal"} - Pink tag for internal-only content
+\item \code{NULL} (default) - No tag, shows only the review date
 }}
 }
 \value{
 An \code{htmltools::div} element containing:
-  \itemize{
-    \item Optional audience tag (if specified) with appropriate styling
-    \item Last reviewed date right-aligned in format "DD Month YYYY"
-    \item CSS dependency for styling
-  }
+\itemize{
+\item Optional audience tag (if specified) with appropriate styling
+\item Last reviewed date right-aligned in format "DD Month YYYY"
+\item CSS dependency for styling
+}
 }
 \description{
 Displays the last review date for page content with an optional audience tag
@@ -49,12 +49,12 @@ page content to provide context about data freshness and access restrictions.
 The function enforces a consistent date format: "DD Month YYYY" (e.g.,
 "08 July 2025", "01 January 2024"). You can provide:
 \itemize{
-  \item A character string already in "DD Month YYYY" format
-  \item A UK date string in "DD/MM/YYYY" format (e.g., "08/07/2025")
-  \item A Date object (e.g., \code{as.Date("2025-07-08")}) which will be
-    automatically formatted
-  \item An ISO date string (e.g., "2025-07-08") which will be parsed and
-    formatted
+\item A character string already in "DD Month YYYY" format
+\item A UK date string in "DD/MM/YYYY" format (e.g., "08/07/2025")
+\item A Date object (e.g., \code{as.Date("2025-07-08")}) which will be
+automatically formatted
+\item An ISO date string (e.g., "2025-07-08") which will be parsed and
+formatted
 }
 Invalid formats will produce an error with guidance on the expected format.
 
@@ -66,20 +66,20 @@ the format of your data frame.
 \section{Tag Styles}{
 
 \describe{
-  \item{Health Professional}{
-    \itemize{
-      \item Background: Light blue (#e2f4fd)
-      \item Text: Blue-grey (#52627a)
-      \item Label: "Health professionals"
-    }
-  }
-  \item{Internal Only}{
-    \itemize{
-      \item Background: Light pink (#fff0f8)
-      \item Text: Pink (#cc006c)
-      \item Label: "Internal only"
-    }
-  }
+\item{Health Professional}{
+\itemize{
+\item Background: Light blue (#e2f4fd)
+\item Text: Blue-grey (#52627a)
+\item Label: "Health professionals"
+}
+}
+\item{Internal Only}{
+\itemize{
+\item Background: Light pink (#fff0f8)
+\item Text: Pink (#cc006c)
+\item Label: "Internal only"
+}
+}
 }
 }
 

@@ -9,16 +9,16 @@ onThisPage(..., include_top_button = TRUE)
 \arguments{
 \item{...}{Pairs of values where the first element is the div ID to link to
 and the second element is the display text for the link. Each pair should
-be provided as a vector `c(id, text)`. The div ID should be the heading of
-the content to link to can be provided with or without a leading `#`.}
+be provided as a vector \code{c(id, text)}. The div ID should be the heading of
+the content to link to can be provided with or without a leading \verb{#}.}
 
 \item{include_top_button}{Logical. Whether to include the scroll-to-top
-button that appears after scrolling down 200px. Default is `TRUE`.}
+button that appears after scrolling down 200px. Default is \code{TRUE}.}
 }
 \value{
-A `tagList` containing the styled navigation box, Material Symbols
-  dependencies, and optionally the scroll-to-top button with its JavaScript
-  functionality.
+A \code{tagList} containing the styled navigation box, Material Symbols
+dependencies, and optionally the scroll-to-top button with its JavaScript
+functionality.
 }
 \description{
 Creates a styled navigation box that provides quick links to sections within
@@ -28,16 +28,16 @@ return to the top of the page.
 \details{
 The function creates two main components:
 \itemize{
-  \item A fixed navigation box with styled links to page sections
-  \item A scroll-to-top button that appears when the user scrolls down more
-    than 200px and smoothly returns them to the top when clicked
+\item A fixed navigation box with styled links to page sections
+\item A scroll-to-top button that appears when the user scrolls down more
+than 200px and smoothly returns them to the top when clicked
 }
 
 The function automatically includes:
 \itemize{
-  \item CSS styling from `css/onThisPage.css`
-  \item Google Material Symbols Sharp font for icons
-  \item JavaScript for scroll detection and smooth scrolling behavior
+\item CSS styling from \code{css/onThisPage.css}
+\item Google Material Symbols Sharp font for icons
+\item JavaScript for scroll detection and smooth scrolling behavior
 }
 }
 \examples{

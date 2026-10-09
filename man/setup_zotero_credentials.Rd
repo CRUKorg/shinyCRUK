@@ -17,7 +17,7 @@ use in API calls").}
 }
 \value{
 Invisibly returns \code{NULL}. Opens your \code{.Renviron} file in
-  the editor and prints instructions for adding the credentials.
+the editor and prints instructions for adding the credentials.
 }
 \description{
 Interactive helper function to configure Zotero API credentials in your
@@ -28,18 +28,18 @@ access your Zotero library.
 \section{Setup Steps}{
 
 \enumerate{
-  \item Create a new API key at https://www.zotero.org/settings/keys
-    \itemize{
-      \item Give it a descriptive name (e.g., "R Shiny Apps")
-      \item Select "Allow library access" (read-only is sufficient)
-      \item Leave "Allow notes access" and "Allow write access" unchecked
-      \item Save and copy the generated key
-    }
-  \item Find your user ID at https://www.zotero.org/settings/security
-  \item Run \code{setup_zotero_credentials(api_key = "your_key", user_id = "your_id")}
-  \item Add the printed lines to your \code{.Renviron} file
-  \item Restart R (Ctrl+Shift+F10 on Windows/Linux, Cmd+Shift+0 on Mac)
-  \item Test with \code{Sys.getenv("ZOTERO_API_KEY")} - should return your key
+\item Create a new API key at https://www.zotero.org/settings/keys
+\itemize{
+\item Give it a descriptive name (e.g., "R Shiny Apps")
+\item Select "Allow library access" (read-only is sufficient)
+\item Leave "Allow notes access" and "Allow write access" unchecked
+\item Save and copy the generated key
+}
+\item Find your user ID at https://www.zotero.org/settings/security
+\item Run \code{setup_zotero_credentials(api_key = "your_key", user_id = "your_id")}
+\item Add the printed lines to your \code{.Renviron} file
+\item Restart R (Ctrl+Shift+F10 on Windows/Linux, Cmd+Shift+0 on Mac)
+\item Test with \code{Sys.getenv("ZOTERO_API_KEY")} - should return your key
 }
 }
 
