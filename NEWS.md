@@ -1,3 +1,25 @@
+# shinyCRUK 0.4.0
+
+## New features
+
+* New `crukTable()` family of functions, built as a wrapper around
+  `reactable::reactable()`.
+  * `crukTable()` creates a styled table that can be used outside of shiny 
+    (eg. in RMarkdown or Quarto docs)
+    * `renderCrukTable()` renders a `crukTable()` in a reactive environment so 
+      allowing the user to pass reactive variables
+    * `crukTableOutput()` is a matching output function for `renderCrukTable()`
+
+* New `crukDownloadButton()`, a CRUK-styled wrapper around
+  `shiny::downloadButton()`. Like `crukButton()`, it takes `type`
+  (`"primary"` or `"secondary"`) and an optional Material Symbols `icon`.
+
+## Bug fixes
+
+* `crukChartTable()`: `dataSourceText` now accepts `shiny::textOutput()` or
+  `shiny::uiOutput()`, so the data source label can update reactively.
+  Previously, tag objects were converted to a string and showed as raw markup.
+
 # shinyCRUK 0.3.0
 
 * First time creating updating the news!

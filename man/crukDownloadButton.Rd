@@ -12,7 +12,7 @@ crukDownloadButton(outputId, text, type = "secondary", icon = "download", ...)
 \item{text}{The button label text to display.}
 
 \item{type}{Character string specifying button style. Either \code{"primary"}
-(default, magenta background) or \code{"secondary"} (white background with
+(magenta background) or \code{"secondary"} (default, white background with
 magenta border).}
 
 \item{icon}{Optional character string specifying which Google Material Symbol
