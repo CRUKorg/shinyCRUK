@@ -1,0 +1,26 @@
+.sources {
+  padding: 16px 48px;
+}
+
+.sources.border {
+    border: 2px solid black !important;
+}
+
+.notes-header {
+  font-family: Progress medium;
+  font-weight: 400;
+}
+
+.sources-header {
+  font-family: Progress Medium;
+  font-weight: 400;
+}
+
+.sources ul {
+  list-style-type: disc;
+  padding-left: 0.5rem;
+}
+
+.sources li::marker {
+  font-size: 1rem;
+}

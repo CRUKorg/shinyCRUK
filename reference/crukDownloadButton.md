@@ -23,8 +23,8 @@ crukDownloadButton(outputId, text, type = "secondary", icon = "download", ...)
 
 - type:
 
-  Character string specifying button style. Either `"primary"` (default,
-  magenta background) or `"secondary"` (white background with magenta
+  Character string specifying button style. Either `"primary"` (magenta
+  background) or `"secondary"` (default, white background with magenta
   border).
 
 - icon:

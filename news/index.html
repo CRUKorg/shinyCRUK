@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +33,33 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="shinycruk-040">shinyCRUK 0.4.0<a class="anchor" aria-label="anchor" href="#shinycruk-040"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
+<ul><li>New <code><a href="../reference/crukTable.html">crukTable()</a></code> family of functions, built as a wrapper around <code><a href="https://glin.github.io/reactable/reference/reactable.html" class="external-link">reactable::reactable()</a></code>.
+<ul><li>
+<code><a href="../reference/crukTable.html">crukTable()</a></code> creates a styled table that can be used outside of shiny (eg. in RMarkdown or Quarto docs)
+<ul><li>
+<code><a href="../reference/renderCrukTable.html">renderCrukTable()</a></code> renders a <code><a href="../reference/crukTable.html">crukTable()</a></code> in a reactive environment so allowing the user to pass reactive variables</li>
+<li>
+<code><a href="../reference/crukTableOutput.html">crukTableOutput()</a></code> is a matching output function for <code><a href="../reference/renderCrukTable.html">renderCrukTable()</a></code>
+</li>
+</ul></li>
+</ul></li>
+<li>New <code><a href="../reference/crukDownloadButton.html">crukDownloadButton()</a></code>, a CRUK-styled wrapper around <code><a href="https://rdrr.io/pkg/shiny/man/downloadButton.html" class="external-link">shiny::downloadButton()</a></code>. Like <code><a href="../reference/crukButton.html">crukButton()</a></code>, it takes <code>type</code> (<code>"primary"</code> or <code>"secondary"</code>) and an optional Material Symbols <code>icon</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-4-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-0"></a></h3>
+<ul><li>
+<code><a href="../reference/crukChartTable.html">crukChartTable()</a></code>: <code>dataSourceText</code> now accepts <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">shiny::textOutput()</a></code> or <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">shiny::uiOutput()</a></code>, so the data source label can update reactively. Previously, tag objects were converted to a string and showed as raw markup.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="shinycruk-030">shinyCRUK 0.3.0<a class="anchor" aria-label="anchor" href="#shinycruk-030"></a></h2>
 <ul><li>First time creating updating the news!</li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
