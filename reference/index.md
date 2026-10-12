@@ -12,6 +12,8 @@
   : Border-less Card for Chart and Table Combined Output
 - [`crukDatePicker()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukDatePicker.md)
   : CRUK Date Picker
+- [`crukDownloadButton()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukDownloadButton.md)
+  : Create a CRUK-branded download button
 - [`crukFooter()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukFooter.md)
   : CRUK Footer with Legal Information and Branding
 - [`crukGA()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukGA.md)
