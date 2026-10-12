@@ -18,8 +18,14 @@ characters. Please ensure alt text is sufficiently descriptive. Supplied
 character string will be appended with the text " Please see table for the data
 in an accessible format."}
 
-\item{dataSourceText}{Character. Data source text that is displayed at the
-bottom of the table. Text is appended with "Data source: " in front.}
+\item{dataSourceText}{Character, or a \code{shiny.tag}/UI output object (e.g.
+\code{shiny::textOutput}, \code{shiny::uiOutput}). Data source text that is
+displayed at the bottom of the table. If a plain character string is supplied,
+it is appended with "Data source: " in front. If a tag/output object is
+supplied (for example a reactive \code{textOutput}), it is inserted directly
+as rendered content alongside a static "Data source: " label, rather than
+being coerced to a string, so its output is rendered rather than shown as
+raw HTML.}
 
 \item{dataSourceLink}{Character. URL for the data source hyperlink.}
 
@@ -56,6 +62,11 @@ these as additional arguments. They will be displayed about the chart table card
 direct the user to a data sources/references box at the bottom of the page
 and supply the function the full URL of the app with the div id of the
 data sources/reference box
+\item \code{dataSourceText} can be a dynamic \code{shiny::textOutput} or
+\code{shiny::uiOutput} if you need the data source label to update
+reactively; just remember to bind it server-side with a matching
+\code{output$id <- renderText({...})} (or \code{renderUI}), since the
+output tag itself is only a placeholder until bound.
 }
 }
 
@@ -83,6 +94,15 @@ crukChartTable(
                  label = strong("Show confidence intervals"),
                  shape = "square",
                  value = FALSE)
+)
+
+# Chart and table card with a reactive data source label
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = "Some alt text to go with the chart.",
+  dataSourceText = shiny::textOutput("dataSourceLabel"),
+  dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars"
 )
 }
 }

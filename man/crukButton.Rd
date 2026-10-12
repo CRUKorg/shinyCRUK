@@ -37,8 +37,7 @@ if (interactive()) {
 
   ui <- fluidPage(
     crukButton("btn1", "Primary Button", type = "primary"),
-    crukButton("btn2", "Download", type = "secondary", icon = "download"),
-    crukButton("btn3", "Share", icon = "share")
+    crukButton("btn2", "Share", icon = "share")
   )
 
   server <- function(input, output, session) {

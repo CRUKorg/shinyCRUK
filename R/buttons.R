@@ -26,8 +26,7 @@
 #'
 #'   ui <- fluidPage(
 #'     crukButton("btn1", "Primary Button", type = "primary"),
-#'     crukButton("btn2", "Download", type = "secondary", icon = "download"),
-#'     crukButton("btn3", "Share", icon = "share")
+#'     crukButton("btn2", "Share", icon = "share")
 #'   )
 #'
 #'   server <- function(input, output, session) {
@@ -203,4 +202,140 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, class = "", .
   )
 
   htmltools::attachDependencies(radioButton, css)
+}
+
+
+#' Create a CRUK-branded download button
+#'
+#' This function creates a Cancer Research UK branded download button for Shiny
+#' applications. It wraps \code{shiny::downloadButton()} with CRUK-specific
+#' styling and optional Google Material Symbols icons.
+#'
+#' @param outputId The name of the output slot that the download handler uses.
+#' @param text The button label text to display.
+#' @param type Character string specifying button style. Either \code{"primary"}
+#'   (default, magenta background) or \code{"secondary"} (white background with
+#'   magenta border).
+#' @param icon Optional character string specifying which Google Material Symbol
+#'   to display. Must be one of: \code{"upload_file"}, \code{"download"},
+#'   \code{"check_circle"}, \code{"open_in_new"}, \code{"content_copy"},
+#'   \code{"mail"}, or \code{"share"}. Default is \code{NULL} (no icon).
+#' @param ... Additional arguments passed to \code{shiny::downloadButton()}.
+#'
+#' @return A Shiny download button tag with CRUK branding and attached CSS/icon
+#'   dependencies.
+#'
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'
+#'   ui <- fluidPage(
+#'     crukDownloadButton(
+#'       "downloadDemoData",
+#'       "Download data",
+#'       type = "secondary",
+#'       icon = "download"
+#'     )
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'     output$downloadDemoData <- downloadHandler(
+#'       filename = function() {
+#'         paste0("mtcars_", Sys.Date(), ".csv")
+#'       },
+#'       content = function(file) {
+#'         write.csv(mtcars, file, row.names = FALSE)
+#'       }
+#'     )
+#'   }
+#'
+#'   shinyApp(ui, server)
+#' }
+crukDownloadButton <- function(outputId,
+                               text,
+                               type = "secondary",
+                               icon = "download",
+                               ...) {
+
+  # Validation checks
+  if (!type %in% c("primary", "secondary")) {
+    stop("type must be primary or secondary")
+  }
+
+  if (!is.null(icon) && !icon %in% c(
+    "upload_file",
+    "download",
+    "check_circle",
+    "open_in_new",
+    "content_copy",
+    "mail",
+    "share"
+  )) {
+    stop(
+      "Available icons are: upload_file, download, check_circle, ",
+      "open_in_new, content_copy, mail, or share."
+    )
+  }
+
+  if (text == "") {
+    stop("You need to give your button a label via the text argument! How about 'Download data'?")
+  }
+
+  # Dependencies
+  css <- htmltools::htmlDependency(
+    name = "crukButton",
+    version = get_pkg_version(),
+    src = "www",
+    package = "shinyCRUK",
+    stylesheet = "css/buttons.css",
+    all_files = TRUE
+  )
+
+  googleSymbols <- htmltools::tags$link(
+    href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+    rel = "stylesheet"
+  )
+
+  # Create button
+  button <- shiny::downloadButton(
+    outputId = outputId,
+    icon = NULL,
+    label = NULL,
+    class = c(
+      paste0("cruk-btn-", type),
+      "cruk-btn"
+    ),
+    ...
+  )
+
+  # Build button content
+  if (!is.null(icon)) {
+
+    icon_html <- htmltools::tags$span(
+      class = c(
+        "material-symbols-sharp",
+        paste0("cruk-btn-icon-", type)
+      ),
+      icon
+    )
+
+    button$children[[2]] <- htmltools::tagList(
+      text,
+      " ",
+      icon_html
+    )
+
+  } else {
+
+    button$children[[2]] <- text
+
+  }
+
+  # Attach dependencies
+  htmltools::tagList(
+    googleSymbols,
+    htmltools::attachDependencies(button, css)
+  )
 }
