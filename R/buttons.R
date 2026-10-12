@@ -214,7 +214,7 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, class = "", .
 #' @param outputId The name of the output slot that the download handler uses.
 #' @param text The button label text to display.
 #' @param type Character string specifying button style. Either \code{"primary"}
-#'   (default, magenta background) or \code{"secondary"} (white background with
+#'   (magenta background) or \code{"secondary"} (default, white background with
 #'   magenta border).
 #' @param icon Optional character string specifying which Google Material Symbol
 #'   to display. Must be one of: \code{"upload_file"}, \code{"download"},
