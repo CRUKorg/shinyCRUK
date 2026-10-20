@@ -1,3 +1,7 @@
+# shinyCRUK 0.5.0
+
+* New `crukTooltip()` function, a tooltip based on the Helix design system's Popover
+
 # shinyCRUK 0.4.0
 
 ## New features
