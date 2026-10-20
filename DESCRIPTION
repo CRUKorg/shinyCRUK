@@ -1,7 +1,7 @@
 Type: Package
 Package: shinyCRUK
 Title: Styling Shiny Apps with CRUK Branding
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(
     person("Matt", "Grant", , "matt.grant@cancer.org.uk", role = c("aut", "cre")),
     person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut"),
@@ -12,6 +12,7 @@ Description: This package aims to make it easy to create a shiny app that matche
 License: MIT + file LICENSE
 Imports: 
     bslib,
+    bsicons,
     dplyr,
     glue,
     htmltools (>= 0.5.8.1),

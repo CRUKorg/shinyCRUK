@@ -1,6 +1,6 @@
 library(shiny)
-#library(shinyCRUK)
-devtools::load_all() # Comment out above line and comment this in to test package edits made locally
+library(shinyCRUK)
+#devtools::load_all() # Comment out above line and comment this in to test package edits made locally
 library(bslib)
 library(shinyWidgets)
 library(dplyr)
@@ -196,6 +196,15 @@ ui <- bslib::page_navbar(
 
       br(),
 
+      h3("Tooltip"),
+      p("A tooltip to display useful information on hover (desktop) or click (mobile)"),
+      div(
+        style = "border: 1px solid #ccc; padding: 20px; margin: 20px 0;",
+        crukTooltip("Information", "Here is some useful information")
+      ),
+
+      br(),
+
       h3("CRUK Logos", id = "logos"),
       p("Two logo formats are available:"),
 
@@ -238,7 +247,6 @@ ui <- bslib::page_navbar(
       ),
       crukChartTable(
         chart = plotlyOutput("demo_plot", height = "500px"),
-        #table = gt::gt_output("demo_table"),
         table = crukTableOutput("demo_table"),
         alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
         dataSourceText = textOutput("dataSourceReactive"),
@@ -338,7 +346,9 @@ ui <- bslib::page_navbar(
           h3("Display Components"),
           tags$ul(
             tags$li(tags$strong("crukTitle()"), " - Page titles with optional subheadings"),
+            tags$li(tags$strong("crukTooltip()"), " - A tooltip to display useful information on hover"),
             tags$li(tags$strong("crukValueBox()"), " - Metric display boxes"),
+            tags$li(tags$strong("crukTable()"), "- Branded table"),
             tags$li(tags$strong("crukChartTable()"), " - Combined chart/table with alt text"),
             tags$li(tags$strong("lastReview()"), " - Last reviewed date with audience tags"),
             tags$li(tags$strong("crukLogo() / crukLogoWide()"), " - CRUK logos"),
