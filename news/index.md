@@ -1,5 +1,11 @@
 # Changelog
 
+## shinyCRUK 0.5.0
+
+- New
+  [`crukTooltip()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTooltip.md)
+  function, a tooltip based on the Helix design system’s Popover
+
 ## shinyCRUK 0.4.0
 
 ### New features

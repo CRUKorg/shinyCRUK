@@ -732,6 +732,8 @@ Matt or Sam.
   : Apply CRUK Brand Theme to Shiny Application
 - [`crukTitle()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTitle.md)
   : Page Title with Optional Subheading
+- [`crukTooltip()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTooltip.md)
+  : CRUK-styled tooltip
 - [`crukValueBox()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukValueBox.md)
   : CRUK-Branded Value Box
 - [`find_zotero_group()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/find_zotero_group.md)
