@@ -24,18 +24,18 @@
 #' @param defaultPageSize Number of rows per page. If \code{NULL}, all rows are
 #'   shown when pagination is off and 10 when it is on.
 #' @param class Optional extra CSS class(es) for the table.
-#' @param WindowSize Optional. The reactive returned by [window_size_server()]
-#'   (pass the reactive itself, e.g. \code{WindowSize = WindowSize}, not
-#'   \code{WindowSize()}), or a list with a numeric \code{width} element. When the
-#'   window is narrower than \code{mobileBreakpoint}, a compact version of the
-#'   table is drawn: smaller fonts and cell padding, and a smaller default
-#'   minimum column width so that the table is about \code{mobileMaxWidth}
-#'   pixels wide or less. If \code{NULL} (the default), or the window size is
-#'   not yet known, the full-size table is drawn. Use this inside
-#'   [renderCrukTable()] so the table redraws when the window is resized. Note
-#'   that a redraw resets sorting, filtering and selection. Any \code{width},
-#'   \code{minWidth} or \code{maxWidth} you set in \code{columns} takes
-#'   precedence over the compact defaults.
+#' @param WindowSize Optional. The current window size, i.e. the value of the
+#'   reactive returned by [window_size_server()]: pass \code{WindowSize()}, not
+#'   \code{WindowSize}. Any list with a numeric \code{width} element works.
+#'   When the window is narrower than \code{mobileBreakpoint}, a compact
+#'   version of the table is drawn: smaller fonts and cell padding, and a
+#'   smaller default minimum column width so that the table is about
+#'   \code{mobileMaxWidth} pixels wide or less. If \code{NULL} (the default),
+#'   or the width is not yet known, the full-size table is drawn. Call
+#'   \code{crukTable()} inside [renderCrukTable()] so the table redraws when the
+#'   window is resized. Note that a redraw resets sorting, filtering and
+#'   selection. Any \code{width}, \code{minWidth} or \code{maxWidth} you set in
+#'   \code{columns} takes precedence over the compact defaults.
 #' @param mobileBreakpoint Window width in pixels below which the compact table
 #'   is used. Default is 900 (Bootstrap's \code{md} breakpoint).
 #' @param mobileMaxWidth Target maximum table width in pixels for the compact
@@ -85,18 +85,23 @@ crukTable <- function(
     stop("`selection` must be \"single\", \"multiple\", or NULL", call. = FALSE)
   }
 
-  if (!is.null(WindowSize) && !shiny::is.reactive(WindowSize) &&
-      !is.list(WindowSize)) {
+  if (is.function(WindowSize)) {
     stop(
-      "`WindowSize` must be NULL, the reactive returned by `window_size_server()`, ",
-      "or a list with a `width` element",
+      "`WindowSize` must be the window size, not the reactive: use ",
+      "`WindowSize = WindowSize()` rather than `WindowSize = WindowSize`",
       call. = FALSE
     )
   }
 
-  # Reading a reactive here means that, inside renderCrukTable(), the table
-  # redraws when the window crosses the breakpoint (and on every resize event
-  # that changes the debounced value).
+  if (!is.null(WindowSize) && !is.list(WindowSize)) {
+    stop(
+      "`WindowSize` must be NULL or a list with a `width` element, such as ",
+      "the value of the reactive returned by `window_size_server()`",
+      call. = FALSE
+    )
+  }
+
+  # Anything unexpected (NULL, NA, no width yet) counts as "not mobile".
   mobile <- cruk_is_mobile(WindowSize, mobileBreakpoint)
 
   # Show all rows when pagination is disabled. max() avoids a page size of 0
@@ -272,20 +277,10 @@ cruk_table_dependency <- function() {
   )
 }
 
-# TRUE if the window is known to be narrower than `breakpoint`. Anything
-# unexpected (NULL, NA, no width yet) counts as "not mobile", so the full-size
-# table is the fallback.
+# TRUE if the window is known to be narrower than `breakpoint`. NULL, NA or a
+# missing width count as "not mobile", so the full-size table is the fallback.
 cruk_is_mobile <- function(WindowSize, breakpoint) {
-  if (is.null(WindowSize)) {
-    return(FALSE)
-  }
-
-  size <- if (shiny::is.reactive(WindowSize)) WindowSize() else WindowSize
-  if (!is.list(size)) {
-    return(FALSE)
-  }
-
-  width <- size$width
+  width <- WindowSize$width
   is.numeric(width) && length(width) == 1 && !is.na(width) && width < breakpoint
 }
 

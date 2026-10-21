@@ -99,10 +99,10 @@ test_that("crukTable draws a compact table when WindowSize is below the breakpoi
   )
 })
 
-test_that("crukTable reads a reactive WindowSize inside a reactive context", {
+test_that("crukTable redraws when the WindowSize value changes in renderCrukTable", {
   server <- function(input, output, session) {
     ws <- shiny::reactive(input$ws)
-    output$table <- renderCrukTable(crukTable(head(mtcars), WindowSize = ws))
+    output$table <- renderCrukTable(crukTable(head(mtcars), WindowSize = ws()))
   }
 
   shiny::testServer(server, {
@@ -114,6 +114,12 @@ test_that("crukTable reads a reactive WindowSize inside a reactive context", {
   })
 })
 
+test_that("crukTable treats a NULL WindowSize as full size", {
+  html <- as.character(htmltools::as.tags(crukTable(head(mtcars), WindowSize = NULL)))
+  expect_false(grepl("cruk-table--compact", html))
+})
+
 test_that("crukTable validates WindowSize", {
   expect_error(crukTable(mtcars, WindowSize = "small"), "WindowSize")
+  expect_error(crukTable(mtcars, WindowSize = function() list(width = 400)), "win_size\\(\\)")
 })
