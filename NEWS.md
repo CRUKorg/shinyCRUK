@@ -7,6 +7,7 @@
   wide scrolls horizontally inside the card instead of widening the page.
 * `centralColumn()`: on screens under 992px, one wide child (e.g. a table) no
   longer stretches the whole column, and the page, past the screen edge.
+* `crukTitle()`' subtitle now resizes properly on mobile.
   
 # shinyCRUK 0.5.0
 

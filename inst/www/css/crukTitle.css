@@ -6,10 +6,19 @@
 }
 
 /* Subheading */
+@media screen and (min-width: 901px) {
+   .cruk-title-subheading {
+    font-family: Poppins, sans-serif;
+    font-size: 28px;
+    margin: 28px 0 0 0;
+    display: block;
+  }
+}
+
 .cruk-title-subheading {
   font-family: Poppins, sans-serif;
   font-size: 28px;
-  margin: 28px 0 0 0;
+  margin: 22px 0 0 0;
   display: block;
 }
 
