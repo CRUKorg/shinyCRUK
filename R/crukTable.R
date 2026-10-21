@@ -24,6 +24,24 @@
 #' @param defaultPageSize Number of rows per page. If \code{NULL}, all rows are
 #'   shown when pagination is off and 10 when it is on.
 #' @param class Optional extra CSS class(es) for the table.
+#' @param WindowSize Optional. The current window size, i.e. the value of the
+#'   reactive returned by [window_size_server()]: pass \code{WindowSize()}, not
+#'   \code{WindowSize}. Any list with a numeric \code{width} element works.
+#'   When the window is narrower than \code{mobileBreakpoint}, a compact
+#'   version of the table is drawn: smaller fonts and cell padding, and a
+#'   smaller default minimum column width so that the table is about
+#'   \code{mobileMaxWidth} pixels wide or less. If \code{NULL} (the default),
+#'   or the width is not yet known, the full-size table is drawn. Call
+#'   \code{crukTable()} inside [renderCrukTable()] so the table redraws when the
+#'   window is resized. Note that a redraw resets sorting, filtering and
+#'   selection. Any \code{width}, \code{minWidth} or \code{maxWidth} you set in
+#'   \code{columns} takes precedence over the compact defaults.
+#' @param mobileBreakpoint Window width in pixels below which the compact table
+#'   is used. Default is 900 (Bootstrap's \code{md} breakpoint).
+#' @param mobileMaxWidth Target maximum table width in pixels for the compact
+#'   table. Used to work out the default minimum column width (the table
+#'   width is not capped if there are too many columns to fit; it then scrolls
+#'   horizontally inside its container). Default is 600.
 #' @param ... Additional arguments passed to \code{reactable::reactable()}.
 #'
 #' @return A \code{reactable} htmlwidget with the CRUK table stylesheet
@@ -45,6 +63,9 @@ crukTable <- function(
     pagination = FALSE,
     defaultPageSize = NULL,
     class = NULL,
+    WindowSize = NULL,
+    mobileBreakpoint = 900,
+    mobileMaxWidth = 600,
     ...
 ) {
 
@@ -64,6 +85,25 @@ crukTable <- function(
     stop("`selection` must be \"single\", \"multiple\", or NULL", call. = FALSE)
   }
 
+  if (is.function(WindowSize)) {
+    stop(
+      "`WindowSize` must be the window size, not the reactive: use ",
+      "`WindowSize = WindowSize()` rather than `WindowSize = WindowSize`",
+      call. = FALSE
+    )
+  }
+
+  if (!is.null(WindowSize) && !is.list(WindowSize)) {
+    stop(
+      "`WindowSize` must be NULL or a list with a `width` element, such as ",
+      "the value of the reactive returned by `window_size_server()`",
+      call. = FALSE
+    )
+  }
+
+  # Anything unexpected (NULL, NA, no width yet) counts as "not mobile".
+  mobile <- cruk_is_mobile(WindowSize, mobileBreakpoint)
+
   # Show all rows when pagination is disabled. max() avoids a page size of 0
   # for empty data.
   if (is.null(defaultPageSize)) {
@@ -79,6 +119,7 @@ crukTable <- function(
       if (!is.null(selection)) "cruk-table--selectable",
       if (highlight) "cruk-table--highlight",
       if (sortable) "cruk-table--sortable",
+      if (mobile) "cruk-table--compact",
       class
     ),
     collapse = " "
@@ -95,10 +136,7 @@ crukTable <- function(
     borderless = TRUE,
     pagination = pagination,
     defaultPageSize = defaultPageSize,
-    defaultColDef = reactable::colDef(
-      align = "left",
-      headerStyle = list(textAlign = "left")
-    ),
+    defaultColDef = cruk_default_col_def(data, mobile, mobileMaxWidth),
     class = table_class,
     ...
   )
@@ -236,6 +274,32 @@ cruk_table_dependency <- function() {
     package = "shinyCRUK",
     stylesheet = "css/tables.css",
     all_files = TRUE
+  )
+}
+
+# TRUE if the window is known to be narrower than `breakpoint`. NULL, NA or a
+# missing width count as "not mobile", so the full-size table is the fallback.
+cruk_is_mobile <- function(WindowSize, breakpoint) {
+  width <- WindowSize$width
+  is.numeric(width) && length(width) == 1 && !is.na(width) && width < breakpoint
+}
+
+# reactable's default minWidth is 100px. On mobile, share `max_width` between
+# the columns, but never go below 40px (unreadable) or above 100px (the
+# reactable default).
+cruk_default_col_def <- function(data, mobile, max_width) {
+  if (!mobile) {
+    return(reactable::colDef(
+      align = "left",
+      headerStyle = list(textAlign = "left")
+    ))
+  }
+
+  n_col <- max(ncol(data), 1L)
+  reactable::colDef(
+    align = "left",
+    headerStyle = list(textAlign = "left"),
+    minWidth = max(40, min(100, floor(max_width / n_col)))
   )
 }
 

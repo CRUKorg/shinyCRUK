@@ -1,3 +1,14 @@
+# shinyCRUK 0.5.1
+
+* `crukTable()` gains `WindowSize`, `mobileBreakpoint` and `mobileMaxWidth`
+  arguments. Pass the reactive from `window_size_server()` to draw a compact
+  table (smaller fonts, padding and column widths) on narrow screens.
+* `crukChartTable()` now fills its container's width, and content that is too
+  wide scrolls horizontally inside the card instead of widening the page.
+* `centralColumn()`: on screens under 992px, one wide child (e.g. a table) no
+  longer stretches the whole column, and the page, past the screen edge.
+* `crukTitle()`' subtitle now resizes properly on mobile.
+  
 # shinyCRUK 0.5.0
 
 * New `crukTooltip()` function, a tooltip based on the Helix design system's Popover

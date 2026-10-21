@@ -1,3 +1,29 @@
+/* Fit the container and scroll inside the card, not the page ------------------
+   Flex/grid items default to min-width: auto, so one wide child (a table, a
+   fixed-width chart) can force every ancestor wider than the viewport.
+   min-width: 0 lets each level shrink, and overflow-x: auto turns the overflow
+   into a scrollbar inside the card. */
+.no-border-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.no-border-card .card,
+.no-border-card .tab-content,
+.no-border-card .tab-pane,
+.no-border-card .card-body,
+.no-border-card .no-border-card-table {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.no-border-card .tab-content,
+.no-border-card .card-body,
+.no-border-card .no-border-card-table {
+  overflow-x: auto;
+}
+
 /* Remove card border */
 .no-border-card .card {
   border: none !important;
