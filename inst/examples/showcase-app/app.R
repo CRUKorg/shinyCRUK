@@ -440,7 +440,7 @@ server <- function(input, output, session) {
     filtered_data() |>
       tibble::rownames_to_column("car") |>
       select(car, mpg, cyl, wt, hp) |>
-      crukTable(filterable = FALSE)
+      crukTable(filterable = FALSE, WindowSize = win_size)
   })
 
   # Dynamic source text

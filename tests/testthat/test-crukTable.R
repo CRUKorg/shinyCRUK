@@ -86,3 +86,34 @@ test_that("renderCrukTable errors on unsupported return values", {
     expect_error(output$table, "expects `crukTable\\(\\)`")
   })
 })
+
+test_that("crukTable draws a compact table when WindowSize is below the breakpoint", {
+  html <- function(...) as.character(htmltools::as.tags(crukTable(head(mtcars), ...)))
+
+  expect_false(grepl("cruk-table--compact", html()))
+  expect_false(grepl("cruk-table--compact", html(WindowSize = list(width = 1000))))
+  expect_false(grepl("cruk-table--compact", html(WindowSize = list(width = NA))))
+  expect_true(grepl("cruk-table--compact", html(WindowSize = list(width = 400))))
+  expect_true(
+    grepl("cruk-table--compact", html(WindowSize = list(width = 900), mobileBreakpoint = 1000))
+  )
+})
+
+test_that("crukTable reads a reactive WindowSize inside a reactive context", {
+  server <- function(input, output, session) {
+    ws <- shiny::reactive(input$ws)
+    output$table <- renderCrukTable(crukTable(head(mtcars), WindowSize = ws))
+  }
+
+  shiny::testServer(server, {
+    session$setInputs(ws = list(width = 1200))
+    wide <- output$table
+    session$setInputs(ws = list(width = 400))
+    narrow <- output$table
+    expect_false(identical(wide, narrow))
+  })
+})
+
+test_that("crukTable validates WindowSize", {
+  expect_error(crukTable(mtcars, WindowSize = "small"), "WindowSize")
+})

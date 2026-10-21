@@ -192,4 +192,4 @@ This package aligns with CRUK's Helix Design System which is used throughout the
 
 ## Contributing
 
-This package is maintained by the CRUK Cancer Intelligence team. For questions, issues, or contributions, open an issue on GitHub or message Matt or Sam.
+This package is maintained by the CRUK Cancer Intelligence team. For questions, issues, or contributions, open an issue on GitHub or message Sam.

@@ -5,6 +5,7 @@
  *   .cruk-table--selectable  selection is not NULL
  *   .cruk-table--highlight   highlight = TRUE
  *   .cruk-table--sortable    sortable = TRUE
+ *   .cruk-table--compact     WindowSize is narrower than mobileBreakpoint
  *
  * The .rt-* classes belong to reactable. They are not a public API, so check
  * them in browser dev tools if reactable is upgraded.
@@ -24,6 +25,10 @@
   font-size: 0.875rem;
   color: var(--cruk-table-text);
   border-bottom: 3px solid var(--cruk-table-rule);
+
+  /* Never be wider than the container. reactable's own .rt-table already
+     scrolls horizontally when its columns need more room than this. */
+  max-width: 100%;
 }
 
 .cruk-table .rt-th,
@@ -103,4 +108,21 @@
   border-color: var(--cruk-table-accent);
   outline: none;
   box-shadow: 0 0 0 1px var(--cruk-table-accent);
+}
+
+/* Compact (small screens) --------------------------------------------------- */
+
+.cruk-table--compact {
+  font-size: 0.75rem;
+}
+
+.cruk-table--compact .rt-thead .rt-th {
+  font-size: 0.625rem;
+}
+
+/* reactable puts cell padding on the -inner elements (check in dev tools if
+   reactable is upgraded). */
+.cruk-table--compact .rt-th-inner,
+.cruk-table--compact .rt-td-inner {
+  padding: 6px 6px;
 }
