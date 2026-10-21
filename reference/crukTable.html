@@ -7,7 +7,7 @@ directly. Call it directly in R Markdown, Quarto, or for static tables."><meta p
 comes from inst/www/css/tables.css, which is attached as an HTML
 dependency. In a Shiny app you will usually use crukTableOutput() in
 the UI and renderCrukTable() in the server instead of calling this
-directly. Call it directly in R Markdown, Quarto, or for static tables."><!-- dependencies from examples --><script src="libs/core-js-2.5.3/shim.min.js"></script><script src="libs/react-18.2.0/react.min.js"></script><script src="libs/react-18.2.0/react-dom.min.js"></script><script src="libs/reactwidget-2.0.0/react-tools.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/reactable-0.4.5/reactable.css" rel="stylesheet"><script src="libs/reactable-binding-0.4.5/reactable.js"></script><link href="libs/crukTable-0.5.0/css/tables.css" rel="stylesheet"></head><body>
+directly. Call it directly in R Markdown, Quarto, or for static tables."><!-- dependencies from examples --><script src="libs/core-js-2.5.3/shim.min.js"></script><script src="libs/react-18.2.0/react.min.js"></script><script src="libs/react-18.2.0/react-dom.min.js"></script><script src="libs/reactwidget-2.0.0/react-tools.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/reactable-0.4.5/reactable.css" rel="stylesheet"><script src="libs/reactable-binding-0.4.5/reactable.js"></script><link href="libs/crukTable-0.5.1/css/tables.css" rel="stylesheet"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +15,7 @@ directly. Call it directly in R Markdown, Quarto, or for static tables."><!-- de
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,6 +62,9 @@ directly. Call it directly in R Markdown, Quarto, or for static tables.</p>
 <span>  pagination <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  defaultPageSize <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  class <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  WindowSize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mobileBreakpoint <span class="op">=</span> <span class="fl">900</span>,</span>
+<span>  mobileMaxWidth <span class="op">=</span> <span class="fl">600</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -116,6 +119,33 @@ shown when pagination is off and 10 when it is on.</p></dd>
 
 <dt id="arg-class">class<a class="anchor" aria-label="anchor" href="#arg-class"></a></dt>
 <dd><p>Optional extra CSS class(es) for the table.</p></dd>
+
+
+<dt id="arg-windowsize">WindowSize<a class="anchor" aria-label="anchor" href="#arg-windowsize"></a></dt>
+<dd><p>Optional. The current window size, i.e. the value of the
+reactive returned by <code><a href="window_size.html">window_size_server()</a></code>: pass <code>WindowSize()</code>, not
+<code>WindowSize</code>. Any list with a numeric <code>width</code> element works.
+When the window is narrower than <code>mobileBreakpoint</code>, a compact
+version of the table is drawn: smaller fonts and cell padding, and a
+smaller default minimum column width so that the table is about
+<code>mobileMaxWidth</code> pixels wide or less. If <code>NULL</code> (the default),
+or the width is not yet known, the full-size table is drawn. Call
+<code>crukTable()</code> inside <code><a href="renderCrukTable.html">renderCrukTable()</a></code> so the table redraws when the
+window is resized. Note that a redraw resets sorting, filtering and
+selection. Any <code>width</code>, <code>minWidth</code> or <code>maxWidth</code> you set in
+<code>columns</code> takes precedence over the compact defaults.</p></dd>
+
+
+<dt id="arg-mobilebreakpoint">mobileBreakpoint<a class="anchor" aria-label="anchor" href="#arg-mobilebreakpoint"></a></dt>
+<dd><p>Window width in pixels below which the compact table
+is used. Default is 900 (Bootstrap's <code>md</code> breakpoint).</p></dd>
+
+
+<dt id="arg-mobilemaxwidth">mobileMaxWidth<a class="anchor" aria-label="anchor" href="#arg-mobilemaxwidth"></a></dt>
+<dd><p>Target maximum table width in pixels for the compact
+table. Used to work out the default minimum column width (the table
+width is not capped if there are too many columns to fit; it then scrolls
+horizontally inside its container). Default is 600.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

@@ -1,5 +1,22 @@
 # Changelog
 
+## shinyCRUK 0.5.1
+
+- [`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md)
+  gains `WindowSize`, `mobileBreakpoint` and `mobileMaxWidth` arguments.
+  Pass the reactive from
+  [`window_size_server()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/window_size.md)
+  to draw a compact table (smaller fonts, padding and column widths) on
+  narrow screens.
+- [`crukChartTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukChartTable.md)
+  now fills its container’s width, and content that is too wide scrolls
+  horizontally inside the card instead of widening the page.
+- [`centralColumn()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md):
+  on screens under 992px, one wide child (e.g. a table) no longer
+  stretches the whole column, and the page, past the screen edge.
+- [`crukTitle()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTitle.md)’
+  subtitle now resizes properly on mobile.
+
 ## shinyCRUK 0.5.0
 
 - New

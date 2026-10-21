@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,17 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.1" id="shinycruk-051">shinyCRUK 0.5.1<a class="anchor" aria-label="anchor" href="#shinycruk-051"></a></h2>
+<ul><li>
+<code><a href="../reference/crukTable.html">crukTable()</a></code> gains <code>WindowSize</code>, <code>mobileBreakpoint</code> and <code>mobileMaxWidth</code> arguments. Pass the reactive from <code><a href="../reference/window_size.html">window_size_server()</a></code> to draw a compact table (smaller fonts, padding and column widths) on narrow screens.</li>
+<li>
+<code><a href="../reference/crukChartTable.html">crukChartTable()</a></code> now fills its container’s width, and content that is too wide scrolls horizontally inside the card instead of widening the page.</li>
+<li>
+<code><a href="../reference/centralColumn.html">centralColumn()</a></code>: on screens under 992px, one wide child (e.g. a table) no longer stretches the whole column, and the page, past the screen edge.</li>
+<li>
+<code><a href="../reference/crukTitle.html">crukTitle()</a></code>’ subtitle now resizes properly on mobile.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="shinycruk-050">shinyCRUK 0.5.0<a class="anchor" aria-label="anchor" href="#shinycruk-050"></a></h2>
 <ul><li>New <code><a href="../reference/crukTooltip.html">crukTooltip()</a></code> function, a tooltip based on the Helix design system’s Popover</li>

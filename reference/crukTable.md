@@ -25,6 +25,9 @@ crukTable(
   pagination = FALSE,
   defaultPageSize = NULL,
   class = NULL,
+  WindowSize = NULL,
+  mobileBreakpoint = 900,
+  mobileMaxWidth = 600,
   ...
 )
 ```
@@ -76,6 +79,36 @@ crukTable(
 - class:
 
   Optional extra CSS class(es) for the table.
+
+- WindowSize:
+
+  Optional. The current window size, i.e. the value of the reactive
+  returned by
+  [`window_size_server()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/window_size.md):
+  pass `WindowSize()`, not `WindowSize`. Any list with a numeric `width`
+  element works. When the window is narrower than `mobileBreakpoint`, a
+  compact version of the table is drawn: smaller fonts and cell padding,
+  and a smaller default minimum column width so that the table is about
+  `mobileMaxWidth` pixels wide or less. If `NULL` (the default), or the
+  width is not yet known, the full-size table is drawn. Call
+  `crukTable()` inside
+  [`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md)
+  so the table redraws when the window is resized. Note that a redraw
+  resets sorting, filtering and selection. Any `width`, `minWidth` or
+  `maxWidth` you set in `columns` takes precedence over the compact
+  defaults.
+
+- mobileBreakpoint:
+
+  Window width in pixels below which the compact table is used. Default
+  is 900 (Bootstrap's `md` breakpoint).
+
+- mobileMaxWidth:
+
+  Target maximum table width in pixels for the compact table. Used to
+  work out the default minimum column width (the table width is not
+  capped if there are too many columns to fit; it then scrolls
+  horizontally inside its container). Default is 600.
 
 - ...:
 
