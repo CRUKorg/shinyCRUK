@@ -121,5 +121,8 @@ test_that("crukTable treats a NULL WindowSize as full size", {
 
 test_that("crukTable validates WindowSize", {
   expect_error(crukTable(mtcars, WindowSize = "small"), "WindowSize")
-  expect_error(crukTable(mtcars, WindowSize = function() list(width = 400)), "win_size\\(\\)")
+  expect_error(
+    crukTable(mtcars, WindowSize = function() list(width = 400)),
+    "not the reactive"
+  )
 })

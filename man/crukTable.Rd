@@ -50,18 +50,18 @@ shown when pagination is off and 10 when it is on.}
 
 \item{class}{Optional extra CSS class(es) for the table.}
 
-\item{WindowSize}{Optional. The reactive returned by \code{\link[=window_size_server]{window_size_server()}}
-(pass the reactive itself, e.g. \code{WindowSize = WindowSize}, not
-\code{WindowSize()}), or a list with a numeric \code{width} element. When the
-window is narrower than \code{mobileBreakpoint}, a compact version of the
-table is drawn: smaller fonts and cell padding, and a smaller default
-minimum column width so that the table is about \code{mobileMaxWidth}
-pixels wide or less. If \code{NULL} (the default), or the window size is
-not yet known, the full-size table is drawn. Use this inside
-\code{\link[=renderCrukTable]{renderCrukTable()}} so the table redraws when the window is resized. Note
-that a redraw resets sorting, filtering and selection. Any \code{width},
-\code{minWidth} or \code{maxWidth} you set in \code{columns} takes
-precedence over the compact defaults.}
+\item{WindowSize}{Optional. The current window size, i.e. the value of the
+reactive returned by \code{\link[=window_size_server]{window_size_server()}}: pass \code{WindowSize()}, not
+\code{WindowSize}. Any list with a numeric \code{width} element works.
+When the window is narrower than \code{mobileBreakpoint}, a compact
+version of the table is drawn: smaller fonts and cell padding, and a
+smaller default minimum column width so that the table is about
+\code{mobileMaxWidth} pixels wide or less. If \code{NULL} (the default),
+or the width is not yet known, the full-size table is drawn. Call
+\code{crukTable()} inside \code{\link[=renderCrukTable]{renderCrukTable()}} so the table redraws when the
+window is resized. Note that a redraw resets sorting, filtering and
+selection. Any \code{width}, \code{minWidth} or \code{maxWidth} you set in
+\code{columns} takes precedence over the compact defaults.}
 
 \item{mobileBreakpoint}{Window width in pixels below which the compact table
 is used. Default is 900 (Bootstrap's \code{md} breakpoint).}
