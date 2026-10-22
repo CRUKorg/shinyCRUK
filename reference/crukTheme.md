@@ -30,12 +30,12 @@ assets (logos, images, etc.)
 This function is typically used in the UI definition of a Shiny app,
 placed within `tags$head()` to ensure the CSS loads before the page
 renders. It should be used in conjunction with
-[`crukNavTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukNavTitle.md)
+[`crukNavTitle`](https://crukorg.github.io/shinyCRUK/reference/crukNavTitle.md)
 and other shinyCRUK components for complete CRUK branding.
 
 ## See also
 
-[`crukNavTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukNavTitle.md)
+[`crukNavTitle`](https://crukorg.github.io/shinyCRUK/reference/crukNavTitle.md)
 for creating a CRUK-branded navigation bar
 
 ## Examples

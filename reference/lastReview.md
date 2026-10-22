@@ -97,15 +97,15 @@ double check the format of your data frame.
 
 Place this component at the top of page content, typically immediately
 after
-[`crukTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTitle.md)
+[`crukTitle`](https://crukorg.github.io/shinyCRUK/reference/crukTitle.md)
 or as the first element within
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md).
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md).
 
 ## See also
 
-[`crukTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTitle.md)
+[`crukTitle`](https://crukorg.github.io/shinyCRUK/reference/crukTitle.md)
 for page titles
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md)
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md)
 for the main content container
 
 ## Examples

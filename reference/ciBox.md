@@ -36,7 +36,7 @@ creators of the application. Includes the Cancer Intelligence logo and
 contact information.
 
 The box is typically placed at the bottom of the page, within
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md),
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md),
 and can be displayed with or without a border.
 
 ## Styling
@@ -69,20 +69,20 @@ The attribution box should be placed at the end of your UI definition,
 typically:
 
 - As the last element within
-  [`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md)
+  [`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md)
 
 - Before or after
-  [`crukFooter`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukFooter.md)
+  [`crukFooter`](https://crukorg.github.io/shinyCRUK/reference/crukFooter.md)
   depending on your layout needs
 
 - At the bottom of the page to maintain clear visual hierarchy
 
 ## See also
 
-[`crukFooter`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukFooter.md)
+[`crukFooter`](https://crukorg.github.io/shinyCRUK/reference/crukFooter.md)
 for the main CRUK footer with legal information
 
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md)
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md)
 for the main content container
 
 ## Examples

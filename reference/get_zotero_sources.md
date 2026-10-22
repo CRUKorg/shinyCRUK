@@ -30,7 +30,7 @@ get_zotero_sources(
 
   Numeric. Zotero group library ID. Default is `6230705` (CRUK team
   library). Use
-  [`find_zotero_group`](https://verbose-guacamole-l18vr83.pages.github.io/reference/find_zotero_group.md)
+  [`find_zotero_group`](https://crukorg.github.io/shinyCRUK/reference/find_zotero_group.md)
   to find your group ID if using a different library.
 
 - api_key:
@@ -78,7 +78,7 @@ credentials by:
 3.  Restarting R
 
 Or use
-[`setup_zotero_credentials`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md)
+[`setup_zotero_credentials`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md)
 to help with this setup.
 
 ## Collection Paths
@@ -120,13 +120,13 @@ References are formatted according to CRUK guidelines:
 
 ## See also
 
-[`crukSources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukSources.md)
+[`crukSources`](https://crukorg.github.io/shinyCRUK/reference/crukSources.md)
 for displaying the formatted sources in a styled box
 
-[`setup_zotero_credentials`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md)
+[`setup_zotero_credentials`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md)
 for configuring API access
 
-[`find_zotero_group`](https://verbose-guacamole-l18vr83.pages.github.io/reference/find_zotero_group.md)
+[`find_zotero_group`](https://crukorg.github.io/shinyCRUK/reference/find_zotero_group.md)
 for finding your Zotero group ID
 
 ## Examples

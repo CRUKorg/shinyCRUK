@@ -1,7 +1,7 @@
 # Render a CRUK table in Shiny
 
 Server counterpart to
-[`crukTableOutput()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTableOutput.md).
+[`crukTableOutput()`](https://crukorg.github.io/shinyCRUK/reference/crukTableOutput.md).
 `expr` is evaluated reactively and can return either:
 
 ## Usage
@@ -15,7 +15,7 @@ renderCrukTable(expr, env = parent.frame(), quoted = FALSE)
 - expr:
 
   An expression that returns a
-  [`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md),
+  [`crukTable()`](https://crukorg.github.io/shinyCRUK/reference/crukTable.md),
   a data frame or a matrix.
 
 - env:
@@ -34,20 +34,20 @@ A render function for use as `output$id`.
 ## Details
 
 - a table built with
-  [`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md),
+  [`crukTable()`](https://crukorg.github.io/shinyCRUK/reference/crukTable.md),
   so you can set any of its arguments (and use reactive values in them),
   or
 
 - a data frame or matrix, which is passed to
-  [`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md)
+  [`crukTable()`](https://crukorg.github.io/shinyCRUK/reference/crukTable.md)
   with its default arguments.
 
 Returning `NULL` renders nothing.
 
 ## See also
 
-[`crukTableOutput()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTableOutput.md),
-[`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md)
+[`crukTableOutput()`](https://crukorg.github.io/shinyCRUK/reference/crukTableOutput.md),
+[`crukTable()`](https://crukorg.github.io/shinyCRUK/reference/crukTable.md)
 
 ## Examples
 

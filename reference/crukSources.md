@@ -85,7 +85,7 @@ To use Zotero integration, set these in your `.Renviron` file:
   https://www.zotero.org/settings/security)
 
 Use
-[`setup_zotero_credentials`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md)
+[`setup_zotero_credentials`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md)
 to help configure these.
 
 ## Custom Sources Format
@@ -105,7 +105,7 @@ When providing `custom_sources`, create a list of `<li>` elements:
 
 Place this component near the bottom of your page content, typically
 after all data visualizations and tables but before
-[`crukFooter`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukFooter.md).
+[`crukFooter`](https://crukorg.github.io/shinyCRUK/reference/crukFooter.md).
 
 ## Styling
 
@@ -123,16 +123,16 @@ The sources box uses custom CSS (`crukSources.css`) that provides:
 
 ## See also
 
-[`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md)
+[`get_zotero_sources`](https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.md)
 for the underlying Zotero fetching function
 
-[`setup_zotero_credentials`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md)
+[`setup_zotero_credentials`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md)
 for configuring Zotero API access
 
-[`find_zotero_group`](https://verbose-guacamole-l18vr83.pages.github.io/reference/find_zotero_group.md)
+[`find_zotero_group`](https://crukorg.github.io/shinyCRUK/reference/find_zotero_group.md)
 for finding your Zotero group ID
 
-[`crukFooter`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukFooter.md)
+[`crukFooter`](https://crukorg.github.io/shinyCRUK/reference/crukFooter.md)
 for the page footer component
 
 ## Examples

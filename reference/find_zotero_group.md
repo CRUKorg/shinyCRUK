@@ -2,7 +2,7 @@
 
 Retrieves a list of your Zotero group libraries and their IDs. Use this
 function to find the correct `group_id` parameter for
-[`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md)
+[`get_zotero_sources`](https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.md)
 when working with group libraries.
 
 ## Usage
@@ -58,12 +58,12 @@ This function requires:
 - Your Zotero user ID
 
 Set these up using
-[`setup_zotero_credentials`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md).
+[`setup_zotero_credentials`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md).
 
 ## Usage
 
 Once you've found your group ID, use it in
-[`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md):
+[`get_zotero_sources`](https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.md):
 
 
     # Find your group
@@ -78,10 +78,10 @@ Once you've found your group ID, use it in
 
 ## See also
 
-[`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md)
+[`get_zotero_sources`](https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.md)
 for fetching sources from a group library
 
-[`setup_zotero_credentials`](https://verbose-guacamole-l18vr83.pages.github.io/reference/setup_zotero_credentials.md)
+[`setup_zotero_credentials`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md)
 for configuring API access
 
 ## Examples

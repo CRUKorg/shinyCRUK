@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,43 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.0" id="shinycruk-060">shinyCRUK 0.6.0<a class="anchor" aria-label="anchor" href="#shinycruk-060"></a></h2>
+<div class="section level3">
+<h3 id="new-functions-0-6-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-0"></a></h3>
+<ul><li>
+<code><a href="../reference/crukKeyStatBox.html">crukKeyStatBox()</a></code> adds a bordered box containing a key statement and, optionally, an image.
+<ul><li>
+<code>statement</code> accepts a single character string, or a Shiny output such as <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> or <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput()</a></code>, so the statement can be reactive.</li>
+<li>
+<code>image</code> is optional. It takes the file name of an image in the app’s <code>www</code> folder and displays it at 140px by 140px. It is treated as decorative (<code>alt = ""</code>).</li>
+<li>The layout responds to the width of the box rather than the width of the page (a CSS container query). The image sits to the left of the statement when there is room, and above it otherwise.</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="changes-to-crukcharttable-0-6-0">Changes to <code>crukChartTable()</code>
+<a class="anchor" aria-label="anchor" href="#changes-to-crukcharttable-0-6-0"></a></h3>
+<div class="section level4">
+<h4 id="breaking-changes-0-6-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-6-0"></a></h4>
+<ul><li>
+<code>dataSourceText</code> is now the displayed text, and <code>dataSourceLink</code> is the URL the user goes to when they click on it. The URL is no longer displayed. Previously, unless the link was a <code>shinyapps.io</code> URL ending in <code>#</code>, the URL was printed after the source text.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="new-features-0-6-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h4>
+<ul><li>
+<code>dataSourceText</code> and <code>dataSourceLink</code> are now optional. If neither is supplied, no source line is added and the words “Data source” do not appear. If only <code>dataSourceText</code> is supplied, it is shown as plain text without a link. If <code>dataSourceLink</code> is supplied without <code>dataSourceText</code>, it is ignored with a warning.</li>
+<li>
+<code>dataSourceLink</code> now accepts <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">shiny::textOutput()</a></code> and <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">shiny::uiOutput()</a></code> as well as a character string, so the link can be reactive. The rendered value is used as the destination of the link and is not displayed. Only <code>http(s)://</code> URLs are used.</li>
+<li>A top-level <code>div</code> supplied as <code>dataSourceText</code> (the default for <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> and <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput()</a></code>) is now converted to a <code>span</code>, so it stays on the same line as the “Data source:” label.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="bug-fixes-0-6-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-0"></a></h4>
+<ul><li>The data source line is now sized to its full text in <code>crukChartTable.css</code>, so “Data source: …” no longer wraps onto two lines.</li>
+<li>Alt text over 125 characters now gives a warning instead of an error. Alt text under 15 characters, or empty, still errors.</li>
+<li>Documentation: fixed the “Title” tab typo (now “Table”) and a stray <code>#'</code> in the examples.</li>
+</ul></div>
+</div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="shinycruk-051">shinyCRUK 0.5.1<a class="anchor" aria-label="anchor" href="#shinycruk-051"></a></h2>
 <ul><li>

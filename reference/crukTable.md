@@ -5,9 +5,9 @@ Builds a
 widget with CRUK styling. All styling comes from
 `inst/www/css/tables.css`, which is attached as an HTML dependency. In a
 Shiny app you will usually use
-[`crukTableOutput()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTableOutput.md)
+[`crukTableOutput()`](https://crukorg.github.io/shinyCRUK/reference/crukTableOutput.md)
 in the UI and
-[`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md)
+[`renderCrukTable()`](https://crukorg.github.io/shinyCRUK/reference/renderCrukTable.md)
 in the server instead of calling this directly. Call it directly in R
 Markdown, Quarto, or for static tables.
 
@@ -84,7 +84,7 @@ crukTable(
 
   Optional. The current window size, i.e. the value of the reactive
   returned by
-  [`window_size_server()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/window_size.md):
+  [`window_size_server()`](https://crukorg.github.io/shinyCRUK/reference/window_size.md):
   pass `WindowSize()`, not `WindowSize`. Any list with a numeric `width`
   element works. When the window is narrower than `mobileBreakpoint`, a
   compact version of the table is drawn: smaller fonts and cell padding,
@@ -92,7 +92,7 @@ crukTable(
   `mobileMaxWidth` pixels wide or less. If `NULL` (the default), or the
   width is not yet known, the full-size table is drawn. Call
   `crukTable()` inside
-  [`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md)
+  [`renderCrukTable()`](https://crukorg.github.io/shinyCRUK/reference/renderCrukTable.md)
   so the table redraws when the window is resized. Note that a redraw
   resets sorting, filtering and selection. Any `width`, `minWidth` or
   `maxWidth` you set in `columns` takes precedence over the compact
@@ -121,8 +121,8 @@ A `reactable` htmlwidget with the CRUK table stylesheet attached.
 
 ## See also
 
-[`crukTableOutput()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTableOutput.md),
-[`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md)
+[`crukTableOutput()`](https://crukorg.github.io/shinyCRUK/reference/crukTableOutput.md),
+[`renderCrukTable()`](https://crukorg.github.io/shinyCRUK/reference/renderCrukTable.md)
 
 ## Examples
 

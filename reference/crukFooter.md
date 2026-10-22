@@ -105,18 +105,18 @@ documents.
 
 The footer should be placed at the end of your UI definition, typically
 as the last element within
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md)
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md)
 or at the bottom of the page outside the central column.
 
 ## See also
 
-[`crukNavTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukNavTitle.md)
+[`crukNavTitle`](https://crukorg.github.io/shinyCRUK/reference/crukNavTitle.md)
 for the header/navigation component
 
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md)
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md)
 for the main content container
 
-[`crukTheme`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTheme.md)
+[`crukTheme`](https://crukorg.github.io/shinyCRUK/reference/crukTheme.md)
 for overall CRUK styling
 
 ## Examples

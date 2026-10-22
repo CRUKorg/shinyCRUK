@@ -45,13 +45,13 @@ over 3 lines Default class: `"cruk-logo"` File location:
 ## Usage Guidelines
 
 This is the preferred CRUK logo format for most use cases. Use
-[`crukLogoWide()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogoWide.md)
+[`crukLogoWide()`](https://crukorg.github.io/shinyCRUK/reference/crukLogoWide.md)
 only when vertical space is limited or when the stacked format doesn't
 fit the layout requirements.
 
 ## See also
 
-[crukLogoWide](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogoWide.md)
+[crukLogoWide](https://crukorg.github.io/shinyCRUK/reference/crukLogoWide.md)
 for the wide version of the CRUK logo
 
 ## Examples

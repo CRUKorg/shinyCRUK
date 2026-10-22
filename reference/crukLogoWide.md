@@ -48,17 +48,17 @@ Use this wide logo format **sparingly** and only when:
 
 Horizontal space is constrained but vertical space is available The
 stacked logo
-([`crukLogo()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogo.md))
+([`crukLogo()`](https://crukorg.github.io/shinyCRUK/reference/crukLogo.md))
 doesn't fit the layout Designing for wide/landscape orientations (e.g.,
 desktop navigation bars)
 
 The stacked logo
-([`crukLogo()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogo.md))
+([`crukLogo()`](https://crukorg.github.io/shinyCRUK/reference/crukLogo.md))
 is the preferred format for most use cases per CRUK brand guidelines.
 
 ## See also
 
-[`crukLogo()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukLogo.md)
+[`crukLogo()`](https://crukorg.github.io/shinyCRUK/reference/crukLogo.md)
 for the standard stacked version of the CRUK logo (preferred)
 
 ## Examples

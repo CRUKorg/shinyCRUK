@@ -7,7 +7,14 @@ ensure accessibility best practice.
 ## Usage
 
 ``` r
-crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
+crukChartTable(
+  chart,
+  table,
+  alt,
+  dataSourceText = NULL,
+  dataSourceLink = NULL,
+  ...
+)
 ```
 
 ## Arguments
@@ -28,25 +35,37 @@ crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
 - alt:
 
   Character. Alt text to include alongside the chart. Minimum 15
-  characters. Please ensure alt text is sufficiently descriptive.
-  Supplied character string will be appended with the text " Please see
-  table for the data in an accessible format."
+  characters; over 125 characters gives a warning (it may cause issues
+  with some screen readers). Please ensure alt text is sufficiently
+  descriptive. Supplied character string will be appended with the text
+  " Please see table for the data in an accessible format."
 
 - dataSourceText:
 
-  Character, or a `shiny.tag`/UI output object (e.g.
+  Optional. Character, or a `shiny.tag`/UI output object (e.g.
   [`shiny::textOutput`](https://rdrr.io/pkg/shiny/man/textOutput.html),
   [`shiny::uiOutput`](https://rdrr.io/pkg/shiny/man/htmlOutput.html)).
-  Data source text that is displayed at the bottom of the table. If a
-  plain character string is supplied, it is appended with "Data source:
-  " in front. If a tag/output object is supplied (for example a reactive
-  `textOutput`), it is inserted directly as rendered content alongside a
-  static "Data source: " label, rather than being coerced to a string,
-  so its output is rendered rather than shown as raw HTML.
+  The data source text displayed at the bottom of the table, after a
+  static "Data source: " label on the same line. If a tag/output object
+  is supplied it is inserted as rendered content rather than coerced to
+  a string. Top-level `div` outputs (the default for `textOutput` and
+  `uiOutput`) are converted to `span`s so they stay inline. If `NULL`
+  (the default), no data source line is added and "Data source" does not
+  appear.
 
 - dataSourceLink:
 
-  Character. URL for the data source hyperlink.
+  Optional. Where the user goes when they click `dataSourceText`. Either
+  a single character URL, or a `shiny.tag` output
+  ([`shiny::textOutput`](https://rdrr.io/pkg/shiny/man/textOutput.html)
+  or [`shiny::uiOutput`](https://rdrr.io/pkg/shiny/man/htmlOutput.html))
+  whose rendered content is the URL, so the link can be reactive. The
+  URL is never displayed. For a `renderUI` output you can return plain
+  text, or a tag containing an `<a href>`, in which case its `href` is
+  used. Only `http(s)://` URLs are used; if the rendered value is
+  anything else the text is shown without a link. Needs
+  `dataSourceText`: if supplied on its own, it is ignored with a
+  warning.
 
 - ...:
 
@@ -66,15 +85,15 @@ includes:
 
 - Attached alt text to the chart output, directing users to the table
 
-- A tab with the heading "Title" and a data source
+- A tab with the heading "Table" and, if supplied, a data source
 
 - Optional additional arguments placed above the card, e.g. a title
   using
   [`htmltools::h1`](https://rstudio.github.io/htmltools/reference/builder.html)
   or selectors using
-  [`shinyCRUK::crukPickerInput`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukPickerInput.md)
+  [`shinyCRUK::crukPickerInput`](https://crukorg.github.io/shinyCRUK/reference/crukPickerInput.md)
   or
-  [`shinyCRUK::crukSelectInput`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukSelectInput.md).
+  [`shinyCRUK::crukSelectInput`](https://crukorg.github.io/shinyCRUK/reference/crukSelectInput.md).
 
 ## Usage Tips
 
@@ -101,11 +120,21 @@ includes:
   `output$id <- renderText({...})` (or `renderUI`), since the output tag
   itself is only a placeholder until bound.
 
+- `dataSourceLink` is the destination of the click on `dataSourceText`;
+  the URL itself is never shown.
+
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-#' # Basic card with just chart and table
+# Basic card with just chart and table
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = "A chart showing how horsepower varies according to mpg in the mtcars dataset."
+)
+
+# Card with a data source
 crukChartTable(
   chart = plotlyOutput(outputId = "mtcarsPlot"),
   table = gt::gt_output(outputId = "mtTable"),
@@ -136,6 +165,17 @@ crukChartTable(
   alt = "Some alt text to go with the chart.",
   dataSourceText = shiny::textOutput("dataSourceLabel"),
   dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars"
+)
+
+# Chart and table card with a reactive data source label and link.
+# Server side: output$dataSourceLabel <- renderText(...);
+#              output$dataSourceUrl <- renderText(url())
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = "Some alt text to go with the chart.",
+  dataSourceText = shiny::textOutput("dataSourceLabel"),
+  dataSourceLink = shiny::textOutput("dataSourceUrl")
 )
 } # }
 ```

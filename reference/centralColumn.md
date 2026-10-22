@@ -76,10 +76,10 @@ Typical page structure using this function:
 
 ## See also
 
-[`crukNavTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukNavTitle.md)
+[`crukNavTitle`](https://crukorg.github.io/shinyCRUK/reference/crukNavTitle.md)
 for the navigation bar that sits outside this container
 
-[`crukTheme`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTheme.md)
+[`crukTheme`](https://crukorg.github.io/shinyCRUK/reference/crukTheme.md)
 for applying overall CRUK styling
 
 ## Examples

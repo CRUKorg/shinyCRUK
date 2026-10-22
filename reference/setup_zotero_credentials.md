@@ -3,7 +3,7 @@
 Interactive helper function to configure Zotero API credentials in your
 `.Renviron` file. This function guides you through adding your API key
 and user ID, which are required for
-[`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md)
+[`get_zotero_sources`](https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.md)
 to access your Zotero library.
 
 ## Usage
@@ -61,10 +61,10 @@ secure and never commit it to version control. Add `.Renviron` to your
 
 ## See also
 
-[`get_zotero_sources`](https://verbose-guacamole-l18vr83.pages.github.io/reference/get_zotero_sources.md)
+[`get_zotero_sources`](https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.md)
 for using the credentials to fetch sources
 
-[`find_zotero_group`](https://verbose-guacamole-l18vr83.pages.github.io/reference/find_zotero_group.md)
+[`find_zotero_group`](https://crukorg.github.io/shinyCRUK/reference/find_zotero_group.md)
 for finding your Zotero group ID
 
 [`edit_r_environ`](https://usethis.r-lib.org/reference/edit.html) for

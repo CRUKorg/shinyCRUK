@@ -70,15 +70,15 @@ The title uses CRUK brand typography:
 
 Place this at the beginning of each page's content, typically as the
 first element within
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md).
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md).
 Use descriptive titles that clearly communicate the page's purpose.
 
 ## See also
 
-[`centralColumn`](https://verbose-guacamole-l18vr83.pages.github.io/reference/centralColumn.md)
+[`centralColumn`](https://crukorg.github.io/shinyCRUK/reference/centralColumn.md)
 for the container that typically wraps page content
 
-[`crukNavTitle`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukNavTitle.md)
+[`crukNavTitle`](https://crukorg.github.io/shinyCRUK/reference/crukNavTitle.md)
 for the application-level navigation title
 
 ## Examples

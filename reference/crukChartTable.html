@@ -11,7 +11,7 @@ best practice."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,14 @@ best practice.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crukChartTable</span><span class="op">(</span><span class="va">chart</span>, <span class="va">table</span>, <span class="va">alt</span>, <span class="va">dataSourceText</span>, <span class="va">dataSourceLink</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crukChartTable</span><span class="op">(</span></span>
+<span>  <span class="va">chart</span>,</span>
+<span>  <span class="va">table</span>,</span>
+<span>  <span class="va">alt</span>,</span>
+<span>  dataSourceText <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dataSourceLink <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -64,24 +71,33 @@ best practice.</p>
 
 <dt id="arg-alt">alt<a class="anchor" aria-label="anchor" href="#arg-alt"></a></dt>
 <dd><p>Character. Alt text to include alongside the chart. Minimum 15
-characters. Please ensure alt text is sufficiently descriptive. Supplied
+characters; over 125 characters gives a warning (it may cause issues with
+some screen readers). Please ensure alt text is sufficiently descriptive. Supplied
 character string will be appended with the text " Please see table for the data
 in an accessible format."</p></dd>
 
 
 <dt id="arg-datasourcetext">dataSourceText<a class="anchor" aria-label="anchor" href="#arg-datasourcetext"></a></dt>
-<dd><p>Character, or a <code>shiny.tag</code>/UI output object (e.g.
-<code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">shiny::textOutput</a></code>, <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">shiny::uiOutput</a></code>). Data source text that is
-displayed at the bottom of the table. If a plain character string is supplied,
-it is appended with "Data source: " in front. If a tag/output object is
-supplied (for example a reactive <code>textOutput</code>), it is inserted directly
-as rendered content alongside a static "Data source: " label, rather than
-being coerced to a string, so its output is rendered rather than shown as
-raw HTML.</p></dd>
+<dd><p>Optional. Character, or a <code>shiny.tag</code>/UI output
+object (e.g. <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">shiny::textOutput</a></code>, <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">shiny::uiOutput</a></code>). The data
+source text displayed at the bottom of the table, after a static
+"Data source: " label on the same line. If a tag/output object is supplied it
+is inserted as rendered content rather than coerced to a string. Top-level
+<code>div</code> outputs (the default for <code>textOutput</code> and <code>uiOutput</code>) are
+converted to <code>span</code>s so they stay inline. If <code>NULL</code> (the default), no
+data source line is added and "Data source" does not appear.</p></dd>
 
 
 <dt id="arg-datasourcelink">dataSourceLink<a class="anchor" aria-label="anchor" href="#arg-datasourcelink"></a></dt>
-<dd><p>Character. URL for the data source hyperlink.</p></dd>
+<dd><p>Optional. Where the user goes when they click
+<code>dataSourceText</code>. Either a single character URL, or a <code>shiny.tag</code>
+output (<code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">shiny::textOutput</a></code> or <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">shiny::uiOutput</a></code>) whose rendered
+content is the URL, so the link can be reactive. The URL is never displayed.
+For a <code>renderUI</code> output you can return plain text, or a tag containing
+an <code>&lt;a href&gt;</code>, in which case its <code>href</code> is used. Only
+<code>http(s)://</code> URLs are used; if the rendered value is anything else the text is
+shown without a link. Needs <code>dataSourceText</code>: if supplied on its own,
+it is ignored with a warning.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -94,7 +110,7 @@ raw HTML.</p></dd>
 for CRUK styling. The card includes:</p><ul><li><p>A border-less, shadow-less card with two <code><a href="https://rstudio.github.io/bslib/reference/nav-items.html" class="external-link">bslib::nav_panel</a></code>s</p></li>
 <li><p>A tab with the heading "Chart".</p></li>
 <li><p>Attached alt text to the chart output, directing users to the table</p></li>
-<li><p>A tab with the heading "Title" and a data source</p></li>
+<li><p>A tab with the heading "Table" and, if supplied, a data source</p></li>
 <li><p>Optional additional arguments placed above the card, e.g. a title
 using <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">htmltools::h1</a></code> or selectors using <code><a href="crukPickerInput.html">shinyCRUK::crukPickerInput</a></code>
 or <code><a href="crukSelectInput.html">shinyCRUK::crukSelectInput</a></code>.</p></li>
@@ -118,12 +134,21 @@ data sources/reference box</p></li>
 reactively; just remember to bind it server-side with a matching
 <code>output$id &lt;- renderText({...})</code> (or <code>renderUI</code>), since the
 output tag itself is only a placeholder until bound.</p></li>
+<li><p><code>dataSourceLink</code> is the destination of the click on
+<code>dataSourceText</code>; the URL itself is never shown.</p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co">#' # Basic card with just chart and table</span></span></span>
+<span class="r-in"><span><span class="co"># Basic card with just chart and table</span></span></span>
+<span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"A chart showing how horsepower varies according to mpg in the mtcars dataset."</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Card with a data source</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
@@ -154,6 +179,17 @@ output tag itself is only a placeholder until bound.</p></li>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"Some alt text to go with the chart."</span>,</span></span>
 <span class="r-in"><span>  dataSourceText <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"dataSourceLabel"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  dataSourceLink <span class="op">=</span> <span class="st">"https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Chart and table card with a reactive data source label and link.</span></span></span>
+<span class="r-in"><span><span class="co"># Server side: output$dataSourceLabel &lt;- renderText(...);</span></span></span>
+<span class="r-in"><span><span class="co">#              output$dataSourceUrl &lt;- renderText(url())</span></span></span>
+<span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"Some alt text to go with the chart."</span>,</span></span>
+<span class="r-in"><span>  dataSourceText <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"dataSourceLabel"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  dataSourceLink <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"dataSourceUrl"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>

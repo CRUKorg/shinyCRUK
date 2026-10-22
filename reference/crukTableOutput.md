@@ -1,7 +1,7 @@
 # CRUK table output for Shiny
 
 UI counterpart to
-[`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md).
+[`renderCrukTable()`](https://crukorg.github.io/shinyCRUK/reference/renderCrukTable.md).
 A thin wrapper around
 [`reactable::reactableOutput()`](https://glin.github.io/reactable/reference/reactable-shiny.html)
 that also loads the CRUK table stylesheet, so the CSS is on the page
@@ -42,8 +42,8 @@ work with the same `outputId`.
 
 ## See also
 
-[`renderCrukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/renderCrukTable.md),
-[`crukTable()`](https://verbose-guacamole-l18vr83.pages.github.io/reference/crukTable.md)
+[`renderCrukTable()`](https://crukorg.github.io/shinyCRUK/reference/renderCrukTable.md),
+[`crukTable()`](https://crukorg.github.io/shinyCRUK/reference/crukTable.md)
 
 ## Examples
 
