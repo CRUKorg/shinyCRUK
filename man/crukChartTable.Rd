@@ -4,7 +4,14 @@
 \alias{crukChartTable}
 \title{Border-less Card for Chart and Table Combined Output}
 \usage{
-crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
+crukChartTable(
+  chart,
+  table,
+  alt,
+  dataSourceText = NULL,
+  dataSourceLink = NULL,
+  ...
+)
 }
 \arguments{
 \item{chart}{A chart output in the form of a \code{shiny::plotOutput},
@@ -14,20 +21,29 @@ crukChartTable(chart, table, alt, dataSourceText, dataSourceLink, ...)
 \code{DT::dataTableOutput}, \code{gt::gt_output}, or \code{reactable::reactableOutput}.}
 
 \item{alt}{Character. Alt text to include alongside the chart. Minimum 15
-characters. Please ensure alt text is sufficiently descriptive. Supplied
+characters; over 125 characters gives a warning (it may cause issues with
+some screen readers). Please ensure alt text is sufficiently descriptive. Supplied
 character string will be appended with the text " Please see table for the data
 in an accessible format."}
 
-\item{dataSourceText}{Character, or a \code{shiny.tag}/UI output object (e.g.
-\code{shiny::textOutput}, \code{shiny::uiOutput}). Data source text that is
-displayed at the bottom of the table. If a plain character string is supplied,
-it is appended with "Data source: " in front. If a tag/output object is
-supplied (for example a reactive \code{textOutput}), it is inserted directly
-as rendered content alongside a static "Data source: " label, rather than
-being coerced to a string, so its output is rendered rather than shown as
-raw HTML.}
+\item{dataSourceText}{Optional. Character, or a \code{shiny.tag}/UI output
+object (e.g. \code{shiny::textOutput}, \code{shiny::uiOutput}). The data
+source text displayed at the bottom of the table, after a static
+"Data source: " label on the same line. If a tag/output object is supplied it
+is inserted as rendered content rather than coerced to a string. Top-level
+\code{div} outputs (the default for \code{textOutput} and \code{uiOutput}) are
+converted to \code{span}s so they stay inline. If \code{NULL} (the default), no
+data source line is added and "Data source" does not appear.}
 
-\item{dataSourceLink}{Character. URL for the data source hyperlink.}
+\item{dataSourceLink}{Optional. Where the user goes when they click
+\code{dataSourceText}. Either a single character URL, or a \code{shiny.tag}
+output (\code{shiny::textOutput} or \code{shiny::uiOutput}) whose rendered
+content is the URL, so the link can be reactive. The URL is never displayed.
+For a \code{renderUI} output you can return plain text, or a tag containing
+an \code{<a href>}, in which case its \code{href} is used. Only
+\code{http(s)://} URLs are used; if the rendered value is anything else the text is
+shown without a link. Needs \code{dataSourceText}: if supplied on its own,
+it is ignored with a warning.}
 
 \item{...}{Optional additional arguments}
 }
@@ -38,7 +54,7 @@ for CRUK styling. The card includes:
 \item A border-less, shadow-less card with two \code{bslib::nav_panel}s
 \item A tab with the heading "Chart".
 \item Attached alt text to the chart output, directing users to the table
-\item A tab with the heading "Title" and a data source
+\item A tab with the heading "Table" and, if supplied, a data source
 \item Optional additional arguments placed above the card, e.g. a title
 using \code{htmltools::h1} or selectors using \code{shinyCRUK::crukPickerInput}
 or \code{shinyCRUK::crukSelectInput}.
@@ -67,12 +83,21 @@ data sources/reference box
 reactively; just remember to bind it server-side with a matching
 \code{output$id <- renderText({...})} (or \code{renderUI}), since the
 output tag itself is only a placeholder until bound.
+\item \code{dataSourceLink} is the destination of the click on
+\code{dataSourceText}; the URL itself is never shown.
 }
 }
 
 \examples{
 \dontrun{
-#' # Basic card with just chart and table
+# Basic card with just chart and table
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = "A chart showing how horsepower varies according to mpg in the mtcars dataset."
+)
+
+# Card with a data source
 crukChartTable(
   chart = plotlyOutput(outputId = "mtcarsPlot"),
   table = gt::gt_output(outputId = "mtTable"),
@@ -103,6 +128,17 @@ crukChartTable(
   alt = "Some alt text to go with the chart.",
   dataSourceText = shiny::textOutput("dataSourceLabel"),
   dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars"
+)
+
+# Chart and table card with a reactive data source label and link.
+# Server side: output$dataSourceLabel <- renderText(...);
+#              output$dataSourceUrl <- renderText(url())
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = "Some alt text to go with the chart.",
+  dataSourceText = shiny::textOutput("dataSourceLabel"),
+  dataSourceLink = shiny::textOutput("dataSourceUrl")
 )
 }
 }

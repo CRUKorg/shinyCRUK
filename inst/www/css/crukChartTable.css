@@ -70,4 +70,8 @@
   color: #666666 !important;
   align-self: flex-end;
   padding-right: 8px;
+  /* Size to the full text rather than a squeezed fit-content width, so
+     "Data source: <text>" stays on one line; still wraps if wider than the card */
+  width: max-content;
+  max-width: 100%;
 }
