@@ -28,10 +28,13 @@ test_that("text and link: the text is the link and the URL is not displayed", {
   expect_equal(lengths(regmatches(html, gregexpr(url, html, fixed = TRUE))), 1L)
 })
 
-test_that("text only gives plain text with no anchor", {
+test_that("text only gives plain text with no anchor in the source line", {
   html <- as.character(card(dataSourceText = "NHS Digital"))
   expect_match(html, "NHS Digital", fixed = TRUE)
-  expect_false(grepl("<a ", html, fixed = TRUE))
+  # The tab headers are <a> elements too, so only look inside the source div
+  source_html <- strsplit(html, "no-border-card-source", fixed = TRUE)[[1]][2]
+  expect_false(is.na(source_html))
+  expect_false(grepl("<a ", source_html, fixed = TRUE))
 })
 
 test_that("link without text warns and adds no source line", {
