@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,23 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.1" id="shinycruk-061">shinyCRUK 0.6.1<a class="anchor" aria-label="anchor" href="#shinycruk-061"></a></h2>
+<div class="section level3">
+<h3 id="new-functions-0-6-1">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-6-1"></a></h3>
+<ul><li>New <code><a href="../reference/window_is_narrow.html">window_is_narrow()</a></code> helper function. Calling this function on a reactive returned from <code><a href="../reference/window_size.html">window_size_server()</a></code> returns TRUE if screen width is smaller than a chosen breakpoint (default is 900 pixels).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-6-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-6-1"></a></h3>
+<ul><li>Fixed an issue where <code><a href="../reference/crukRadioButton.html">crukRadioButton()</a></code> wouldn’t grow above 48px, causing text to overflow the box if it wrapped onto a second line.</li>
+<li>
+<code><a href="../reference/crukTable.html">crukTable()</a></code>: The line above the pagination bar is now 3px solid black, as is the right-hand divider on the row header column (<code>colDef(rowHeader = TRUE)</code>).</li>
+<li>
+<code><a href="../reference/crukTable.html">crukTable()</a></code>: Tupplying <code>defaultPageSize</code> now switches pagination on (it was silently ignored while <code>pagination</code> was <code>FALSE</code>). Setting both <code>pagination = FALSE</code> and <code>defaultPageSize</code> warns that the page size is ignored.</li>
+<li>
+<code><a href="../reference/crukTable.html">crukTable()</a></code>: Treviously, passing the width returned from <code><a href="../reference/window_size.html">window_size_server()</a></code> would redraw the every time the screen changed size. This caused a bug where paginated tables would be redrawn every time the user navigates to a page with fewer than <code>defaultPageSize</code> entries, which would reset the pagination to the first page. Now a new <code>mobile</code> parameter is designed to work with the new <code><a href="../reference/window_is_narrow.html">window_is_narrow()</a></code> function, which only updates when the screen width cross the breakpoint, preventing redrawing.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="shinycruk-060">shinyCRUK 0.6.0<a class="anchor" aria-label="anchor" href="#shinycruk-060"></a></h2>
 <div class="section level3">

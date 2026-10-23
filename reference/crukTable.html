@@ -7,7 +7,7 @@ directly. Call it directly in R Markdown, Quarto, or for static tables."><meta p
 comes from inst/www/css/tables.css, which is attached as an HTML
 dependency. In a Shiny app you will usually use crukTableOutput() in
 the UI and renderCrukTable() in the server instead of calling this
-directly. Call it directly in R Markdown, Quarto, or for static tables."><!-- dependencies from examples --><script src="libs/core-js-2.5.3/shim.min.js"></script><script src="libs/react-18.2.0/react.min.js"></script><script src="libs/react-18.2.0/react-dom.min.js"></script><script src="libs/reactwidget-2.0.0/react-tools.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/reactable-0.4.5/reactable.css" rel="stylesheet"><script src="libs/reactable-binding-0.4.5/reactable.js"></script><link href="libs/crukTable-0.6.0/css/tables.css" rel="stylesheet"></head><body>
+directly. Call it directly in R Markdown, Quarto, or for static tables."><!-- dependencies from examples --><script src="libs/core-js-2.5.3/shim.min.js"></script><script src="libs/react-18.2.0/react.min.js"></script><script src="libs/react-18.2.0/react-dom.min.js"></script><script src="libs/reactwidget-2.0.0/react-tools.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/reactable-0.4.5/reactable.css" rel="stylesheet"><script src="libs/reactable-binding-0.4.5/reactable.js"></script><link href="libs/crukTable-0.6.1/css/tables.css" rel="stylesheet"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -15,7 +15,7 @@ directly. Call it directly in R Markdown, Quarto, or for static tables."><!-- de
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@ directly. Call it directly in R Markdown, Quarto, or for static tables.</p>
 <span>  <span class="va">data</span>,</span>
 <span>  columns <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sortable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  filterable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  filterable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  selection <span class="op">=</span> <span class="st">"multiple"</span>,</span>
 <span>  onClick <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">selection</span><span class="op">)</span><span class="op">)</span> <span class="st">"select"</span> <span class="kw">else</span> <span class="cn">NULL</span>,</span>
 <span>  highlight <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -64,7 +64,8 @@ directly. Call it directly in R Markdown, Quarto, or for static tables.</p>
 <span>  class <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  WindowSize <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  mobileBreakpoint <span class="op">=</span> <span class="fl">900</span>,</span>
-<span>  mobileMaxWidth <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>  mobileMaxWidth <span class="op">=</span> <span class="fl">375</span>,</span>
+<span>  mobile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -89,12 +90,15 @@ column headers. Default is <code>TRUE</code>.</p></dd>
 
 <dt id="arg-filterable">filterable<a class="anchor" aria-label="anchor" href="#arg-filterable"></a></dt>
 <dd><p>Logical. Whether filter inputs are displayed for columns.
-Default is <code>TRUE</code>.</p></dd>
+Default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-selection">selection<a class="anchor" aria-label="anchor" href="#arg-selection"></a></dt>
 <dd><p>Row selection mode: <code>"multiple"</code>, <code>"single"</code>, or
-<code>NULL</code> for no selection. Default is <code>"multiple"</code>.</p></dd>
+<code>NULL</code> for no selection. Default is <code>"multiple"</code>. Rows are
+selected by clicking them; reactable's checkbox column is not shown (and
+takes up no space). To show it anyway, supply your own <code>.selection</code>
+column definition in <code>columns</code>.</p></dd>
 
 
 <dt id="arg-onclick">onClick<a class="anchor" aria-label="anchor" href="#arg-onclick"></a></dt>
@@ -108,13 +112,16 @@ Default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-pagination">pagination<a class="anchor" aria-label="anchor" href="#arg-pagination"></a></dt>
-<dd><p>Logical. Whether pagination is enabled.
-Default is <code>FALSE</code>.</p></dd>
+<dd><p>Logical. Whether pagination is enabled. Default is
+<code>FALSE</code>, unless <code>defaultPageSize</code> is supplied and
+<code>pagination</code> is not, in which case pagination is switched on.</p></dd>
 
 
 <dt id="arg-defaultpagesize">defaultPageSize<a class="anchor" aria-label="anchor" href="#arg-defaultpagesize"></a></dt>
 <dd><p>Number of rows per page. If <code>NULL</code>, all rows are
-shown when pagination is off and 10 when it is on.</p></dd>
+shown when pagination is off and 10 when it is on. Supplying a page size
+switches pagination on unless you also set <code>pagination = FALSE</code>, in
+which case the page size is ignored (with a warning).</p></dd>
 
 
 <dt id="arg-class">class<a class="anchor" aria-label="anchor" href="#arg-class"></a></dt>
@@ -133,19 +140,35 @@ or the width is not yet known, the full-size table is drawn. Call
 <code>crukTable()</code> inside <code><a href="renderCrukTable.html">renderCrukTable()</a></code> so the table redraws when the
 window is resized. Note that a redraw resets sorting, filtering and
 selection. Any <code>width</code>, <code>minWidth</code> or <code>maxWidth</code> you set in
-<code>columns</code> takes precedence over the compact defaults.</p></dd>
+<code>columns</code> takes precedence over the compact defaults. Passing
+<code>WindowSize = win_size()</code> inside <code><a href="renderCrukTable.html">renderCrukTable()</a></code> redraws the table
+on every window size update, which resets the current page. Prefer
+<code>mobile = window_is_narrow(win_size)</code> (see below) in Shiny apps.</p></dd>
 
 
 <dt id="arg-mobilebreakpoint">mobileBreakpoint<a class="anchor" aria-label="anchor" href="#arg-mobilebreakpoint"></a></dt>
 <dd><p>Window width in pixels below which the compact table
-is used. Default is 900 (Bootstrap's <code>md</code> breakpoint).</p></dd>
+is used. Default is 900 (Bootstrap's <code>md</code> breakpoint). Only used with
+<code>WindowSize</code>; with <code>mobile</code>, the breakpoint is whatever you gave
+<code><a href="window_is_narrow.html">window_is_narrow()</a></code>.</p></dd>
 
 
 <dt id="arg-mobilemaxwidth">mobileMaxWidth<a class="anchor" aria-label="anchor" href="#arg-mobilemaxwidth"></a></dt>
 <dd><p>Target maximum table width in pixels for the compact
 table. Used to work out the default minimum column width (the table
 width is not capped if there are too many columns to fit; it then scrolls
-horizontally inside its container). Default is 600.</p></dd>
+horizontally inside its container). Default is 375.</p></dd>
+
+
+<dt id="arg-mobile">mobile<a class="anchor" aria-label="anchor" href="#arg-mobile"></a></dt>
+<dd><p>Optional. <code>TRUE</code> or <code>FALSE</code>: draw the compact
+version of the table (see <code>WindowSize</code>) or the full-size one. In a
+Shiny app, pass the reactive from <code><a href="window_is_narrow.html">window_is_narrow()</a></code> called, i.e.
+<code>mobile = is_narrow()</code>. Because <code><a href="window_is_narrow.html">window_is_narrow()</a></code> only changes
+when the window crosses its breakpoint, the table is redrawn only then,
+rather than on every resize, so the current page, sort order and selection
+are kept. If supplied, <code>mobile</code> takes precedence over
+<code>WindowSize</code>. If <code>NULL</code> (the default), <code>WindowSize</code> is used.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -159,14 +182,30 @@ attached.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="crukTableOutput.html">crukTableOutput()</a></code>, <code><a href="renderCrukTable.html">renderCrukTable()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="crukTableOutput.html">crukTableOutput()</a></code>, <code><a href="renderCrukTable.html">renderCrukTable()</a></code>, <code><a href="window_is_narrow.html">window_is_narrow()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">crukTable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, filterable <span class="op">=</span> <span class="cn">FALSE</span>, selection <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
 <div id="htmlwidget-ac96cb3ee4656e2e9ec3" class="reactable html-widget" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],"mpg":[21,21,22.8,21.4,18.7,18.1],"cyl":[6,6,4,6,8,6],"disp":[160,160,108,258,360,225],"hp":[110,110,93,110,175,105],"drat":[3.9,3.9,3.85,3.08,3.15,2.76],"wt":[2.62,2.875,2.32,3.215,3.44,3.46],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22],"vs":[0,0,1,1,0,1],"am":[1,1,1,0,0,0],"gear":[4,4,4,3,3,3],"carb":[4,4,1,1,2,1]},"columns":[{"id":".rownames","name":"","type":"character","align":"left","headerStyle":{"textAlign":"left"},"sortable":false,"filterable":false,"rowHeader":true},{"id":"mpg","name":"mpg","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"cyl","name":"cyl","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"disp","name":"disp","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"hp","name":"hp","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"drat","name":"drat","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"wt","name":"wt","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"qsec","name":"qsec","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"vs","name":"vs","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"am","name":"am","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"gear","name":"gear","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"carb","name":"carb","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}}],"pagination":false,"defaultPageSize":6,"highlight":true,"borderless":true,"className":"cruk-table cruk-table--highlight cruk-table--sortable","dataKey":"ccb58144b43c63afa6f590ba55b4440c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script></code></pre></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],"mpg":[21,21,22.8,21.4,18.7,18.1],"cyl":[6,6,4,6,8,6],"disp":[160,160,108,258,360,225],"hp":[110,110,93,110,175,105],"drat":[3.9,3.9,3.85,3.08,3.15,2.76],"wt":[2.62,2.875,2.32,3.215,3.44,3.46],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22],"vs":[0,0,1,1,0,1],"am":[1,1,1,0,0,0],"gear":[4,4,4,3,3,3],"carb":[4,4,1,1,2,1]},"columns":[{"id":".rownames","name":"","type":"character","align":"left","headerStyle":{"textAlign":"left"},"sortable":false,"filterable":false,"rowHeader":true},{"id":"mpg","name":"mpg","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"cyl","name":"cyl","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"disp","name":"disp","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"hp","name":"hp","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"drat","name":"drat","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"wt","name":"wt","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"qsec","name":"qsec","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"vs","name":"vs","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"am","name":"am","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"gear","name":"gear","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}},{"id":"carb","name":"carb","type":"numeric","align":"left","headerStyle":{"textAlign":"left"}}],"pagination":false,"defaultPageSize":6,"highlight":true,"borderless":true,"className":"cruk-table cruk-table--highlight cruk-table--sortable","dataKey":"ccb58144b43c63afa6f590ba55b4440c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Force the compact version</span></span></span>
+<span class="r-in"><span><span class="fu">crukTable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, mobile <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<div id="htmlwidget-e5c8c404fe174e4c81bd" class="reactable html-widget" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],"mpg":[21,21,22.8,21.4,18.7,18.1],"cyl":[6,6,4,6,8,6],"disp":[160,160,108,258,360,225],"hp":[110,110,93,110,175,105],"drat":[3.9,3.9,3.85,3.08,3.15,2.76],"wt":[2.62,2.875,2.32,3.215,3.44,3.46],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22],"vs":[0,0,1,1,0,1],"am":[1,1,1,0,0,0],"gear":[4,4,4,3,3,3],"carb":[4,4,1,1,2,1]},"columns":[{"id":".selection","name":"","type":null,"minWidth":40,"align":"left","headerStyle":{"textAlign":"left"},"resizable":false,"width":45,"selectable":true,"show":false},{"id":".rownames","name":"","type":"character","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"},"sortable":false,"filterable":false,"rowHeader":true},{"id":"mpg","name":"mpg","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"cyl","name":"cyl","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"disp","name":"disp","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"hp","name":"hp","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"drat","name":"drat","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"wt","name":"wt","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"qsec","name":"qsec","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"vs","name":"vs","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"am","name":"am","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"gear","name":"gear","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"carb","name":"carb","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}}],"pagination":false,"defaultPageSize":6,"selection":"multiple","onClick":"select","highlight":true,"borderless":true,"className":"cruk-table cruk-table--selectable cruk-table--highlight cruk-table--sortable cruk-table--compact","dataKey":"d5b8d1ec978d94124821361c95058f3a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># In a Shiny app: redraw only when the window crosses the breakpoint</span></span></span>
+<span class="r-in"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">win_size</span>  <span class="op">&lt;-</span> <span class="fu"><a href="window_size.html">window_size_server</a></span><span class="op">(</span><span class="st">"window_tracker"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">is_narrow</span> <span class="op">&lt;-</span> <span class="fu"><a href="window_is_narrow.html">window_is_narrow</a></span><span class="op">(</span><span class="va">win_size</span>, breakpoint <span class="op">=</span> <span class="fl">900</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">output</span><span class="op">$</span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="renderCrukTable.html">renderCrukTable</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu">crukTable</span><span class="op">(</span><span class="va">mtcars</span>, pagination <span class="op">=</span> <span class="cn">TRUE</span>, mobile <span class="op">=</span> <span class="fu">is_narrow</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

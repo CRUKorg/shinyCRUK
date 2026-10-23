@@ -752,6 +752,8 @@ Matt or Sam.
   : Render a CRUK table in Shiny
 - [`setup_zotero_credentials()`](https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.md)
   : Setup Zotero API Credentials
+- [`window_is_narrow()`](https://crukorg.github.io/shinyCRUK/reference/window_is_narrow.md)
+  : Is the browser window narrower than a breakpoint?
 - [`window_size_ui()`](https://crukorg.github.io/shinyCRUK/reference/window_size.md)
   [`window_size_server()`](https://crukorg.github.io/shinyCRUK/reference/window_size.md)
   : Window Size Tracking Module
