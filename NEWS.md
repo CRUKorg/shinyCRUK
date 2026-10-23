@@ -1,3 +1,26 @@
+# shinyCRUK 0.6.1
+
+## New functions
+* New `window_is_narrow()` helper function. Calling this function on a reactive 
+returned from `window_size_server()` returns TRUE if screen width is smaller than 
+a chosen breakpoint (default is 900 pixels). 
+
+## Bug fixes
+
+* Fixed an issue where `crukRadioButton()` wouldn't grow above 48px, causing text 
+to overflow the box if it wrapped onto a second line.
+* `crukTable()`: The line above the pagination bar is now 3px solid black, as is
+  the right-hand divider on the row header column (`colDef(rowHeader = TRUE)`).
+* `crukTable()`: Tupplying `defaultPageSize` now switches pagination on (it was
+silently ignored while `pagination` was `FALSE`). Setting both
+`pagination = FALSE` and `defaultPageSize` warns that the page size is ignored.
+* `crukTable()`: Treviously, passing the width returned from `window_size_server()` 
+would redraw the every time the screen changed size. This caused a bug where paginated 
+tables would be redrawn every time the user navigates to a page with fewer than 
+`defaultPageSize` entries, which would reset the pagination to the first page. Now 
+a new `mobile` parameter is designed to work with the new `window_is_narrow()` function, 
+which only updates when the screen width cross the breakpoint, preventing redrawing.
+
 # shinyCRUK 0.6.0
 
 ## New functions
