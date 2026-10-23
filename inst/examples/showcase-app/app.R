@@ -8,17 +8,26 @@ library(plotly)
 library(gt)
 
 options(shiny.autoreload = TRUE)
+options(shiny.reactlog = TRUE)
 
 # Define UI
 ui <- bslib::page_navbar(
   window_title = "shinyCRUK",
   fillable = FALSE,
   navbar_options = navbar_options(underline = FALSE),
-  # Apply CRUK theme and Google Analytics
-  tags$head(
-    crukTheme(),
-    crukGA()
+
+  header = tagList(
+    # Apply CRUK theme and Google Analytics
+    tags$head(
+      crukTheme(),
+      crukGA()
+    ),
+
+    # Window size tracking (hidden UI component)
+    window_size_ui("window_tracker"),
   ),
+
+
 
   # Navigation bar with two selectors
   title = crukNavTitle(
@@ -38,8 +47,7 @@ ui <- bslib::page_navbar(
     # )
   ),
 
-  # Window size tracking (hidden UI component)
-  window_size_ui("window_tracker"),
+
 
   # Footer at bottom
   footer = centralColumn(
@@ -196,6 +204,15 @@ ui <- bslib::page_navbar(
 
       br(),
 
+      h3("Key stat box"),
+      p("A box to draw attention to a big key stat"),
+      div(
+        style = "border: 1px solid #ccc; padding: 20px; margin: 20px 0;",
+        crukKeyStatBox("Nearly 1 in 2 of us will get cancer in our lifetimes")
+      ),
+
+      br(),
+
       h3("Tooltip"),
       p("A tooltip to display useful information on hover (desktop) or click (mobile)"),
       div(
@@ -298,7 +315,8 @@ ui <- bslib::page_navbar(
           tags$ul(
             tags$li(tags$strong("centralColumn()"), " - Main content container (900px max width)"),
             tags$li(tags$strong("crukTheme()"), " - Apply CRUK CSS theme to the app"),
-            tags$li(tags$strong("window_size_ui() / window_size_server()"), " - Track browser window dimensions")
+            tags$li(tags$strong("window_size_ui() / window_size_server()"), " - Track browser window dimensions"),
+            tags$li(tags$strong("window_is_narrow()"), " - Returns TRUE if narrower than set value (default is 900px)")
           )
       ),
 
@@ -384,6 +402,7 @@ server <- function(input, output, session) {
 
   # Track window size
   win_size <- window_size_server("window_tracker", debounce_ms = 300, verbose = FALSE)
+  is_narrow <- window_is_narrow(win_size, breakpoint = 900)
 
   # Display window size
   output$window_size_display <- renderText({
@@ -435,12 +454,16 @@ server <- function(input, output, session) {
       )
   })
 
-  # Create crukTable()
+
+  # Table output
   output$demo_table <- renderCrukTable({
     filtered_data() |>
       tibble::rownames_to_column("car") |>
       select(car, mpg, cyl, wt, hp) |>
-      crukTable(filterable = FALSE, WindowSize = win_size())
+      crukTable(
+        mobile = is_narrow(),
+        pagination = TRUE
+      )
   })
 
   # Dynamic source text

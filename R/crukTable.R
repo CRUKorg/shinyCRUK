@@ -12,17 +12,23 @@
 #' @param sortable Logical. Whether columns can be sorted by clicking the
 #'   column headers. Default is \code{TRUE}.
 #' @param filterable Logical. Whether filter inputs are displayed for columns.
-#'   Default is \code{TRUE}.
+#'   Default is \code{FALSE}.
 #' @param selection Row selection mode: \code{"multiple"}, \code{"single"}, or
-#'   \code{NULL} for no selection. Default is \code{"multiple"}.
+#'   \code{NULL} for no selection. Default is \code{"multiple"}. Rows are
+#'   selected by clicking them; reactable's checkbox column is not shown (and
+#'   takes up no space). To show it anyway, supply your own \code{.selection}
+#'   column definition in \code{columns}.
 #' @param onClick Action to perform when a row is clicked. Defaults to
 #'   \code{"select"} when \code{selection} is set, otherwise \code{NULL}.
 #' @param highlight Logical. Whether rows are highlighted on hover.
 #'   Default is \code{TRUE}.
-#' @param pagination Logical. Whether pagination is enabled.
-#'   Default is \code{FALSE}.
+#' @param pagination Logical. Whether pagination is enabled. Default is
+#'   \code{FALSE}, unless \code{defaultPageSize} is supplied and
+#'   \code{pagination} is not, in which case pagination is switched on.
 #' @param defaultPageSize Number of rows per page. If \code{NULL}, all rows are
-#'   shown when pagination is off and 10 when it is on.
+#'   shown when pagination is off and 10 when it is on. Supplying a page size
+#'   switches pagination on unless you also set \code{pagination = FALSE}, in
+#'   which case the page size is ignored (with a warning).
 #' @param class Optional extra CSS class(es) for the table.
 #' @param WindowSize Optional. The current window size, i.e. the value of the
 #'   reactive returned by [window_size_server()]: pass \code{WindowSize()}, not
@@ -35,28 +41,56 @@
 #'   \code{crukTable()} inside [renderCrukTable()] so the table redraws when the
 #'   window is resized. Note that a redraw resets sorting, filtering and
 #'   selection. Any \code{width}, \code{minWidth} or \code{maxWidth} you set in
-#'   \code{columns} takes precedence over the compact defaults.
+#'   \code{columns} takes precedence over the compact defaults. Passing
+#'   \code{WindowSize = win_size()} inside [renderCrukTable()] redraws the table
+#'   on every window size update, which resets the current page. Prefer
+#'   \code{mobile = window_is_narrow(win_size)} (see below) in Shiny apps.
 #' @param mobileBreakpoint Window width in pixels below which the compact table
-#'   is used. Default is 900 (Bootstrap's \code{md} breakpoint).
+#'   is used. Default is 900 (Bootstrap's \code{md} breakpoint). Only used with
+#'   \code{WindowSize}; with \code{mobile}, the breakpoint is whatever you gave
+#'   [window_is_narrow()].
 #' @param mobileMaxWidth Target maximum table width in pixels for the compact
 #'   table. Used to work out the default minimum column width (the table
 #'   width is not capped if there are too many columns to fit; it then scrolls
-#'   horizontally inside its container). Default is 600.
+#'   horizontally inside its container). Default is 375.
+#' @param mobile Optional. \code{TRUE} or \code{FALSE}: draw the compact
+#'   version of the table (see \code{WindowSize}) or the full-size one. In a
+#'   Shiny app, pass the reactive from [window_is_narrow()] called, i.e.
+#'   \code{mobile = is_narrow()}. Because [window_is_narrow()] only changes
+#'   when the window crosses its breakpoint, the table is redrawn only then,
+#'   rather than on every resize, so the current page, sort order and selection
+#'   are kept. If supplied, \code{mobile} takes precedence over
+#'   \code{WindowSize}. If \code{NULL} (the default), \code{WindowSize} is used.
 #' @param ... Additional arguments passed to \code{reactable::reactable()}.
 #'
 #' @return A \code{reactable} htmlwidget with the CRUK table stylesheet
 #'   attached.
 #'
-#' @seealso [crukTableOutput()], [renderCrukTable()]
+#' @seealso [crukTableOutput()], [renderCrukTable()], [window_is_narrow()]
 #' @export
 #'
 #' @examples
 #' crukTable(head(mtcars), filterable = FALSE, selection = NULL)
+#'
+#' # Force the compact version
+#' crukTable(head(mtcars), mobile = TRUE)
+#'
+#' \dontrun{
+#' # In a Shiny app: redraw only when the window crosses the breakpoint
+#' server <- function(input, output, session) {
+#'   win_size  <- window_size_server("window_tracker")
+#'   is_narrow <- window_is_narrow(win_size, breakpoint = 900)
+#'
+#'   output$table <- renderCrukTable(
+#'     crukTable(mtcars, pagination = TRUE, mobile = is_narrow())
+#'   )
+#' }
+#' }
 crukTable <- function(
     data,
     columns = NULL,
     sortable = TRUE,
-    filterable = TRUE,
+    filterable = FALSE,
     selection = "multiple",
     onClick = if (!is.null(selection)) "select" else NULL,
     highlight = TRUE,
@@ -65,7 +99,8 @@ crukTable <- function(
     class = NULL,
     WindowSize = NULL,
     mobileBreakpoint = 900,
-    mobileMaxWidth = 600,
+    mobileMaxWidth = 375,
+    mobile = NULL,
     ...
 ) {
 
@@ -88,7 +123,7 @@ crukTable <- function(
   if (is.function(WindowSize)) {
     stop(
       "`WindowSize` must be the window size, not the reactive: use ",
-      "`WindowSize = WindowSize()` rather than `WindowSize = WindowSize`",
+      "`WindowSize = win_size()` rather than `WindowSize = win_size`",
       call. = FALSE
     )
   }
@@ -101,8 +136,37 @@ crukTable <- function(
     )
   }
 
-  # Anything unexpected (NULL, NA, no width yet) counts as "not mobile".
-  mobile <- cruk_is_mobile(WindowSize, mobileBreakpoint)
+  if (!is.null(mobile)) {
+    check_flag(mobile, "mobile")
+  }
+
+  # An explicit `mobile` wins. Otherwise fall back to WindowSize, where anything
+  # unexpected (NULL, NA, no width yet) counts as "not mobile".
+  is_mobile <- if (!is.null(mobile)) {
+    mobile
+  } else {
+    cruk_is_mobile(WindowSize, mobileBreakpoint)
+  }
+
+  # A page size only means something with pagination on. If the caller gave a
+  # page size but left `pagination` alone, they clearly want pages; if they set
+  # `pagination = FALSE` as well, say that the page size is being ignored.
+  if (!is.null(defaultPageSize)) {
+    if (!is.numeric(defaultPageSize) || length(defaultPageSize) != 1 ||
+        is.na(defaultPageSize) || defaultPageSize < 1) {
+      stop("`defaultPageSize` must be a single number of at least 1", call. = FALSE)
+    }
+
+    if (missing(pagination)) {
+      pagination <- TRUE
+    } else if (!pagination) {
+      warning(
+        "`defaultPageSize` is ignored when `pagination = FALSE`",
+        call. = FALSE
+      )
+      defaultPageSize <- NULL
+    }
+  }
 
   # Show all rows when pagination is disabled. max() avoids a page size of 0
   # for empty data.
@@ -119,7 +183,7 @@ crukTable <- function(
       if (!is.null(selection)) "cruk-table--selectable",
       if (highlight) "cruk-table--highlight",
       if (sortable) "cruk-table--sortable",
-      if (mobile) "cruk-table--compact",
+      if (is_mobile) "cruk-table--compact",
       class
     ),
     collapse = " "
@@ -127,7 +191,7 @@ crukTable <- function(
 
   widget <- reactable::reactable(
     data,
-    columns = columns,
+    columns = cruk_columns(columns, selection),
     sortable = sortable,
     filterable = filterable,
     selection = selection,
@@ -136,7 +200,7 @@ crukTable <- function(
     borderless = TRUE,
     pagination = pagination,
     defaultPageSize = defaultPageSize,
-    defaultColDef = cruk_default_col_def(data, mobile, mobileMaxWidth),
+    defaultColDef = cruk_default_col_def(data, is_mobile, mobileMaxWidth),
     class = table_class,
     ...
   )
@@ -282,6 +346,19 @@ cruk_table_dependency <- function() {
 cruk_is_mobile <- function(WindowSize, breakpoint) {
   width <- WindowSize$width
   is.numeric(width) && length(width) == 1 && !is.na(width) && width < breakpoint
+}
+
+# Rows are selected by clicking, so reactable's checkbox column is never wanted.
+# Hiding it with CSS is not enough: reactable still lays it out, so it adds 45px
+# to the table's minimum width and leaves an empty 45px cell in the footer
+# (summary) row. show = FALSE removes it from the table altogether. A
+# `.selection` definition supplied by the caller is left alone.
+cruk_columns <- function(columns, selection) {
+  if (is.null(selection) || ".selection" %in% names(columns)) {
+    return(columns)
+  }
+
+  c(columns, list(.selection = reactable::colDef(show = FALSE)))
 }
 
 # reactable's default minWidth is 100px. On mobile, share `max_width` between

@@ -8,7 +8,7 @@ crukTable(
   data,
   columns = NULL,
   sortable = TRUE,
-  filterable = TRUE,
+  filterable = FALSE,
   selection = "multiple",
   onClick = if (!is.null(selection)) "select" else NULL,
   highlight = TRUE,
@@ -17,7 +17,8 @@ crukTable(
   class = NULL,
   WindowSize = NULL,
   mobileBreakpoint = 900,
-  mobileMaxWidth = 600,
+  mobileMaxWidth = 375,
+  mobile = NULL,
   ...
 )
 }
@@ -31,10 +32,13 @@ crukTable(
 column headers. Default is \code{TRUE}.}
 
 \item{filterable}{Logical. Whether filter inputs are displayed for columns.
-Default is \code{TRUE}.}
+Default is \code{FALSE}.}
 
 \item{selection}{Row selection mode: \code{"multiple"}, \code{"single"}, or
-\code{NULL} for no selection. Default is \code{"multiple"}.}
+\code{NULL} for no selection. Default is \code{"multiple"}. Rows are
+selected by clicking them; reactable's checkbox column is not shown (and
+takes up no space). To show it anyway, supply your own \code{.selection}
+column definition in \code{columns}.}
 
 \item{onClick}{Action to perform when a row is clicked. Defaults to
 \code{"select"} when \code{selection} is set, otherwise \code{NULL}.}
@@ -42,11 +46,14 @@ Default is \code{TRUE}.}
 \item{highlight}{Logical. Whether rows are highlighted on hover.
 Default is \code{TRUE}.}
 
-\item{pagination}{Logical. Whether pagination is enabled.
-Default is \code{FALSE}.}
+\item{pagination}{Logical. Whether pagination is enabled. Default is
+\code{FALSE}, unless \code{defaultPageSize} is supplied and
+\code{pagination} is not, in which case pagination is switched on.}
 
 \item{defaultPageSize}{Number of rows per page. If \code{NULL}, all rows are
-shown when pagination is off and 10 when it is on.}
+shown when pagination is off and 10 when it is on. Supplying a page size
+switches pagination on unless you also set \code{pagination = FALSE}, in
+which case the page size is ignored (with a warning).}
 
 \item{class}{Optional extra CSS class(es) for the table.}
 
@@ -61,15 +68,29 @@ or the width is not yet known, the full-size table is drawn. Call
 \code{crukTable()} inside \code{\link[=renderCrukTable]{renderCrukTable()}} so the table redraws when the
 window is resized. Note that a redraw resets sorting, filtering and
 selection. Any \code{width}, \code{minWidth} or \code{maxWidth} you set in
-\code{columns} takes precedence over the compact defaults.}
+\code{columns} takes precedence over the compact defaults. Passing
+\code{WindowSize = win_size()} inside \code{\link[=renderCrukTable]{renderCrukTable()}} redraws the table
+on every window size update, which resets the current page. Prefer
+\code{mobile = window_is_narrow(win_size)} (see below) in Shiny apps.}
 
 \item{mobileBreakpoint}{Window width in pixels below which the compact table
-is used. Default is 900 (Bootstrap's \code{md} breakpoint).}
+is used. Default is 900 (Bootstrap's \code{md} breakpoint). Only used with
+\code{WindowSize}; with \code{mobile}, the breakpoint is whatever you gave
+\code{\link[=window_is_narrow]{window_is_narrow()}}.}
 
 \item{mobileMaxWidth}{Target maximum table width in pixels for the compact
 table. Used to work out the default minimum column width (the table
 width is not capped if there are too many columns to fit; it then scrolls
-horizontally inside its container). Default is 600.}
+horizontally inside its container). Default is 375.}
+
+\item{mobile}{Optional. \code{TRUE} or \code{FALSE}: draw the compact
+version of the table (see \code{WindowSize}) or the full-size one. In a
+Shiny app, pass the reactive from \code{\link[=window_is_narrow]{window_is_narrow()}} called, i.e.
+\code{mobile = is_narrow()}. Because \code{\link[=window_is_narrow]{window_is_narrow()}} only changes
+when the window crosses its breakpoint, the table is redrawn only then,
+rather than on every resize, so the current page, sort order and selection
+are kept. If supplied, \code{mobile} takes precedence over
+\code{WindowSize}. If \code{NULL} (the default), \code{WindowSize} is used.}
 
 \item{...}{Additional arguments passed to \code{reactable::reactable()}.}
 }
@@ -86,7 +107,22 @@ directly. Call it directly in R Markdown, Quarto, or for static tables.
 }
 \examples{
 crukTable(head(mtcars), filterable = FALSE, selection = NULL)
+
+# Force the compact version
+crukTable(head(mtcars), mobile = TRUE)
+
+\dontrun{
+# In a Shiny app: redraw only when the window crosses the breakpoint
+server <- function(input, output, session) {
+  win_size  <- window_size_server("window_tracker")
+  is_narrow <- window_is_narrow(win_size, breakpoint = 900)
+
+  output$table <- renderCrukTable(
+    crukTable(mtcars, pagination = TRUE, mobile = is_narrow())
+  )
+}
+}
 }
 \seealso{
-\code{\link[=crukTableOutput]{crukTableOutput()}}, \code{\link[=renderCrukTable]{renderCrukTable()}}
+\code{\link[=crukTableOutput]{crukTableOutput()}}, \code{\link[=renderCrukTable]{renderCrukTable()}}, \code{\link[=window_is_narrow]{window_is_narrow()}}
 }
