@@ -29,6 +29,7 @@ crukTable(
   mobileBreakpoint = 900,
   mobileMaxWidth = 375,
   mobile = NULL,
+  fitHeaders = TRUE,
   ...
 )
 ```
@@ -43,6 +44,8 @@ crukTable(
 
   Optional named list of column definitions created with
   [`reactable::colDef()`](https://glin.github.io/reactable/reference/colDef.html).
+  A column that sets any of `width`, `maxWidth` or `minWidth` keeps
+  exactly that sizing; see `fitHeaders`.
 
 - sortable:
 
@@ -122,7 +125,11 @@ crukTable(
   Target maximum table width in pixels for the compact table. Used to
   work out the default minimum column width (the table width is not
   capped if there are too many columns to fit; it then scrolls
-  horizontally inside its container). Default is 375.
+  horizontally inside its container). Default is 375. With
+  `fitHeaders = TRUE` a column is never made narrower than its longest
+  header word, so this is a target rather than a guarantee: tables with
+  long headers or many columns will scroll horizontally on small screens
+  rather than shrink the text or split words.
 
 - mobile:
 
@@ -137,6 +144,17 @@ crukTable(
   sort order and selection are kept. If supplied, `mobile` takes
   precedence over `WindowSize`. If `NULL` (the default), `WindowSize` is
   used.
+
+- fitHeaders:
+
+  Logical. If `TRUE` (the default), each column's minimum width is
+  raised, if necessary, so that the longest word in its header fits on
+  one line instead of being split mid-word. The width is estimated from
+  the number of characters (not measured in the browser), and capped so
+  that one very long word cannot make a column huge. Columns are left
+  alone if their `colDef()` sets `width`, `maxWidth` or `minWidth`, or
+  sets `show = FALSE` or a custom `header`. Set to `FALSE` for
+  reactable's own sizing.
 
 - ...:
 
@@ -162,7 +180,7 @@ crukTable(head(mtcars), filterable = FALSE, selection = NULL)
 # Force the compact version
 crukTable(head(mtcars), mobile = TRUE)
 
-{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],"mpg":[21,21,22.8,21.4,18.7,18.1],"cyl":[6,6,4,6,8,6],"disp":[160,160,108,258,360,225],"hp":[110,110,93,110,175,105],"drat":[3.9,3.9,3.85,3.08,3.15,2.76],"wt":[2.62,2.875,2.32,3.215,3.44,3.46],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22],"vs":[0,0,1,1,0,1],"am":[1,1,1,0,0,0],"gear":[4,4,4,3,3,3],"carb":[4,4,1,1,2,1]},"columns":[{"id":".selection","name":"","type":null,"minWidth":40,"align":"left","headerStyle":{"textAlign":"left"},"resizable":false,"width":45,"selectable":true,"show":false},{"id":".rownames","name":"","type":"character","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"},"sortable":false,"filterable":false,"rowHeader":true},{"id":"mpg","name":"mpg","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"cyl","name":"cyl","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"disp","name":"disp","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"hp","name":"hp","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"drat","name":"drat","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"wt","name":"wt","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"qsec","name":"qsec","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"vs","name":"vs","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"am","name":"am","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"gear","name":"gear","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"carb","name":"carb","type":"numeric","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"}}],"pagination":false,"defaultPageSize":6,"selection":"multiple","onClick":"select","highlight":true,"borderless":true,"className":"cruk-table cruk-table--selectable cruk-table--highlight cruk-table--sortable cruk-table--compact","dataKey":"d5b8d1ec978d94124821361c95058f3a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}
+{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant"],"mpg":[21,21,22.8,21.4,18.7,18.1],"cyl":[6,6,4,6,8,6],"disp":[160,160,108,258,360,225],"hp":[110,110,93,110,175,105],"drat":[3.9,3.9,3.85,3.08,3.15,2.76],"wt":[2.62,2.875,2.32,3.215,3.44,3.46],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22],"vs":[0,0,1,1,0,1],"am":[1,1,1,0,0,0],"gear":[4,4,4,3,3,3],"carb":[4,4,1,1,2,1]},"columns":[{"id":".selection","name":"","type":null,"minWidth":40,"align":"left","headerStyle":{"textAlign":"left"},"resizable":false,"width":45,"selectable":true,"show":false},{"id":".rownames","name":"","type":"character","minWidth":40,"align":"left","headerStyle":{"textAlign":"left"},"sortable":false,"filterable":false,"rowHeader":true},{"id":"mpg","name":"mpg","type":"numeric","minWidth":53,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"cyl","name":"cyl","type":"numeric","minWidth":53,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"disp","name":"disp","type":"numeric","minWidth":60,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"hp","name":"hp","type":"numeric","minWidth":45,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"drat","name":"drat","type":"numeric","minWidth":60,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"wt","name":"wt","type":"numeric","minWidth":45,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"qsec","name":"qsec","type":"numeric","minWidth":60,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"vs","name":"vs","type":"numeric","minWidth":45,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"am","name":"am","type":"numeric","minWidth":45,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"gear","name":"gear","type":"numeric","minWidth":60,"align":"left","headerStyle":{"textAlign":"left"}},{"id":"carb","name":"carb","type":"numeric","minWidth":60,"align":"left","headerStyle":{"textAlign":"left"}}],"pagination":false,"defaultPageSize":6,"selection":"multiple","onClick":"select","highlight":true,"borderless":true,"className":"cruk-table cruk-table--selectable cruk-table--highlight cruk-table--sortable cruk-table--compact","dataKey":"083a4b467def13cbdda83a1d2809b1a0"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}
 if (FALSE) { # \dontrun{
 # In a Shiny app: redraw only when the window crosses the breakpoint
 server <- function(input, output, session) {

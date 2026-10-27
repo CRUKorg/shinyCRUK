@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,13 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.2" id="shinycruk-062">shinyCRUK 0.6.2<a class="anchor" aria-label="anchor" href="#shinycruk-062"></a></h2>
+<ul><li>Minor update to <code><a href="../reference/crukTable.html">crukTable()</a></code> function:
+<ul><li>Removed default all-caps header styling. Now headers are in whatever case your column headings are. Rename column headings before passing them to <code><a href="../reference/crukTable.html">crukTable()</a></code> or restyle them as you would in <code>reactable</code>.</li>
+<li>Added <code>fitHeaders</code> argument, set to <code>TRUE</code> by default. This enables minor automatic resizing of column header widths. Pass the reactive from <code><a href="../reference/window_is_narrow.html">window_is_narrow()</a></code> to the <code>mobile</code> argument to slightly reduce font sizes, column widths, and padding when table is below the breakpoint set in <code><a href="../reference/window_is_narrow.html">window_is_narrow()</a></code> (default is 900px). Header columns will widths will attempt to shrink to just a bit wider than the longest word in the heading cell. Set <code>fitHeaders</code> to <code>FALSE</code> to disable this and enable <code>reactable</code>’s default behaviour (which allows line breaks mid-word). Manually editing column widths with <code>colDef()</code> is respected.</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="shinycruk-061">shinyCRUK 0.6.1<a class="anchor" aria-label="anchor" href="#shinycruk-061"></a></h2>
 <div class="section level3">
