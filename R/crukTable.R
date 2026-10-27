@@ -423,24 +423,27 @@ cruk_default_col_def <- function(data, mobile, max_width) {
 # *estimated* from the character count, using the constants below.
 #
 # KEEP IN SYNC WITH inst/www/css/tables.css:
-#   font_rem  .cruk-table .rt-thead .rt-th font-size (the same in compact mode)
-#   pad_px    left/right padding of .rt-th-inner: reactable's default 8px, and
-#             6px in .cruk-table--compact
-# ESTIMATES, not measurements (calibrate against the browser; compare the
-# widths this produces with the rendered header words):
-#   rem_px       1rem = 16px, as set on <html> in crukTheme.css. Only true when
+#   font_rem     .cruk-table .rt-thead .rt-th font-size (the same in compact mode)
+#   pad_px       left/right padding of .rt-th-inner: reactable's default 8px, and
+#                6px in .cruk-table--compact
+#   rem_px       1rem = 16px, as set in crukTheme.css. Only true when
 #                crukTheme() is on the page; otherwise the browser default
 #                (normally also 16px) applies.
-#   em_per_char  average advance of an upper-case Poppins Semibold letter plus
-#                the 0.02em letter-spacing, as a fraction of the font size. Set
-#                deliberately on the wide side so words are less likely to split.
-#   sort_px      room for the sort arrow that reactable adds beside the text.
+#   em_per_char  average advance of a MIXED-CASE Poppins Semibold letter plus the
+#                0.02em letter-spacing, as a fraction of the font size. Headers
+#                are not upper-cased by default and capitals are wider than
+#                lower-case letters
+#   sort_px      room for the sort arrow that reactable adds beside the text of
+#                the SORTED column. Reserved on every sortable column so sorting
+#                does not make a tight header split. Read by eye from a
+#                screenshot at about 12-13px (arrow plus gap); the 6px slack
+#                covers the difference. Confirm with test-crukTable-headers.R.
 cruk_header_metrics <- list(
   rem_px      = 16,
   font_rem    = 0.6875,
-  em_per_char = 0.78,
+  em_per_char = 0.68,
   pad_px      = c(full = 8, compact = 6),
-  sort_px     = 16,
+  sort_px     = 12,
   slack_px    = 6,    # sub-pixel rounding and the 3px row-header border
   max_px      = 220   # one very long word must not make a column huge
 )
@@ -453,17 +456,12 @@ cruk_longest_word_chars <- function(label) {
     stringr::str_replace_all("-", "- ") |>
     stringr::str_split("\\s+") |>
     unlist() |>
-    stringr::str_to_upper() |>
     stringr::str_length() |>
     max(0L, na.rm = TRUE)
 }
 
 # TRUE if the caller has sized this column with colDef(), in which case we do
-# not touch it. This relies on colDef() leaving width, minWidth and maxWidth
-# NULL unless they are supplied (checked: reactable::colDef()[["minWidth"]] is
-# NULL), so even an explicit minWidth = 100 counts. `[[` rather than `$`
-# throughout: `$` partial-matches, so col$header would silently return
-# col$headerStyle.
+# not touch it.
 cruk_is_user_sized <- function(col) {
   !is.null(col[["width"]]) ||
     !is.null(col[["minWidth"]]) ||
