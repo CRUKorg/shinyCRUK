@@ -65,7 +65,8 @@
 #'   estimated from the number of characters (not measured in the browser), and
 #'   capped so that one very long word cannot make a column huge. Columns are
 #'   left alone if their \code{colDef()} sets \code{width}, \code{maxWidth} or
-#'   \code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}. Set to \code{FALSE} for reactable's own sizing.
+#'   \code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}.
+#'   Set to \code{FALSE} for reactable's own sizing.
 #' @param mobile Optional. \code{TRUE} or \code{FALSE}: draw the compact
 #'   version of the table (see \code{WindowSize}) or the full-size one. In a
 #'   Shiny app, pass the reactive from [window_is_narrow()] called, i.e.

@@ -1,3 +1,18 @@
+# shinyCRUK 0.6.2
+* Minor update to `crukTable()` function:
+  * Removed default all-caps header styling. Now headers are in whatever case your 
+    column headings are. Rename column headings before passing them to `crukTable()` 
+    or restyle them as you would in `reactable`.
+  * Added `fitHeaders` argument, set to `TRUE` by default. This enables minor
+    automatic resizing of column header widths. Pass the reactive from `window_is_narrow()`
+    to the `mobile` argument to slightly reduce font sizes, column widths, and padding
+    when table is below the breakpoint set in `window_is_narrow()` (default is 900px).
+    Header columns will widths will attempt to shrink to just a bit wider than the 
+    longest word in the heading cell. Set `fitHeaders` to `FALSE` to disable this and
+    enable `reactable`'s default behaviour (which allows line breaks mid-word).
+    Manually editing column widths with `colDef()` is respected.
+
+
 # shinyCRUK 0.6.1
 
 ## New functions
