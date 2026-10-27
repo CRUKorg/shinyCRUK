@@ -8,7 +8,9 @@
 #'
 #' @param data A data frame or matrix to display.
 #' @param columns Optional named list of column definitions created with
-#'   \code{reactable::colDef()}.
+#'   \code{reactable::colDef()}. A column that sets any of \code{width},
+#'   \code{maxWidth} or \code{minWidth} keeps exactly that sizing; see
+#'   \code{fitHeaders}.
 #' @param sortable Logical. Whether columns can be sorted by clicking the
 #'   column headers. Default is \code{TRUE}.
 #' @param filterable Logical. Whether filter inputs are displayed for columns.
@@ -52,7 +54,19 @@
 #' @param mobileMaxWidth Target maximum table width in pixels for the compact
 #'   table. Used to work out the default minimum column width (the table
 #'   width is not capped if there are too many columns to fit; it then scrolls
-#'   horizontally inside its container). Default is 375.
+#'   horizontally inside its container). Default is 375. With
+#'   \code{fitHeaders = TRUE} a column is never made narrower than its longest
+#'   header word, so this is a target rather than a guarantee: tables with long
+#'   headers or many columns will scroll horizontally on small screens rather
+#'   than shrink the text or split words.
+#' @param fitHeaders Logical. If \code{TRUE} (the default), each column's
+#'   minimum width is raised, if necessary, so that the longest word in its
+#'   header fits on one line instead of being split mid-word. The width is
+#'   estimated from the number of characters (not measured in the browser), and
+#'   capped so that one very long word cannot make a column huge. Columns are
+#'   left alone if their \code{colDef()} sets \code{width}, \code{maxWidth} or
+#'   \code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}.
+#'   Set to \code{FALSE} for reactable's own sizing.
 #' @param mobile Optional. \code{TRUE} or \code{FALSE}: draw the compact
 #'   version of the table (see \code{WindowSize}) or the full-size one. In a
 #'   Shiny app, pass the reactive from [window_is_narrow()] called, i.e.
@@ -101,6 +115,7 @@ crukTable <- function(
     mobileBreakpoint = 900,
     mobileMaxWidth = 375,
     mobile = NULL,
+    fitHeaders = TRUE,
     ...
 ) {
 
@@ -113,6 +128,7 @@ crukTable <- function(
   check_flag(filterable, "filterable")
   check_flag(highlight, "highlight")
   check_flag(pagination, "pagination")
+  check_flag(fitHeaders, "fitHeaders")
 
   if (!is.null(selection) &&
       !(is.character(selection) && length(selection) == 1 &&
@@ -188,6 +204,18 @@ crukTable <- function(
     ),
     collapse = " "
   )
+
+  # Let columns grow so the longest header word fits on one line. This runs
+  # before cruk_columns() so that only the caller's columns are considered.
+  if (fitHeaders) {
+    columns <- cruk_fit_headers(
+      columns,
+      data,
+      sortable = sortable,
+      mobile = is_mobile,
+      floor_px = cruk_min_width_floor(data, is_mobile, mobileMaxWidth)
+    )
+  }
 
   widget <- reactable::reactable(
     data,
@@ -362,8 +390,16 @@ cruk_columns <- function(columns, selection) {
 }
 
 # reactable's default minWidth is 100px. On mobile, share `max_width` between
-# the columns, but never go below 40px (unreadable) or above 100px (the
-# reactable default).
+# the columns, but never go below 40px or above 100px (the reactable default).
+cruk_min_width_floor <- function(data, mobile, max_width) {
+  if (!mobile) {
+    return(100)
+  }
+
+  n_col <- max(ncol(data), 1L)
+  max(40, min(100, floor(max_width / n_col)))
+}
+
 cruk_default_col_def <- function(data, mobile, max_width) {
   if (!mobile) {
     return(reactable::colDef(
@@ -372,12 +408,123 @@ cruk_default_col_def <- function(data, mobile, max_width) {
     ))
   }
 
-  n_col <- max(ncol(data), 1L)
   reactable::colDef(
     align = "left",
     headerStyle = list(textAlign = "left"),
-    minWidth = max(40, min(100, floor(max_width / n_col)))
+    minWidth = cruk_min_width_floor(data, mobile, max_width)
   )
+}
+
+# Header fitting ---------------------------------------------------------------
+#
+# reactable sizes columns in pixels (colDef(minWidth =)), but the header text is
+# sized by the browser, and reactable's CSS sets `word-wrap: break-word` on
+# cells, so a column narrower than its longest header word splits that word
+# mid-word. R cannot measure text in the user's browser, so the width needed is
+# *estimated* from the character count, using the constants below.
+#
+# KEEP IN SYNC WITH inst/www/css/tables.css:
+#   font_rem     .cruk-table .rt-thead .rt-th font-size (the same in compact mode)
+#   pad_px       left/right padding of .rt-th-inner: reactable's default 8px, and
+#                6px in .cruk-table--compact
+#   rem_px       1rem = 16px, as set in crukTheme.css. Only true when
+#                crukTheme() is on the page; otherwise the browser default
+#                (normally also 16px) applies.
+#   em_per_char  average advance of a MIXED-CASE Poppins Semibold letter plus the
+#                0.02em letter-spacing, as a fraction of the font size. Headers
+#                are not upper-cased by default and capitals are wider than
+#                lower-case letters
+#   sort_px      room for the sort arrow that reactable adds beside the text of
+#                the SORTED column. Reserved on every sortable column so sorting
+#                does not make a tight header split. Read by eye from a
+#                screenshot at about 12-13px (arrow plus gap); the 6px slack
+#                covers the difference. Confirm with test-crukTable-headers.R.
+cruk_header_metrics <- list(
+  rem_px      = 16,
+  font_rem    = 0.6875,
+  em_per_char = 0.68,
+  pad_px      = c(full = 8, compact = 6),
+  sort_px     = 12,
+  slack_px    = 6,    # sub-pixel rounding and the 3px row-header border
+  max_px      = 220   # one very long word must not make a column huge
+)
+
+# Number of characters in the longest unbreakable word of a header. Browsers
+# can break a line at a space or after a hyphen, so split on both.
+cruk_longest_word_chars <- function(label) {
+  label |>
+    as.character() |>
+    stringr::str_replace_all("-", "- ") |>
+    stringr::str_split("\\s+") |>
+    unlist() |>
+    stringr::str_length() |>
+    max(0L, na.rm = TRUE)
+}
+
+# TRUE if the caller has sized this column with colDef(), in which case we do
+# not touch it.
+cruk_is_user_sized <- function(col) {
+  !is.null(col[["width"]]) ||
+    !is.null(col[["minWidth"]]) ||
+    !is.null(col[["maxWidth"]])
+}
+
+# Estimated pixel width needed for the longest header word, or NA if this
+# column should be left alone.
+cruk_header_width <- function(col, name, sortable, mobile) {
+  if (cruk_is_user_sized(col) ||
+      !is.null(col[["header"]]) ||        # custom header: text unknown
+      identical(col[["show"]], FALSE)) {
+    return(NA_real_)
+  }
+
+  m <- cruk_header_metrics
+  label <- if (is.null(col[["name"]])) name else col[["name"]]
+  col_sortable <- if (is.null(col[["sortable"]])) sortable else col[["sortable"]]
+  pad <- if (mobile) m$pad_px[["compact"]] else m$pad_px[["full"]]
+
+  ceiling(
+    cruk_longest_word_chars(label) * m$em_per_char * m$font_rem * m$rem_px +
+      2 * pad +
+      (if (isTRUE(col_sortable)) m$sort_px else 0) +
+      m$slack_px
+  )
+}
+
+# Raise one column's minWidth if its header needs more room than `floor_px`.
+# Never lowers a width, never touches a user-sized column. `col` is NULL when
+# the caller did not define the column; the result is then NULL (nothing to
+# change) or a new colDef().
+cruk_fit_header <- function(col, name, sortable, mobile, floor_px) {
+  needed <- cruk_header_width(col, name, sortable, mobile)
+  if (is.na(needed) || needed <= floor_px) {
+    return(col)
+  }
+
+  min_width <- max(floor_px, min(needed, cruk_header_metrics$max_px))
+
+  if (is.null(col)) {
+    return(reactable::colDef(minWidth = min_width))
+  }
+
+  col[["minWidth"]] <- min_width
+  col
+}
+
+# Apply cruk_fit_header() to every data column. Entries in `columns` that are
+# not data columns (e.g. `.selection`) pass through unchanged.
+cruk_fit_headers <- function(columns, data, sortable, mobile, floor_px) {
+  col_names <- colnames(data)
+  if (is.null(col_names)) {
+    return(columns)
+  }
+
+  fitted <- col_names |>
+    rlang::set_names() |>
+    purrr::map(\(nm) cruk_fit_header(columns[[nm]], nm, sortable, mobile, floor_px)) |>
+    purrr::compact()
+
+  c(fitted, columns[setdiff(names(columns), col_names)])
 }
 
 # Turn whatever renderCrukTable()'s expression returned into a table

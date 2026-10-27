@@ -19,6 +19,7 @@ crukTable(
   mobileBreakpoint = 900,
   mobileMaxWidth = 375,
   mobile = NULL,
+  fitHeaders = TRUE,
   ...
 )
 }
@@ -26,7 +27,9 @@ crukTable(
 \item{data}{A data frame or matrix to display.}
 
 \item{columns}{Optional named list of column definitions created with
-\code{reactable::colDef()}.}
+\code{reactable::colDef()}. A column that sets any of \code{width},
+\code{maxWidth} or \code{minWidth} keeps exactly that sizing; see
+\code{fitHeaders}.}
 
 \item{sortable}{Logical. Whether columns can be sorted by clicking the
 column headers. Default is \code{TRUE}.}
@@ -81,7 +84,11 @@ is used. Default is 900 (Bootstrap's \code{md} breakpoint). Only used with
 \item{mobileMaxWidth}{Target maximum table width in pixels for the compact
 table. Used to work out the default minimum column width (the table
 width is not capped if there are too many columns to fit; it then scrolls
-horizontally inside its container). Default is 375.}
+horizontally inside its container). Default is 375. With
+\code{fitHeaders = TRUE} a column is never made narrower than its longest
+header word, so this is a target rather than a guarantee: tables with long
+headers or many columns will scroll horizontally on small screens rather
+than shrink the text or split words.}
 
 \item{mobile}{Optional. \code{TRUE} or \code{FALSE}: draw the compact
 version of the table (see \code{WindowSize}) or the full-size one. In a
@@ -91,6 +98,14 @@ when the window crosses its breakpoint, the table is redrawn only then,
 rather than on every resize, so the current page, sort order and selection
 are kept. If supplied, \code{mobile} takes precedence over
 \code{WindowSize}. If \code{NULL} (the default), \code{WindowSize} is used.}
+
+\item{fitHeaders}{Logical. If \code{TRUE} (the default), each column's
+minimum width is raised, if necessary, so that the longest word in its
+header fits on one line instead of being split mid-word. The width is
+estimated from the number of characters (not measured in the browser), and
+capped so that one very long word cannot make a column huge. Columns are
+left alone if their \code{colDef()} sets \code{width}, \code{maxWidth} or
+\code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}. Set to \code{FALSE} for reactable's own sizing.}
 
 \item{...}{Additional arguments passed to \code{reactable::reactable()}.}
 }
