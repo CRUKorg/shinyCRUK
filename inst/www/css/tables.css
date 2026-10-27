@@ -7,15 +7,10 @@
  *   .cruk-table--sortable    sortable = TRUE
  *   .cruk-table--compact     WindowSize is narrower than mobileBreakpoint
  *
- * The .rt-* classes belong to reactable. They are not a public API, so check
- * them in browser dev tools if reactable is upgraded.
- *
  * Fonts are declared with @font-face in crukTheme.css, not here.
  */
 
 .cruk-table {
-  /* #E60078 with white text is ~4.5:1 (WCAG AA for normal text).
-     #FF0087 is ~3.7:1 and fails AA at this font size. */
   --cruk-table-accent: #E60078;
   --cruk-table-row-hover: #F8C9DF;
   --cruk-table-text: #000000;
@@ -129,12 +124,14 @@
 
 /* Compact (small screens) --------------------------------------------------- */
 
+/* Small screens get tighter padding and a slightly smaller body font, but the
+   header font is NOT reduced: it stays at the size set on .rt-thead .rt-th
+   above (0.6875rem). crukTable() estimates the width each header word needs
+   from that size (cruk_header_metrics$font_rem in crukTable.R), so the two
+   must match. If the table is too wide for the screen it scrolls sideways
+   rather than shrinking text. */
 .cruk-table--compact {
-  font-size: 0.75rem;
-}
-
-.cruk-table--compact .rt-thead .rt-th {
-  font-size: 0.625rem;
+  font-size: 0.8125rem;
 }
 
 /* reactable puts cell padding on the -inner elements (check in dev tools if
