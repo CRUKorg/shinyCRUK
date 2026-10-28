@@ -55,6 +55,11 @@ window.scrollToDivWhenReady = (function () {
     });
 
     orphanMenus.forEach(function (menu) { menu.classList.remove("show"); });
+
+    if (window.scrollToDivWhenReady && window.scrollToDivWhenReady.debug) {
+      console.log("scrollToDivWhenReady: closed", toggles.size, "toggle(s) and",
+                  orphanMenus.length, "orphan menu(s)");
+    }
   }
 
   // Bootstrap's Tab plugin can mark the parent dropdown as open *after* the
@@ -71,7 +76,7 @@ window.scrollToDivWhenReady = (function () {
     }, 1000);
   }
 
-  return function (id, timeoutMs) {
+  const scrollToDivWhenReady = function (id, timeoutMs) {
     timeoutMs = timeoutMs || 5000;
     if (timer) clearInterval(timer); // cancel any earlier poll
     const start = Date.now();
@@ -98,4 +103,14 @@ window.scrollToDivWhenReady = (function () {
       }
     }, 100);
   };
+
+  // Version marker: lets you confirm in the console which copy of this file
+  // the browser loaded (a cached older copy has no .version).
+  scrollToDivWhenReady.version = "3";
+  // Set scrollToDivWhenReady.debug = true in the console to log each close.
+  scrollToDivWhenReady.debug = false;
+  // Exposed so the close step can be run by hand while debugging.
+  scrollToDivWhenReady.closeDropdowns = closeNavbarDropdowns;
+
+  return scrollToDivWhenReady;
 })();
