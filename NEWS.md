@@ -1,3 +1,10 @@
+# shinyCRUK 0.7.0
+* New `crukNavLink()` and `crukNavLinkSetup()` functions - Wraps scrollToDivWhenReady.js 
+and onclick, facilitating navigation using `crukValueBox()`, or any other navigation
+element. Can be used to set up multiple onclick events at once, tidying code.
+* Slightly bumped header font size in crukTable(), from 0.6875rem 
+(11px with `crukTheme()`) to 0.75rem (12px with `crukTheme()`)
+
 # shinyCRUK 0.6.2
 * Minor update to `crukTable()` function:
   * Removed default all-caps header styling. Now headers are in whatever case your 
