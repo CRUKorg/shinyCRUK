@@ -105,7 +105,8 @@ header fits on one line instead of being split mid-word. The width is
 estimated from the number of characters (not measured in the browser), and
 capped so that one very long word cannot make a column huge. Columns are
 left alone if their \code{colDef()} sets \code{width}, \code{maxWidth} or
-\code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}. Set to \code{FALSE} for reactable's own sizing.}
+\code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}.
+Set to \code{FALSE} for reactable's own sizing.}
 
 \item{...}{Additional arguments passed to \code{reactable::reactable()}.}
 }

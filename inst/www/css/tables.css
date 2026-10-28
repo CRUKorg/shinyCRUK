@@ -37,7 +37,7 @@
   background-color: #FFFFFF;
   color: var(--cruk-table-text);
   font-family: "Poppins Semibold", "Poppins", sans-serif;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
   border-bottom: 3px solid var(--cruk-table-rule);
 }
@@ -125,7 +125,7 @@
 
 /* Small screens get tighter padding and a slightly smaller body font, but the
    header font is NOT reduced: it stays at the size set on .rt-thead .rt-th
-   above (0.6875rem). crukTable() estimates the width each header word needs
+   above (0.75rem). crukTable() estimates the width each header word needs
    from that size (cruk_header_metrics$font_rem in crukTable.R), so the two
    must match. If the table is too wide for the screen it scrolls sideways
    rather than shrinking text. */
