@@ -58,7 +58,7 @@ crukRounding(1200, case = "upper")
 
 crukRounding(156789)
 #> [1] "nearly 157,000"
-# Returns: "around 157,000"
+# Returns: "nearly 157,000"
 
 crukRounding(c(3, 25, 500, 5000, 50000))
 #> [1] "less than 5"   "around 25"     "around 500"    "around 5,000" 

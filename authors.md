@@ -14,13 +14,13 @@ Source:
 [`DESCRIPTION`](https://github.com/CRUKorg/shinyCRUK/blob/master/DESCRIPTION)
 
 Grant M, Finnegan S, Mahabubul M (2026). *shinyCRUK: Styling Shiny Apps
-with CRUK Branding*. R package version 0.6.2,
+with CRUK Branding*. R package version 0.7.0,
 <https://verbose-guacamole-l18vr83.pages.github.io/>.
 
     @Manual{,
       title = {shinyCRUK: Styling Shiny Apps with CRUK Branding},
       author = {Matt Grant and Sam Finnegan and Mishell Mahabubul},
       year = {2026},
-      note = {R package version 0.6.2},
+      note = {R package version 0.7.0},
       url = {https://verbose-guacamole-l18vr83.pages.github.io/},
     }

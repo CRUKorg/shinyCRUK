@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,21 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="shinycruk-070">shinyCRUK 0.7.0<a class="anchor" aria-label="anchor" href="#shinycruk-070"></a></h2>
+<div class="section level3">
+<h3 id="new-functions-0-7-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-7-0"></a></h3>
+<ul><li>New <code><a href="../reference/crukNavLink.html">crukNavLink()</a></code> and <code><a href="../reference/crukNavLinkSetup.html">crukNavLinkSetup()</a></code> functions - Wraps scrollToDivWhenReady.js and onclick, facilitating navigation using <code><a href="../reference/crukValueBox.html">crukValueBox()</a></code>, or any other navigation element. Can be used to set up multiple onclick events at once, tidying code.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-7-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-0"></a></h3>
+<p><em><code><a href="../reference/crukRounding.html">crukRounding()</a></code> now uses the correct “around” / “nearly” / “more than” thresholds for numbers of 1 million and above. The thresholds had been copied from the 100,000+ range without being scaled, so most numbers in the millions were described too early as “nearly” or “around” (e.g. 1,090,747 returned “nearly 1,090,000” instead of “around 1,090,000”). The 100 million+ range also rounded rather than floored in its “more than” wording. <strong>Output wording will change for many values of 1 million and above</strong>, for example 1,234,567 now returns “more than 1,230,000” rather than “around 1,230,000”. </em> Corrected the <code><a href="../reference/crukRounding.html">crukRounding()</a></code> example for <code>156789</code>, which should return “nearly 157,000”</p>
+</div>
+<div class="section level3">
+<h3 id="minor-tweaks-0-7-0">Minor tweaks<a class="anchor" aria-label="anchor" href="#minor-tweaks-0-7-0"></a></h3>
+<ul><li>Slightly bumped header font size in crukTable(), from 0.6875rem (11px with <code><a href="../reference/crukTheme.html">crukTheme()</a></code>) to 0.75rem (12px with <code><a href="../reference/crukTheme.html">crukTheme()</a></code>)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.2" id="shinycruk-062">shinyCRUK 0.6.2<a class="anchor" aria-label="anchor" href="#shinycruk-062"></a></h2>
 <ul><li>Minor update to <code><a href="../reference/crukTable.html">crukTable()</a></code> function:

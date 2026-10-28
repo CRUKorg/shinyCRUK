@@ -1,0 +1,168 @@
+/* ---- crukDatePicker ---- */
+
+@font-face {
+  font-family: "Progress Medium";
+  src: url('fonts/Progress-Medium.otf');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins Medium';
+    src: url('fonts/Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins Semibold';
+    src: url('fonts/Poppins-SemiBold.ttf') format('truetype');
+}
+
+.air-datepicker {
+  border: 1px solid #000000;
+  border-radius: 0px;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  color: #000000;
+}
+
+.air-datepicker-nav {
+  color: #000000;
+  border-bottom: 1px solid #000000;
+}
+
+.air-datepicker-nav--action:hover {
+	background: #fff0f8;
+	border-radius: 0px;
+}
+
+.air-datepicker-nav--title:hover {
+	background: #fff0f8;
+	border-radius: 0px;
+}
+
+.air-datepicker-nav--action path {
+	fill: none;
+	stroke: #000000;
+	stroke-width: 2px;
+}
+
+.air-datepicker-cell.-current- {
+  color: #e60078;
+  border: none;
+  border-radius: 0px;
+}
+
+.air-datepicker--content {
+	color: #e60078;
+}
+
+.air-datepicker-cell:hover{
+  background: #fff0f8;
+  border-radius: 0px;
+}
+
+.air-datepicker-cell.-selected-.-focus- {
+	background: #e60078;
+	color: #ffffff;
+	border: none;
+	border-radius: 0px;
+}
+
+.air-datepicker-cell.-selected- {
+	color: #fff;
+	border: none;
+	background: #e60078;
+	border-radius: 0px;
+}
+
+.air-datepicker-cell.-selected-.-current- {
+	color: #fff;
+	background: #e60078;
+}
+
+.air-datepicker--pointer::after {
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+}
+
+
+.crukDatePicker input.sw-air-picker {
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-right: 0;
+  border-radius: 0 !important;
+  font-family: Poppins, sans-serif;
+  box-shadow: none !important;
+}
+
+.crukDatePicker button.dp-addon {
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 0;
+  border-radius: 0 !important;
+  padding-left: 12px;
+  padding-right: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.air-datepicker-nav--title i {
+    font-style: normal;
+    color: #000000;
+    margin-left: .3em;
+}
+
+.air-datepicker-body--day-name {
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: .8em;
+}
+
+.crukDatePicker .sw-air-picker-button:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.crukDatePicker .control-label {
+  font-family: 'Poppins Medium', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.crukDatePicker .btn {
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 0;
+}
+
+/* Make sure the calendar icon doesn't disappear on hover */
+.crukDatePicker .btn:hover {
+  color: #000000;
+  cursor: text;
+  background: #ffffff;
+  border-left: 0;
+  border-right: 1px solid #000000;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-radius: 0;
+}
+
+/* Make button the same when clicked to disguise clickability */
+.crukDatePicker .btn:active {
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}

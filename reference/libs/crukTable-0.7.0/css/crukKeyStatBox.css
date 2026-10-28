@@ -1,0 +1,39 @@
+/* The outer element is the query container. It has no border or padding, so
+   its width equals the space available to the box. */
+.cruk-key-stat-box {
+  container-type: inline-size;
+  container-name: cruk-key-stat-box;
+}
+
+/* Default (narrow): image above statement */
+.cruk-key-stat-box__box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  border: 2px solid #bbc7d9;
+  padding: 32px;
+  font-size: 20px;
+  font-family: 'Progress Medium';
+}
+
+.cruk-key-stat-box__image {
+  width: 140px;
+  height: 140px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.cruk-key-stat-box__statement {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* Wide: image to the left of statement.
+   528px is a placeholder, not taken from other shinyCRUK components. */
+@container cruk-key-stat-box (min-width: 528px) {
+  .cruk-key-stat-box__box {
+    flex-direction: row;
+    align-items: center;
+  }
+}

@@ -712,6 +712,10 @@ Matt or Sam.
   : CRUK Stacked Logo
 - [`crukLogoWide()`](https://crukorg.github.io/shinyCRUK/reference/crukLogoWide.md)
   : CRUK Wide Logo
+- [`crukNavLink()`](https://crukorg.github.io/shinyCRUK/reference/crukNavLink.md)
+  : Make an Element Navigate to a Page and Scroll to a Section
+- [`crukNavLinkSetup()`](https://crukorg.github.io/shinyCRUK/reference/crukNavLinkSetup.md)
+  : Page Setup for crukNavLink
 - [`crukNavTitle()`](https://crukorg.github.io/shinyCRUK/reference/crukNavTitle.md)
   : CRUK-branded Navigation Title
 - [`crukPickerInput()`](https://crukorg.github.io/shinyCRUK/reference/crukPickerInput.md)

@@ -1,0 +1,97 @@
+/* crukTooltip: trigger (in the page) */
+.cruk-tooltip-wrap {
+  color: #00007e;
+  font-weight: 600;
+}
+
+.cruk-tooltip-trigger {
+  display: inline;
+  cursor: pointer;
+  color: inherit;
+}
+
+.cruk-tooltip-trigger-icon {
+  display: inline-block;
+  margin-left: 0.25em;
+  line-height: 1;
+}
+
+.cruk-tooltip-trigger:focus-visible {
+  outline: 2px solid #00007e;
+  outline-offset: 2px;
+}
+
+/* crukTooltip: the tooltip itself. */
+.tooltip.cruk-tooltip {
+  --bs-tooltip-opacity: 1;
+  --bs-tooltip-max-width: min(22rem, calc(100vw - 1rem));
+  font-family: 'Poppins', sans-serif;
+}
+
+.tooltip.cruk-tooltip .tooltip-inner {
+  box-sizing: border-box;
+  padding: 22px 24px 22px 22px;
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+  border-left-width: 4px;
+  border-radius: 0;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.cruk-tooltip-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* Material "info" icon, taken from the SVG, drawn as a background */
+.cruk-tooltip-icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px; /* centres 20px icon on the first 28px text line */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='34 50 20 20'%3E%3Cpath fill-rule='evenodd' d='M43 55H45V57H43V55ZM43 59H45V65H43V59ZM44 50C38.48 50 34 54.48 34 60C34 65.52 38.48 70 44 70C49.52 70 54 65.52 54 60C54 54.48 49.52 50 44 50Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+.cruk-tooltip-message {
+  overflow-wrap: anywhere;
+}
+
+/* Arrow: a 45-degree rotated square (side = 18 * sqrt(2)) whose centre sits on
+   the box's inner border edge. White fill hides the border under the arrow; two
+   2px black borders draw the outline. */
+.tooltip.cruk-tooltip .tooltip-arrow::before {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  width: 25.456px;
+  height: 25.456px;
+  background: #fff;
+  border: 0 solid #000;
+  transform: rotate(45deg);
+}
+
+/* Popper names the side the tooltip sits on, relative to the trigger */
+
+/* tooltip below its trigger, arrow points up */
+.tooltip.cruk-tooltip[data-popper-placement^="bottom"] .tooltip-arrow { top: -17px; width: 36px; height: 18px; }
+.tooltip.cruk-tooltip[data-popper-placement^="bottom"] .tooltip-arrow::before { left: 5.272px; top: 5.272px; border-width: 2px 0 0 2px; }
+
+/* tooltip above its trigger, arrow points down */
+.tooltip.cruk-tooltip[data-popper-placement^="top"] .tooltip-arrow { bottom: -17px; width: 36px; height: 18px; }
+.tooltip.cruk-tooltip[data-popper-placement^="top"] .tooltip-arrow::before { left: 5.272px; top: -12.728px; border-width: 0 2px 2px 0; }
+
+/* tooltip left of its trigger, arrow points right */
+.tooltip.cruk-tooltip[data-popper-placement^="left"] .tooltip-arrow { right: -17px; width: 18px; height: 36px; }
+.tooltip.cruk-tooltip[data-popper-placement^="left"] .tooltip-arrow::before { left: -12.728px; top: 5.272px; border-width: 2px 2px 0 0; }
+
+/* tooltip right of its trigger, arrow points left.
+   The tooltip's left border is 4px (design quirk),
+   so the legs are 4px here to read as one continuous
+   stroke with it. */
+.tooltip.cruk-tooltip[data-popper-placement^="right"] .tooltip-arrow { left: -18px; width: 18px; height: 36px; }
+.tooltip.cruk-tooltip[data-popper-placement^="right"] .tooltip-arrow::before { left: 5.272px; top: 5.272px; border-width: 0 0 4px 4px; }
