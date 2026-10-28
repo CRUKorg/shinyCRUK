@@ -1,7 +1,7 @@
 Type: Package
 Package: shinyCRUK
 Title: Styling Shiny Apps with CRUK Branding
-Version: 0.6.2
+Version: 0.7.0
 Authors@R: c(
     person("Matt", "Grant", , "matt.grant@cancer.org.uk", role = c("aut", "cre")),
     person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut"),
@@ -17,11 +17,13 @@ Imports:
     glue,
     htmltools (>= 0.5.8.1),
     httr2,
+    jsonlite,
     knitr,
     purrr,
     reactable,
     rlang,
     shiny (>= 1.11.1),
+    shinyjs (>= 2.0.0),
     shinyWidgets,
     stringr,
     tibble,

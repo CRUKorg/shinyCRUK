@@ -441,7 +441,7 @@ cruk_default_col_def <- function(data, mobile, max_width) {
 #                covers the difference. Confirm with test-crukTable-headers.R.
 cruk_header_metrics <- list(
   rem_px      = 16,
-  font_rem    = 0.6875,
+  font_rem    = 0.75,
   em_per_char = 0.68,
   pad_px      = c(full = 8, compact = 6),
   sort_px     = 12,

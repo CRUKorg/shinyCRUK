@@ -34,7 +34,7 @@
 #' # Returns: "Around 1,200"
 #'
 #' crukRounding(156789)
-#' # Returns: "around 157,000"
+#' # Returns: "nearly 157,000"
 #'
 #' crukRounding(c(3, 25, 500, 5000, 50000))
 #' # Returns vectorized output for multiple values
@@ -69,9 +69,9 @@ crukRounding <- function(number, case = "lower") {
 
   # Apply rounding tweaks to avoid ties at 0.5 boundaries
   number <- dplyr::case_when(
-    number >= 100000000 & number %% 1000000 == 500 ~ number + 1,
-    number >= 10000000 & number %% 100000 == 500 ~ number + 1,
-    number >= 1000000 & number %% 10000 == 500 ~ number + 1,
+    number >= 100000000 & number %% 1000000 == 500000 ~ number + 1,
+    number >= 10000000 & number %% 100000 == 50000 ~ number + 1,
+    number >= 1000000 & number %% 10000 == 5000 ~ number + 1,
     number >= 100000 & number %% 1000 == 500 ~ number + 1,
     number >= 10000 & number %% 100 == 50 ~ number + 1,
     number >= 1000 & number %% 100 == 50 ~ number + 1,
@@ -87,35 +87,35 @@ crukRounding <- function(number, case = "lower") {
 
   # Generate descriptive text based on magnitude and remainder
   numbertext <- dplyr::case_when(
-    # 100+ million range
-    number >= 100000000 & number %% 1000000 >= 900 ~
+    # 100+ million range (3 s.f. step = 1,000,000)
+    number >= 100000000 & number %% 1000000 >= 900000 ~
       paste0("around ", fmt(signif(number, 3))),
-    number >= 100000000 & number %% 1000000 >= 700 ~
+    number >= 100000000 & number %% 1000000 >= 700000 ~
       paste0("nearly ", fmt(signif(number, 3))),
-    number >= 100000000 & number %% 1000000 >= 200 ~
-      paste0("more than ", fmt(signif(floor(number / 100000) * 100000, 3))),
+    number >= 100000000 & number %% 1000000 >= 200000 ~
+      paste0("more than ", fmt(floor(number / 1000000) * 1000000)),
     number >= 100000000 ~
-      paste0("around ", fmt(signif(floor(number / 100000) * 100000, 3))),
+      paste0("around ", fmt(floor(number / 1000000) * 1000000)),
 
-    # 10+ million range
-    number >= 10000000 & number %% 100000 >= 900 ~
+    # 10+ million range (3 s.f. step = 100,000)
+    number >= 10000000 & number %% 100000 >= 90000 ~
       paste0("around ", fmt(signif(number, 3))),
-    number >= 10000000 & number %% 100000 >= 700 ~
+    number >= 10000000 & number %% 100000 >= 70000 ~
       paste0("nearly ", fmt(signif(number, 3))),
-    number >= 10000000 & number %% 100000 >= 200 ~
-      paste0("more than ", fmt(signif(floor(number / 100000) * 100000, 3))),
+    number >= 10000000 & number %% 100000 >= 20000 ~
+      paste0("more than ", fmt(floor(number / 100000) * 100000)),
     number >= 10000000 ~
-      paste0("around ", fmt(signif(floor(number / 100000) * 100000, 3))),
+      paste0("around ", fmt(floor(number / 100000) * 100000)),
 
-    # 1+ million range
-    number >= 1000000 & number %% 10000 >= 900 ~
+    # 1+ million range (3 s.f. step = 10,000)
+    number >= 1000000 & number %% 10000 >= 9000 ~
       paste0("around ", fmt(signif(number, 3))),
-    number >= 1000000 & number %% 10000 >= 700 ~
+    number >= 1000000 & number %% 10000 >= 7000 ~
       paste0("nearly ", fmt(signif(number, 3))),
-    number >= 1000000 & number %% 10000 >= 200 ~
-      paste0("more than ", fmt(signif(floor(number / 10000) * 10000, 3))),
+    number >= 1000000 & number %% 10000 >= 2000 ~
+      paste0("more than ", fmt(floor(number / 10000) * 10000)),
     number >= 1000000 ~
-      paste0("around ", fmt(signif(floor(number / 10000) * 10000, 3))),
+      paste0("around ", fmt(floor(number / 10000) * 10000)),
 
     # 100k+ range
     number >= 100000 & number %% 1000 >= 900 ~

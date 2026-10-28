@@ -324,7 +324,8 @@ ui <- bslib::page_navbar(
           h3("Navigation"),
           tags$ul(
             tags$li(tags$strong("crukNavTitle()"), " - Branded navigation bar with logo and selectors"),
-            tags$li(tags$strong("onThisPage()"), " - Contents navigation box with scroll-to-top button")
+            tags$li(tags$strong("onThisPage()"), " - Contents navigation box with scroll-to-top button"),
+            tags$li(tags$strong("crukNavLink()/crukNavLinkSetup()"), " - To handle the click event for crukValueBox()")
           )
       ),
 
