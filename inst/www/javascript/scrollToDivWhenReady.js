@@ -20,23 +20,41 @@ window.scrollToDivWhenReady = (function () {
   }
 
   function closeNavbarDropdowns() {
-    document
-      .querySelectorAll('.navbar .dropdown-toggle.show, .navbar .dropdown-toggle[aria-expanded="true"]')
-      .forEach(function (toggle) {
-        const Dropdown = window.bootstrap && window.bootstrap.Dropdown;
-        const instance = Dropdown && Dropdown.getInstance(toggle);
-        if (instance) {
-          instance.hide();
-        } else {
-          // Fallback if the bootstrap global isn't exposed
-          toggle.classList.remove("show");
-          toggle.setAttribute("aria-expanded", "false");
-          const menu = toggle.nextElementSibling;
-          if (menu && menu.classList.contains("dropdown-menu")) {
-            menu.classList.remove("show");
-          }
-        }
-      });
+    const Dropdown = window.bootstrap && window.bootstrap.Dropdown;
+
+    // Find open dropdowns from both sides. Selecting a tab inside a menu can
+    // leave `.show` on the <ul class="dropdown-menu"> while its toggle still
+    // reports aria-expanded="false", so looking at toggles alone misses it.
+    const toggles = new Set(document.querySelectorAll(
+      '.navbar .dropdown-toggle.show, .navbar .dropdown-toggle[aria-expanded="true"]'
+    ));
+    const orphanMenus = [];
+
+    document.querySelectorAll(".navbar .dropdown-menu.show").forEach(function (menu) {
+      const toggle = menu.parentElement &&
+        menu.parentElement.querySelector(":scope > .dropdown-toggle");
+      if (toggle) {
+        toggles.add(toggle);
+      } else {
+        orphanMenus.push(menu);
+      }
+    });
+
+    toggles.forEach(function (toggle) {
+      // Let Bootstrap tear down its popper first, then clean up by hand in case
+      // the instance thought the menu was already closed (hide() is a no-op then).
+      const instance = Dropdown && Dropdown.getInstance(toggle);
+      if (instance) instance.hide();
+
+      toggle.classList.remove("show");
+      toggle.setAttribute("aria-expanded", "false");
+      const menu = toggle.nextElementSibling;
+      if (menu && menu.classList.contains("dropdown-menu")) {
+        menu.classList.remove("show");
+      }
+    });
+
+    orphanMenus.forEach(function (menu) { menu.classList.remove("show"); });
   }
 
   // Bootstrap's Tab plugin can mark the parent dropdown as open *after* the
