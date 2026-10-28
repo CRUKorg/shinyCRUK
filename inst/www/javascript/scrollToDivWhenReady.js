@@ -39,6 +39,20 @@ window.scrollToDivWhenReady = (function () {
       });
   }
 
+  // Bootstrap's Tab plugin can mark the parent dropdown as open *after* the
+  // pane becomes visible (it does so when the tab transition completes), so a
+  // single close at "pane visible" time can be undone. Close again when the tab
+  // reports it has been shown, with a timed fallback in case that event has
+  // already fired or never fires.
+  function closeAgainAfterTabShown() {
+    function handler() { closeNavbarDropdowns(); }
+    document.addEventListener("shown.bs.tab", handler, { once: true });
+    setTimeout(function () {
+      document.removeEventListener("shown.bs.tab", handler);
+      closeNavbarDropdowns();
+    }, 1000);
+  }
+
   return function (id, timeoutMs) {
     timeoutMs = timeoutMs || 5000;
     if (timer) clearInterval(timer); // cancel any earlier poll
@@ -51,6 +65,7 @@ window.scrollToDivWhenReady = (function () {
         clearInterval(timer);
         timer = null;
         closeNavbarDropdowns();
+        closeAgainAfterTabShown();
         // Two frames lets layout settle after the tab transition / dropdown collapse
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {

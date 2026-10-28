@@ -29,10 +29,10 @@ contains \code{targetPage}, for example the \code{id} of
 \code{valueBoxId}.}
 
 \item{targetDiv}{Character vector or \code{NULL}. The full DOM id of the div
-to scroll to, including any module namespace (for example
-\code{shiny::NS("screening_Eng")("screeningBowelScreening")}). Recycled to
-the length of \code{valueBoxId}. If \code{NULL} (the default) the page is
-opened without scrolling.}
+to scroll to, including any module namespace (for example if module id is
+"ScreeningModule" and the div id is "BowelScreening", then pass
+"ScreeningModule-BowelScreening). Recycled to the length of \code{valueBoxId}.
+If \code{NULL} (the default) the page is opened without scrolling.}
 
 \item{session}{The Shiny session that owns \code{navId}. Default is
 \code{NULL}, which uses the root session of the app. Only supply this if

@@ -42,7 +42,7 @@ crukRounding(1200, case = "upper")
 # Returns: "Around 1,200"
 
 crukRounding(156789)
-# Returns: "around 157,000"
+# Returns: "nearly 157,000"
 
 crukRounding(c(3, 25, 500, 5000, 50000))
 # Returns vectorized output for multiple values
