@@ -20,7 +20,7 @@ window.scrollToDivWhenReady = (function () {
   }
 
   function closeNavbarDropdowns() {
-    const Dropdown = window.bootstrap && window.bootstrap.Dropdown;
+    const Dropdown = window.bootstrap?.Dropdown;
 
     // Find open dropdowns from both sides. Selecting a tab inside a menu can
     // leave `.show` on the <ul class="dropdown-menu"> while its toggle still
@@ -31,8 +31,7 @@ window.scrollToDivWhenReady = (function () {
     const orphanMenus = [];
 
     document.querySelectorAll(".navbar .dropdown-menu.show").forEach(function (menu) {
-      const toggle = menu.parentElement &&
-        menu.parentElement.querySelector(":scope > .dropdown-toggle");
+      const toggle = menu.parentElement?.querySelector(":scope > .dropdown-toggle");
       if (toggle) {
         toggles.add(toggle);
       } else {
@@ -43,20 +42,19 @@ window.scrollToDivWhenReady = (function () {
     toggles.forEach(function (toggle) {
       // Let Bootstrap tear down its popper first, then clean up by hand in case
       // the instance thought the menu was already closed (hide() is a no-op then).
-      const instance = Dropdown && Dropdown.getInstance(toggle);
-      if (instance) instance.hide();
+      Dropdown?.getInstance(toggle)?.hide();
 
       toggle.classList.remove("show");
       toggle.setAttribute("aria-expanded", "false");
       const menu = toggle.nextElementSibling;
-      if (menu && menu.classList.contains("dropdown-menu")) {
+      if (menu?.classList.contains("dropdown-menu")) {
         menu.classList.remove("show");
       }
     });
 
     orphanMenus.forEach(function (menu) { menu.classList.remove("show"); });
 
-    if (window.scrollToDivWhenReady && window.scrollToDivWhenReady.debug) {
+    if (window.scrollToDivWhenReady?.debug) {
       console.log("scrollToDivWhenReady: closed", toggles.size, "toggle(s) and",
                   orphanMenus.length, "orphan menu(s)");
     }
