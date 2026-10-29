@@ -8,7 +8,14 @@ with CRUK-specific styling and optional Google Material Symbols icons.
 ## Usage
 
 ``` r
-crukDownloadButton(outputId, text, type = "secondary", icon = "download", ...)
+crukDownloadButton(
+  outputId,
+  text = "Download data",
+  type = "secondary",
+  icon = "download",
+  align = "right",
+  ...
+)
 ```
 
 ## Arguments
@@ -19,7 +26,7 @@ crukDownloadButton(outputId, text, type = "secondary", icon = "download", ...)
 
 - text:
 
-  The button label text to display.
+  The button label text to display. Default is "Download data"
 
 - type:
 
@@ -32,7 +39,12 @@ crukDownloadButton(outputId, text, type = "secondary", icon = "download", ...)
   Optional character string specifying which Google Material Symbol to
   display. Must be one of: `"upload_file"`, `"download"`,
   `"check_circle"`, `"open_in_new"`, `"content_copy"`, `"mail"`, or
-  `"share"`. Default is `NULL` (no icon).
+  `"share"`. Default is `"download"`.
+
+- align:
+
+  Character string. Horizontal alignment of the button within its
+  container. Either `"right"` (default) or `"left"`.
 
 - ...:
 
