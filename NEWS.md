@@ -1,3 +1,12 @@
+# shinyCRUK 0.7.1
+
+## Minor tweaks
+* `crukDownloadButton()` now has an `align` property, which sets its location within
+its parent container to be either right-aligned (default) or left-aligned.
+
+## Bug fixes
+* Fixed dodgy formatting of the bug fixes section below, lol.
+
 # shinyCRUK 0.7.0
 
 ## New functions
@@ -6,13 +15,13 @@ and onclick, facilitating navigation using `crukValueBox()`, or any other naviga
 element. Can be used to set up multiple onclick events at once, tidying code.
 
 ## Bug fixes
-*`crukRounding()` now uses the correct "around" / "nearly" / "more than"
+* `crukRounding()` now uses the correct "around" / "nearly" / "more than"
   thresholds for numbers of 1 million and above. The thresholds had been copied
   from the 100,000+ range without being scaled, so most numbers in the millions
   were described too early as "nearly" or "around" (e.g. 1,090,747 returned
   "nearly 1,090,000" instead of "around 1,090,000"). The 100 million+ range also
-  rounded rather than floored in its "more than" wording. **Output wording will
-  change for many values of 1 million and above**, for example 1,234,567 now
+  rounded rather than floored in its "more than" wording. Output wording will
+  change for many values of 1 million and above, for example 1,234,567 now
   returns "more than 1,230,000" rather than "around 1,230,000".
 * Corrected the `crukRounding()` example for `156789`, which should return
   "nearly 157,000"

@@ -4,12 +4,19 @@
 \alias{crukDownloadButton}
 \title{Create a CRUK-branded download button}
 \usage{
-crukDownloadButton(outputId, text, type = "secondary", icon = "download", ...)
+crukDownloadButton(
+  outputId,
+  text = "Download data",
+  type = "secondary",
+  icon = "download",
+  align = "right",
+  ...
+)
 }
 \arguments{
 \item{outputId}{The name of the output slot that the download handler uses.}
 
-\item{text}{The button label text to display.}
+\item{text}{The button label text to display. Default is "Download data"}
 
 \item{type}{Character string specifying button style. Either \code{"primary"}
 (magenta background) or \code{"secondary"} (default, white background with
@@ -18,7 +25,10 @@ magenta border).}
 \item{icon}{Optional character string specifying which Google Material Symbol
 to display. Must be one of: \code{"upload_file"}, \code{"download"},
 \code{"check_circle"}, \code{"open_in_new"}, \code{"content_copy"},
-\code{"mail"}, or \code{"share"}. Default is \code{NULL} (no icon).}
+\code{"mail"}, or \code{"share"}. Default is \code{"download"}.}
+
+\item{align}{Character string. Horizontal alignment of the button within its
+container. Either \code{"right"} (default) or \code{"left"}.}
 
 \item{...}{Additional arguments passed to \code{shiny::downloadButton()}.}
 }

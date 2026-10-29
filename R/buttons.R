@@ -212,14 +212,16 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, class = "", .
 #' styling and optional Google Material Symbols icons.
 #'
 #' @param outputId The name of the output slot that the download handler uses.
-#' @param text The button label text to display.
+#' @param text The button label text to display. Default is "Download data"
 #' @param type Character string specifying button style. Either \code{"primary"}
 #'   (magenta background) or \code{"secondary"} (default, white background with
 #'   magenta border).
 #' @param icon Optional character string specifying which Google Material Symbol
 #'   to display. Must be one of: \code{"upload_file"}, \code{"download"},
 #'   \code{"check_circle"}, \code{"open_in_new"}, \code{"content_copy"},
-#'   \code{"mail"}, or \code{"share"}. Default is \code{NULL} (no icon).
+#'   \code{"mail"}, or \code{"share"}. Default is \code{"download"}.
+#' @param align Character string. Horizontal alignment of the button within its
+#'   container. Either \code{"right"} (default) or \code{"left"}.
 #' @param ... Additional arguments passed to \code{shiny::downloadButton()}.
 #'
 #' @return A Shiny download button tag with CRUK branding and attached CSS/icon
@@ -254,9 +256,10 @@ crukRadioButton <- function(inputId, label, choices, width = NULL, class = "", .
 #'   shinyApp(ui, server)
 #' }
 crukDownloadButton <- function(outputId,
-                               text,
+                               text = "Download data",
                                type = "secondary",
                                icon = "download",
+                               align = "right",
                                ...) {
 
   # Validation checks
@@ -281,6 +284,10 @@ crukDownloadButton <- function(outputId,
 
   if (text == "") {
     stop("You need to give your button a label via the text argument! How about 'Download data'?")
+  }
+
+  if (!align %in% c("right", "left")) {
+    stop("align must be right or left")
   }
 
   # Dependencies
@@ -333,9 +340,19 @@ crukDownloadButton <- function(outputId,
 
   }
 
+  # Alignment wrapper
+  align_items <- if (align == "right") "flex-end" else "flex-start"
+
+  wrapper <- htmltools::tags$div(
+    style = paste0(
+      "display: flex; flex-direction: column; align-items: ", align_items, ";"
+    ),
+    button
+  )
+
   # Attach dependencies
   htmltools::tagList(
     googleSymbols,
-    htmltools::attachDependencies(button, css)
+    htmltools::attachDependencies(wrapper, css)
   )
 }
