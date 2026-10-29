@@ -1,0 +1,29 @@
+.cruk-checkbox {
+  --cruk-pink: #FF0087;
+  --cruk-checkbox-offset: 45px;
+  font-family: "Poppins Medium", sans-serif;
+}
+
+/* Unchecked: black outline, white fill */
+.cruk-checkbox .pretty .state label:before {
+  border: 1px solid #000;
+  background-color: #fff;
+}
+
+/* Checked: pink box (!important because the library's fill rules use it) */
+.cruk-checkbox .pretty input:checked ~ .state label:before,
+.cruk-checkbox .pretty input:checked ~ .state label:after {
+  border-color: var(--cruk-pink) !important;
+  background-color: var(--cruk-pink) !important;
+}
+
+/* White tick */
+.cruk-checkbox .pretty input:checked ~ .state .icon:before,
+.cruk-checkbox .pretty input:checked ~ .state .icon {
+  color: #fff !important;
+}
+
+/* Alignment: offset only when the row is side by side */
+@media (min-width: 768px) {
+  .cruk-checkbox-align { margin-top: var(--cruk-checkbox-offset); }
+}

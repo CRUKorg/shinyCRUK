@@ -1,3 +1,13 @@
+# shinyCRUK 0.8.0
+
+## New function
+* `crukCheckbox()` a CRUK-styled wrapper for `shinyWidgets::prettyCheckbox()`. Check
+  the help page for a note about label length.
+ 
+## Minor tweaks
+* Added 16px margin-bottom to `crukKeyStatBox()`. The function now has the same
+  margin-bottom as general paragraph styling. 
+
 # shinyCRUK 0.7.1
 
 ## Minor tweaks
