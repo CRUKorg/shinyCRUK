@@ -23,6 +23,17 @@
   color: #fff !important;
 }
 
+/* A tooltip inside the label: lift it above pretty-checkbox's invisible input overlay */
+.cruk-checkbox .pretty .cruk-tooltip-trigger {
+  position: relative;
+  z-index: 3;
+}
+
+/* text-indent is inherited, and the inline-block icon would pick up the label's indent */
+.cruk-checkbox .pretty .cruk-tooltip-trigger-icon {
+  text-indent: 0;
+}
+
 /* Alignment: offset only when the row is side by side */
 @media (min-width: 768px) {
   .cruk-checkbox-align { margin-top: var(--cruk-checkbox-offset); }

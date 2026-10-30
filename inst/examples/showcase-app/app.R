@@ -161,7 +161,8 @@ ui <- bslib::page_navbar(
           crukCheckbox(inputId = "checkbox",
                        label = "Tick(le) me pink",
                        alignWithInput = TRUE),
-        )
+        ),
+        heights_equal = "row"
         )
       ),
       h3("Content for the bottom of your pages"),
