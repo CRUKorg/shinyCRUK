@@ -1,3 +1,12 @@
+# shinyCRUK 0.8.1
+
+## Minor tweaks
+* When near or over 1,000,000 `crukRounding()` now uses the word "million". E.g.
+  `crukRounding(1234567)` gives "around 1.2 million".
+* `crukTable()` has a new `fitCells` parameter. Like the existing `fitHeaders`, 
+  this defaults to `TRUE` and causes table columns to widen to prevent line breaks
+  from occurring mid-word.
+
 # shinyCRUK 0.8.0
 
 ## New function
