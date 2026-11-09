@@ -506,7 +506,7 @@ cruk_header_width <- function(col, name, sortable, mobile) {
 # Body cell metrics
 cruk_cell_metrics <- list(
   font_rem    = c(full = 0.875, compact = 0.8125),
-  em_per_char = 0.56,
+  em_per_char = 0.62,
   pad_px      = c(full = 8, compact = 6),
   slack_px    = 6
 )
