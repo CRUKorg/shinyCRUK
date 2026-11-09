@@ -10,6 +10,8 @@
   : Create a CRUK-branded action button
 - [`crukChartTable()`](https://crukorg.github.io/shinyCRUK/reference/crukChartTable.md)
   : Border-less Card for Chart and Table Combined Output
+- [`crukCheckbox()`](https://crukorg.github.io/shinyCRUK/reference/crukCheckbox.md)
+  : CRUK-styled checkbox
 - [`crukDatePicker()`](https://crukorg.github.io/shinyCRUK/reference/crukDatePicker.md)
   : CRUK Date Picker
 - [`crukDownloadButton()`](https://crukorg.github.io/shinyCRUK/reference/crukDownloadButton.md)

@@ -16,6 +16,7 @@ crukRounding(number, case = "lower")
 - number:
 
   Numeric vector of values to format. Can be integers or decimals.
+  Missing (`NA`/`NaN`) and infinite values are an error.
 
 - case:
 
@@ -32,7 +33,11 @@ than).
 
 The function applies different rounding rules based on number magnitude:
 
-- Numbers \>= 100,000: Rounded to 3 significant figures with qualifiers
+- Numbers \>= 1,000,000: Expressed in millions to 1 decimal place (e.g.
+  "more than 1.2 million") with qualifiers
+
+- Numbers \>= 100,000: Rounded to 3 significant figures with qualifiers.
+  Values that would round up to 1,000,000 are expressed as "1.0 million"
 
 - Numbers \>= 1,000: Rounded to nearest 100 with "around" prefix
 
@@ -60,12 +65,16 @@ crukRounding(156789)
 #> [1] "nearly 157,000"
 # Returns: "nearly 157,000"
 
+crukRounding(1234567)
+#> [1] "more than 1.2 million"
+# Returns: "more than 1.2 million"
+
 crukRounding(c(3, 25, 500, 5000, 50000))
 #> [1] "less than 5"   "around 25"     "around 500"    "around 5,000" 
 #> [5] "around 50,000"
 # Returns vectorized output for multiple values
 
 crukRounding(999999)
-#> [1] "around 1,000,000"
-# Returns: "around 1,000,000"
+#> [1] "around 1.0 million"
+# Returns: "around 1.0 million"
 ```

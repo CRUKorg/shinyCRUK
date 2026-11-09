@@ -9,6 +9,7 @@
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/ciBox.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/crukButton.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/crukChartTable.html</loc></url>
+<url><loc>https://crukorg.github.io/shinyCRUK/reference/crukCheckbox.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/crukDatePicker.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/crukDownloadButton.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/crukFooter.html</loc></url>
@@ -35,7 +36,7 @@
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/get_zotero_sources.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/index.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/lastReview.html</loc></url>
-<url><loc>https://crukorg.github.io/shinyCRUK/reference/libs/crukTable-0.7.1/ga-code.html</loc></url>
+<url><loc>https://crukorg.github.io/shinyCRUK/reference/libs/crukTable-0.8.1/ga-code.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/onThisPage.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/renderCrukTable.html</loc></url>
 <url><loc>https://crukorg.github.io/shinyCRUK/reference/setup_zotero_credentials.html</loc></url>

@@ -1,5 +1,34 @@
 # Changelog
 
+## shinyCRUK 0.8.1
+
+### Minor tweaks
+
+- When near or over 1,000,000
+  [`crukRounding()`](https://crukorg.github.io/shinyCRUK/reference/crukRounding.md)
+  now uses the word “million”. E.g. `crukRounding(1234567)` gives
+  “around 1.2 million”.
+- [`crukTable()`](https://crukorg.github.io/shinyCRUK/reference/crukTable.md)
+  has a new `fitCells` parameter. Like the existing `fitHeaders`, this
+  defaults to `TRUE` and causes table columns to widen to prevent line
+  breaks from occurring mid-word.
+
+## shinyCRUK 0.8.0
+
+### New function
+
+- [`crukCheckbox()`](https://crukorg.github.io/shinyCRUK/reference/crukCheckbox.md)
+  a CRUK-styled wrapper for
+  [`shinyWidgets::prettyCheckbox()`](https://dreamrs.github.io/shinyWidgets/reference/prettyCheckbox.html).
+  Check the help page for a note about label length.
+
+### Minor tweaks
+
+- Added 16px margin-bottom to
+  [`crukKeyStatBox()`](https://crukorg.github.io/shinyCRUK/reference/crukKeyStatBox.md).
+  The function now has the same margin-bottom as general paragraph
+  styling.
+
 ## shinyCRUK 0.7.1
 
 ### Minor tweaks
