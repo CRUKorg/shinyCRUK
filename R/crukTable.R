@@ -75,6 +75,15 @@
 #'   rather than on every resize, so the current page, sort order and selection
 #'   are kept. If supplied, \code{mobile} takes precedence over
 #'   \code{WindowSize}. If \code{NULL} (the default), \code{WindowSize} is used.
+#' @param fitCells Logical. If \code{TRUE} (the default), each column's minimum
+#'   width is also raised, if necessary, so that the longest word in any of its
+#'   cells fits on one line. All rows are measured, not just the current page,
+#'   so widths do not change when paging. The width is estimated from the number
+#'   of characters, as for \code{fitHeaders}. Columns are left alone if their
+#'   \code{colDef()} sets \code{width}, \code{maxWidth}, \code{minWidth},
+#'   \code{cell}, \code{format}, or \code{html = TRUE} (the displayed text is
+#'   then unknown), or sets \code{show = FALSE}. List columns are skipped. Set
+#'   to \code{FALSE} to size columns from headers only.
 #' @param ... Additional arguments passed to \code{reactable::reactable()}.
 #'
 #' @return A \code{reactable} htmlwidget with the CRUK table stylesheet
@@ -116,6 +125,7 @@ crukTable <- function(
     mobileMaxWidth = 375,
     mobile = NULL,
     fitHeaders = TRUE,
+    fitCells = TRUE,
     ...
 ) {
 
@@ -205,15 +215,17 @@ crukTable <- function(
     collapse = " "
   )
 
-  # Let columns grow so the longest header word fits on one line. This runs
+  # Let columns grow so the longest header or cell word fits on one line. This runs
   # before cruk_columns() so that only the caller's columns are considered.
-  if (fitHeaders) {
+  if (fitHeaders || fitCells) {
     columns <- cruk_fit_headers(
       columns,
       data,
       sortable = sortable,
       mobile = is_mobile,
-      floor_px = cruk_min_width_floor(data, is_mobile, mobileMaxWidth)
+      floor_px = cruk_min_width_floor(data, is_mobile, mobileMaxWidth),
+      fit_headers = fitHeaders,
+      fit_cells = fitCells
     )
   }
 
@@ -415,7 +427,7 @@ cruk_default_col_def <- function(data, mobile, max_width) {
   )
 }
 
-# Header fitting ---------------------------------------------------------------
+# Cell and header fitting ------------------------------------------------------
 #
 # reactable sizes columns in pixels (colDef(minWidth =)), but the header text is
 # sized by the browser, and reactable's CSS sets `word-wrap: break-word` on
@@ -491,17 +503,62 @@ cruk_header_width <- function(col, name, sortable, mobile) {
   )
 }
 
-# Raise one column's minWidth if its header needs more room than `floor_px`.
-# Never lowers a width, never touches a user-sized column. `col` is NULL when
-# the caller did not define the column; the result is then NULL (nothing to
-# change) or a new colDef().
-cruk_fit_header <- function(col, name, sortable, mobile, floor_px) {
-  needed <- cruk_header_width(col, name, sortable, mobile)
-  if (is.na(needed) || needed <= floor_px) {
+# Body cell metrics
+cruk_cell_metrics <- list(
+  font_rem    = c(full = 0.875, compact = 0.8125),
+  em_per_char = 0.62,
+  pad_px      = c(full = 8, compact = 6),
+  slack_px    = 6
+)
+
+# The values of one column of `data`, which may be a data frame or a matrix.
+cruk_column_values <- function(data, name) {
+  if (is.matrix(data)) data[, name] else data[[name]]
+}
+
+# Estimated pixel width needed for the longest word in a column's cells, or NA
+# if the cells should be left alone.
+cruk_cell_width <- function(col, values, mobile) {
+  if (is.null(values) || is.list(values) || length(values) == 0 ||
+      cruk_is_user_sized(col) ||
+      identical(col[["show"]], FALSE) ||
+      !is.null(col[["cell"]]) ||
+      !is.null(col[["format"]]) ||
+      isTRUE(col[["html"]])) {
+    return(NA_real_)
+  }
+
+  chars <- cruk_longest_word_chars(unique(values))
+  if (chars == 0) {
+    return(NA_real_)
+  }
+
+  m <- cruk_cell_metrics
+  mode <- if (mobile) "compact" else "full"
+
+  ceiling(
+    chars * m$em_per_char * m$font_rem[[mode]] * cruk_header_metrics$rem_px +
+      2 * m$pad_px[[mode]] +
+      m$slack_px
+  )
+}
+
+# Raise one column's minWidth if its header and/or cells need more room than
+# `floor_px`. Never lowers a width, never touches a user-sized column.
+cruk_fit_header <- function(col, name, sortable, mobile, floor_px,
+                            values = NULL, fit_headers = TRUE,
+                            fit_cells = FALSE) {
+  needed <- c(
+    if (fit_headers) cruk_header_width(col, name, sortable, mobile),
+    if (fit_cells) cruk_cell_width(col, values, mobile)
+  )
+  needed <- needed[!is.na(needed)]
+
+  if (length(needed) == 0 || max(needed) <= floor_px) {
     return(col)
   }
 
-  min_width <- max(floor_px, min(needed, cruk_header_metrics$max_px))
+  min_width <- max(floor_px, min(max(needed), cruk_header_metrics$max_px))
 
   if (is.null(col)) {
     return(reactable::colDef(minWidth = min_width))
@@ -511,9 +568,8 @@ cruk_fit_header <- function(col, name, sortable, mobile, floor_px) {
   col
 }
 
-# Apply cruk_fit_header() to every data column. Entries in `columns` that are
-# not data columns (e.g. `.selection`) pass through unchanged.
-cruk_fit_headers <- function(columns, data, sortable, mobile, floor_px) {
+cruk_fit_headers <- function(columns, data, sortable, mobile, floor_px,
+                             fit_headers = TRUE, fit_cells = FALSE) {
   col_names <- colnames(data)
   if (is.null(col_names)) {
     return(columns)
@@ -521,7 +577,12 @@ cruk_fit_headers <- function(columns, data, sortable, mobile, floor_px) {
 
   fitted <- col_names |>
     rlang::set_names() |>
-    purrr::map(\(nm) cruk_fit_header(columns[[nm]], nm, sortable, mobile, floor_px)) |>
+    purrr::map(\(nm) cruk_fit_header(
+      columns[[nm]], nm, sortable, mobile, floor_px,
+      values = if (fit_cells) cruk_column_values(data, nm),
+      fit_headers = fit_headers,
+      fit_cells = fit_cells
+    )) |>
     purrr::compact()
 
   c(fitted, columns[setdiff(names(columns), col_names)])
@@ -542,6 +603,13 @@ as_cruk_table <- function(x) {
     "not an object of class <", class(x)[1], ">",
     call. = FALSE
   )
+}
+
+check_flag <- function(x, arg) {
+  if (!is.logical(x) || length(x) != 1 || is.na(x)) {
+    stop("`", arg, "` must be TRUE or FALSE", call. = FALSE)
+  }
+  invisible(x)
 }
 
 check_flag <- function(x, arg) {

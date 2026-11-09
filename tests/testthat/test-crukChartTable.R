@@ -73,3 +73,4 @@ test_that("alt text over 125 characters warns rather than errors", {
 test_that("alt text under 15 characters still errors", {
   expect_error(card(alt = "too short"), "descriptive")
 })
+

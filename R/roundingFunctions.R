@@ -5,6 +5,7 @@
 #' on magnitude. Returns descriptive text like "around 1,200" or "more than 5,000".
 #'
 #' @param number Numeric vector of values to format. Can be integers or decimals.
+#'   Missing (`NA`/`NaN`) and infinite values are an error.
 #' @param case Character string specifying text case. Either "lower" (default)
 #'   for lowercase or "upper" for sentence case output.
 #'
@@ -14,7 +15,10 @@
 #' @details
 #' The function applies different rounding rules based on number magnitude:
 #' \itemize{
-#'   \item Numbers >= 100,000: Rounded to 3 significant figures with qualifiers
+#'   \item Numbers >= 1,000,000: Expressed in millions to 1 decimal place
+#'     (e.g. "more than 1.2 million") with qualifiers
+#'   \item Numbers >= 100,000: Rounded to 3 significant figures with qualifiers.
+#'     Values that would round up to 1,000,000 are expressed as "1.0 million"
 #'   \item Numbers >= 1,000: Rounded to nearest 100 with "around" prefix
 #'   \item Numbers >= 100: Rounded to nearest 10 with "around" prefix
 #'   \item Numbers >= 10: Rounded to nearest 5 with "around" prefix
@@ -36,22 +40,29 @@
 #' crukRounding(156789)
 #' # Returns: "nearly 157,000"
 #'
+#' crukRounding(1234567)
+#' # Returns: "more than 1.2 million"
+#'
 #' crukRounding(c(3, 25, 500, 5000, 50000))
 #' # Returns vectorized output for multiple values
 #'
 #' crukRounding(999999)
-#' # Returns: "around 1,000,000"
+#' # Returns: "around 1.0 million"
 #'
 #' @export
 crukRounding <- function(number, case = "lower") {
-  # Input validation
-  if (!is.numeric(number) && !all(is.na(number))) {
-    # Try to coerce to numeric
+  # Input validation: coerce to numeric, erroring if any value cannot be coerced
+  if (!is.numeric(number)) {
     number_converted <- suppressWarnings(as.numeric(number))
-    if (all(is.na(number_converted) & !is.na(number))) {
+    if (any(is.na(number_converted) & !is.na(number))) {
       stop("`number` must be numeric or coercible to numeric")
     }
     number <- number_converted
+  }
+
+  # Error on missing or infinite values rather than returning misleading text
+  if (any(!is.finite(number))) {
+    stop("`number` must not contain missing (NA) or infinite values")
   }
 
   # Convert to numeric if not already
@@ -85,37 +96,27 @@ crukRounding <- function(number, case = "lower") {
     trimws(format(x, big.mark = ",", scientific = FALSE))
   }
 
+  # Helper function to express a value in millions to 1 d.p.
+  fmt_m <- function(x) {
+    formatC(x / 1e6, format = "f", digits = 1, big.mark = ",")
+  }
+
   # Generate descriptive text based on magnitude and remainder
   numbertext <- dplyr::case_when(
-    # 100+ million range (3 s.f. step = 1,000,000)
-    number >= 100000000 & number %% 1000000 >= 900000 ~
-      paste0("around ", fmt(signif(number, 3))),
-    number >= 100000000 & number %% 1000000 >= 700000 ~
-      paste0("nearly ", fmt(signif(number, 3))),
-    number >= 100000000 & number %% 1000000 >= 200000 ~
-      paste0("more than ", fmt(floor(number / 1000000) * 1000000)),
-    number >= 100000000 ~
-      paste0("around ", fmt(floor(number / 1000000) * 1000000)),
-
-    # 10+ million range (3 s.f. step = 100,000)
-    number >= 10000000 & number %% 100000 >= 90000 ~
-      paste0("around ", fmt(signif(number, 3))),
-    number >= 10000000 & number %% 100000 >= 70000 ~
-      paste0("nearly ", fmt(signif(number, 3))),
-    number >= 10000000 & number %% 100000 >= 20000 ~
-      paste0("more than ", fmt(floor(number / 100000) * 100000)),
-    number >= 10000000 ~
-      paste0("around ", fmt(floor(number / 100000) * 100000)),
-
-    # 1+ million range (3 s.f. step = 10,000)
-    number >= 1000000 & number %% 10000 >= 9000 ~
-      paste0("around ", fmt(signif(number, 3))),
-    number >= 1000000 & number %% 10000 >= 7000 ~
-      paste0("nearly ", fmt(signif(number, 3))),
-    number >= 1000000 & number %% 10000 >= 2000 ~
-      paste0("more than ", fmt(floor(number / 10000) * 10000)),
+    # 1+ million range: expressed in millions to 1 d.p. (step = 100,000)
+    number >= 1000000 & number %% 100000 >= 90000 ~
+      paste0("around ", fmt_m(ceiling(number / 100000) * 100000), " million"),
+    number >= 1000000 & number %% 100000 >= 70000 ~
+      paste0("nearly ", fmt_m(ceiling(number / 100000) * 100000), " million"),
+    number >= 1000000 & number %% 100000 >= 20000 ~
+      paste0("more than ", fmt_m(floor(number / 100000) * 100000), " million"),
     number >= 1000000 ~
-      paste0("around ", fmt(floor(number / 10000) * 10000)),
+      paste0("around ", fmt_m(floor(number / 100000) * 100000), " million"),
+
+    # Values just under 1 million that the 100k+ rule below would round up to
+    # 1,000,000 are expressed in millions for consistency with the range above
+    number >= 999900 ~ "around 1.0 million",
+    number >= 999700 ~ "nearly 1.0 million",
 
     # 100k+ range
     number >= 100000 & number %% 1000 >= 900 ~
@@ -137,7 +138,7 @@ crukRounding <- function(number, case = "lower") {
 
     # 100+ range - round to nearest 10
     number >= 100 ~
-      paste0("around ", round(number / 10) * 10),
+      paste0("around ", fmt(round(number / 10) * 10)),
 
     # 10+ range - round to nearest 5
     number >= 10 ~
@@ -151,7 +152,7 @@ crukRounding <- function(number, case = "lower") {
     TRUE ~ "less than 5"
   )
 
-  numbertext <- if(case == "upper") {
+  numbertext <- if (case == "upper") {
     paste0(
       substr(toupper(numbertext), 1, 1),
       substr(numbertext, 2, nchar(numbertext))
@@ -160,7 +161,7 @@ crukRounding <- function(number, case = "lower") {
     numbertext
   }
 
-return(numbertext)
+  return(numbertext)
 }
 
 

@@ -20,6 +20,7 @@ crukTable(
   mobileMaxWidth = 375,
   mobile = NULL,
   fitHeaders = TRUE,
+  fitCells = TRUE,
   ...
 )
 }
@@ -107,6 +108,16 @@ capped so that one very long word cannot make a column huge. Columns are
 left alone if their \code{colDef()} sets \code{width}, \code{maxWidth} or
 \code{minWidth}, or sets \code{show = FALSE} or a custom \code{header}.
 Set to \code{FALSE} for reactable's own sizing.}
+
+\item{fitCells}{Logical. If \code{TRUE} (the default), each column's minimum
+width is also raised, if necessary, so that the longest word in any of its
+cells fits on one line. All rows are measured, not just the current page,
+so widths do not change when paging. The width is estimated from the number
+of characters, as for \code{fitHeaders}. Columns are left alone if their
+\code{colDef()} sets \code{width}, \code{maxWidth}, \code{minWidth},
+\code{cell}, \code{format}, or \code{html = TRUE} (the displayed text is
+then unknown), or sets \code{show = FALSE}. List columns are skipped. Set
+to \code{FALSE} to size columns from headers only.}
 
 \item{...}{Additional arguments passed to \code{reactable::reactable()}.}
 }

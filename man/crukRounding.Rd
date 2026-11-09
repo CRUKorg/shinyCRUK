@@ -7,7 +7,8 @@
 crukRounding(number, case = "lower")
 }
 \arguments{
-\item{number}{Numeric vector of values to format. Can be integers or decimals.}
+\item{number}{Numeric vector of values to format. Can be integers or decimals.
+Missing (\code{NA}/\code{NaN}) and infinite values are an error.}
 
 \item{case}{Character string specifying text case. Either "lower" (default)
 for lowercase or "upper" for sentence case output.}
@@ -24,7 +25,10 @@ on magnitude. Returns descriptive text like "around 1,200" or "more than 5,000".
 \details{
 The function applies different rounding rules based on number magnitude:
 \itemize{
-\item Numbers >= 100,000: Rounded to 3 significant figures with qualifiers
+\item Numbers >= 1,000,000: Expressed in millions to 1 decimal place
+(e.g. "more than 1.2 million") with qualifiers
+\item Numbers >= 100,000: Rounded to 3 significant figures with qualifiers.
+Values that would round up to 1,000,000 are expressed as "1.0 million"
 \item Numbers >= 1,000: Rounded to nearest 100 with "around" prefix
 \item Numbers >= 100: Rounded to nearest 10 with "around" prefix
 \item Numbers >= 10: Rounded to nearest 5 with "around" prefix
@@ -44,10 +48,13 @@ crukRounding(1200, case = "upper")
 crukRounding(156789)
 # Returns: "nearly 157,000"
 
+crukRounding(1234567)
+# Returns: "more than 1.2 million"
+
 crukRounding(c(3, 25, 500, 5000, 50000))
 # Returns vectorized output for multiple values
 
 crukRounding(999999)
-# Returns: "around 1,000,000"
+# Returns: "around 1.0 million"
 
 }

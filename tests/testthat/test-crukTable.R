@@ -248,3 +248,41 @@ test_that("cruk_columns hides the selection column unless told otherwise", {
   own <- list(.selection = reactable::colDef(width = 60))
   expect_identical(cruk_columns(own, "multiple"), own)
 })
+
+
+test_that("fitCells widens columns to fit the longest cell word", {
+  df <- data.frame(a = c("x", "Presentation"), b = c(1, 2))
+
+  cols <- cruk_fit_headers(
+    NULL, df, sortable = TRUE, mobile = TRUE, floor_px = 40,
+    fit_headers = FALSE, fit_cells = TRUE
+  )
+
+  expect_gt(cols$a$minWidth, 40)
+  expect_null(cols$b)
+})
+
+test_that("fit_cells = FALSE and user-sized or formatted columns are untouched", {
+  df <- data.frame(a = "Presentation", b = "Presentation", c = "Presentation")
+  columns <- list(
+    b = reactable::colDef(width = 50),
+    c = reactable::colDef(format = reactable::colFormat(prefix = "x"))
+  )
+
+  off <- cruk_fit_headers(NULL, df["a"], TRUE, TRUE, 40, FALSE, FALSE)
+  expect_length(off, 0)
+
+  on <- cruk_fit_headers(columns, df, TRUE, TRUE, 40, FALSE, TRUE)
+  expect_equal(on$b$width, 50)
+  expect_null(on$b$minWidth)
+  expect_null(on$c$minWidth)
+})
+
+test_that("cell width estimate uses the compact font size when mobile", {
+  col <- NULL
+  vals <- "Presentation"
+  expect_lt(
+    cruk_cell_width(col, vals, mobile = TRUE),
+    cruk_cell_width(col, vals, mobile = FALSE)
+  )
+})

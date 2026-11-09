@@ -112,6 +112,12 @@
   border-top: 3px solid var(--cruk-table-rule);
 }
 
+/* Adds pink background to hover for page buttons */
+.cruk-table.Reactable .rt-page-button:hover {
+  background-color: var(--cruk-table-row-hover);
+  border-radius: 0px;
+}
+
 /* Row header column ------------------------------------------------------- */
 
 /* The left-most column is a row header (colDef(rowHeader = TRUE)), which
