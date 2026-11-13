@@ -2,9 +2,10 @@
 
 Makes one or more elements (typically
 [`crukValueBox`](https://crukorg.github.io/shinyCRUK/reference/crukValueBox.md)es)
-clickable. A click selects a page in a navbar or tabset, then scrolls to
-a div on that page once it is visible, and closes any navbar dropdown
-menu left open by the navigation. Call
+clickable. A click selects a page in a navbar or tabset, closes any
+navbar dropdown menu left open by the navigation, and then scrolls. If
+`targetDiv` is given, the browser scrolls to that div once it is
+visible; otherwise the new page opens scrolled to the top. Call
 [`crukNavLinkSetup`](https://crukorg.github.io/shinyCRUK/reference/crukNavLinkSetup.md)
 once in the UI first.
 
@@ -43,16 +44,18 @@ crukNavLink(
 
   Character vector. The `value` of the
   [`bslib::nav_panel()`](https://rstudio.github.io/bslib/reference/nav-items.html)
-  to open. Recycled to the length of `valueBoxId`.
+  to open. Recycled to the length of `valueBoxId`. When `targetDiv` is
+  `NULL` the browser also uses this value to detect when the page has
+  opened, so it must match the panel's `value` exactly.
 
 - targetDiv:
 
   Character vector or `NULL`. The full DOM id of the div to scroll to,
   including any module namespace (for example if module id is
   "ScreeningModule" and the div id is "BowelScreening", then pass
-  "ScreeningModule-BowelScreening). Recycled to the length of
-  `valueBoxId`. If `NULL` (the default) the page is opened without
-  scrolling.
+  "ScreeningModule-BowelScreening"). Recycled to the length of
+  `valueBoxId`. If `NULL` (the default) the page is opened and scrolled
+  to the top.
 
 - session:
 
@@ -62,8 +65,9 @@ crukNavLink(
 
 - timeoutMs:
 
-  Numeric. How long, in milliseconds, the browser keeps waiting for
-  `targetDiv` to become visible before giving up. Default is 5000.
+  Numeric. How long, in milliseconds, the browser keeps waiting for the
+  target (`targetDiv`, or the page itself when `targetDiv` is `NULL`) to
+  become visible before giving up. Default is 5000.
 
 - asis:
 
@@ -86,8 +90,9 @@ clickable elements.
 Requires
 [`crukNavLinkSetup()`](https://crukorg.github.io/shinyCRUK/reference/crukNavLinkSetup.md)
 in the UI, which loads shinyjs and the scroll helper. Without it the
-navigation still happens, but nothing scrolls and the browser console
-reports that `scrollToDivWhenReady` is not defined.
+navigation still happens, but nothing scrolls or closes the dropdown,
+and the browser console reports that `scrollToDivWhenReady` is not
+defined.
 
 ## Things to watch
 
@@ -100,6 +105,10 @@ reports that `scrollToDivWhenReady` is not defined.
 
 - If `targetDiv` never becomes visible (wrong id, wrong page), a warning
   is written to the browser console after `timeoutMs`.
+
+- With `targetDiv = NULL`, the same happens if the page never becomes
+  active, for example if `targetPage` does not match the `value` of any
+  [`bslib::nav_panel()`](https://rstudio.github.io/bslib/reference/nav-items.html).
 
 ## See also
 
@@ -144,6 +153,14 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+
+# Without targetDiv: open the page and scroll to its top
+# (server code)
+crukNavLink(
+  valueBoxId = "bowel_box",
+  navId = "main_navbar",
+  targetPage = "screening_page"
+)
 
 # Inside a module: several boxes at once, each with its own target
 # (module server code)

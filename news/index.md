@@ -1,5 +1,16 @@
 # Changelog
 
+## shinyCRUK 0.8.2
+
+### Bug fixes
+
+- [`crukNavLink()`](https://crukorg.github.io/shinyCRUK/reference/crukNavLink.md)
+  now closes any open navbar dropdown menu when `targetDiv` is `NULL`.
+  Previously the dropdown was only closed when scrolling to a div.
+- [`crukNavLink()`](https://crukorg.github.io/shinyCRUK/reference/crukNavLink.md)
+  now scrolls to the top of the new page when `targetDiv` is `NULL`,
+  instead of keeping the scroll position from the previous page.
+
 ## shinyCRUK 0.8.1
 
 ### Minor tweaks
