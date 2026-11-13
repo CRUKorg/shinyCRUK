@@ -26,20 +26,24 @@ contains \code{targetPage}, for example the \code{id} of
 
 \item{targetPage}{Character vector. The \code{value} of the
 \code{bslib::nav_panel()} to open. Recycled to the length of
-\code{valueBoxId}.}
+\code{valueBoxId}. When \code{targetDiv} is \code{NULL} the browser also
+uses this value to detect when the page has opened, so it must match the
+panel's \code{value} exactly.}
 
 \item{targetDiv}{Character vector or \code{NULL}. The full DOM id of the div
 to scroll to, including any module namespace (for example if module id is
 "ScreeningModule" and the div id is "BowelScreening", then pass
-"ScreeningModule-BowelScreening). Recycled to the length of \code{valueBoxId}.
-If \code{NULL} (the default) the page is opened without scrolling.}
+"ScreeningModule-BowelScreening"). Recycled to the length of
+\code{valueBoxId}. If \code{NULL} (the default) the page is opened and
+scrolled to the top.}
 
 \item{session}{The Shiny session that owns \code{navId}. Default is
 \code{NULL}, which uses the root session of the app. Only supply this if
 \code{navId} lives inside a module.}
 
 \item{timeoutMs}{Numeric. How long, in milliseconds, the browser keeps waiting
-for \code{targetDiv} to become visible before giving up. Default is 5000.}
+for the target (\code{targetDiv}, or the page itself when \code{targetDiv}
+is \code{NULL}) to become visible before giving up. Default is 5000.}
 
 \item{asis}{Logical. If \code{TRUE}, \code{valueBoxId} is used exactly as
 given instead of being namespaced inside a module. Default is
@@ -50,9 +54,11 @@ Invisibly, a tibble with one row per link registered.
 }
 \description{
 Makes one or more elements (typically \code{\link{crukValueBox}}es) clickable.
-A click selects a page in a navbar or tabset, then scrolls to a div on that
-page once it is visible, and closes any navbar dropdown menu left open by the
-navigation. Call \code{\link{crukNavLinkSetup}} once in the UI first.
+A click selects a page in a navbar or tabset, closes any navbar dropdown menu
+left open by the navigation, and then scrolls. If \code{targetDiv} is given,
+the browser scrolls to that div once it is visible; otherwise the new page
+opens scrolled to the top. Call \code{\link{crukNavLinkSetup}} once in the UI
+first.
 }
 \details{
 Built on \code{\link[shinyjs]{onclick}} and \code{\link[bslib]{nav_select}}.
@@ -63,8 +69,8 @@ elements.
 
 Requires \code{crukNavLinkSetup()} in the UI, which loads shinyjs and the
 scroll helper. Without it the navigation still happens, but nothing scrolls
-and the browser console reports that \code{scrollToDivWhenReady} is not
-defined.
+or closes the dropdown, and the browser console reports that
+\code{scrollToDivWhenReady} is not defined.
 }
 
 \section{Things to watch}{
@@ -77,6 +83,9 @@ defined.
 namespaced id for divs created inside modules.
 \item If \code{targetDiv} never becomes visible (wrong id, wrong page), a
 warning is written to the browser console after \code{timeoutMs}.
+\item With \code{targetDiv = NULL}, the same happens if the page never
+becomes active, for example if \code{targetPage} does not match the
+\code{value} of any \code{bslib::nav_panel()}.
 }
 }
 
@@ -114,6 +123,14 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+
+# Without targetDiv: open the page and scroll to its top
+# (server code)
+crukNavLink(
+  valueBoxId = "bowel_box",
+  navId = "main_navbar",
+  targetPage = "screening_page"
+)
 
 # Inside a module: several boxes at once, each with its own target
 # (module server code)
