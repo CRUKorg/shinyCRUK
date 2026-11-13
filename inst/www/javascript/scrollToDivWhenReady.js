@@ -1,7 +1,11 @@
 // Scroll to a div once it is visible, and close any open navbar dropdown.
-// Used by crukNavLink(). Call as scrollToDivWhenReady(id, timeoutMs).
-// `id` is the full DOM id. A bare id also works: if no exact match exists, the
-// first visible element whose id ends in "-<id>" is used (module namespaces).
+// Used by crukNavLink(). Two entry points:
+//   scrollToDivWhenReady(id, timeoutMs)        - scroll to a div
+//   scrollToDivWhenReady.toTop(page, timeoutMs) - open a page, scroll to top
+// For scrollToDivWhenReady, `id` is the full DOM id. A bare id also works: if
+// no exact match exists, the first visible element whose id ends in "-<id>" is
+// used (module namespaces).
+// For toTop, `page` is the value of the bslib::nav_panel() that was selected.
 window.scrollToDivWhenReady = (function () {
   let timer = null; // one active poll at a time
 
@@ -102,9 +106,43 @@ window.scrollToDivWhenReady = (function () {
     }, 100);
   };
 
+  // Open a page that has no target div: wait until the page's pane is active
+  // and visible, close any open dropdown, then jump to the top of the page.
+  // Assumes bslib marks the selected pane as `.tab-pane.active` with a
+  // `data-value` equal to the nav_panel() value.
+  scrollToDivWhenReady.toTop = function (pageValue, timeoutMs) {
+    timeoutMs = timeoutMs || 5000;
+    if (timer) clearInterval(timer); // shares the one-poll-at-a-time timer
+    const start = Date.now();
+    const selector = '.tab-pane.active[data-value="' + CSS.escape(pageValue) + '"]';
+
+    timer = setInterval(function () {
+      const pane = document.querySelector(selector);
+
+      if (pane && isVisible(pane)) {
+        clearInterval(timer);
+        timer = null;
+        closeNavbarDropdowns();
+        closeAgainAfterTabShown();
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            // Instant, not smooth: the reader has just switched pages, so a
+            // long animated scroll up from the old offset would look odd.
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+          });
+        });
+      } else if (Date.now() - start > timeoutMs) {
+        clearInterval(timer);
+        timer = null;
+        closeNavbarDropdowns(); // don't leave the menu open on failure
+        console.warn("scrollToDivWhenReady.toTop: no active page found for '" + pageValue + "'");
+      }
+    }, 100);
+  };
+
   // Version marker: lets you confirm in the console which copy of this file
   // the browser loaded (a cached older copy has no .version).
-  scrollToDivWhenReady.version = "3";
+  scrollToDivWhenReady.version = "4";
   // Set scrollToDivWhenReady.debug = true in the console to log each close.
   scrollToDivWhenReady.debug = false;
   // Exposed so the close step can be run by hand while debugging.
