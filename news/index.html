@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,28 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.3" id="shinycruk-083">shinyCRUK 0.8.3<a class="anchor" aria-label="anchor" href="#shinycruk-083"></a></h2>
+<div class="section level3">
+<h3 id="minor-tweaks-0-8-3">Minor tweaks<a class="anchor" aria-label="anchor" href="#minor-tweaks-0-8-3"></a></h3>
+<ul><li>
+<p><code><a href="../reference/crukKeyStatBox.html">crukKeyStatBox()</a></code> has two new arguments:</p>
+<ul><li>
+<code>showImage</code> (default <code>TRUE</code>) controls whether the image is shown.</li>
+<li>
+<code>boxColour</code> (default <code>"#bbc7d9"</code>) sets the border colour. It only accepts hex codes (<code>#RRGGBB</code> or <code>#RGB</code>) and gives a warning if the colour is not one of the CRUK brand colours.</li>
+</ul></li>
+<li><p><code><a href="../reference/crukKeyStatBox.html">crukKeyStatBox()</a></code> now defaults <code>image</code> to the CRUK logo mark, shipped with the package. <strong>This is a visible change:</strong> calls that previously gave no image (such as <code>crukKeyStatBox("text")</code>) now show the logo. Use <code>showImage = FALSE</code> (or <code>image = NULL</code>) to get the old appearance.</p></li>
+<li><p><code><a href="../reference/crukKeyStatBox.html">crukKeyStatBox()</a></code> now aligns the top of the image with the top of the statement. Images are drawn at the top left of their 140px by 140px area instead of centered, which affects non-square custom images.</p></li>
+<li>
+<p><code>crukChartTable():</code>alt<code>can now be a</code>shiny::textOutput()<code>as well as a character string, so the chart's alt text can be generated reactively.  Bind it server-side with</code>output$id &lt;- renderText({…})<code>. The rendered text  is copied into the chart panel's</code>aria-label`, with the standard “Please see the table for the data in an accessible format.” sentence appended. Until the output first renders, a generic fallback label is used.</p>
+<ul><li>The 15-character minimum for <code>alt</code> still applies to character strings, but cannot be checked for a <code>textOutput</code>, because its text only exists at runtime.</li>
+</ul></li>
+<li><p><code><a href="../reference/crukChartTable.html">crukChartTable()</a></code>: Removed the warning for alt text longer than 125 characters.</p></li>
+<li><p><code><a href="../reference/crukChartTable.html">crukChartTable()</a></code>: Static alt text is no longer passed through <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code>, so curly braces in an alt string are now treated as literal text rather than evaluated as R code.</p></li>
+<li><p><code><a href="../reference/crukChartTable.html">crukChartTable()</a></code>: Invalid <code>alt</code> values (for example a vector, or <code>NA</code>) now give a clearer error message.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.2" id="shinycruk-082">shinyCRUK 0.8.2<a class="anchor" aria-label="anchor" href="#shinycruk-082"></a></h2>
 <div class="section level3">

@@ -1,5 +1,52 @@
 # Changelog
 
+## shinyCRUK 0.8.3
+
+### Minor tweaks
+
+- [`crukKeyStatBox()`](https://crukorg.github.io/shinyCRUK/reference/crukKeyStatBox.md)
+  has two new arguments:
+
+  - `showImage` (default `TRUE`) controls whether the image is shown.
+  - `boxColour` (default `"#bbc7d9"`) sets the border colour. It only
+    accepts hex codes (`#RRGGBB` or `#RGB`) and gives a warning if the
+    colour is not one of the CRUK brand colours.
+
+- [`crukKeyStatBox()`](https://crukorg.github.io/shinyCRUK/reference/crukKeyStatBox.md)
+  now defaults `image` to the CRUK logo mark, shipped with the package.
+  **This is a visible change:** calls that previously gave no image
+  (such as `crukKeyStatBox("text")`) now show the logo. Use
+  `showImage = FALSE` (or `image = NULL`) to get the old appearance.
+
+- [`crukKeyStatBox()`](https://crukorg.github.io/shinyCRUK/reference/crukKeyStatBox.md)
+  now aligns the top of the image with the top of the statement. Images
+  are drawn at the top left of their 140px by 140px area instead of
+  centered, which affects non-square custom images.
+
+- `crukChartTable():`alt`can now be a`shiny::textOutput()`as well as a character string, so the chart's alt text can be generated reactively. Bind it server-side with`output\$id
+  \<-
+  renderText({…})`. The rendered text is copied into the chart panel's`aria-label\`,
+  with the standard “Please see the table for the data in an accessible
+  format.” sentence appended. Until the output first renders, a generic
+  fallback label is used.
+
+  - The 15-character minimum for `alt` still applies to character
+    strings, but cannot be checked for a `textOutput`, because its text
+    only exists at runtime.
+
+- [`crukChartTable()`](https://crukorg.github.io/shinyCRUK/reference/crukChartTable.md):
+  Removed the warning for alt text longer than 125 characters.
+
+- [`crukChartTable()`](https://crukorg.github.io/shinyCRUK/reference/crukChartTable.md):
+  Static alt text is no longer passed through
+  [`glue::glue()`](https://glue.tidyverse.org/reference/glue.html), so
+  curly braces in an alt string are now treated as literal text rather
+  than evaluated as R code.
+
+- [`crukChartTable()`](https://crukorg.github.io/shinyCRUK/reference/crukChartTable.md):
+  Invalid `alt` values (for example a vector, or `NA`) now give a
+  clearer error message.
+
 ## shinyCRUK 0.8.2
 
 ### Bug fixes

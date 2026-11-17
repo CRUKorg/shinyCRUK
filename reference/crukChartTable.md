@@ -34,11 +34,15 @@ crukChartTable(
 
 - alt:
 
-  Character. Alt text to include alongside the chart. Minimum 15
-  characters; over 125 characters gives a warning (it may cause issues
-  with some screen readers). Please ensure alt text is sufficiently
-  descriptive. Supplied character string will be appended with the text
-  " Please see table for the data in an accessible format."
+  Either a character string or a
+  [`shiny::textOutput`](https://rdrr.io/pkg/shiny/man/textOutput.html)
+  whose rendered text is used as the alt text, so it can update
+  reactively. Bind it server-side with `output$id <- renderText({...})`.
+  Please ensure alt text is sufficiently descriptive, but bear in mind
+  that some screen readers may have issues with extremely long alt text.
+  A character string must be at least 15 characters; this cannot be
+  checked for a `textOutput`. In both cases the text " Please see the
+  table for the data in an accessible format." is appended.
 
 - dataSourceText:
 
@@ -176,6 +180,14 @@ crukChartTable(
   alt = "Some alt text to go with the chart.",
   dataSourceText = shiny::textOutput("dataSourceLabel"),
   dataSourceLink = shiny::textOutput("dataSourceUrl")
+)
+
+#' # Chart with reactive alt text.
+# Server side: output$chartAlt <- renderText(...)
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = shiny::textOutput("chartAlt")
 )
 } # }
 ```
