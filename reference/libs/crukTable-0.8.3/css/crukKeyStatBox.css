@@ -20,11 +20,15 @@
 
 .cruk-key-stat-box__image {
   width: 140px;
-  height: 140px;
+  /* Height follows the image's aspect ratio (capped at 140px), so a wide image
+     such as the default logo doesn't leave empty space under short statements. */
+  height: auto;
+  max-height: 140px;
   flex: 0 0 auto;
   object-fit: contain;
-  /* Draw the image at the top-left of its 140px area rather than centred, so
-     it lines up with the top of the text. */
+  /* Draw the image at the top-left of its area rather than centred, so it
+     lines up with the top of the text. Only matters for images taller than
+     they are wide, which are shrunk to fit the 140px cap. */
   object-position: left top;
 }
 
