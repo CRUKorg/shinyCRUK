@@ -4,15 +4,31 @@
 \alias{crukKeyStatBox}
 \title{Key statistic box}
 \usage{
-crukKeyStatBox(statement, image = NULL)
+crukKeyStatBox(
+  statement,
+  image = "shinyCRUK/images/CI-logo-no-text.svg",
+  showImage = TRUE,
+  boxColour = "#bbc7d9"
+)
 }
 \arguments{
 \item{statement}{A single character string, or a Shiny output such as
 \code{\link[shiny:textOutput]{shiny::textOutput()}} or \code{\link[shiny:uiOutput]{shiny::uiOutput()}}.}
 
-\item{image}{Optional. File name of an image in the app's \code{www} folder, e.g.
-\code{"magnifying-glass.svg"}. Displayed at 140px by 140px. Defaults to \code{NULL}
-(no image).}
+\item{image}{Optional. The \code{src} of the image to show: either a file name in
+the app's \code{www} folder, e.g. \code{"magnifying-glass.svg"}, or a path served by
+a registered resource path. Displayed in a 140px by 140px area, top-left
+aligned. Defaults to the Cancer Research UK logo mark shipped with this
+package. \code{NULL} means no image.}
+
+\item{showImage}{\code{TRUE} (the default) to show \code{image}, \code{FALSE} to hide it.}
+
+\item{boxColour}{Colour of the box border, as a hex code (\code{"#RRGGBB"} or
+\code{"#RGB"}, case-insensitive; the leading \verb{#} is required). Defaults to
+\code{"#bbc7d9"} (CRUK grey). A warning is given if the colour is not one of the
+CRUK brand colours: black \verb{#000000}; cyan \verb{#009CEE}, \verb{#BCE4FA}, \verb{#5BC5F2};
+magenta \verb{#E60078}, \verb{#E60079}, \verb{#F8C9DF}, \verb{#F088B6}; navy \verb{#00007E},
+\verb{#CCCCE6}, \verb{#6666B2}; grey \verb{#BBC7D9}, \verb{#C6C6C6}, \verb{#878787}.}
 }
 \value{
 A \link[htmltools:tag]{htmltools::tag} object.
@@ -20,9 +36,13 @@ A \link[htmltools:tag]{htmltools::tag} object.
 \description{
 A bordered box containing a key statement and, optionally, an image. The
 image sits to the left of the statement when there is room, and above it
-otherwise.
+otherwise. When the statement is taller than the image, the image is aligned
+to the top of the box; when it is shorter, the statement is vertically
+centred beside the image.
 }
 \examples{
 crukKeyStatBox("Nearly 1 in 2 of us will get cancer in our lifetimes.")
 crukKeyStatBox("A statement", image = "magnifying-glass.svg")
+crukKeyStatBox("No image here", showImage = FALSE)
+crukKeyStatBox("A navy box", boxColour = "#00007e")
 }

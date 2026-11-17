@@ -8,11 +8,14 @@
 #'  \code{plotly::plotlyOutput}, or \code{highcharter::highchartOutput}.
 #' @param table A table output in the form of a \code{shiny::tableOutput},
 #'  \code{DT::dataTableOutput}, \code{gt::gt_output}, or \code{reactable::reactableOutput}.
-#' @param alt Character. Alt text to include alongside the chart. Minimum 15
-#'  characters; over 125 characters gives a warning (it may cause issues with
-#'  some screen readers). Please ensure alt text is sufficiently descriptive. Supplied
-#'  character string will be appended with the text " Please see table for the data
-#'  in an accessible format."
+#' @param alt Either a character string or a \code{shiny::textOutput} whose
+#'  rendered text is used as the alt text, so it can update reactively. Bind it
+#'  server-side with \code{output$id <- renderText({...})}. Please ensure alt
+#'  text is sufficiently descriptive, but bear in mind that some screen readers
+#'  may have issues with extremely long alt text. A character string must be at
+#'  least 15 characters; this cannot be checked for a \code{textOutput}. In both
+#'  cases the text " Please see the table for the data in an accessible format."
+#'  is appended.
 #' @param dataSourceText Optional. Character, or a \code{shiny.tag}/UI output
 #'  object (e.g. \code{shiny::textOutput}, \code{shiny::uiOutput}). The data
 #'  source text displayed at the bottom of the table, after a static
@@ -116,7 +119,16 @@
 #'   dataSourceText = shiny::textOutput("dataSourceLabel"),
 #'   dataSourceLink = shiny::textOutput("dataSourceUrl")
 #' )
+#'
+#' #' # Chart with reactive alt text.
+#' # Server side: output$chartAlt <- renderText(...)
+#' crukChartTable(
+#'   chart = plotlyOutput(outputId = "mtcarsPlot"),
+#'   table = gt::gt_output(outputId = "mtTable"),
+#'   alt = shiny::textOutput("chartAlt")
+#' )
 #' }
+#'
 #' @export
 crukChartTable <- function(chart, table, alt, dataSourceText = NULL, dataSourceLink = NULL, ...) {
 
@@ -129,14 +141,20 @@ crukChartTable <- function(chart, table, alt, dataSourceText = NULL, dataSourceL
     stop("Parameter 'table' is required and cannot be empty")
   }
 
-  if (missing(alt) || nchar(alt) == 0 ) {
+  if (missing(alt) || is.null(alt)) {
     stop("Parameter 'alt' is required and cannot be empty")
-  } else if (nchar(alt) < 15) {
-    stop("Please provide more descriptive alt text")
-  } else if (nchar(alt) > 125) {
-    warning("Alt text is over 125 characters, which may cause issues with some screen readers. Please use shorter alt text.", call. = FALSE)
   }
 
+  # A shiny output (e.g. textOutput) means the alt text is generated server-side
+  alt_is_dynamic <- inherits(alt, "shiny.tag")
+
+  if (!alt_is_dynamic) {
+    if (!is.character(alt) || length(alt) != 1 || is.na(alt)) {
+      stop("'alt' must be a single character string or a shiny output (textOutput)")
+    }
+    if (nchar(alt) == 0) stop("Parameter 'alt' is required and cannot be empty")
+    if (nchar(alt) < 15) stop("Please provide more descriptive alt text")
+  }
 
   # Create and store the dependency
   css <- htmltools::htmlDependency(
@@ -149,12 +167,10 @@ crukChartTable <- function(chart, table, alt, dataSourceText = NULL, dataSourceL
   )
 
 
-  # Adjust alt text by adding additional info. Also add period if necessary
-  if (!grepl("\\.$", alt)) {
-    alt_processed <- glue::glue(alt, ". Please see the table for the data in an accessible format.")
-  } else {
-    alt_processed <- glue::glue(alt, " Please see the table for the data in an accessible format.")
+  alt_suffix <- "Please see the table for the data in an accessible format."
 
+  if (!alt_is_dynamic) {
+    alt_processed <- paste0(alt, if (grepl("\\.$", alt)) " " else ". ", alt_suffix)
   }
 
   # ---- Data source -------------------------------------------------------
@@ -180,6 +196,49 @@ crukChartTable <- function(chart, table, alt, dataSourceText = NULL, dataSourceL
     if (inherits(x, "shiny.tag") && identical(x$name, "div")) x$name <- "span"
     x
   }
+
+  # Dynamic alt text: keep the output in the DOM, visually hidden and hidden from
+  # screen readers, and copy its rendered text into the aria-label of the
+  # enclosing tab pane. `suffix` is a constant with no quotes, so it is safe to
+  # embed in the JS string.
+  alt_dynamic <- function(alt_output, suffix) {
+    out_id <- htmltools::tagGetAttribute(alt_output, "id")
+    if (is.null(out_id) || !grepl("^[A-Za-z0-9_.:-]+$", out_id)) {
+      stop("'alt' is a shiny output without a usable id")
+    }
+
+    js <- sprintf(
+      paste0(
+        "(function() {",
+        " var out = document.getElementById('%s');",
+        " if (!out) return;",
+        " var pane = out.closest('.tab-pane');",
+        " if (!pane) return;",
+        " var update = function() {",
+        "  var txt = (out.textContent || '').trim();",
+        "  if (!txt) return;",
+        "  pane.setAttribute('aria-label', txt + (/\\.$/.test(txt) ? ' ' : '. ') + '%s');",
+        " };",
+        " new MutationObserver(update).observe(out, {childList: true, characterData: true, subtree: true});",
+        " update();",
+        "})();"
+      ),
+      out_id, suffix
+    )
+
+    htmltools::tagList(
+      htmltools::tagAppendAttributes(
+        as_inline(alt_output),
+        style = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;",
+        `aria-hidden` = "true"
+      ),
+      htmltools::tags$script(htmltools::HTML(js))
+    )
+  }
+
+  # Fallback label used until the output first renders (and for static alt text)
+  alt_label <- if (alt_is_dynamic) paste("Chart.", alt_suffix) else alt_processed
+  alt_extra <- if (alt_is_dynamic) alt_dynamic(alt, alt_suffix) else NULL
 
   # Make `label` a hyperlink whose href follows the rendered value of a shiny
   # output. The output is kept in the DOM (Shiny suspends outputs that are not
@@ -271,7 +330,8 @@ crukChartTable <- function(chart, table, alt, dataSourceText = NULL, dataSourceL
       bslib::nav_panel(
         "Chart",
         role = "img",
-        `aria-label` = alt_processed,
+        `aria-label` = alt_label,
+        alt_extra,
         htmltools::div(
           style = "padding-top: 10px;",
           chart
