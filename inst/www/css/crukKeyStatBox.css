@@ -26,9 +26,6 @@
   /* Draw the image at the top-left of its 140px area rather than centred, so
      it lines up with the top of the text. */
   object-position: left top;
-  /* In the wide layout the statement is centred against the image when short,
-     but the image itself stays at the top when the statement is taller. */
-  align-self: flex-start;
 }
 
 .cruk-key-stat-box__statement {
@@ -41,6 +38,5 @@
 @container cruk-key-stat-box (min-width: 528px) {
   .cruk-key-stat-box__box {
     flex-direction: row;
-    align-items: center;
   }
 }

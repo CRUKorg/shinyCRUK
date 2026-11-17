@@ -21,9 +21,8 @@ cruk_brand_box_colours <- c(
 #'
 #' A bordered box containing a key statement and, optionally, an image. The
 #' image sits to the left of the statement when there is room, and above it
-#' otherwise. When the statement is taller than the image, the image is aligned
-#' to the top of the box; when it is shorter, the statement is vertically
-#' centred beside the image.
+#' otherwise. The image and the statement are both aligned to the top of the
+#' box.
 #'
 #' @param statement A single character string, or a Shiny output such as
 #'   [shiny::textOutput()] or [shiny::uiOutput()].

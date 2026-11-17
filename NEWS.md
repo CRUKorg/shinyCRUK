@@ -11,11 +11,9 @@
   the package. **This is a visible change:** calls that previously gave no
   image (such as `crukKeyStatBox("text")`) now show the logo. Use
   `showImage = FALSE` (or `image = NULL`) to get the old appearance.
-* `crukKeyStatBox()` now aligns the image to the top of the box when the
-  statement is taller than the image. Short statements are still vertically
-  centred beside the image. Images are drawn at the top left of their
-  140px by 140px area instead of centred, which affects non-square custom
-  images.
+* `crukKeyStatBox()` now aligns the top of the image with the top of the
+  statement. Images are drawn at the top left of their 140px by 140px area
+  instead of centered, which affects non-square custom images.
 
 * `crukChartTable(): `alt` can now be a `shiny::textOutput()` as well as a
   character string, so the chart's alt text can be generated reactively. 
