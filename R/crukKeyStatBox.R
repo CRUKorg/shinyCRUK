@@ -28,9 +28,10 @@ cruk_brand_box_colours <- c(
 #'   [shiny::textOutput()] or [shiny::uiOutput()].
 #' @param image Optional. The `src` of the image to show: either a file name in
 #'   the app's `www` folder, e.g. `"magnifying-glass.svg"`, or a path served by
-#'   a registered resource path. Displayed in a 140px by 140px area, top-left
-#'   aligned. Defaults to the Cancer Research UK logo mark shipped with this
-#'   package. `NULL` means no image.
+#'   a registered resource path. Displayed 140px wide, with its aspect ratio
+#'   kept and a maximum height of 140px, aligned to the top left. Defaults to
+#'   the Cancer Research UK logo mark shipped with this package. `NULL` means
+#'   no image.
 #' @param showImage `TRUE` (the default) to show `image`, `FALSE` to hide it.
 #' @param boxColour Colour of the box border, as a hex code (`"#RRGGBB"` or
 #'   `"#RGB"`, case-insensitive; the leading `#` is required). Defaults to
