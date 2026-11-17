@@ -1,3 +1,39 @@
+# shinyCRUK 0.8.3
+
+## Minor tweaks
+
+* `crukKeyStatBox()` has two new arguments:
+  * `showImage` (default `TRUE`) controls whether the image is shown.
+  * `boxColour` (default `"#bbc7d9"`) sets the border colour. It only
+    accepts hex codes (`#RRGGBB` or `#RGB`) and gives a warning if the colour
+    is not one of the CRUK brand colours.
+* `crukKeyStatBox()` now defaults `image` to the CRUK logo mark, shipped with
+  the package. **This is a visible change:** calls that previously gave no
+  image (such as `crukKeyStatBox("text")`) now show the logo. Use
+  `showImage = FALSE` (or `image = NULL`) to get the old appearance.
+* `crukKeyStatBox()` now aligns the image to the top of the box when the
+  statement is taller than the image. Short statements are still vertically
+  centred beside the image. Images are drawn at the top left of their
+  140px by 140px area instead of centred, which affects non-square custom
+  images.
+
+* `crukChartTable(): `alt` can now be a `shiny::textOutput()` as well as a
+  character string, so the chart's alt text can be generated reactively. 
+  Bind it server-side with `output$id <- renderText({...})`. The rendered text 
+  is copied into the chart panel's `aria-label`, with the standard
+  "Please see the table for the data in an accessible format." sentence appended.
+  Until the output first renders, a generic fallback label is used.
+    * The 15-character minimum for `alt` still applies to character strings, but
+      cannot be checked for a `textOutput`, because its text only exists at runtime.
+
+* `crukChartTable()`:  Removed the warning for alt text longer than 125 characters.
+
+* `crukChartTable()`: Static alt text is no longer passed through `glue::glue()`,
+  so curly braces in an alt string are now treated as literal text rather than evaluated as R code.
+
+* `crukChartTable()`: Invalid `alt` values (for example a vector, or `NA`) now
+  give a clearer error message.
+
 # shinyCRUK 0.8.2
 
 ## Bug fixes
