@@ -64,13 +64,38 @@ test_that("invalid link or text types error", {
   expect_error(card(dataSourceText = 1:2), "dataSourceText")
 })
 
-test_that("alt text over 125 characters warns rather than errors", {
-  long_alt <- strrep("a", 126)
-  expect_warning(card(alt = long_alt), "125 characters")
-  expect_no_error(suppressWarnings(card(alt = long_alt)))
+test_that("long alt text is accepted without a warning", {
+  long_alt <- strrep("a", 200)
+  expect_no_warning(card(alt = long_alt))
 })
 
 test_that("alt text under 15 characters still errors", {
   expect_error(card(alt = "too short"), "descriptive")
 })
 
+test_that("alt accepts a textOutput", {
+  res <- crukChartTable(
+    chart = shiny::plotOutput("p"),
+    table = shiny::tableOutput("t"),
+    alt   = shiny::textOutput("altText")
+  )
+  html <- as.character(htmltools::renderTags(res)$html)
+  expect_match(html, 'id="altText"', fixed = TRUE)
+  expect_match(html, "Please see the table", fixed = TRUE)
+})
+
+test_that("static alt is not glue-evaluated", {
+  res <- crukChartTable(
+    chart = shiny::plotOutput("p"),
+    table = shiny::tableOutput("t"),
+    alt   = "A chart of {Sys.time()} values over time"
+  )
+  expect_match(as.character(res), "{Sys.time()}", fixed = TRUE)
+})
+
+test_that("short static alt still errors", {
+  expect_error(
+    crukChartTable(shiny::plotOutput("p"), shiny::tableOutput("t"), alt = "Too short"),
+    "more descriptive"
+  )
+})

@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
-  border: 2px solid #bbc7d9;
+  border: 2px solid var(--cruk-key-stat-box-colour, #bbc7d9);
   padding: 32px;
   font-size: 20px;
   font-family: 'Progress Medium';
@@ -23,6 +23,9 @@
   height: 140px;
   flex: 0 0 auto;
   object-fit: contain;
+  /* Draw the image at the top-left of its 140px area rather than centred, so
+     it lines up with the top of the text. */
+  object-position: left top;
 }
 
 .cruk-key-stat-box__statement {
@@ -35,6 +38,5 @@
 @container cruk-key-stat-box (min-width: 528px) {
   .cruk-key-stat-box__box {
     flex-direction: row;
-    align-items: center;
   }
 }

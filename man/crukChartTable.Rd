@@ -20,11 +20,14 @@ crukChartTable(
 \item{table}{A table output in the form of a \code{shiny::tableOutput},
 \code{DT::dataTableOutput}, \code{gt::gt_output}, or \code{reactable::reactableOutput}.}
 
-\item{alt}{Character. Alt text to include alongside the chart. Minimum 15
-characters; over 125 characters gives a warning (it may cause issues with
-some screen readers). Please ensure alt text is sufficiently descriptive. Supplied
-character string will be appended with the text " Please see table for the data
-in an accessible format."}
+\item{alt}{Either a character string or a \code{shiny::textOutput} whose
+rendered text is used as the alt text, so it can update reactively. Bind it
+server-side with \code{output$id <- renderText({...})}. Please ensure alt
+text is sufficiently descriptive, but bear in mind that some screen readers
+may have issues with extremely long alt text. A character string must be at
+least 15 characters; this cannot be checked for a \code{textOutput}. In both
+cases the text " Please see the table for the data in an accessible format."
+is appended.}
 
 \item{dataSourceText}{Optional. Character, or a \code{shiny.tag}/UI output
 object (e.g. \code{shiny::textOutput}, \code{shiny::uiOutput}). The data
@@ -140,5 +143,14 @@ crukChartTable(
   dataSourceText = shiny::textOutput("dataSourceLabel"),
   dataSourceLink = shiny::textOutput("dataSourceUrl")
 )
+
+#' # Chart with reactive alt text.
+# Server side: output$chartAlt <- renderText(...)
+crukChartTable(
+  chart = plotlyOutput(outputId = "mtcarsPlot"),
+  table = gt::gt_output(outputId = "mtTable"),
+  alt = shiny::textOutput("chartAlt")
+)
 }
+
 }
