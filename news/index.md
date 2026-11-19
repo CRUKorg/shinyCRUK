@@ -1,5 +1,20 @@
 # Changelog
 
+## shinyCRUK 0.8.4
+
+### Minor tweaks
+
+- [`crukSources()`](https://crukorg.github.io/shinyCRUK/reference/crukSources.md)
+  now accepts dynamic notes or sources, passed via
+  [`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html)
+  or[`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html) and
+  their associated render functions. If passing dynamic sources via
+  [`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html), the
+  output *must* be a `tagList` of `<li>` items, e.g. created using
+  `tags$li()`
+- The bullet points are now indented so that they sit underneath the
+  headings.
+
 ## shinyCRUK 0.8.3
 
 ### Minor tweaks

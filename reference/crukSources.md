@@ -1,10 +1,10 @@
 # CRUK Data Sources Box with Zotero Integration
 
 Creates a styled box displaying data sources and optional notes for CRUK
-applications. The function can automatically fetch and format
-bibliographic references from a Zotero collection or accept custom HTML
-source lists. This component helps users understand the provenance of
-data and comply with citation requirements.
+applications. Notes and sources can be fixed (a character string or a
+list of `<li>` elements) or rendered dynamically from the server using
+[`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) and
+[`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html).
 
 ## Usage
 
@@ -21,10 +21,18 @@ crukSources(
 
 - notes:
 
-  Character string. Optional explanatory notes to display above the data
-  sources list. Use this to provide context about data limitations,
-  methodology, or important caveats. Appears with a "Notes:" header.
-  Default is an empty string (no notes section).
+  Optional explanatory notes displayed above the data sources list,
+  under a "Notes:" header. Use this to provide context about data
+  limitations, methodology, or important caveats. Either:
+
+  - a character string. If `""` (the default) no notes section is shown;
+    or
+
+  - a Shiny output such as `shiny::textOutput("my_notes")` or
+    `shiny::uiOutput("my_notes")`, filled by the matching `render*()`
+    function in your server. The "Notes:" header is always shown in this
+    case, because the UI is built before the server knows whether the
+    notes will be empty.
 
 - zotero_path:
 
@@ -36,10 +44,29 @@ crukSources(
 
 - custom_sources:
 
-  HTML tag list or NULL. Custom HTML list of data sources to display.
-  Use this when not integrating with Zotero or when you need custom
-  formatting. Should be created with `htmltools::tags$li()` or similar.
-  Only used if `zotero_path` is `NULL`. Default is `NULL`.
+  Custom list of data sources to display. Use this when not integrating
+  with Zotero or when you need custom formatting. Only used if
+  `zotero_path` is `NULL`. Either:
+
+  - `NULL` (the default), or an
+    [`htmltools::tagList()`](https://rstudio.github.io/htmltools/reference/tagList.html)
+    of `htmltools::tags$li()` elements;
+
+  - `shiny::uiOutput("my_sources")`. The output container is turned into
+    the `<ul>` itself, so the matching
+    [`renderUI()`](https://rdrr.io/pkg/shiny/man/renderUI.html) must
+    return `<li>` elements only, not a `<ul>`; or
+
+  - `shiny::textOutput("my_source")`, for a single plain-text source.
+    The text is escaped, so it cannot contain links or multiple bullets.
+    Use [`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html)
+    for anything richer.
+
+  A [`uiOutput()`](https://rdrr.io/pkg/shiny/man/htmlOutput.html) or
+  [`textOutput()`](https://rdrr.io/pkg/shiny/man/textOutput.html) must
+  be passed directly, not inside another
+  [`tagList()`](https://rstudio.github.io/htmltools/reference/tagList.html),
+  or it will not be recognised.
 
 - boxBorder:
 
@@ -59,6 +86,28 @@ element with class `"sources"` containing:
 - "Data sources:" header
 
 - Unordered list of sources (from Zotero or custom HTML)
+
+## Dynamic notes and sources
+
+Because the UI is built before the server runs, `crukSources()` cannot
+inspect dynamic content. Output IDs must be unique on the page, and
+inside a Shiny module they must be wrapped in `ns()`. For example:
+
+
+    # UI
+    crukSources(
+      notes = shiny::textOutput("src_notes"),
+      custom_sources = shiny::uiOutput("src_list")
+    )
+
+    # Server
+    output$src_notes <- shiny::renderText("Data up to 2024.")
+    output$src_list <- shiny::renderUI({
+      htmltools::tagList(
+        htmltools::tags$li("First source"),
+        htmltools::tags$li("Second source")
+      )
+    })
 
 ## Zotero Integration
 
@@ -90,7 +139,8 @@ to help configure these.
 
 ## Custom Sources Format
 
-When providing `custom_sources`, create a list of `<li>` elements:
+When providing a static `custom_sources`, create a list of `<li>`
+elements:
 
 
     custom_sources <- htmltools::tagList(
@@ -111,15 +161,18 @@ after all data visualizations and tables but before
 
 The sources box uses custom CSS (`crukSources.css`) that provides:
 
-- Distinct "Notes:" and "Data sources:" headers in bold
+- Distinct "Notes:" and "Data sources:" headers
 
 - Consistent spacing and typography
 
-- Optional border (1px solid black when `boxBorder = TRUE`)
+- Optional border (2px solid black when `boxBorder = TRUE`)
+
+- Bulleted lists indented so that the bullets sit under the headers
 
 - Responsive padding and margins
 
-- Zotero list styling with class `"zotero-list"`
+Zotero lists also carry the class `"zotero-list"`, which is available as
+a hook for custom CSS but has no rules of its own in `crukSources.css`.
 
 ## See also
 
@@ -161,8 +214,7 @@ crukSources(
       "Office for National Statistics. ",
       htmltools::a(
         "Cancer Registration Statistics",
-        href = "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/
-                conditionsanddiseases"
+        href = "https://www.ons.gov.uk"
       ),
       ", 2023."
     ),
@@ -176,7 +228,7 @@ crukSources(
 #>   <ul style="margin-top: 0px">
 #>     <li>
 #>       Office for National Statistics. 
-#>       <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/&#10;                conditionsanddiseases">Cancer Registration Statistics</a>
+#>       <a href="https://www.ons.gov.uk">Cancer Registration Statistics</a>
 #>       , 2023.
 #>     </li>
 #>     <li>NHS Digital. Hospital Episode Statistics, 2022-2023.</li>
@@ -204,6 +256,30 @@ crukSources(
 #>     <li>Public Health England. Cancer Services Data, 2023.</li>
 #>   </ul>
 #> </div>
+
+# With dynamic notes and sources, rendered from the server
+if (interactive()) {
+  library(shiny)
+
+  ui <- fluidPage(
+    crukSources(
+      notes = textOutput("src_notes"),
+      custom_sources = uiOutput("src_list")
+    )
+  )
+
+  server <- function(input, output, session) {
+    output$src_notes <- renderText("This is a dynamic note.")
+    output$src_list <- renderUI({
+      htmltools::tagList(
+        htmltools::tags$li("First source"),
+        htmltools::tags$li("Second source")
+      )
+    })
+  }
+
+  shinyApp(ui, server)
+}
 
 # In a complete Shiny app
 if (FALSE) { # \dontrun{

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,16 @@
       <small>Source: <a href="https://github.com/CRUKorg/shinyCRUK/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.4" id="shinycruk-084">shinyCRUK 0.8.4<a class="anchor" aria-label="anchor" href="#shinycruk-084"></a></h2>
+<div class="section level3">
+<h3 id="minor-tweaks-0-8-4">Minor tweaks<a class="anchor" aria-label="anchor" href="#minor-tweaks-0-8-4"></a></h3>
+<ul><li>
+<code><a href="../reference/crukSources.html">crukSources()</a></code> now accepts dynamic notes or sources, passed via <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> or<code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput()</a></code> and their associated render functions. If passing dynamic sources via <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput()</a></code>, the output <em>must</em> be a <code>tagList</code> of <code>&lt;li&gt;</code> items, e.g. created using <code>tags$li()</code>
+</li>
+<li>The bullet points are now indented so that they sit underneath the headings.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.3" id="shinycruk-083">shinyCRUK 0.8.3<a class="anchor" aria-label="anchor" href="#shinycruk-083"></a></h2>
 <div class="section level3">
