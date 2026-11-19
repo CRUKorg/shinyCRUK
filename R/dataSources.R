@@ -109,9 +109,7 @@
 #' The sources box uses custom CSS (\code{crukSources.css}) that provides:
 #' \itemize{
 #'   \item Distinct "Notes:" and "Data sources:" headers
-#'   \item Consistent spacing and typography, including a matching bottom
-#'     margin for static notes (a \code{<p>}) and dynamic notes (a \code{<div>}
-#'     with class \code{"sources-notes"})
+#'   \item Consistent spacing and typography
 #'   \item Optional border (2px solid black when \code{boxBorder = TRUE})
 #'   \item Bulleted lists indented so that the bullets sit under the headers
 #'   \item Responsive padding and margins
