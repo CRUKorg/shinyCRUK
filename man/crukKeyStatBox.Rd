@@ -17,9 +17,10 @@ crukKeyStatBox(
 
 \item{image}{Optional. The \code{src} of the image to show: either a file name in
 the app's \code{www} folder, e.g. \code{"magnifying-glass.svg"}, or a path served by
-a registered resource path. Displayed in a 140px by 140px area, top-left
-aligned. Defaults to the Cancer Research UK logo mark shipped with this
-package. \code{NULL} means no image.}
+a registered resource path. Displayed 140px wide, with its aspect ratio
+kept and a maximum height of 140px, aligned to the top left. Defaults to
+the Cancer Research UK logo mark shipped with this package. \code{NULL} means
+no image.}
 
 \item{showImage}{\code{TRUE} (the default) to show \code{image}, \code{FALSE} to hide it.}
 
@@ -36,9 +37,8 @@ A \link[htmltools:tag]{htmltools::tag} object.
 \description{
 A bordered box containing a key statement and, optionally, an image. The
 image sits to the left of the statement when there is room, and above it
-otherwise. When the statement is taller than the image, the image is aligned
-to the top of the box; when it is shorter, the statement is vertically
-centred beside the image.
+otherwise. The image and the statement are both aligned to the top of the
+box.
 }
 \examples{
 crukKeyStatBox("Nearly 1 in 2 of us will get cancer in our lifetimes.")
