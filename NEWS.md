@@ -1,7 +1,15 @@
+# shinyCRUK 0.8.4
+
+## Minor tweaks
+* `crukSources()` now accepts dynamic notes or sources, passed via `textOutput()`
+  or`uiOutput()` and their associated render functions. If passing dynamic sources 
+  via `uiOutput()`, the output *must* be a  `tagList` of `<li>` items, e.g. created 
+  using `tags$li()`
+* The bullet points are now indented so that they sit underneath the headings.
+
 # shinyCRUK 0.8.3
 
 ## Minor tweaks
-
 * `crukKeyStatBox()` has two new arguments:
   * `showImage` (default `TRUE`) controls whether the image is shown.
   * `boxColour` (default `"#bbc7d9"`) sets the border colour. It only
