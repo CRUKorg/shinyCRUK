@@ -5,7 +5,13 @@
   "use strict";
 
   function safeFilename(name) {
-    var cleaned = String(name || "chart").replace(/[^A-Za-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "");
+    var cleaned = String(name || "chart").replace(/[^A-Za-z0-9._-]+/g, "-");
+    // Trim leading/trailing dashes with a loop rather than a regex: /-+$/ backtracks badly
+    var start = 0;
+    var end = cleaned.length;
+    while (start < end && cleaned[start] === "-") start++;
+    while (end > start && cleaned[end - 1] === "-") end--;
+    cleaned = cleaned.slice(start, end);
     return (cleaned || "chart") + ".png";
   }
 
@@ -47,7 +53,7 @@
   async function capture(btn) {
     var plotId = btn.getAttribute("data-plot-id");
     var plot = document.getElementById(plotId);
-    if (!plot || !plot.querySelector(".main-svg")) {
+    if (!plot?.querySelector(".main-svg")) {
       console.error("crukDownloadChartButton: no rendered plotly chart found with id '" + plotId + "'");
       return;
     }
@@ -111,9 +117,11 @@
   }
 
   document.addEventListener("click", function (e) {
-    var btn = e.target.closest && e.target.closest(".cruk-download-chart");
+    var btn = e.target.closest?.(".cruk-download-chart");
     if (!btn || btn.disabled) return;
     e.preventDefault();
-    capture(btn);
+    capture(btn).catch(function (err) {
+      console.error("crukDownloadChartButton: unexpected error", err);
+    });
   });
 })();
