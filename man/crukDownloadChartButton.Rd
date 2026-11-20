@@ -80,7 +80,7 @@ read at click time.
 The button is styled to match \code{\link[=crukDownloadButton]{crukDownloadButton()}} and \code{\link[=crukButton]{crukButton()}}.
 }
 \examples{
-if (interactive()) {
+if (interactive() && requireNamespace("plotly", quietly = TRUE)) {
   library(shiny)
   ui <- fluidPage(
     h3(id = "cars_title", "Stopping distance by speed"),

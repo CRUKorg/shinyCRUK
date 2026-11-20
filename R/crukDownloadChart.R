@@ -45,7 +45,7 @@
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("plotly", quietly = TRUE)) {
 #'   library(shiny)
 #'   ui <- fluidPage(
 #'     h3(id = "cars_title", "Stopping distance by speed"),
