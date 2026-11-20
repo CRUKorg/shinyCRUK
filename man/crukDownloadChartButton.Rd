@@ -9,6 +9,8 @@ crukDownloadChartButton(
   filename = "chart",
   heading = NULL,
   headingId = NULL,
+  subheading = NULL,
+  subheadingId = NULL,
   text = "Download chart",
   type = "secondary",
   icon = "download",
@@ -29,6 +31,14 @@ file names are replaced with \code{-}.}
 
 \item{headingId}{Optional id of an element on the page whose text is used as
 the heading. Inside a module, pass \code{ns("heading")}.}
+
+\item{subheading}{Optional fixed subheading text, shown under the heading in
+the PNG. Can be used with or without a heading.}
+
+\item{subheadingId}{Optional id of an element on the page (typically an
+\code{\link[shiny:h4]{shiny::h4()}}) whose text is used as the subheading. It is read at click
+time, like \code{headingId}. If both \code{subheading} and \code{subheadingId} are given,
+\code{subheading} wins. Inside a module, pass \code{ns("subheading")}.}
 
 \item{text}{Button label.}
 

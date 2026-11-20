@@ -22,6 +22,12 @@
 #' @param heading Optional fixed heading text.
 #' @param headingId Optional id of an element on the page whose text is used as
 #'   the heading. Inside a module, pass `ns("heading")`.
+#' @param subheading Optional fixed subheading text, shown under the heading in
+#'   the PNG. Can be used with or without a heading.
+#' @param subheadingId Optional id of an element on the page (typically an
+#'   [shiny::h4()]) whose text is used as the subheading. It is read at click
+#'   time, like `headingId`. If both `subheading` and `subheadingId` are given,
+#'   `subheading` wins. Inside a module, pass `ns("subheading")`.
 #' @param text Button label.
 #' @param type Either `"primary"` (magenta background) or `"secondary"`
 #'   (default, white background with magenta border).
@@ -55,6 +61,8 @@ crukDownloadChartButton <- function(plotId,
                                     filename = "chart",
                                     heading = NULL,
                                     headingId = NULL,
+                                    subheading = NULL,
+                                    subheadingId = NULL,
                                     text = "Download chart",
                                     type = "secondary",
                                     icon = "download",
@@ -76,6 +84,12 @@ crukDownloadChartButton <- function(plotId,
   }
   if (!is.null(headingId) && !is_string(headingId)) {
     stop("`headingId` must be NULL or a single non-empty string.", call. = FALSE)
+  }
+  if (!is.null(subheading) && !is_string(subheading)) {
+    stop("`subheading` must be NULL or a single non-empty string.", call. = FALSE)
+  }
+  if (!is.null(subheadingId) && !is_string(subheadingId)) {
+    stop("`subheadingId` must be NULL or a single non-empty string.", call. = FALSE)
   }
   if (!is_string(text)) {
     stop("You need to give your button a label via the text argument!", call. = FALSE)
@@ -149,6 +163,8 @@ crukDownloadChartButton <- function(plotId,
     `data-filename` = filename,
     `data-heading` = heading,
     `data-heading-id` = headingId,
+    `data-subheading` = subheading,
+    `data-subheading-id` = subheadingId,
     `data-scale` = scale,
     content,
     ...

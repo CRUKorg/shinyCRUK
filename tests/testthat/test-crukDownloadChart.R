@@ -19,6 +19,26 @@ test_that("headingId is used and absent attributes are dropped", {
   expect_false(grepl("data-heading=", html, fixed = TRUE))
 })
 
+test_that("subheadingId is used and absent when not supplied", {
+  html <- as.character(crukDownloadChartButton("p", headingId = "h", subheadingId = "sub_h4"))
+  expect_match(html, 'data-subheading-id="sub_h4"', fixed = TRUE)
+  expect_match(html, 'data-heading-id="h"', fixed = TRUE)
+
+  without <- as.character(crukDownloadChartButton("p", headingId = "h"))
+  expect_false(grepl("data-subheading-id", without, fixed = TRUE))
+})
+
+test_that("subheading string is added alongside subheadingId", {
+  html <- as.character(
+    crukDownloadChartButton("p", subheading = "Fixed sub", subheadingId = "sub_h4")
+  )
+  expect_match(html, 'data-subheading="Fixed sub"', fixed = TRUE)
+  expect_match(html, 'data-subheading-id="sub_h4"', fixed = TRUE)
+
+  without <- as.character(crukDownloadChartButton("p", subheadingId = "sub_h4"))
+  expect_false(grepl("data-subheading=", without, fixed = TRUE))
+})
+
 test_that("the button carries CRUK styling classes and an icon by default", {
   html <- as.character(crukDownloadChartButton("p"))
 
@@ -63,6 +83,8 @@ test_that("invalid input errors", {
   expect_error(crukDownloadChartButton("p", filename = ""), "filename")
   expect_error(crukDownloadChartButton("p", heading = 1), "heading")
   expect_error(crukDownloadChartButton("p", headingId = c("a", "b")), "headingId")
+  expect_error(crukDownloadChartButton("p", subheading = 1), "subheading")
+  expect_error(crukDownloadChartButton("p", subheadingId = c("a", "b")), "subheadingId")
   expect_error(crukDownloadChartButton("p", text = ""), "label")
   expect_error(crukDownloadChartButton("p", type = "tertiary"), "primary or secondary")
   expect_error(crukDownloadChartButton("p", icon = "banana"), "Available icons")

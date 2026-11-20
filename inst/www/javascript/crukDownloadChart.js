@@ -9,13 +9,22 @@
     return (cleaned || "chart") + ".png";
   }
 
-  function headingText(btn) {
-    var fixed = btn.getAttribute("data-heading");
-    if (fixed) return fixed;
-    var id = btn.getAttribute("data-heading-id");
+  function textFromId(id) {
     if (!id) return "";
     var el = document.getElementById(id);
     return el ? el.textContent.trim() : "";
+  }
+
+  function headingText(btn) {
+    var fixed = btn.getAttribute("data-heading");
+    if (fixed) return fixed;
+    return textFromId(btn.getAttribute("data-heading-id"));
+  }
+
+  function subheadingText(btn) {
+    var fixed = btn.getAttribute("data-subheading");
+    if (fixed) return fixed;
+    return textFromId(btn.getAttribute("data-subheading-id"));
   }
 
   function download(canvas, filename) {
@@ -60,11 +69,19 @@
       "font-family:" + getComputedStyle(plot).fontFamily + ";";
 
     var text = headingText(btn);
+    var subtext = subheadingText(btn);
     if (text) {
       var h = document.createElement("h3");
       h.textContent = text;
-      h.style.cssText = "margin:0 0 12px 0;padding:0;font-weight:700;line-height:1.25;color:#2e2f3b;";
+      h.style.cssText = "margin:0 0 " + (subtext ? "4px" : "12px") +
+        " 0;padding:0;font-weight:700;line-height:1.25;color:#2e2f3b;";
       wrap.appendChild(h);
+    }
+    if (subtext) {
+      var s = document.createElement("h4");
+      s.textContent = subtext;
+      s.style.cssText = "margin:0 0 12px 0;padding:0;font-size:1rem;font-weight:400;line-height:1.35;color:#2e2f3b;";
+      wrap.appendChild(s);
     }
 
     var copy = plot.cloneNode(true);
