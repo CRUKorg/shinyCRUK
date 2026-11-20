@@ -23,7 +23,8 @@ crukChartTable(
 
   A chart output in the form of a
   [`shiny::plotOutput`](https://rdrr.io/pkg/shiny/man/plotOutput.html),
-  `plotly::plotlyOutput`, or `highcharter::highchartOutput`.
+  [`plotly::plotlyOutput`](https://rdrr.io/pkg/plotly/man/plotly-shiny.html),
+  or `highcharter::highchartOutput`.
 
 - table:
 
@@ -103,8 +104,9 @@ includes:
 
 - Use descriptive but concise alt text
 
-- By default, `plotly::plotlyOutput`s should scale to fill the div, so
-  avoid manually setting chart sizes
+- By default,
+  [`plotly::plotlyOutput`](https://rdrr.io/pkg/plotly/man/plotly-shiny.html)s
+  should scale to fill the div, so avoid manually setting chart sizes
 
 - If you want a title or selectors to apply to the chart and table, pass
   these as additional arguments. They will be displayed about the chart

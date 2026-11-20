@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -348,7 +348,7 @@ Show code
 <span>        placeholder <span class="op">=</span> <span class="st">"Select cylinders..."</span></span>
 <span>      <span class="op">)</span>,</span>
 <span>      <span class="fu"><a href="reference/crukChartTable.html">crukChartTable</a></span><span class="op">(</span></span>
-<span>        chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span><span class="st">"demo_plot"</span>, height <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span>,</span>
+<span>        chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span><span class="st">"demo_plot"</span>, height <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span>,</span>
 <span>        table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span><span class="st">"demo_table"</span><span class="op">)</span>,</span>
 <span>        alt <span class="op">=</span> <span class="st">"A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset"</span>,</span>
 <span>        dataSourceText <span class="op">=</span> <span class="st">"mtcars dataset from R"</span>,</span>
@@ -501,8 +501,8 @@ Show code
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Create plotly chart</span></span>
-<span>  <span class="va">output</span><span class="op">$</span><span class="va">demo_plot</span> <span class="op">&lt;-</span> <span class="fu">renderPlotly</span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="fu">plot_ly</span><span class="op">(</span><span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">demo_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">renderPlotly</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plot_ly.html" class="external-link">plot_ly</a></span><span class="op">(</span><span class="fu">filtered_data</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>            x <span class="op">=</span> <span class="op">~</span><span class="va">wt</span>,</span>
 <span>            y <span class="op">=</span> <span class="op">~</span><span class="va">mpg</span>,</span>
 <span>            type <span class="op">=</span> <span class="st">'scatter'</span>,</span>
@@ -513,7 +513,7 @@ Show code
 <span>                          <span class="st">"&lt;br&gt;MPG:"</span>, <span class="va">mpg</span><span class="op">)</span>,</span>
 <span>            hoverinfo <span class="op">=</span> <span class="st">'text'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu">config</span><span class="op">(</span>displayModeBar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/graphics/layout.html" class="external-link">layout</a></span><span class="op">(</span></span>
+<span>      <span class="fu">layout</span><span class="op">(</span></span>
 <span>        showlegend <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co">#change to true if not using annotations</span></span>
 <span>        yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>          title <span class="op">=</span> <span class="st">"Miles per gallon"</span>,</span>

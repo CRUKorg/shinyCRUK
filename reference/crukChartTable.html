@@ -11,7 +11,7 @@ best practice."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ best practice.</p>
 
 <dl><dt id="arg-chart">chart<a class="anchor" aria-label="anchor" href="#arg-chart"></a></dt>
 <dd><p>A chart output in the form of a <code><a href="https://rdrr.io/pkg/shiny/man/plotOutput.html" class="external-link">shiny::plotOutput</a></code>,
-<code>plotly::plotlyOutput</code>, or <code>highcharter::highchartOutput</code>.</p></dd>
+<code><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotly::plotlyOutput</a></code>, or <code>highcharter::highchartOutput</code>.</p></dd>
 
 
 <dt id="arg-table">table<a class="anchor" aria-label="anchor" href="#arg-table"></a></dt>
@@ -123,7 +123,7 @@ or <code><a href="crukSelectInput.html">shinyCRUK::crukSelectInput</a></code>.</
 
 
 <ul><li><p>Use descriptive but concise alt text</p></li>
-<li><p>By default, <code>plotly::plotlyOutput</code>s should scale to fill the div,
+<li><p>By default, <code><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotly::plotlyOutput</a></code>s should scale to fill the div,
 so avoid manually setting chart sizes</p></li>
 <li><p>If you want a title or selectors to apply to the chart and table, pass
 these as additional arguments. They will be displayed about the chart table card</p></li>
@@ -146,14 +146,14 @@ output tag itself is only a placeholder until bound.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Basic card with just chart and table</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"A chart showing how horsepower varies according to mpg in the mtcars dataset."</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Card with a data source</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"A chart showing how horsepower varies according to mpg in the mtcars dataset."</span>,</span></span>
 <span class="r-in"><span>  dataSourceText <span class="op">=</span> <span class="st">"mtcars: Motor Trend Car Road Tests"</span>,</span></span>
@@ -162,7 +162,7 @@ output tag itself is only a placeholder until bound.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Chart and table card with additional arguments passed</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"Some alt text to go with the chart."</span>,</span></span>
 <span class="r-in"><span>  dataSourceText <span class="op">=</span> <span class="st">"mtcars: Motor Trend Car Road Tests"</span>,</span></span>
@@ -177,7 +177,7 @@ output tag itself is only a placeholder until bound.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Chart and table card with a reactive data source label</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"Some alt text to go with the chart."</span>,</span></span>
 <span class="r-in"><span>  dataSourceText <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"dataSourceLabel"</span><span class="op">)</span>,</span></span>
@@ -188,7 +188,7 @@ output tag itself is only a placeholder until bound.</p></li>
 <span class="r-in"><span><span class="co"># Server side: output$dataSourceLabel &lt;- renderText(...);</span></span></span>
 <span class="r-in"><span><span class="co">#              output$dataSourceUrl &lt;- renderText(url())</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="st">"Some alt text to go with the chart."</span>,</span></span>
 <span class="r-in"><span>  dataSourceText <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"dataSourceLabel"</span><span class="op">)</span>,</span></span>
@@ -198,7 +198,7 @@ output tag itself is only a placeholder until bound.</p></li>
 <span class="r-in"><span><span class="co">#' # Chart with reactive alt text.</span></span></span>
 <span class="r-in"><span><span class="co"># Server side: output$chartAlt &lt;- renderText(...)</span></span></span>
 <span class="r-in"><span><span class="fu">crukChartTable</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu">plotlyOutput</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plotly-shiny.html" class="external-link">plotlyOutput</a></span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtcarsPlot"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  table <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu">gt_output</span><span class="op">(</span>outputId <span class="op">=</span> <span class="st">"mtTable"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  alt <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput</a></span><span class="op">(</span><span class="st">"chartAlt"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>

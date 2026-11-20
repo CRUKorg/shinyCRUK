@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyCRUK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +33,17 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.4" id="shinycruk-084">shinyCRUK 0.8.4<a class="anchor" aria-label="anchor" href="#shinycruk-084"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.9.0" id="shinycruk-090">shinyCRUK 0.9.0<a class="anchor" aria-label="anchor" href="#shinycruk-090"></a></h2>
 <div class="section level3">
-<h3 id="minor-tweaks-0-8-4">Minor tweaks<a class="anchor" aria-label="anchor" href="#minor-tweaks-0-8-4"></a></h3>
+<h3 id="new-functions-0-9-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-9-0"></a></h3>
+<ul><li>
+<code><a href="../reference/crukDownloadChartButton.html">crukDownloadChartButton()</a></code> adds a CRUK-styled button that downloads a rendered plotly chart as a PNG with a heading, without using plotly’s modebar or any plotly.js export. The snapshot is taken in the browser with html2canvas, so it needs no server-side Chrome, kaleido or Python and should work on shinyapps.io and Posit Connect.
+<ul><li>The heading and optional subheading can be read from existing page elements at click time (<code>headingId</code>, <code>subheadingId</code>, e.g. an <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3()</a></code> and <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h4()</a></code>) or supplied as strings (<code>heading</code>, <code>subheading</code>). A string takes priority over the matching id.</li>
+<li>Styling and the <code>type</code>, <code>icon</code> and <code>align</code> arguments match <code><a href="../reference/crukDownloadButton.html">crukDownloadButton()</a></code>. # shinyCRUK 0.8.4</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-tweaks-0-9-0">Minor tweaks<a class="anchor" aria-label="anchor" href="#minor-tweaks-0-9-0"></a></h3>
 <ul><li>
 <code><a href="../reference/crukSources.html">crukSources()</a></code> now accepts dynamic notes or sources, passed via <code><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">textOutput()</a></code> or<code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput()</a></code> and their associated render functions. If passing dynamic sources via <code><a href="https://rdrr.io/pkg/shiny/man/htmlOutput.html" class="external-link">uiOutput()</a></code>, the output <em>must</em> be a <code>tagList</code> of <code>&lt;li&gt;</code> items, e.g. created using <code>tags$li()</code>
 </li>

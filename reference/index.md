@@ -16,6 +16,8 @@
   : CRUK Date Picker
 - [`crukDownloadButton()`](https://crukorg.github.io/shinyCRUK/reference/crukDownloadButton.md)
   : Create a CRUK-branded download button
+- [`crukDownloadChartButton()`](https://crukorg.github.io/shinyCRUK/reference/crukDownloadChartButton.md)
+  : Download a plotly chart as a PNG, with a heading
 - [`crukFooter()`](https://crukorg.github.io/shinyCRUK/reference/crukFooter.md)
   : CRUK Footer with Legal Information and Branding
 - [`crukGA()`](https://crukorg.github.io/shinyCRUK/reference/crukGA.md)
