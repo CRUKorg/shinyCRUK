@@ -1,7 +1,7 @@
 Type: Package
 Package: shinyCRUK
 Title: Styling Shiny Apps with CRUK Branding
-Version: 0.8.4
+Version: 0.9.0
 Authors@R: c(
     person("Matt", "Grant", , "matt.grant@cancer.org.uk", role = c("aut", "cre")),
     person("Sam", "Finnegan", , "sam.finnegan@cancer.org.uk", role = "aut"),
@@ -32,6 +32,7 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 Suggests: 
+    plotly,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://verbose-guacamole-l18vr83.pages.github.io/

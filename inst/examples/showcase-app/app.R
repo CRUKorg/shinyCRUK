@@ -280,9 +280,13 @@ ui <- bslib::page_navbar(
         alt = "A scatter plot showing the relationship between car weight and miles per gallon from the mtcars dataset",
         dataSourceText = textOutput("dataSourceReactive"),
         dataSourceLink = "https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars",
-        h3("A nice little chart based on mtcars")
+        h3("A nice little chart based on mtcars - How does this look if it's really bloody long?", id = "demo_test")
       ),
-      crukDownloadButton("downloadDemoData", "Download data", type = "secondary", icon = "download"),
+      layout_column_wrap(
+        width = 1/2,
+        crukDownloadButton("downloadDemoData", "Download data", type = "secondary", align = "left", icon = "download"),
+        crukDownloadChartButton("demo_plot", filename = "chart", headingId = "demo_test", text = "Download chart", align = "right"),
+      ),
 
       br(),
 

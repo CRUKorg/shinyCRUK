@@ -76,7 +76,7 @@
 .cruk-btn-secondary.show,
 .cruk-btn-secondary.in,
 .cruk-btn-secondary:hover,
-.cruk-btn-secondary.btn:first-child:active
+.cruk-btn-secondary.btn:first-child:active,
 .cruk-btn-secondary:active, .cruk-btn-secondary.btn:first-child:active {
   border: 1px solid #e60078;
   background: #e60078;

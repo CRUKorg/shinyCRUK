@@ -1,3 +1,18 @@
+# shinyCRUK 0.9.0
+
+## New functions
+
+* `crukDownloadChartButton()` adds a CRUK-styled button that downloads a rendered
+  plotly chart as a PNG with a heading, without using plotly's modebar or any
+  plotly.js export. The snapshot is taken in the browser with html2canvas, so it
+  needs no server-side Chrome, kaleido or Python and should work on shinyapps.io
+  and Posit Connect.
+  * The heading and optional subheading can be read from existing page elements
+    at click time (`headingId`, `subheadingId`, e.g. an `h3()` and `h4()`) or
+    supplied as strings (`heading`, `subheading`). A string takes priority over
+    the matching id.
+  * Styling and the `type`, `icon` and `align` arguments match
+    `crukDownloadButton()`.
 # shinyCRUK 0.8.4
 
 ## Minor tweaks
